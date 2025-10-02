@@ -6,14 +6,14 @@
  todos/:id crud and options/head/delete cases, categories+tasksof, cleanup after tests
 */
 
-import org.junit.*;
-import static org.junit.Assert.*;
 import java.io.*;
 import java.net.*;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
+import org.junit.*;
+import static org.junit.Assert.*;
 
-public class TodoApiTests_Extended {
+public class TodoApiTest {
 
     private static final String BASE_URL = "http://localhost:4567";
     private static String baselineTodoId;
@@ -79,7 +79,7 @@ public class TodoApiTests_Extended {
 
     @BeforeClass
     public static void initBaselineTodo() throws IOException {
-        TodoApiTests_Extended t = new TodoApiTests_Extended();
+        TodoApiTest t = new TodoApiTest();
         baselineTodoId = t.createTodo("Baseline");
         assertNotNull("Failed to create baseline todo", baselineTodoId);
     }
