@@ -23,8 +23,13 @@ public class CommonConstants {
     public static final String CATEGORIES_MISSING_TITLE_XML = "<errorMessages><errorMessage>title : field is mandatory</errorMessage></errorMessages>";
     public static final String CATEGORIES_EMPTY_TITLE_JSON = "{\"errorMessages\":[\"Failed Validation: title : can not be empty\"]}";
     public static final String CATEGORIES_EMPTY_TITLE_XML = "<errorMessages><errorMessage>Failed Validation: title : can not be empty</errorMessage></errorMessages>";
+    public static final String CATEGORIES_INEXISTENT_ID_JSON_PREFIX = "{\"errorMessages\":[\"Could not find an instance with categories/";
+    public static final String CATEGORIES_INEXISTENT_ID_JSON_SUFFIX = "\"]}";
+    public static final String CATEGORIES_INEXISTENT_ID_XML_PREFIX = "<errorMessages><errorMessage>Could not find an instance with categories/";
+    public static final String CATEGORIES_INEXISTENT_ID_XML_SUFFIX = "</errorMessage></errorMessages>";
 
     public static final String CATEGORY_OPTIONS = "OPTIONS, GET, HEAD, POST";
+    public static final String CATEGORY_ID_OPTIONS = "OPTIONS, GET, HEAD, POST, PUT, DELETE";
 
     public static final Category officeCategory = new Category("1", "Office", "");
     public static final Category homeCategory = new Category("2", "Home", "");

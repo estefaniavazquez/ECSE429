@@ -40,7 +40,7 @@ public abstract class BaseApiTest {
         if (serverProcess != null) {
             serverProcess.destroy();
             serverProcess.waitFor();
-            System.out.println("Server stopped.=======================");
+            System.out.println("Server stopped.=======================\n");
         }
     }
 }

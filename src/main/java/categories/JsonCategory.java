@@ -27,7 +27,7 @@ public class JsonCategory {
         return sb.toString();
     }
 
-    private boolean isIn(Category category) {
+    public boolean isIn(Category category) {
         for (Category c : categories) {
             if (c.equals(category)) {
                 return true;
@@ -40,6 +40,26 @@ public class JsonCategory {
     public boolean areIn(Category[] categories) {
         for (Category category : categories) {
             if (!isIn(category)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public boolean contains(Category category) {
+        for (Category c : categories) {
+            if (c.equals(category)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public boolean containsAll(Category[] categories) {
+        for (Category category : categories) {
+            if (!contains(category)) {
                 return false;
             }
         }

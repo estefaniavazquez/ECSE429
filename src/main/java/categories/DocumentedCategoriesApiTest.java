@@ -174,21 +174,33 @@ public class DocumentedCategoriesApiTest extends BaseApiTest {
         String bodyJson = objectMapper.writeValueAsString(body);
 
         HttpURLConnection connection1 = request(CATEGORIES_ENDPOINT, POST_METHOD, JSON_FORMAT, JSON_FORMAT, bodyJson);
+        String responseBody1 = readResponse(connection1);
+
+        Category createdCategory1 = objectMapper.readValue(responseBody1, Category.class);
+
         HttpURLConnection connection2 = request(CATEGORIES_ENDPOINT, POST_METHOD, JSON_FORMAT, JSON_FORMAT, bodyJson);
-        int responseCode = connection2.getResponseCode();
-        String responseMessage = connection2.getResponseMessage();
-        String contentType = connection2.getContentType();
-        String responseBody = readResponse(connection2);
+        int responseCode2 = connection2.getResponseCode();
+        String responseMessage2 = connection2.getResponseMessage();
+        String contentType2 = connection2.getContentType();
+        String responseBody2 = readResponse(connection2);
 
-        Category createdCategory = objectMapper.readValue(responseBody, Category.class);
+        Category createdCategory2 = objectMapper.readValue(responseBody2, Category.class);
 
-        assertEquals(201, responseCode);
-        assertEquals("Created", responseMessage);
-        assertTrue(contentType.contains(JSON_FORMAT));
-        assertTrue(body.bodySameAsCategory(createdCategory));
+        HttpURLConnection connectionAll = request(CATEGORIES_ENDPOINT, GET_METHOD, JSON_FORMAT, JSON_FORMAT, null);
+        String allResponseBody = readResponse(connectionAll);
+
+        JsonCategory allCategories = objectMapper.readValue(allResponseBody, JsonCategory.class);
+
+        assertEquals(201, responseCode2);
+        assertEquals("Created", responseMessage2);
+        assertTrue(contentType2.contains(JSON_FORMAT));
+        assertTrue(body.bodySameAsCategory(createdCategory2));
+        assertNotEquals(createdCategory1.getId(), createdCategory2.getId());
+        assertTrue(allCategories.areIn(new Category[]{createdCategory1, createdCategory2, officeCategory, homeCategory}));
 
         connection1.disconnect();
         connection2.disconnect();
+        connectionAll.disconnect();
 
         System.out.println("testPostCategoriesDuplicateBodyJson passed.");
     }
@@ -202,21 +214,33 @@ public class DocumentedCategoriesApiTest extends BaseApiTest {
         String bodyXml = xmlMapper.writeValueAsString(body);
 
         HttpURLConnection connection1 = request(CATEGORIES_ENDPOINT, POST_METHOD, XML_FORMAT, XML_FORMAT, bodyXml);
+        String responseBody1 = readResponse(connection1);
+
+        Category createdCategory1 = xmlMapper.readValue(responseBody1, Category.class);
+
         HttpURLConnection connection2 = request(CATEGORIES_ENDPOINT, POST_METHOD, XML_FORMAT, XML_FORMAT, bodyXml);
-        int responseCode = connection2.getResponseCode();
-        String responseMessage = connection2.getResponseMessage();
-        String contentType = connection2.getContentType();
-        String responseBody = readResponse(connection2);
+        int responseCode2 = connection2.getResponseCode();
+        String responseMessage2 = connection2.getResponseMessage();
+        String contentType2 = connection2.getContentType();
+        String responseBody2 = readResponse(connection2);
 
-        Category createdCategory = xmlMapper.readValue(responseBody, Category.class);
+        Category createdCategory2 = xmlMapper.readValue(responseBody2, Category.class);
 
-        assertEquals(201, responseCode);
-        assertEquals("Created", responseMessage);
-        assertTrue(contentType.contains(XML_FORMAT));
-        assertTrue(body.bodySameAsCategory(createdCategory));
+        HttpURLConnection connectionAll = request(CATEGORIES_ENDPOINT, GET_METHOD, XML_FORMAT, XML_FORMAT, null);
+        String allResponseBody = readResponse(connectionAll);
+
+        XmlCategory allCategories = xmlMapper.readValue(allResponseBody, XmlCategory.class);
+
+        assertEquals(201, responseCode2);
+        assertEquals("Created", responseMessage2);
+        assertTrue(contentType2.contains(XML_FORMAT));
+        assertTrue(body.bodySameAsCategory(createdCategory2));
+        assertNotEquals(createdCategory1.getId(), createdCategory2.getId());
+        assertTrue(allCategories.areIn(new Category[]{createdCategory1, createdCategory2, officeCategory, homeCategory}));
 
         connection1.disconnect();
         connection2.disconnect();
+        connectionAll.disconnect();
 
         System.out.println("testPostCategoriesDuplicateBodyXml passed.");
     }

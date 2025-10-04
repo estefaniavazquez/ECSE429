@@ -5,8 +5,7 @@ import java.net.*;
 import java.nio.charset.StandardCharsets;
 import java.io.BufferedReader;
 
-import static general.CommonConstants.BASE_URL;
-import static general.CommonConstants.POST_METHOD;
+import static general.CommonConstants.*;
 
 public class Utils {
     public static HttpURLConnection request(String endpoint, String method, String acceptType, String contentType, String body) throws Exception {
@@ -32,19 +31,19 @@ public class Utils {
         connection.setRequestMethod(POST_METHOD);
         connection.setRequestProperty("Accept", acceptType);
         connection.setRequestProperty("Content-Type", contentType);
-        connection.setRequestProperty("X-HTTP-Method-Override", "PATCH");
+        connection.setRequestProperty("X-HTTP-Method-Override", PATCH_METHOD);
         connection.setDoOutput(true);
 
         return connection;
     }
 
-    public static HttpURLConnection requestWithId(String endpoint, String method, String acceptType, String contentType, int id, String body) throws Exception {
+    public static HttpURLConnection requestWithId(String endpoint, String method, String acceptType, String contentType, String id, String body) throws Exception {
         String newEndpoint = endpoint + "/" + id;
 
         return request(newEndpoint, method, acceptType, contentType, body);
     }
 
-    public static HttpURLConnection requestWithIdPATCH(String endpoint, String acceptType, String contentType, int id) throws Exception {
+    public static HttpURLConnection requestWithIdPATCH(String endpoint, String acceptType, String contentType, String id) throws Exception {
         String newEndpoint = endpoint + "/" + id;
 
         return requestPATCH(newEndpoint, acceptType, contentType);
