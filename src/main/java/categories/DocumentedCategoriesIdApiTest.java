@@ -357,4 +357,86 @@ public class DocumentedCategoriesIdApiTest extends BaseApiTest {
 
         System.out.println("testDeleteCategoriesIdXml passed.");
     }
+
+    @Test
+    public void testDeleteCategoriesSameIdTwiceJson() throws Exception {
+        System.out.println("Running testDeleteCategoriesSameIdTwiceJson...");
+
+        String officeId = officeCategory.getId();
+
+        HttpURLConnection connection1 = requestWithId(CATEGORIES_ENDPOINT, DELETE_METHOD, JSON_FORMAT, JSON_FORMAT, officeId, null);
+        int responseCode1 = connection1.getResponseCode();
+        String responseMessage1 = connection1.getResponseMessage();
+        String contentType1 = connection1.getContentType();
+        String responseBody1 = readResponse(connection1);
+
+        HttpURLConnection connectionAll = request(CATEGORIES_ENDPOINT, GET_METHOD, JSON_FORMAT, JSON_FORMAT, null);
+        String responseBodyAll = readResponse(connectionAll);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonCategory allCategories = objectMapper.readValue(responseBodyAll, JsonCategory.class);
+
+        assertEquals(200, responseCode1);
+        assertEquals("OK", responseMessage1);
+        assertTrue(contentType1.contains(JSON_FORMAT));
+        assertEquals("", responseBody1);
+        assertTrue(allCategories.areIn(new Category[]{homeCategory}));
+
+        // Try to delete the same category again
+        HttpURLConnection connection2 = requestWithId(CATEGORIES_ENDPOINT, DELETE_METHOD, JSON_FORMAT, JSON_FORMAT, officeId, null);
+        int responseCode2 = connection2.getResponseCode();
+        String responseMessage2 = connection2.getResponseMessage();
+        String responseBody2 = readResponse(connection2);
+
+        assertEquals(404, responseCode2);
+        assertEquals("Not Found", responseMessage2);
+        assertEquals(CATEGORIES_DELETE_INEXISTENT_ID_JSON + officeId + CATEGORIES_INEXISTENT_ID_JSON_SUFFIX, responseBody2);
+
+        connection1.disconnect();
+        connectionAll.disconnect();
+        connection2.disconnect();
+
+        System.out.println("testDeleteCategoriesSameIdTwiceJson passed.");
+    }
+
+    @Test
+    public void testDeleteCategoriesSameIdTwiceXml() throws Exception {
+        System.out.println("Running testDeleteCategoriesSameIdTwiceXml...");
+
+        String officeId = officeCategory.getId();
+
+        HttpURLConnection connection1 = requestWithId(CATEGORIES_ENDPOINT, DELETE_METHOD, XML_FORMAT, XML_FORMAT, officeId, null);
+        int responseCode1 = connection1.getResponseCode();
+        String responseMessage1 = connection1.getResponseMessage();
+        String contentType1 = connection1.getContentType();
+        String responseBody1 = readResponse(connection1);
+
+        HttpURLConnection connectionAll = request(CATEGORIES_ENDPOINT, GET_METHOD, XML_FORMAT, XML_FORMAT, null);
+        String responseBodyAll = readResponse(connectionAll);
+
+        XmlMapper xmlMapper = new XmlMapper();
+        XmlCategory allCategories = xmlMapper.readValue(responseBodyAll, XmlCategory.class);
+
+        assertEquals(200, responseCode1);
+        assertEquals("OK", responseMessage1);
+        assertTrue(contentType1.contains(XML_FORMAT));
+        assertEquals("", responseBody1);
+        assertTrue(allCategories.areIn(new Category[]{homeCategory}));
+
+        // Try to delete the same category again
+        HttpURLConnection connection2 = requestWithId(CATEGORIES_ENDPOINT, DELETE_METHOD, XML_FORMAT, XML_FORMAT, officeId, null);
+        int responseCode2 = connection2.getResponseCode();
+        String responseMessage2 = connection2.getResponseMessage();
+        String responseBody2 = readResponse(connection2);
+
+        assertEquals(404, responseCode2);
+        assertEquals("Not Found", responseMessage2);
+        assertEquals(CATEGORIES_DELETE_INEXISTENT_ID_XML + officeId + CATEGORIES_INEXISTENT_ID_XML_SUFFIX, responseBody2);
+
+        connection1.disconnect();
+        connectionAll.disconnect();
+        connection2.disconnect();
+
+        System.out.println("testDeleteCategoriesSameIdTwiceXml passed.");
+    }
 }

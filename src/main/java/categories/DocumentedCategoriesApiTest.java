@@ -21,6 +21,47 @@ import static general.CommonConstants.*;
 public class DocumentedCategoriesApiTest extends BaseApiTest {
     /*   /categories endpoint tests    */
 
+    // Test malformed JSON/XML in request body
+    @Test
+    public void testMalformedJsonBody() throws Exception {
+        System.out.println("Running testMalformedJsonBody...");
+
+        String malformedJsonBody = "{\"title\":\"Malformed JSON\",\"description\":\"Missing ending brace\"";
+
+        HttpURLConnection connection = request(CATEGORIES_ENDPOINT, POST_METHOD, JSON_FORMAT, JSON_FORMAT, malformedJsonBody);
+        int responseCode = connection.getResponseCode();
+        String responseMessage = connection.getResponseMessage();
+        String responseBody = readResponse(connection);
+
+        assertEquals(400, responseCode);
+        assertEquals("Bad Request", responseMessage);
+        assertTrue(responseBody.contains("errorMessages"));
+
+        connection.disconnect();
+
+        System.out.println("testMalformedJsonBody passed.");
+    }
+
+    @Test
+    public void testMalformedXmlBody() throws Exception {
+        System.out.println("Running testMalformedXmlBody...");
+
+        String malformedXmlBody = "<category><title>Malformed XML</title><description>Missing ending tag</description>";
+
+        HttpURLConnection connection = request(CATEGORIES_ENDPOINT, POST_METHOD, XML_FORMAT, XML_FORMAT, malformedXmlBody);
+        int responseCode = connection.getResponseCode();
+        String responseMessage = connection.getResponseMessage();
+        String responseBody = readResponse(connection);
+
+        assertEquals(400, responseCode);
+        assertEquals("Bad Request", responseMessage);
+        assertTrue(responseBody.contains("errorMessages"));
+
+        connection.disconnect();
+
+        System.out.println("testMalformedXmlBody passed.");
+    }
+
     // Test GET /categories
 
     @Test

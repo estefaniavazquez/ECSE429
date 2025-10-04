@@ -27,6 +27,8 @@ public class CommonConstants {
     public static final String CATEGORIES_INEXISTENT_ID_JSON_SUFFIX = "\"]}";
     public static final String CATEGORIES_INEXISTENT_ID_XML_PREFIX = "<errorMessages><errorMessage>Could not find an instance with categories/";
     public static final String CATEGORIES_INEXISTENT_ID_XML_SUFFIX = "</errorMessage></errorMessages>";
+    public static final String CATEGORIES_DELETE_INEXISTENT_ID_JSON = "{\"errorMessages\":[\"Could not find any instances with categories/";
+    public static final String CATEGORIES_DELETE_INEXISTENT_ID_XML = "<errorMessages><errorMessage>Could not find any instances with categories/";
 
     public static final String CATEGORY_OPTIONS = "OPTIONS, GET, HEAD, POST";
     public static final String CATEGORY_ID_OPTIONS = "OPTIONS, GET, HEAD, POST, PUT, DELETE";
