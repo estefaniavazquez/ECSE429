@@ -6,6 +6,7 @@ import java.nio.charset.StandardCharsets;
 import java.io.BufferedReader;
 
 import static general.CommonConstants.BASE_URL;
+import static general.CommonConstants.POST_METHOD;
 
 public class Utils {
     public static HttpURLConnection request(String endpoint, String method, String acceptType, String contentType, String body) throws Exception {
@@ -24,20 +25,29 @@ public class Utils {
         return connection;
     }
 
-    public static HttpURLConnection requestWithId(String endpoint, String method, String acceptType, String contentType, int id, String body) throws Exception {
-        URL url = new URL(BASE_URL + endpoint + "/" + id);
+    public static HttpURLConnection requestPATCH(String endpoint, String acceptType, String contentType) throws Exception {
+        URL url = new URL(BASE_URL + endpoint);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
-        connection.setRequestMethod(method);
+        connection.setRequestMethod(POST_METHOD);
         connection.setRequestProperty("Accept", acceptType);
         connection.setRequestProperty("Content-Type", contentType);
+        connection.setRequestProperty("X-HTTP-Method-Override", "PATCH");
         connection.setDoOutput(true);
-        if (body != null && !body.isEmpty()) {
-            connection.setDoInput(true);
-            connection.getOutputStream().write(body.getBytes(StandardCharsets.UTF_8));
-        }
 
         return connection;
+    }
+
+    public static HttpURLConnection requestWithId(String endpoint, String method, String acceptType, String contentType, int id, String body) throws Exception {
+        String newEndpoint = endpoint + "/" + id;
+
+        return request(newEndpoint, method, acceptType, contentType, body);
+    }
+
+    public static HttpURLConnection requestWithIdPATCH(String endpoint, String acceptType, String contentType, int id) throws Exception {
+        String newEndpoint = endpoint + "/" + id;
+
+        return requestPATCH(newEndpoint, acceptType, contentType);
     }
 
     public static String readResponse(HttpURLConnection connection) throws Exception {

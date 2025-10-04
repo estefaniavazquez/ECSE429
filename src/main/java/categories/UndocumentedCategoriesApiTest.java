@@ -31,9 +31,11 @@ public class UndocumentedCategoriesApiTest extends BaseApiTest {
         HttpURLConnection connection = request(CATEGORIES_ENDPOINT, PUT_METHOD, JSON_FORMAT, JSON_FORMAT, categoryJson);
         int responseCode = connection.getResponseCode();
         String responseMessage = connection.getResponseMessage();
+        String responseBody = readResponse(connection);
 
         assertEquals(405, responseCode);
         assertEquals("Method Not Allowed", responseMessage);
+        assertEquals("", responseBody);
 
         connection.disconnect();
 
@@ -50,9 +52,11 @@ public class UndocumentedCategoriesApiTest extends BaseApiTest {
         HttpURLConnection connection = request(CATEGORIES_ENDPOINT, PUT_METHOD, XML_FORMAT, XML_FORMAT, categoryXml);
         int responseCode = connection.getResponseCode();
         String responseMessage = connection.getResponseMessage();
+        String responseBody = readResponse(connection);
 
         assertEquals(405, responseCode);
         assertEquals("Method Not Allowed", responseMessage);
+        assertEquals("", responseBody);
 
         connection.disconnect();
 
@@ -70,9 +74,11 @@ public class UndocumentedCategoriesApiTest extends BaseApiTest {
         HttpURLConnection connection = request(CATEGORIES_ENDPOINT, DELETE_METHOD, JSON_FORMAT, JSON_FORMAT, idBody);
         int responseCode = connection.getResponseCode();
         String responseMessage = connection.getResponseMessage();
+        String responseBody = readResponse(connection);
 
         assertEquals(405, responseCode);
         assertEquals("Method Not Allowed", responseMessage);
+        assertEquals("", responseBody);
 
         connection.disconnect();
 
@@ -88,9 +94,11 @@ public class UndocumentedCategoriesApiTest extends BaseApiTest {
         HttpURLConnection connection = request(CATEGORIES_ENDPOINT, DELETE_METHOD, XML_FORMAT, XML_FORMAT, idBody);
         int responseCode = connection.getResponseCode();
         String responseMessage = connection.getResponseMessage();
+        String responseBody = readResponse(connection);
 
         assertEquals(405, responseCode);
         assertEquals("Method Not Allowed", responseMessage);
+        assertEquals("", responseBody);
 
         connection.disconnect();
 
@@ -101,12 +109,14 @@ public class UndocumentedCategoriesApiTest extends BaseApiTest {
     public void testPatchCategoriesJson() throws Exception {
         System.out.println("Running testPatchCategoriesJson...");
 
-        HttpURLConnection connection = request(CATEGORIES_ENDPOINT, PATCH_METHOD, JSON_FORMAT, JSON_FORMAT, null);
+        HttpURLConnection connection = requestPATCH(CATEGORIES_ENDPOINT, JSON_FORMAT, JSON_FORMAT);
         int responseCode = connection.getResponseCode();
         String responseMessage = connection.getResponseMessage();
+        String responseBody = readResponse(connection);
 
         assertEquals(405, responseCode);
         assertEquals("Method Not Allowed", responseMessage);
+        assertEquals("", responseBody);
 
         connection.disconnect();
 
@@ -117,12 +127,14 @@ public class UndocumentedCategoriesApiTest extends BaseApiTest {
     public void testPatchCategoriesXml() throws Exception {
         System.out.println("Running testPatchCategoriesXml...");
 
-        HttpURLConnection connection = request(CATEGORIES_ENDPOINT, PATCH_METHOD, XML_FORMAT, XML_FORMAT, null);
+        HttpURLConnection connection = requestPATCH(CATEGORIES_ENDPOINT, XML_FORMAT, XML_FORMAT);
         int responseCode = connection.getResponseCode();
         String responseMessage = connection.getResponseMessage();
+        String responseBody = readResponse(connection);
 
         assertEquals(405, responseCode);
         assertEquals("Method Not Allowed", responseMessage);
+        assertEquals("", responseBody);
 
         connection.disconnect();
 
@@ -140,7 +152,7 @@ public class UndocumentedCategoriesApiTest extends BaseApiTest {
 
         assertEquals(200, responseCode);
         assertEquals("OK", responseMessage);
-        assertNotNull(allowHeader);
+        assertEquals(CATEGORY_OPTIONS, allowHeader);
 
         connection.disconnect();
 
@@ -158,7 +170,7 @@ public class UndocumentedCategoriesApiTest extends BaseApiTest {
 
         assertEquals(200, responseCode);
         assertEquals("OK", responseMessage);
-        assertNotNull(allowHeader);
+        assertEquals(CATEGORY_OPTIONS, allowHeader);
 
         connection.disconnect();
 

@@ -19,7 +19,12 @@ public class CommonConstants {
     public static final String PATCH_METHOD = "PATCH";
     public static final String OPTIONS_METHOD = "OPTIONS";
 
-    public static final String[] CATEGORY_OPTIONS = {"GET", "HEAD", "POST", "OPTIONS"};
+    public static final String CATEGORIES_MISSING_TITLE_JSON = "{\"errorMessages\":[\"title : field is mandatory\"]}";
+    public static final String CATEGORIES_MISSING_TITLE_XML = "<errorMessages><errorMessage>title : field is mandatory</errorMessage></errorMessages>";
+    public static final String CATEGORIES_EMPTY_TITLE_JSON = "{\"errorMessages\":[\"Failed Validation: title : can not be empty\"]}";
+    public static final String CATEGORIES_EMPTY_TITLE_XML = "<errorMessages><errorMessage>Failed Validation: title : can not be empty</errorMessage></errorMessages>";
+
+    public static final String CATEGORY_OPTIONS = "OPTIONS, GET, HEAD, POST";
 
     public static final Category officeCategory = new Category("1", "Office", "");
     public static final Category homeCategory = new Category("2", "Home", "");

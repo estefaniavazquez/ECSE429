@@ -56,11 +56,8 @@ public class DocumentedCategoriesApiTest extends BaseApiTest {
         String contentType = connection.getContentType();
         String responseBody = readResponse(connection);
 
-        System.out.println(responseBody);
-
         XmlMapper xmlMapper = new XmlMapper();
         XmlCategory categories = xmlMapper.readValue(responseBody, XmlCategory.class);
-        System.out.println(categories);
 
         assertEquals(200, responseCode);
         assertEquals("OK", responseMessage);
@@ -236,7 +233,7 @@ public class DocumentedCategoriesApiTest extends BaseApiTest {
 
         assertEquals(400, responseCode);
         assertEquals("Bad Request", responseMessage);
-        assertEquals("{\"errorMessages\":[\"title : field is mandatory\"]}", responseBody);
+        assertEquals(CATEGORIES_MISSING_TITLE_JSON, responseBody);
 
         connection.disconnect();
 
@@ -247,7 +244,7 @@ public class DocumentedCategoriesApiTest extends BaseApiTest {
     public void testPostCategoriesNoTitleFailureXml() throws Exception {
         System.out.println("Running testPostCategoriesNoTitleFailureXml...");
 
-        String descriptionBody = "<CategoryBody><description>No title test</description></CategoryBody>";
+        String descriptionBody = "<category><description>No title test</description></category>";
         HttpURLConnection connection = request(CATEGORIES_ENDPOINT, POST_METHOD, XML_FORMAT, XML_FORMAT, descriptionBody);
         int responseCode = connection.getResponseCode();
         String responseMessage = connection.getResponseMessage();
@@ -255,7 +252,7 @@ public class DocumentedCategoriesApiTest extends BaseApiTest {
 
         assertEquals(400, responseCode);
         assertEquals("Bad Request", responseMessage);
-        assertEquals("<errorMessages><errorMessage>title : field is mandatory</errorMessage></errorMessages>", responseBody);
+        assertEquals(CATEGORIES_MISSING_TITLE_XML, responseBody);
 
         connection.disconnect();
 
@@ -274,7 +271,7 @@ public class DocumentedCategoriesApiTest extends BaseApiTest {
 
         assertEquals(400, responseCode);
         assertEquals("Bad Request", responseMessage);
-        assertTrue(responseBody.contains(": can not be empty"));
+        assertEquals(CATEGORIES_EMPTY_TITLE_JSON, responseBody);
 
         connection.disconnect();
 
@@ -293,7 +290,7 @@ public class DocumentedCategoriesApiTest extends BaseApiTest {
 
         assertEquals(400, responseCode);
         assertEquals("Bad Request", responseMessage);
-        assertTrue(responseBody.contains(": can not be empty"));
+        assertEquals(CATEGORIES_EMPTY_TITLE_XML, responseBody);
 
         connection.disconnect();
 
