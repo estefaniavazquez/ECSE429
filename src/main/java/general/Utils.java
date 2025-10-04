@@ -1,9 +1,14 @@
 package general;
 
+import org.apache.http.NameValuePair;
+import org.apache.http.client.utils.URIBuilder;
+import org.apache.http.message.BasicNameValuePair;
+
 import java.io.InputStreamReader;
 import java.net.*;
 import java.nio.charset.StandardCharsets;
 import java.io.BufferedReader;
+import java.util.List;
 
 import static general.CommonConstants.*;
 
@@ -49,6 +54,25 @@ public class Utils {
         return requestPATCH(newEndpoint, acceptType, contentType);
     }
 
+    public static HttpURLConnection requestWithIdAndQueryParams(String endpoint, String method, String acceptType, String contentType, String id, String body, List<NameValuePair> queryParams) throws Exception {
+        String newEndpoint = BASE_URL + endpoint + "/" + id;
+
+        URI uri = new URIBuilder(newEndpoint).addParameters(queryParams).build();
+
+        HttpURLConnection connection = (HttpURLConnection) uri.toURL().openConnection();
+
+        connection.setRequestMethod(method);
+        connection.setRequestProperty("Accept", acceptType);
+        connection.setRequestProperty("Content-Type", contentType);
+        connection.setDoOutput(true);
+        if (body != null && !body.isEmpty()) {
+            connection.setDoInput(true);
+            connection.getOutputStream().write(body.getBytes(StandardCharsets.UTF_8));
+        }
+
+        return connection;
+    }
+
     public static String readResponse(HttpURLConnection connection) throws Exception {
         StringBuilder response = new StringBuilder();
         BufferedReader reader;
@@ -66,5 +90,18 @@ public class Utils {
         }
 
         return response.toString();
+    }
+
+    public static List<NameValuePair> createQueryParams(String title, String description) {
+        List<NameValuePair> queryParams = new java.util.ArrayList<>();
+
+        if (title != null && !title.isEmpty()) {
+            queryParams.add(new BasicNameValuePair("title", title));
+        }
+        if (description != null && !description.isEmpty()) {
+            queryParams.add(new BasicNameValuePair("description", description));
+        }
+
+        return queryParams;
     }
 }

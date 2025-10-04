@@ -15,6 +15,7 @@ import org.junit.runners.Suite;
         UndocumentedCategoriesApiTest.class,
         DocumentedCategoriesIdApiTest.class,
         UndocumentedCategoriesIdApiTest.class,
-        ExpectedBehaviourCategoriesIdApiTest.class
+        ExpectedBehaviourFailingCategoriesIdApiTest.class,
+        ActualBehaviourWorkingCategoriesApiTest.class
 })
 public class AllApiTests {}
