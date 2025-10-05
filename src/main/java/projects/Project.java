@@ -1,7 +1,9 @@
 package projects;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Project {
     private String id;
     private String title;
@@ -9,7 +11,8 @@ public class Project {
     private boolean active;
     private String description;
 
-    public Project() {}
+    public Project() {
+    }
 
     public Project(String id, String title, boolean completed, boolean active, String description) {
         this.id = id;
@@ -40,19 +43,24 @@ public class Project {
     }
 
     public String toStringJson() {
-        return "{\"id\":\"" + id + "\",\"title\":\"" + title + "\",\"completed\":" + completed + ",\"active\":" + active + ",\"description\":\"" + description + "\"}";
+        return "{\"id\":\"" + id + "\",\"title\":\"" + title + "\",\"completed\":" + completed + ",\"active\":" + active
+                + ",\"description\":\"" + description + "\"}";
     }
 
     public String toStringXml() {
-        return "<project><id>" + id + "</id><title>" + title + "</title><completed>" + completed + "</completed><active>" + active + "</active><description>" + description + "</description></project>";
+        return "<project><id>" + id + "</id><title>" + title + "</title><completed>" + completed
+                + "</completed><active>" + active + "</active><description>" + description + "</description></project>";
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
+        if (this == obj)
+            return true;
+        if (obj == null || getClass() != obj.getClass())
+            return false;
         Project project = (Project) obj;
-        return id.equals(project.id) && title.equals(project.title) && completed == project.completed && active == project.active && description.equals(project.description);
+        return id.equals(project.id) && title.equals(project.title) && completed == project.completed
+                && active == project.active && description.equals(project.description);
     }
 
     @JacksonXmlRootElement(localName = "project")
@@ -62,7 +70,8 @@ public class Project {
         private boolean active;
         private String description;
 
-        public ProjectBody() {}
+        public ProjectBody() {
+        }
 
         public ProjectBody(String title, boolean completed, boolean active, String description) {
             this.title = title;
@@ -89,7 +98,7 @@ public class Project {
 
         public boolean bodySameAsProject(Project project) {
             return title.equals(project.getTitle()) && completed == project.isCompleted() &&
-                   active == project.isActive() && description.equals(project.getDescription());
+                    active == project.isActive() && description.equals(project.getDescription());
         }
     }
 }

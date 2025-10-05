@@ -35,7 +35,9 @@ public class CommonConstants {
 
     public static final Category officeCategory = new Category("1", "Office", "");
     public static final Category homeCategory = new Category("2", "Home", "");
-    public static final Category[] defaultCategories = {officeCategory, homeCategory};
+    public static final Category[] defaultCategories = { officeCategory, homeCategory };
 
     public static final Project defaultProject = new Project("1", "Office Work", false, false, "");
+    public static final String PROJECT_OPTIONS = "OPTIONS, GET, HEAD, POST";
+    public static final String PROJECT_ID_OPTIONS = "OPTIONS, GET, HEAD, POST, PUT, DELETE";
 }

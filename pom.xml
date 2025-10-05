@@ -38,22 +38,23 @@
 
     </dependencies>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.1.2</version>
-                <configuration>
-                    <!-- ✅ Always print the test summary after mvn test -->
-                    <printSummary>true</printSummary>
-
-                    <!-- Optional: show individual test method output in the console -->
-                    <redirectTestOutputToFile>false</redirectTestOutputToFile>
-                    <useFile>false</useFile>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
+<build>
+    <testSourceDirectory>${project.basedir}/src/main/java</testSourceDirectory>
+    <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <version>3.1.2</version>
+            <configuration>
+                <includes>
+                    <include>**/*Test.java</include>
+                </includes>
+                <printSummary>true</printSummary>
+                <redirectTestOutputToFile>false</redirectTestOutputToFile>
+                <useFile>false</useFile>
+            </configuration>
+        </plugin>
+    </plugins>
+</build>
 
 </project>
