@@ -10,7 +10,8 @@ public class XmlProject {
     @JacksonXmlProperty(localName = "project")
     private Project[] projects;
 
-    public XmlProject() {}
+    public XmlProject() {
+    }
 
     public XmlProject(Project[] projects) {
         this.projects = projects;
@@ -28,8 +29,11 @@ public class XmlProject {
     }
 
     public boolean contains(Project project) {
+        if (projects == null || project == null) {
+            return false;
+        }
         for (Project p : projects) {
-            if (p.equals(project)) {
+            if (p != null && p.getId().equals(project.getId())) {
                 return true;
             }
         }

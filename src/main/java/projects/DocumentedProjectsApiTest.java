@@ -42,6 +42,11 @@ public class DocumentedProjectsApiTest extends BaseApiTest {
                                                                                         // to map the response to a list
                                                                                         // of Project objects
 
+        System.out.println("Response code: " + responseCode);
+        System.out.println("Response message: " + responseMessage);
+        System.out.println("Content-Type: " + contentType);
+        System.out.println("Response body: " + responseBody);
+
         assertEquals(200, responseCode);
         assertEquals("OK", responseMessage);
         assertTrue(contentType.contains(JSON_FORMAT));

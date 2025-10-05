@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="projects.DocumentedProjectsIdApiTest" time="10.411" tests="16" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="projects.UndocumentedProjectsIdApiTest" time="2.529" tests="4" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="18"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -57,253 +57,48 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="62.0"/>
   </properties>
-  <testcase name="testDeleteProjectsIdJson" classname="projects.DocumentedProjectsIdApiTest" time="0.64">
+  <testcase name="testOptionsProjectsIdJson" classname="projects.UndocumentedProjectsIdApiTest" time="0.615">
     <system-out><![CDATA[=======================Starting server...
 Server is up and running.
 
-Running testDeleteProjectsIdJson...
-Response code: 200
-Response message: OK
-Content-Type: application/json
-Response body: 
-testDeleteProjectsIdJson passed.
+Running testOptionsProjectsIdJson...
+testOptionsProjectsIdJson passed.
 
 Stopping server...
 Server stopped.=======================
 
 ]]></system-out>
   </testcase>
-  <testcase name="testDeleteProjectsIdXml" classname="projects.DocumentedProjectsIdApiTest" time="0.656">
+  <testcase name="testOptionsProjectsIdXml" classname="projects.UndocumentedProjectsIdApiTest" time="0.637">
     <system-out><![CDATA[=======================Starting server...
 Server is up and running.
 
-Running testDeleteProjectsIdXml...
-Response body all projects: <projects></projects>
-Response code: 200
-Response message: OK
-Content-Type: application/xml
-Response body: 
-testDeleteProjectsIdXml passed.
+Running testOptionsProjectsIdXml...
+testOptionsProjectsIdXml passed.
 
 Stopping server...
 Server stopped.=======================
 
 ]]></system-out>
   </testcase>
-  <testcase name="testGetProjectsIdInexistentJson" classname="projects.DocumentedProjectsIdApiTest" time="0.658">
+  <testcase name="testPatchProjectsIdJson" classname="projects.UndocumentedProjectsIdApiTest" time="0.644">
     <system-out><![CDATA[=======================Starting server...
 Server is up and running.
 
-Running testGetProjectsIdInexistentJson...
-Response code: 404
-Response message: Not Found
-Content-Type: application/json
-Response body: {"errorMessages":["Could not find an instance with projects/inexistent"]}
-testGetProjectsIdInexistentJson passed.
+Running testPatchProjectsIdJson...
+testPatchProjectsIdJson passed.
 
 Stopping server...
 Server stopped.=======================
 
 ]]></system-out>
   </testcase>
-  <testcase name="testGetProjectsIdInexistentXml" classname="projects.DocumentedProjectsIdApiTest" time="0.653">
+  <testcase name="testPatchProjectsIdXml" classname="projects.UndocumentedProjectsIdApiTest" time="0.633">
     <system-out><![CDATA[=======================Starting server...
 Server is up and running.
 
-Running testGetProjectsIdInexistentXml...
-Response code: 404
-Response message: Not Found
-Content-Type: application/xml
-Response body: <errorMessages><errorMessage>Could not find an instance with projects/inexistent</errorMessage></errorMessages>
-testGetProjectsIdInexistentXml passed.
-
-Stopping server...
-Server stopped.=======================
-
-]]></system-out>
-  </testcase>
-  <testcase name="testGetProjectsIdJson" classname="projects.DocumentedProjectsIdApiTest" time="0.651">
-    <system-out><![CDATA[=======================Starting server...
-Server is up and running.
-
-Running testGetProjectsIdJson...
-testGetProjectsIdJson passed.
-
-Stopping server...
-Server stopped.=======================
-
-]]></system-out>
-  </testcase>
-  <testcase name="testGetProjectsIdXml" classname="projects.DocumentedProjectsIdApiTest" time="0.66">
-    <system-out><![CDATA[=======================Starting server...
-Server is up and running.
-
-Running testGetProjectsIdXml...
-Response code: 200
-Response message: OK
-Content-Type: application/xml
-Response body: <projects><project><active>false</active><description/><id>1</id><completed>false</completed><title>Office Work</title><tasks><id>2</id></tasks><tasks><id>1</id></tasks></project></projects>
-testGetProjectsIdXml passed.
-
-Stopping server...
-Server stopped.=======================
-
-]]></system-out>
-  </testcase>
-  <testcase name="testHeadProjectsIdJson" classname="projects.DocumentedProjectsIdApiTest" time="0.639">
-    <system-out><![CDATA[=======================Starting server...
-Server is up and running.
-
-Running testHeadProjectsIdJson...
-Response code: 200
-Response message: OK
-Content-Type: application/json
-Response body: 
-testHeadProjectsIdJson passed.
-
-Stopping server...
-Server stopped.=======================
-
-]]></system-out>
-  </testcase>
-  <testcase name="testHeadProjectsIdXml" classname="projects.DocumentedProjectsIdApiTest" time="0.638">
-    <system-out><![CDATA[=======================Starting server...
-Server is up and running.
-
-Running testHeadProjectsIdXml...
-Response code: 200
-Response message: OK
-Content-Type: application/xml
-Response body: 
-testHeadProjectsIdXml passed.
-
-Stopping server...
-Server stopped.=======================
-
-]]></system-out>
-  </testcase>
-  <testcase name="testPostNoBodyProjectsIdJson" classname="projects.DocumentedProjectsIdApiTest" time="0.649">
-    <system-out><![CDATA[=======================Starting server...
-Server is up and running.
-
-Running testPostNoBodyProjectsIdJson...
-Response code: 200
-Response message: OK
-Content-Type: application/json
-Response body: {"id":"1","title":"Office Work","completed":"false","active":"false","description":"","tasks":[{"id":"2"},{"id":"1"}]}
-testPostNoBodyProjectsIdJson passed.
-
-Stopping server...
-Server stopped.=======================
-
-]]></system-out>
-  </testcase>
-  <testcase name="testPostProjectsIdJson" classname="projects.DocumentedProjectsIdApiTest" time="0.647">
-    <system-out><![CDATA[=======================Starting server...
-Server is up and running.
-
-Running testPostProjectsIdJson...
-Response code: 200
-Response message: OK
-Content-Type: application/json
-Response body: {"id":"1","title":"new project","completed":"false","active":"true","description":"A new project","tasks":[{"id":"1"},{"id":"2"}]}
-testPostProjectsIdJson passed.
-
-Stopping server...
-Server stopped.=======================
-
-]]></system-out>
-  </testcase>
-  <testcase name="testPostProjectsIdXml" classname="projects.DocumentedProjectsIdApiTest" time="0.657">
-    <system-out><![CDATA[=======================Starting server...
-Server is up and running.
-
-Running testPostProjectsIdXml...
-Response code: 200
-Response message: OK
-Content-Type: application/xml
-Response body: <project><active>true</active><description>A new project</description><id>1</id><completed>false</completed><title>new project</title><tasks><id>1</id></tasks><tasks><id>2</id></tasks></project>
-testPostProjectsIdXml passed.
-
-Stopping server...
-Server stopped.=======================
-
-]]></system-out>
-  </testcase>
-  <testcase name="testPostRandomFieldProjectsIdJson" classname="projects.DocumentedProjectsIdApiTest" time="0.646">
-    <system-out><![CDATA[=======================Starting server...
-Server is up and running.
-
-Running testPostRandomFieldProjectsIdJson...
-Response code: 400
-Response message: Bad Request
-Content-Type: application/json
-Response body: {"errorMessages":["Could not find field: randomField"]}
-testPostRandomFieldProjectsIdJson passed.
-
-Stopping server...
-Server stopped.=======================
-
-]]></system-out>
-  </testcase>
-  <testcase name="testPutNoBodyProjectsIdJson" classname="projects.DocumentedProjectsIdApiTest" time="0.651">
-    <system-out><![CDATA[=======================Starting server...
-Server is up and running.
-
-Running testPutNoBodyProjectsIdJson...
-Response code: 200
-Response message: OK
-Content-Type: application/json
-Response body: {"id":"1","title":"","completed":"false","active":"false","description":""}
-testPutNoBodyProjectsIdJson passed.
-
-Stopping server...
-Server stopped.=======================
-
-]]></system-out>
-  </testcase>
-  <testcase name="testPutProjectsIdJson" classname="projects.DocumentedProjectsIdApiTest" time="0.659">
-    <system-out><![CDATA[=======================Starting server...
-Server is up and running.
-
-Running testPutProjectsIdJson...
-Response code: 200
-Response message: OK
-Content-Type: application/xml
-Response body: <project><active>true</active><description>A new project</description><id>1</id><completed>false</completed><title>new project</title></project>
-testPutProjectsIdJson passed.
-
-Stopping server...
-Server stopped.=======================
-
-]]></system-out>
-  </testcase>
-  <testcase name="testPutProjectsIdXml" classname="projects.DocumentedProjectsIdApiTest" time="0.649">
-    <system-out><![CDATA[=======================Starting server...
-Server is up and running.
-
-Running testPutProjectsIdXml...
-Response code: 200
-Response message: OK
-Content-Type: application/json
-Response body: {"id":"1","title":"new project","completed":"false","active":"true","description":"A new project"}
-testPutProjectsIdXml passed.
-
-Stopping server...
-Server stopped.=======================
-
-]]></system-out>
-  </testcase>
-  <testcase name="testPutRandomFieldProjectsIdJson" classname="projects.DocumentedProjectsIdApiTest" time="0.654">
-    <system-out><![CDATA[=======================Starting server...
-Server is up and running.
-
-Running testPutRandomFieldProjectsIdJson...
-Response code: 400
-Response message: Bad Request
-Content-Type: application/json
-Response body: {"errorMessages":["Could not find field: randomField"]}
-testPutRandomFieldProjectsIdJson passed.
+Running testPatchProjectsIdXml...
+testPatchProjectsIdXml passed.
 
 Stopping server...
 Server stopped.=======================
