@@ -505,6 +505,32 @@ public class DocumentedProjectsIdApiTest extends BaseApiTest {
                 System.out.println("testDeleteProjectsIdJson passed.");
         }
 
+        // To add later if needed
+        // @Test
+        // // Test deleting the same object again
+        // public void testDeleteProjectsIdJsonTwice() throws Exception {
+        //         System.out.println("Running testDeleteProjectsIdJsonTwice...");
+        //         String projectsId = defaultProject.getId();
+        //         HttpURLConnection connection = requestWithId(PROJECTS_ENDPOINT, DELETE_METHOD, JSON_FORMAT, JSON_FORMAT,
+        //                         projectsId, null);
+        //         int responseCode = connection.getResponseCode();
+        //         String responseMessage = connection.getResponseMessage();
+        //         String contentType = connection.getContentType();
+        //         String responseBody = readResponse(connection);
+        
+        //         System.out.println("Response code: " + responseCode);
+        //         System.out.println("Response message: " + responseMessage);
+        //         System.out.println("Content-Type: " + contentType);
+        //         System.out.println("Response body: " + responseBody);
+        //         assertEquals(404, responseCode);
+        //         assertEquals("Not Found", responseMessage);
+        //         assertEquals(JSON_FORMAT, contentType);
+        //         assertEquals("{\"errorMessages\":[\"Project with ID " + projectsId + " not found\"]}", responseBody);
+        //         connection.disconnect();
+        //         System.out.println("testDeleteProjectsIdJsonTwice passed.");
+
+        // }
+
         // no need
         // @Test
         // public void testDeleteAllProjectsIdJson() throws Exception {
