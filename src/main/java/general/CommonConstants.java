@@ -1,12 +1,14 @@
 package general;
 
 import categories.Category;
+import projects.Project;
 
 public class CommonConstants {
     public static final String BASE_URL = "http://localhost:4567/";
     public static final String PATH_TO_SERVER_JAR = "lib/runTodoManagerRestAPI-1.5.5.jar";
 
     public static final String CATEGORIES_ENDPOINT = "categories";
+    public static final String PROJECTS_ENDPOINT = "projects";
 
     public static final String JSON_FORMAT = "application/json";
     public static final String XML_FORMAT = "application/xml";
@@ -35,5 +37,9 @@ public class CommonConstants {
 
     public static final Category officeCategory = new Category("1", "Office", "");
     public static final Category homeCategory = new Category("2", "Home", "");
-    public static final Category[] defaultCategories = {officeCategory, homeCategory};
+    public static final Category[] defaultCategories = { officeCategory, homeCategory };
+
+    public static final Project defaultProject = new Project("1", "Office Work", false, false, "");
+    public static final String PROJECT_OPTIONS = "OPTIONS, GET, HEAD, POST";
+    public static final String PROJECT_ID_OPTIONS = "OPTIONS, GET, HEAD, POST, PUT, DELETE";
 }

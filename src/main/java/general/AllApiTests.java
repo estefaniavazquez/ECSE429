@@ -1,12 +1,12 @@
 package general;
 
 import categories.*;
+import projects.*;
 
 import org.junit.FixMethodOrder;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 import org.junit.runners.Suite;
-
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @RunWith(Suite.class)
@@ -16,6 +16,11 @@ import org.junit.runners.Suite;
         DocumentedCategoriesIdApiTest.class,
         UndocumentedCategoriesIdApiTest.class,
         ExpectedBehaviourFailingCategoriesIdApiTest.class,
-        ActualBehaviourWorkingCategoriesIdApiTest.class
+        ActualBehaviourWorkingCategoriesIdApiTest.class,
+        DocumentedProjectsApiTest.class,
+        DocumentedProjectsIdApiTest.class,
+        UndocumentedProjectsIdApiTest.class,
+        UndocumentedProjectsApiTest.class
 })
-public class AllApiTests {}
+public class AllApiTests {
+}
