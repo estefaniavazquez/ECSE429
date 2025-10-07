@@ -241,7 +241,7 @@ public class DocumentedProjectsIdApiTest extends BaseApiTest {
                 assertEquals(200, responseCode);
                 assertEquals("OK", responseMessage);
                 assertEquals(JSON_FORMAT, contentType);
-                assertEquals("{\"id\":\"1\",\"title\":\"Office Work\",\"completed\":\"false\",\"active\":\"false\",\"description\":\"\",\"tasks\":[{\"id\":\"2\"},{\"id\":\"1\"}]}", // Could
+                assertEquals("{\"id\":\"1\",\"title\":\"Office Work\",\"completed\":\"false\",\"active\":\"false\",\"description\":\"\",\"tasks\":[{\"id\":\"1\"},{\"id\":\"2\"}]}", // Could
                                                                                                                                                                                      // be
                                                                                                                                                                                      // SUS
                                 responseBody);
@@ -505,31 +505,47 @@ public class DocumentedProjectsIdApiTest extends BaseApiTest {
                 System.out.println("testDeleteProjectsIdJson passed.");
         }
 
-        // To add later if needed
-        // @Test
-        // // Test deleting the same object again
-        // public void testDeleteProjectsIdJsonTwice() throws Exception {
-        //         System.out.println("Running testDeleteProjectsIdJsonTwice...");
-        //         String projectsId = defaultProject.getId();
-        //         HttpURLConnection connection = requestWithId(PROJECTS_ENDPOINT, DELETE_METHOD, JSON_FORMAT, JSON_FORMAT,
-        //                         projectsId, null);
-        //         int responseCode = connection.getResponseCode();
-        //         String responseMessage = connection.getResponseMessage();
-        //         String contentType = connection.getContentType();
-        //         String responseBody = readResponse(connection);
-        
-        //         System.out.println("Response code: " + responseCode);
-        //         System.out.println("Response message: " + responseMessage);
-        //         System.out.println("Content-Type: " + contentType);
-        //         System.out.println("Response body: " + responseBody);
-        //         assertEquals(404, responseCode);
-        //         assertEquals("Not Found", responseMessage);
-        //         assertEquals(JSON_FORMAT, contentType);
-        //         assertEquals("{\"errorMessages\":[\"Project with ID " + projectsId + " not found\"]}", responseBody);
-        //         connection.disconnect();
-        //         System.out.println("testDeleteProjectsIdJsonTwice passed.");
+        @Test
+        // Test deleting the same object again
+        public void testDeleteProjectsIdJsonTwice() throws Exception {
+                System.out.println("Running testDeleteProjectsIdJsonTwice...");
+                String projectsId = defaultProject.getId();
 
-        // }
+                // first delete
+                HttpURLConnection connectionFirst = requestWithId(PROJECTS_ENDPOINT,
+                                DELETE_METHOD, JSON_FORMAT, JSON_FORMAT,
+                                projectsId, null);
+                int responseCodeFirst = connectionFirst.getResponseCode();
+                String responseMessageFirst = connectionFirst.getResponseMessage();
+                String contentTypeFirst = connectionFirst.getContentType();
+                String responseBodyFirst = readResponse(connectionFirst);
+                assertEquals(200, responseCodeFirst);
+                assertEquals("OK", responseMessageFirst);
+                assertEquals(JSON_FORMAT, contentTypeFirst);
+                assertEquals("", responseBodyFirst);
+                connectionFirst.disconnect();
+
+                // second delete
+                HttpURLConnection connection = requestWithId(PROJECTS_ENDPOINT,
+                                DELETE_METHOD, JSON_FORMAT, JSON_FORMAT,
+                                projectsId, null);
+                int responseCode = connection.getResponseCode();
+                String responseMessage = connection.getResponseMessage();
+                String contentType = connection.getContentType();
+                String responseBody = readResponse(connection);
+
+                System.out.println("Response code: " + responseCode);
+                System.out.println("Response message: " + responseMessage);
+                System.out.println("Content-Type: " + contentType);
+                System.out.println("Response body: " + responseBody);
+                assertEquals(404, responseCode);
+                assertEquals("Not Found", responseMessage);
+                assertEquals(JSON_FORMAT, contentType);
+                assertEquals("{\"errorMessages\":[\"Could not find any instances with projects/" + projectsId + "\"]}",
+                                responseBody);
+                connection.disconnect();
+                System.out.println("testDeleteProjectsIdJsonTwice passed.");
+        }
 
         // no need
         // @Test
