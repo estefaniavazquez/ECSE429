@@ -16,7 +16,7 @@ import org.junit.runners.Suite;
         DocumentedCategoriesIdApiTest.class,
         UndocumentedCategoriesIdApiTest.class,
         ExpectedBehaviourFailingCategoriesIdApiTest.class,
-        ActualBehaviourWorkingCategoriesApiTest.class,
+        ActualBehaviourWorkingCategoriesIdApiTest.class,
         DocumentedProjectsApiTest.class,
         DocumentedProjectsIdApiTest.class,
         UndocumentedProjectsIdApiTest.class,

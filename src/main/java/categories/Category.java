@@ -12,7 +12,6 @@ public class Category {
     public Category(String id, String title, String description) {
         this.id = id;
         this.title = title;
-
         this.description = description;
     }
 

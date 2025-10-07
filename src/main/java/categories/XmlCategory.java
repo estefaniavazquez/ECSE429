@@ -46,24 +46,4 @@ public class XmlCategory {
 
         return true;
     }
-
-    public boolean contains(Category category) {
-        for (Category c : categories) {
-            if (c.equals(category)) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    public boolean containsAll(Category[] categories) {
-        for (Category category : categories) {
-            if (!contains(category)) {
-                return false;
-            }
-        }
-
-        return true;
-    }
 }

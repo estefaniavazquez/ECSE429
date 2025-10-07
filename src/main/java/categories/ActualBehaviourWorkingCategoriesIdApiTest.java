@@ -16,7 +16,7 @@ import static general.Utils.*;
 import static general.CommonConstants.*;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class ActualBehaviourWorkingCategoriesApiTest extends BaseApiTest {
+public class ActualBehaviourWorkingCategoriesIdApiTest extends BaseApiTest {
     /*   /categories/{id} endpoint tests   */
 
     // Test POST /categories/{id}?description={description}&title={title} (discovered bug)
