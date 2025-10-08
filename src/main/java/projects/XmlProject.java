@@ -16,6 +16,10 @@ public class XmlProject {
     public XmlProject(Project[] projects) {
         this.projects = projects;
     }
+    
+    public Project[] getProjects() {
+        return projects;
+    }
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
