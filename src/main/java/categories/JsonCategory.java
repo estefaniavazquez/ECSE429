@@ -3,7 +3,8 @@ package categories;
 public class JsonCategory {
     private Category[] categories;
 
-    public JsonCategory() {}
+    public JsonCategory() {
+    }
 
     public JsonCategory(Category[] categories) {
         this.categories = categories;
@@ -65,5 +66,9 @@ public class JsonCategory {
         }
 
         return true;
+    }
+
+    public int size() {
+        return categories != null ? categories.length : 0;
     }
 }

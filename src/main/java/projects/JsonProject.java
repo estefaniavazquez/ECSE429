@@ -5,7 +5,8 @@ public class JsonProject {
     private Project[] projects;
 
     // Required for Jackson deserialization
-    public JsonProject() {}
+    public JsonProject() {
+    }
 
     public JsonProject(Project[] projects) {
         this.projects = projects;
@@ -28,7 +29,8 @@ public class JsonProject {
         return sb.toString();
     }
 
-    // Check if a specific project is in the array of projects that the JsonProject object returned
+    // Check if a specific project is in the array of projects that the JsonProject
+    // object returned
     public boolean contains(Project project) {
         for (Project p : projects) {
             if (p.equals(project)) {
@@ -38,7 +40,8 @@ public class JsonProject {
         return false;
     }
 
-    // Check if all projects in the given array are in the array of projects that the JsonProject object returned
+    // Check if all projects in the given array are in the array of projects that
+    // the JsonProject object returned
     public boolean containsAll(Project[] projects) {
         for (Project project : projects) {
             if (!contains(project)) {
@@ -46,5 +49,9 @@ public class JsonProject {
             }
         }
         return true;
+    }
+
+    public int size() {
+        return projects != null ? projects.length : 0;
     }
 }

@@ -1,13 +1,16 @@
 package categories;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Category {
     private String id;
     private String title;
     private String description;
 
-    public Category() {}
+    public Category() {
+    }
 
     public Category(String id, String title, String description) {
         this.id = id;
@@ -33,13 +36,16 @@ public class Category {
     }
 
     public String toStringXml() {
-        return "<category><id>" + id + "</id><title>" + title + "</title><description>" + description + "</description></category>";
+        return "<category><id>" + id + "</id><title>" + title + "</title><description>" + description
+                + "</description></category>";
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
+        if (this == obj)
+            return true;
+        if (obj == null || getClass() != obj.getClass())
+            return false;
         Category category = (Category) obj;
         return id.equals(category.id) && title.equals(category.title) && description.equals(category.description);
     }
@@ -49,7 +55,8 @@ public class Category {
         private String title;
         private String description;
 
-        public CategoryBody() {}
+        public CategoryBody() {
+        }
 
         public CategoryBody(String title, String description) {
             this.title = title;

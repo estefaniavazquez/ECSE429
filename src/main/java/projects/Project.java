@@ -1,7 +1,7 @@
 package projects;
 
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Project {

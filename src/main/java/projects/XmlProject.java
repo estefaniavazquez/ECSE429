@@ -10,10 +10,15 @@ public class XmlProject {
     @JacksonXmlProperty(localName = "project")
     private Project[] projects;
 
-    public XmlProject() {}
+    public XmlProject() {
+    }
 
     public XmlProject(Project[] projects) {
         this.projects = projects;
+    }
+
+    public Project[] getProjects() {
+        return projects != null ? projects.clone() : new Project[0];
     }
 
     public String toString() {

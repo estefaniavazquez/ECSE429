@@ -10,10 +10,15 @@ public class XmlCategory {
     @JacksonXmlProperty(localName = "category")
     private Category[] categories;
 
-    public XmlCategory() {}
+    public XmlCategory() {
+    }
 
     public XmlCategory(Category[] categories) {
         this.categories = categories;
+    }
+
+    public Category[] getCategories() {
+        return categories != null ? categories.clone() : new Category[0];
     }
 
     public String toString() {
