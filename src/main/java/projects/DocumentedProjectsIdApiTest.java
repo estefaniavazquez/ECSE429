@@ -308,7 +308,8 @@ public class DocumentedProjectsIdApiTest extends BaseApiTest {
                 // check initial state of the target project
                 HttpURLConnection initialTargetConnection = requestWithId(PROJECTS_ENDPOINT, GET_METHOD, JSON_FORMAT, JSON_FORMAT, defaultProject.getId(), null);
                 String initialTargetResponse = readResponse(initialTargetConnection);
-                Project initialTargetProject = objectMapper.readValue(initialTargetResponse, Project.class);
+                JsonProject initialTargetJsonProject = objectMapper.readValue(initialTargetResponse, JsonProject.class);
+                Project initialTargetProject = initialTargetJsonProject.getProjects()[0]; // Get the first (and only) project from the array
                 initialTargetConnection.disconnect();
 
                 String projectsId = defaultProject.getId();

@@ -222,7 +222,7 @@ public class DocumentedProjectsApiTest extends BaseApiTest {
         assertEquals("Default title should be empty string", "", createdProject.getTitle());
         assertEquals("Default description should be empty string", "", createdProject.getDescription());
         assertFalse("Default completed should be false", createdProject.isCompleted());
-        assertTrue("Default active should be true", createdProject.isActive());
+        assertFalse("Default active should be false", createdProject.isActive());
 
         connection.disconnect();
 
