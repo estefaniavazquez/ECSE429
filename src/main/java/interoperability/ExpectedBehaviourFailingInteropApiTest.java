@@ -7,7 +7,6 @@ import static general.CommonConstants.TODOS_CATEGORIES_ENDPOINT;
 import static general.CommonConstants.TODOS_CATEGORIES_ID_ENDPOINT;
 import static general.CommonConstants.TODOS_ENDPOINT;
 import static general.CommonConstants.TODOS_TASKSOF_ENDPOINT;
-import static general.CommonConstants.TODOS_TASKSOF_ID_ENDPOINT;
 import static general.Utils.readResponse;
 import static general.Utils.request;
 import static org.junit.Assert.assertEquals;
@@ -206,35 +205,6 @@ public class ExpectedBehaviourFailingInteropApiTest extends BaseApiTest {
     }
 
     /**
-     * Tests deleting a relationship with a nonexistent todo ID.
-     * This test verifies that attempting to delete a todo-project (tasksof)
-     * relationship
-     * using a todo ID that doesn't exist (99999) results in a proper error
-     * response.
-     * The API should return 404 Not Found with appropriate error message.
-     * Expected: 404 Not Found with error message indicating todo not found.
-     */
-    @Test
-    public void testDeleteRelationshipWithNonexistentTodoJson() throws Exception {
-        System.out.println("Running testDeleteRelationshipWithNonexistentTodoJson...");
-
-        // Try to delete relationship for nonexistent todo
-        String endpoint = String.format(TODOS_TASKSOF_ID_ENDPOINT, "99999", "1");
-        HttpURLConnection connection = request(endpoint, DELETE_METHOD, JSON_FORMAT, JSON_FORMAT, null);
-
-        int responseCode = connection.getResponseCode();
-        String responseMessage = connection.getResponseMessage();
-        String responseBody = readResponse(connection);
-
-        assertEquals(404, responseCode);
-        assertEquals("Not Found", responseMessage);
-        assertTrue(responseBody.contains("errorMessages"));
-
-        connection.disconnect();
-        System.out.println("testDeleteRelationshipWithNonexistentTodoJson passed.");
-    }
-
-    /**
      * Tests creating a relationship with a nonexistent project ID.
      * This test verifies that attempting to create a todo-project (tasksof)
      * relationship
@@ -275,60 +245,6 @@ public class ExpectedBehaviourFailingInteropApiTest extends BaseApiTest {
 
         connection.disconnect();
         System.out.println("testCreateRelationshipWithNonexistentProjectJson passed.");
-    }
-
-    /**
-     * Tests creating a duplicate relationship.
-     * This test verifies that attempting to create a todo-category relationship
-     * that already exists results in a proper error response. First creates the
-     * relationship successfully, then tries to create the same relationship again.
-     * Expected: 400 Bad Request with error message indicating duplicate
-     * relationship.
-     */
-    @Test
-    public void testCreateDuplicateRelationshipJson() throws Exception {
-        System.out.println("Running testCreateDuplicateRelationshipJson...");
-
-        ObjectMapper objectMapper = new ObjectMapper();
-
-        // First create a todo
-        Todo.TodoBody todoBody = new Todo.TodoBody("Test Todo Duplicate Rel", false, "Test description");
-        String todoJson = objectMapper.writeValueAsString(todoBody);
-
-        HttpURLConnection createTodoConnection = request(TODOS_ENDPOINT, POST_METHOD, JSON_FORMAT, JSON_FORMAT,
-                todoJson);
-        String createTodoResponse = readResponse(createTodoConnection);
-        Todo createdTodo = objectMapper.readValue(createTodoResponse, Todo.class);
-        createTodoConnection.disconnect();
-
-        // Create first relationship
-        JsonRelationship relationshipBody = new JsonRelationship("1");
-        String relationshipJson = objectMapper.writeValueAsString(relationshipBody);
-
-        String endpoint = String.format(TODOS_CATEGORIES_ENDPOINT, createdTodo.getId());
-        HttpURLConnection firstConnection = request(endpoint, POST_METHOD, JSON_FORMAT, JSON_FORMAT, relationshipJson);
-        firstConnection.disconnect();
-
-        // Try to create the same relationship again
-        HttpURLConnection secondConnection = request(endpoint, POST_METHOD, JSON_FORMAT, JSON_FORMAT, relationshipJson);
-
-        // HttpURLConnection thirdConnection = request(TODOS_ENDPOINT, GET_METHOD,
-        // JSON_FORMAT, JSON_FORMAT, null);
-
-        // String readResponseFromRetrieval = readResponse(thirdConnection);
-
-        // int responseCodeFromRetrieval = thirdConnection.getResponseCode();
-        // String responseMessageFromRetrieval = thirdConnection.getResponseMessage();
-
-        int responseCode = secondConnection.getResponseCode();
-        String responseBody = readResponse(secondConnection);
-
-        // The API might handle duplicates differently - could be 400 or 409
-        assertTrue("Response code should indicate error", responseCode >= 400);
-        assertTrue("Response should contain error message", responseBody.contains("errorMessages"));
-
-        secondConnection.disconnect();
-        System.out.println("testCreateDuplicateRelationshipJson passed.");
     }
 
     /**

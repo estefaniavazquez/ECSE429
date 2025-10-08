@@ -6,6 +6,13 @@ import org.junit.runners.MethodSorters;
 import org.junit.runners.Suite;
 
 import interoperability.ComprehensiveApiBehaviourTest;
+import interoperability.CrossRelationshipInteropApiTest;
+import interoperability.DocumentedInteropApiTest;
+import interoperability.DocumentedInteropXmlApiTest;
+import interoperability.ExpectedBehaviourFailingInteropApiTest;
+import interoperability.ExpectedBehaviourFailingInteropXmlApiTest;
+import interoperability.UndocumentedInteropApiTest;
+import interoperability.UndocumentedInteropXmlApiTest;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @RunWith(Suite.class)
@@ -21,16 +28,17 @@ import interoperability.ComprehensiveApiBehaviourTest;
                 // UndocumentedProjectsIdApiTest.class,
                 // UndocumentedProjectsApiTest.class,
                 // ====================================
-                // DocumentedInteropApiTest.class,
-                // UndocumentedInteropApiTest.class,
-                // ExpectedBehaviourFailingInteropApiTest.class,
-                // CrossRelationshipInteropApiTest.class,
+                DocumentedInteropApiTest.class,
+                UndocumentedInteropApiTest.class,
+                ExpectedBehaviourFailingInteropApiTest.class,
+                CrossRelationshipInteropApiTest.class,
                 // ====================================
-                // DocumentedInteropXmlApiTest.class,
-                // UndocumentedInteropXmlApiTest.class,
-                // ExpectedBehaviourFailingInteropXmlApiTest.class
+                DocumentedInteropXmlApiTest.class,
+                UndocumentedInteropXmlApiTest.class,
+                ExpectedBehaviourFailingInteropXmlApiTest.class,
                 // ====================================
                 ComprehensiveApiBehaviourTest.class
 })
+
 public class AllApiTests {
 }

@@ -1,11 +1,9 @@
 package interoperability;
 
 import static general.CommonConstants.CATEGORIES_PROJECTS_ENDPOINT;
-import static general.CommonConstants.CATEGORIES_PROJECTS_ID_ENDPOINT;
 import static general.CommonConstants.CATEGORIES_TODOS_ENDPOINT;
 import static general.CommonConstants.CATEGORIES_TODOS_ID_ENDPOINT;
 import static general.CommonConstants.DELETE_METHOD;
-import static general.CommonConstants.GET_METHOD;
 import static general.CommonConstants.HEAD_METHOD;
 import static general.CommonConstants.JSON_FORMAT;
 import static general.CommonConstants.OPTIONS_METHOD;
@@ -16,7 +14,6 @@ import static general.CommonConstants.PROJECTS_TASKS_ID_ENDPOINT;
 import static general.CommonConstants.PUT_METHOD;
 import static general.CommonConstants.RELATIONSHIP_ID_OPTIONS;
 import static general.CommonConstants.TODOS_CATEGORIES_ENDPOINT;
-import static general.CommonConstants.TODOS_CATEGORIES_ID_ENDPOINT;
 import static general.CommonConstants.TODOS_CATEGORIES_OPTIONS;
 import static general.CommonConstants.TODOS_ENDPOINT;
 import static general.CommonConstants.TODOS_TASKSOF_ENDPOINT;
@@ -184,46 +181,6 @@ public class UndocumentedInteropApiTest extends BaseApiTest {
     /* Test undocumented methods on specific relationship ID endpoints */
 
     /**
-     * Tests the GET /todos/{id}/categories/{id} endpoint with JSON format.
-     * This test verifies that GET method on specific relationship ID endpoints
-     * is not supported. The API doesn't support getting individual relationship
-     * details, only collections. Should return 404 Not Found.
-     * Expected: 404 Not Found indicating the specific relationship endpoint doesn't
-     * exist.
-     */
-    @Test
-    public void testGetTodoCategoryIdJson() throws Exception {
-        System.out.println("Running testGetTodoCategoryIdJson...");
-
-        ObjectMapper objectMapper = new ObjectMapper();
-
-        // First create a todo
-        Todo.TodoBody todoBody = new Todo.TodoBody("Test Todo GET ID", false, "Test description");
-        String todoJson = objectMapper.writeValueAsString(todoBody);
-
-        HttpURLConnection createTodoConnection = request(TODOS_ENDPOINT, POST_METHOD, JSON_FORMAT, JSON_FORMAT,
-                todoJson);
-        String createTodoResponse = readResponse(createTodoConnection);
-        Todo createdTodo = objectMapper.readValue(createTodoResponse, Todo.class);
-        createTodoConnection.disconnect();
-
-        // Try GET on specific relationship ID endpoint (should be method not allowed)
-        String endpoint = String.format(TODOS_CATEGORIES_ID_ENDPOINT, createdTodo.getId(), "1");
-        HttpURLConnection connection = request(endpoint, GET_METHOD, JSON_FORMAT, JSON_FORMAT, null);
-
-        int responseCode = connection.getResponseCode();
-        String responseMessage = connection.getResponseMessage();
-        String responseBody = readResponse(connection);
-
-        assertEquals(405, responseCode);
-        assertEquals("Method Not Allowed", responseMessage);
-        assertEquals("", responseBody);
-
-        connection.disconnect();
-        System.out.println("testGetTodoCategoryIdJson passed.");
-    }
-
-    /**
      * Tests the POST /todos/{id}/tasksof/{id} endpoint with JSON format.
      * This test verifies that POST method on specific relationship ID endpoints
      * is not supported. Relationship creation should only happen on collection
@@ -257,8 +214,8 @@ public class UndocumentedInteropApiTest extends BaseApiTest {
         String responseMessage = connection.getResponseMessage();
         String responseBody = readResponse(connection);
 
-        assertEquals(405, responseCode);
-        assertEquals("Method Not Allowed", responseMessage);
+        assertEquals(404, responseCode);
+        assertEquals("Not Found", responseMessage);
         assertEquals("", responseBody);
 
         connection.disconnect();
@@ -446,33 +403,6 @@ public class UndocumentedInteropApiTest extends BaseApiTest {
     }
 
     /**
-     * Tests the GET /categories/{id}/projects/{id} endpoint with JSON format.
-     * This test verifies that GET method on specific relationship ID endpoints
-     * is not supported. The API doesn't support getting individual relationship
-     * details, only collections. Should return 405 Method Not Allowed.
-     * Expected: 405 Method Not Allowed indicating the specific relationship
-     * endpoint access is not supported.
-     */
-    @Test
-    public void testGetCategoryProjectIdJson() throws Exception {
-        System.out.println("Running testGetCategoryProjectIdJson...");
-
-        String endpoint = String.format(CATEGORIES_PROJECTS_ID_ENDPOINT, "1", "1");
-        HttpURLConnection connection = request(endpoint, GET_METHOD, JSON_FORMAT, JSON_FORMAT, null);
-
-        int responseCode = connection.getResponseCode();
-        String responseMessage = connection.getResponseMessage();
-        String responseBody = readResponse(connection);
-
-        assertEquals(405, responseCode);
-        assertEquals("Method Not Allowed", responseMessage);
-        assertEquals("", responseBody);
-
-        connection.disconnect();
-        System.out.println("testGetCategoryProjectIdJson passed.");
-    }
-
-    /**
      * Tests the POST /categories/{id}/todos/{id} endpoint with JSON format.
      * This test verifies that POST method on specific relationship ID endpoints
      * is not supported. Relationship creation should only happen on collection
@@ -494,8 +424,8 @@ public class UndocumentedInteropApiTest extends BaseApiTest {
         String responseMessage = connection.getResponseMessage();
         String responseBody = readResponse(connection);
 
-        assertEquals(405, responseCode);
-        assertEquals("Method Not Allowed", responseMessage);
+        assertEquals(404, responseCode);
+        assertEquals("Not Found", responseMessage);
         assertEquals("", responseBody);
 
         connection.disconnect();

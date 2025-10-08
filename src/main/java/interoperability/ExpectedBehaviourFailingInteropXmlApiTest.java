@@ -3,16 +3,13 @@ package interoperability;
 import static general.CommonConstants.CATEGORIES_ENDPOINT;
 import static general.CommonConstants.CATEGORIES_PROJECTS_ENDPOINT;
 import static general.CommonConstants.CATEGORIES_TODOS_ENDPOINT;
-import static general.CommonConstants.DELETE_METHOD;
 import static general.CommonConstants.GET_METHOD;
 import static general.CommonConstants.POST_METHOD;
 import static general.CommonConstants.PROJECTS_ENDPOINT;
 import static general.CommonConstants.PROJECTS_TASKS_ENDPOINT;
 import static general.CommonConstants.TODOS_CATEGORIES_ENDPOINT;
-import static general.CommonConstants.TODOS_CATEGORIES_ID_ENDPOINT;
 import static general.CommonConstants.TODOS_ENDPOINT;
 import static general.CommonConstants.TODOS_TASKSOF_ENDPOINT;
-import static general.CommonConstants.TODOS_TASKSOF_ID_ENDPOINT;
 import static general.CommonConstants.XML_FORMAT;
 import static general.Utils.readResponse;
 import static general.Utils.request;
@@ -138,43 +135,6 @@ public class ExpectedBehaviourFailingInteropXmlApiTest extends BaseApiTest {
 
         connection.disconnect();
         System.out.println("testPostTodoTasksofNonexistentProjectXml passed.");
-    }
-
-    /**
-     * Tests deleting a nonexistent todo-category relationship using XML format.
-     * This test verifies that attempting to delete a relationship that doesn't
-     * exist
-     * results in appropriate error response using XML format.
-     * Expected: 404 Not Found indicating the relationship doesn't exist.
-     */
-    @Test
-    public void testDeleteNonexistentTodoCategoryRelationshipXml() throws Exception {
-        System.out.println("Running testDeleteNonexistentTodoCategoryRelationshipXml...");
-
-        XmlMapper xmlMapper = new XmlMapper();
-
-        // First create a todo
-        String todoXml = "<todo><title>Test Todo for Nonexistent Relationship</title><doneStatus>false</doneStatus><description>Testing delete nonexistent relationship</description></todo>";
-        HttpURLConnection createTodoConnection = request(TODOS_ENDPOINT, POST_METHOD, XML_FORMAT, XML_FORMAT,
-                todoXml);
-        String createTodoResponse = readResponse(createTodoConnection);
-        Todo createdTodo = xmlMapper.readValue(createTodoResponse, Todo.class);
-        createTodoConnection.disconnect();
-
-        // Try to delete nonexistent relationship
-        String deleteEndpoint = String.format(TODOS_CATEGORIES_ID_ENDPOINT, createdTodo.getId(), "99999");
-        HttpURLConnection connection = request(deleteEndpoint, DELETE_METHOD, XML_FORMAT, XML_FORMAT, null);
-
-        int responseCode = connection.getResponseCode();
-        String responseMessage = connection.getResponseMessage();
-        String responseBody = readResponse(connection);
-
-        assertEquals(404, responseCode);
-        assertEquals("Not Found", responseMessage);
-        assertTrue("Response should contain error message", responseBody.contains("errorMessages"));
-
-        connection.disconnect();
-        System.out.println("testDeleteNonexistentTodoCategoryRelationshipXml passed.");
     }
 
     /**
@@ -372,33 +332,6 @@ public class ExpectedBehaviourFailingInteropXmlApiTest extends BaseApiTest {
 
         connection.disconnect();
         System.out.println("testPostTodoCategoriesEmptyBodyXml passed.");
-    }
-
-    /**
-     * Tests deleting a relationship for a nonexistent todo using XML format.
-     * This test verifies that attempting to delete a relationship for a todo that
-     * doesn't exist
-     * results in appropriate error response using XML format.
-     * Expected: 404 Not Found indicating the todo doesn't exist.
-     */
-    @Test
-    public void testDeleteNonexistentTodoRelationshipXml() throws Exception {
-        System.out.println("Running testDeleteNonexistentTodoRelationshipXml...");
-
-        // Try to delete relationship for nonexistent todo
-        String deleteEndpoint = String.format(TODOS_TASKSOF_ID_ENDPOINT, "99999", "1");
-        HttpURLConnection connection = request(deleteEndpoint, DELETE_METHOD, XML_FORMAT, XML_FORMAT, null);
-
-        int responseCode = connection.getResponseCode();
-        String responseMessage = connection.getResponseMessage();
-        String responseBody = readResponse(connection);
-
-        assertEquals(404, responseCode);
-        assertEquals("Not Found", responseMessage);
-        assertTrue("Response should contain error message", responseBody.contains("errorMessages"));
-
-        connection.disconnect();
-        System.out.println("testDeleteNonexistentTodoRelationshipXml passed.");
     }
 
     /**

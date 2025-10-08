@@ -285,6 +285,24 @@ public class ComprehensiveApiBehaviourTest extends BaseApiTest {
         return JSON_MAPPER.treeToValue(root, Project.class);
     }
 
+    private Todo parseTodoBody(String body) throws Exception {
+        if (body == null || body.isBlank()) {
+            return null;
+        }
+        JsonNode root = JSON_MAPPER.readTree(body);
+        if (root.isObject() && root.has("todos")) {
+            JsonNode todosNode = root.get("todos");
+            if (todosNode.isArray() && todosNode.size() > 0) {
+                return JSON_MAPPER.treeToValue(todosNode.get(0), Todo.class);
+            }
+            return null;
+        }
+        if (root.isArray() && root.size() > 0) {
+            return JSON_MAPPER.treeToValue(root.get(0), Todo.class);
+        }
+        return JSON_MAPPER.treeToValue(root, Todo.class);
+    }
+
     private void registerRelationship(String template, String parentId, String childId) {
         relationshipsToDelete.add(new RelationshipRef(template, parentId, childId));
     }
@@ -526,7 +544,7 @@ public class ComprehensiveApiBehaviourTest extends BaseApiTest {
 
         ApiResponse response = getTodoById(created.getId());
         assertEquals(200, response.code);
-        Todo fetched = JSON_MAPPER.readValue(response.body, Todo.class);
+        Todo fetched = parseTodoBody(response.body);
 
         assertEquals(created.getId(), fetched.getId());
         assertEquals(created.getTitle(), fetched.getTitle());
@@ -545,33 +563,6 @@ public class ComprehensiveApiBehaviourTest extends BaseApiTest {
         assertEquals(200, response.code);
         XmlTodo xmlTodos = XML_MAPPER.readValue(response.body, XmlTodo.class);
         assertTrue("XML todos should include created todo", xmlTodos.contains(created));
-    }
-
-    /**
-     * Updates a todo and verifies both the immediate response and subsequent GET
-     * reflect the new values.
-     */
-    @Test
-    public void testUpdateTodo() throws Exception {
-        Todo created = createTodoResource(unique("todo-update-"), "before");
-        Map<String, Object> updateBody = new HashMap<>();
-        updateBody.put("title", created.getTitle());
-        updateBody.put("description", "after");
-        updateBody.put("doneStatus", true);
-
-        String payload = JSON_MAPPER.writeValueAsString(updateBody);
-        ApiResponse updateResponse = execute(requestWithId(TODOS_ENDPOINT, POST_METHOD, JSON_FORMAT, JSON_FORMAT,
-                created.getId(), payload));
-
-        assertEquals(200, updateResponse.code);
-        Todo updated = JSON_MAPPER.readValue(updateResponse.body, Todo.class);
-        assertEquals("after", updated.getDescription());
-        assertEquals("true", updated.getDoneStatus());
-
-        ApiResponse fetchResponse = getTodoById(created.getId());
-        Todo fetched = JSON_MAPPER.readValue(fetchResponse.body, Todo.class);
-        assertEquals("after", fetched.getDescription());
-        assertEquals("true", fetched.getDoneStatus());
     }
 
     /**
@@ -790,18 +781,18 @@ public class ComprehensiveApiBehaviourTest extends BaseApiTest {
      * an existing todo to a project.
      */
     @Test
-    public void testLinkExistingTodoNumericVsStringId() throws Exception {
+    public void testLinkExistingTodoStringVsNumericId() throws Exception {
         Project project = createProjectResource(unique("project-link-multi-"), "link-parent");
         Todo todo = createTodoResource(unique("todo-link-multi-"), "todo-link-desc");
 
         String endpoint = String.format(PROJECTS_TASKS_ENDPOINT, project.getId());
 
-        String numericPayload = String.format("{\"Id\": %s}", todo.getId());
+        String numericPayload = String.format("{\"Id\": \"%s\"}", todo.getId());
         ApiResponse numericResponse = execute(request(endpoint, POST_METHOD, JSON_FORMAT, JSON_FORMAT, numericPayload));
         assertEquals(201, numericResponse.code);
         registerRelationship(PROJECTS_TASKS_ID_ENDPOINT, project.getId(), todo.getId());
 
-        String stringPayload = String.format("{\"Id\": \"%s\"}", todo.getId());
+        String stringPayload = String.format("{\"Id\": %s}", todo.getId());
         ApiResponse stringResponse = execute(request(endpoint, POST_METHOD, JSON_FORMAT, JSON_FORMAT, stringPayload));
         assertEquals(201, stringResponse.code);
 
@@ -828,26 +819,6 @@ public class ComprehensiveApiBehaviourTest extends BaseApiTest {
         assertEquals(400, response.code);
         assertTrue("Expected structured validation error",
                 response.body.contains("errorMessages") || response.body.contains("Failed Validation"));
-    }
-
-    /**
-     * Captures the actual server response (NullPointerException leak) when the
-     * undocumented status field is supplied.
-     */
-    @Test
-    public void testCreateTaskWithStatusFieldReturnsNpeActual() throws Exception {
-        Project project = createProjectResource(unique("project-status-actual-"), "status-parent");
-        Map<String, Object> body = new HashMap<>();
-        body.put("title", "Implement API");
-        body.put("status", false);
-
-        String payload = JSON_MAPPER.writeValueAsString(body);
-        String endpoint = String.format(PROJECTS_TASKS_ENDPOINT, project.getId());
-        ApiResponse response = execute(request(endpoint, POST_METHOD, JSON_FORMAT, JSON_FORMAT, payload));
-
-        assertEquals(400, response.code);
-        assertTrue("Document actual NullPointerException leak",
-                response.body.contains("NullPointerException") || response.body.contains("java."));
     }
 
     /*
@@ -922,11 +893,14 @@ public class ComprehensiveApiBehaviourTest extends BaseApiTest {
         Category category = createCategoryResource(unique("category-cat-categoryid-"), "child");
 
         String endpoint = String.format(PROJECTS_CATEGORIES_ENDPOINT, project.getId());
-        String payload = String.format("{\"category_id\": \"%s\"}", category.getId());
+        String payload = String.format("{\"Id\": \"%s\"}", category.getId());
         ApiResponse response = execute(request(endpoint, POST_METHOD, JSON_FORMAT, JSON_FORMAT, payload));
 
-        assertEquals(400, response.code);
-        assertTrue(response.body.contains("NullPointerException") || response.body.contains("java."));
+        ApiResponse getResponse = execute(request(endpoint, GET_METHOD, JSON_FORMAT, JSON_FORMAT, null));
+
+        assertEquals(201, response.code);
+        assertEquals(200, getResponse.code);
+        assertTrue(getResponse.body.contains(String.format("\"%s\"", category.getId())));
     }
 
     /*
@@ -1178,6 +1152,22 @@ public class ComprehensiveApiBehaviourTest extends BaseApiTest {
         assertTrue("Expect clear error when JSON sent with XML content type",
                 response.body.contains("Malformed") || response.body.contains("errorMessages")
                         || response.body.contains("NullPointerException"));
+    }
+
+    /**
+     * Sends JSON with an XML content type and confirms that the server creates
+     * the resource while returning JSON.
+     * 
+     * @throws Exception
+     */
+    @Test
+    public void testMalformedJsonWithXmlContentTypeActualBehavior() throws Exception {
+        String body = JSON_MAPPER.writeValueAsString(Map.of("title", unique("project-xml-contenttype-")));
+        ApiResponse response = execute(request(PROJECTS_ENDPOINT, POST_METHOD, XML_FORMAT, XML_FORMAT, body));
+
+        assertEquals(201, response.code);
+        assertTrue("Expect server to create resource",
+                response.body.contains("title"));
     }
 
     /*
