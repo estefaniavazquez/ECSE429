@@ -5,7 +5,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 import org.junit.runners.Suite;
 
-import categories.ActualBehaviourWorkingCategoriesApiTest;
+import categories.ActualBehaviourWorkingCategoriesIdApiTest;
 import categories.DocumentedCategoriesApiTest;
 import categories.DocumentedCategoriesIdApiTest;
 import categories.ExpectedBehaviourFailingCategoriesIdApiTest;
@@ -31,7 +31,7 @@ import projects.UndocumentedProjectsIdApiTest;
         DocumentedCategoriesIdApiTest.class,
         UndocumentedCategoriesIdApiTest.class,
         ExpectedBehaviourFailingCategoriesIdApiTest.class,
-        ActualBehaviourWorkingCategoriesApiTest.class,
+        ActualBehaviourWorkingCategoriesIdApiTest.class,
         DocumentedProjectsApiTest.class,
         DocumentedProjectsIdApiTest.class,
         UndocumentedProjectsIdApiTest.class,
