@@ -5,7 +5,7 @@ import projects.Project;
 
 public class CommonConstants {
     public static final String BASE_URL = "http://localhost:4567/";
-    public static final String PATH_TO_SERVER_JAR = "lib/runTodoManagerRestAPI-1.5.5.jar";
+    public static final String PATH_TO_SERVER_JAR = "src/lib/runTodoManagerRestAPI-1.5.5.jar";
 
     public static final String CATEGORIES_ENDPOINT = "categories";
     public static final String PROJECTS_ENDPOINT = "projects";
@@ -42,4 +42,31 @@ public class CommonConstants {
     public static final Project defaultProject = new Project("1", "Office Work", false, false, "");
     public static final String PROJECT_OPTIONS = "OPTIONS, GET, HEAD, POST";
     public static final String PROJECT_ID_OPTIONS = "OPTIONS, GET, HEAD, POST, PUT, DELETE";
+
+    // Interoperability endpoints
+    public static final String TODOS_ENDPOINT = "todos";
+    public static final String TODOS_TASKSOF_ENDPOINT = "todos/%s/tasksof";
+    public static final String TODOS_CATEGORIES_ENDPOINT = "todos/%s/categories";
+    public static final String PROJECTS_CATEGORIES_ENDPOINT = "projects/%s/categories";
+    public static final String PROJECTS_TASKS_ENDPOINT = "projects/%s/tasks";
+    public static final String CATEGORIES_PROJECTS_ENDPOINT = "categories/%s/projects";
+    public static final String CATEGORIES_TODOS_ENDPOINT = "categories/%s/todos";
+
+    // Relationship deletion endpoints
+    public static final String TODOS_TASKSOF_ID_ENDPOINT = "todos/%s/tasksof/%s";
+    public static final String TODOS_CATEGORIES_ID_ENDPOINT = "todos/%s/categories/%s";
+    public static final String PROJECTS_CATEGORIES_ID_ENDPOINT = "projects/%s/categories/%s";
+    public static final String PROJECTS_TASKS_ID_ENDPOINT = "projects/%s/tasks/%s";
+    public static final String CATEGORIES_PROJECTS_ID_ENDPOINT = "categories/%s/projects/%s";
+    public static final String CATEGORIES_TODOS_ID_ENDPOINT = "categories/%s/todos/%s";
+
+    // OPTIONS responses for interoperability endpoints
+    public static final String TODOS_TASKSOF_OPTIONS = "OPTIONS, GET, HEAD, POST";
+    public static final String TODOS_CATEGORIES_OPTIONS = "OPTIONS, GET, HEAD, POST";
+    public static final String PROJECTS_CATEGORIES_OPTIONS = "OPTIONS, GET, HEAD, POST";
+    public static final String PROJECTS_TASKS_OPTIONS = "OPTIONS, GET, HEAD, POST";
+    public static final String CATEGORIES_PROJECTS_OPTIONS = "OPTIONS, GET, HEAD, POST";
+    public static final String CATEGORIES_TODOS_OPTIONS = "OPTIONS, GET, HEAD, POST";
+
+    public static final String RELATIONSHIP_ID_OPTIONS = "OPTIONS, DELETE";
 }

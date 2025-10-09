@@ -53,4 +53,8 @@ public class JsonProject {
         }
         return true;
     }
+
+    public int size() {
+        return projects != null ? projects.length : 0;
+    }
 }

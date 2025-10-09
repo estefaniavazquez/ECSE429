@@ -21,6 +21,10 @@ public class XmlProject {
         return projects;
     }
 
+    public Project[] getProjects() {
+        return projects != null ? projects.clone() : new Project[0];
+    }
+
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("<projects>");

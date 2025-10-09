@@ -3,7 +3,8 @@ package categories;
 public class JsonCategory {
     private Category[] categories;
 
-    public JsonCategory() {}
+    public JsonCategory() {
+    }
 
     public JsonCategory(Category[] categories) {
         this.categories = categories;
@@ -45,5 +46,29 @@ public class JsonCategory {
         }
 
         return true;
+    }
+
+    public boolean contains(Category category) {
+        for (Category c : categories) {
+            if (c.equals(category)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public boolean containsAll(Category[] categories) {
+        for (Category category : categories) {
+            if (!contains(category)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public int size() {
+        return categories != null ? categories.length : 0;
     }
 }
