@@ -26,7 +26,8 @@ public class DocumentedProjectsIdApiTest extends BaseApiTest {
                 System.out.println("Running testGetProjectsIdJson...");
 
                 // check initial state
-                HttpURLConnection initialAllConnection = request(PROJECTS_ENDPOINT, GET_METHOD, JSON_FORMAT, JSON_FORMAT, null);
+                HttpURLConnection initialAllConnection = request(PROJECTS_ENDPOINT, GET_METHOD, JSON_FORMAT,
+                                JSON_FORMAT, null);
                 String initialAllResponse = readResponse(initialAllConnection);
                 ObjectMapper objectMapper = new ObjectMapper();
                 JsonProject initialAllProjects = objectMapper.readValue(initialAllResponse, JsonProject.class);
@@ -47,12 +48,14 @@ public class DocumentedProjectsIdApiTest extends BaseApiTest {
                 assertTrue(project.contains(defaultProject));
 
                 // verify GET operation didn't modify any data
-                HttpURLConnection finalAllConnection = request(PROJECTS_ENDPOINT, GET_METHOD, JSON_FORMAT, JSON_FORMAT, null);
+                HttpURLConnection finalAllConnection = request(PROJECTS_ENDPOINT, GET_METHOD, JSON_FORMAT, JSON_FORMAT,
+                                null);
                 String finalAllResponse = readResponse(finalAllConnection);
                 JsonProject finalAllProjects = objectMapper.readValue(finalAllResponse, JsonProject.class);
                 finalAllConnection.disconnect();
-                
-                assertEquals("GET operation should not modify project count", initialAllProjects.getProjects().length, finalAllProjects.getProjects().length);
+
+                assertEquals("GET operation should not modify project count", initialAllProjects.getProjects().length,
+                                finalAllProjects.getProjects().length);
                 assertEquals("GET operation should not modify any project data", initialAllResponse, finalAllResponse);
 
                 connection.disconnect();
@@ -196,7 +199,8 @@ public class DocumentedProjectsIdApiTest extends BaseApiTest {
                 System.out.println("Running testPostProjectsIdJson...");
 
                 // check initial state of all projects
-                HttpURLConnection initialConnection = request(PROJECTS_ENDPOINT, GET_METHOD, JSON_FORMAT, JSON_FORMAT, null);
+                HttpURLConnection initialConnection = request(PROJECTS_ENDPOINT, GET_METHOD, JSON_FORMAT, JSON_FORMAT,
+                                null);
                 String initialResponseBody = readResponse(initialConnection);
                 ObjectMapper objectMapper = new ObjectMapper();
                 JsonProject initialProjects = objectMapper.readValue(initialResponseBody, JsonProject.class);
@@ -235,26 +239,30 @@ public class DocumentedProjectsIdApiTest extends BaseApiTest {
                 assertEquals(JSON_FORMAT, contentType);
                 assertEquals(newProject, returnedProject);
                 assertTrue(allProjects.contains(newProject));
-                
+
                 // verify project count remained the same (update, not create)
-                assertEquals("Project count should remain the same for update operation", initialProjectCount, allProjects.getProjects().length);
-                
+                assertEquals("Project count should remain the same for update operation", initialProjectCount,
+                                allProjects.getProjects().length);
+
                 // verify other projects weren't affected
                 for (Project initialProject : initialProjects.getProjects()) {
-                    if (!initialProject.getId().equals(projectsId)) {
-                        boolean foundUnchanged = false;
-                        for (Project finalProject : allProjects.getProjects()) {
-                            if (initialProject.getId().equals(finalProject.getId()) &&
-                                initialProject.getTitle().equals(finalProject.getTitle()) &&
-                                initialProject.getDescription().equals(finalProject.getDescription()) &&
-                                initialProject.isCompleted() == finalProject.isCompleted() &&
-                                initialProject.isActive() == finalProject.isActive()) {
-                                foundUnchanged = true;
-                                break;
-                            }
+                        if (!initialProject.getId().equals(projectsId)) {
+                                boolean foundUnchanged = false;
+                                for (Project finalProject : allProjects.getProjects()) {
+                                        if (initialProject.getId().equals(finalProject.getId()) &&
+                                                        initialProject.getTitle().equals(finalProject.getTitle()) &&
+                                                        initialProject.getDescription()
+                                                                        .equals(finalProject.getDescription())
+                                                        &&
+                                                        initialProject.isCompleted() == finalProject.isCompleted() &&
+                                                        initialProject.isActive() == finalProject.isActive()) {
+                                                foundUnchanged = true;
+                                                break;
+                                        }
+                                }
+                                assertTrue("Project " + initialProject.getId() + " should remain unchanged",
+                                                foundUnchanged);
                         }
-                        assertTrue("Project " + initialProject.getId() + " should remain unchanged", foundUnchanged);
-                    }
                 }
 
                 connection.disconnect();
@@ -281,13 +289,13 @@ public class DocumentedProjectsIdApiTest extends BaseApiTest {
                 System.out.println("Content-Type: " + contentType);
                 System.out.println("Response body: " + responseBody);
 
+                ObjectMapper objectMapper = new ObjectMapper();
+                Project returnedProject = objectMapper.readValue(responseBody, Project.class);
+
                 assertEquals(200, responseCode);
                 assertEquals("OK", responseMessage);
                 assertEquals(JSON_FORMAT, contentType);
-                assertEquals("{\"id\":\"1\",\"title\":\"Office Work\",\"completed\":\"false\",\"active\":\"false\",\"description\":\"\",\"tasks\":[{\"id\":\"1\"},{\"id\":\"2\"}]}", // Could
-                                                                                                                                                                                     // be
-                                                                                                                                                                                     // SUS
-                                responseBody);
+                assertEquals(defaultProject, returnedProject);
 
                 connection.disconnect();
 
@@ -299,17 +307,20 @@ public class DocumentedProjectsIdApiTest extends BaseApiTest {
                 System.out.println("Running testPostRandomFieldProjectsIdJson...");
 
                 // check initial state
-                HttpURLConnection initialConnection = request(PROJECTS_ENDPOINT, GET_METHOD, JSON_FORMAT, JSON_FORMAT, null);
+                HttpURLConnection initialConnection = request(PROJECTS_ENDPOINT, GET_METHOD, JSON_FORMAT, JSON_FORMAT,
+                                null);
                 String initialResponseBody = readResponse(initialConnection);
                 ObjectMapper objectMapper = new ObjectMapper();
                 JsonProject initialProjects = objectMapper.readValue(initialResponseBody, JsonProject.class);
                 initialConnection.disconnect();
 
                 // check initial state of the target project
-                HttpURLConnection initialTargetConnection = requestWithId(PROJECTS_ENDPOINT, GET_METHOD, JSON_FORMAT, JSON_FORMAT, defaultProject.getId(), null);
+                HttpURLConnection initialTargetConnection = requestWithId(PROJECTS_ENDPOINT, GET_METHOD, JSON_FORMAT,
+                                JSON_FORMAT, defaultProject.getId(), null);
                 String initialTargetResponse = readResponse(initialTargetConnection);
                 JsonProject initialTargetJsonProject = objectMapper.readValue(initialTargetResponse, JsonProject.class);
-                Project initialTargetProject = initialTargetJsonProject.getProjects()[0]; // Get the first (and only) project from the array
+                Project initialTargetProject = initialTargetJsonProject.getProjects()[0]; // Get the first (and only)
+                                                                                          // project from the array
                 initialTargetConnection.disconnect();
 
                 String projectsId = defaultProject.getId();
@@ -333,21 +344,26 @@ public class DocumentedProjectsIdApiTest extends BaseApiTest {
                 assertEquals("{\"errorMessages\":[\"Could not find field: randomField\"]}", responseBody);
 
                 // verify target project was not modified by failed request
-                HttpURLConnection finalTargetConnection = requestWithId(PROJECTS_ENDPOINT, GET_METHOD, JSON_FORMAT, JSON_FORMAT, defaultProject.getId(), null);
+                HttpURLConnection finalTargetConnection = requestWithId(PROJECTS_ENDPOINT, GET_METHOD, JSON_FORMAT,
+                                JSON_FORMAT, defaultProject.getId(), null);
                 String finalTargetResponse = readResponse(finalTargetConnection);
                 JsonProject finalTargetJsonProject = objectMapper.readValue(finalTargetResponse, JsonProject.class);
-                Project finalTargetProject = finalTargetJsonProject.getProjects()[0]; // Get the first (and only) project from the array
+                Project finalTargetProject = finalTargetJsonProject.getProjects()[0]; // Get the first (and only)
+                                                                                      // project from the array
                 finalTargetConnection.disconnect();
-                
-                assertEquals("Target project should remain unchanged after failed update", initialTargetProject, finalTargetProject);
+
+                assertEquals("Target project should remain unchanged after failed update", initialTargetProject,
+                                finalTargetProject);
 
                 // verify overall project state unchanged by error
-                HttpURLConnection finalConnection = request(PROJECTS_ENDPOINT, GET_METHOD, JSON_FORMAT, JSON_FORMAT, null);
+                HttpURLConnection finalConnection = request(PROJECTS_ENDPOINT, GET_METHOD, JSON_FORMAT, JSON_FORMAT,
+                                null);
                 String finalResponseBody = readResponse(finalConnection);
                 JsonProject finalProjects = objectMapper.readValue(finalResponseBody, JsonProject.class);
                 finalConnection.disconnect();
-                
-                assertEquals("Project count should remain unchanged after error", initialProjects.getProjects().length, finalProjects.getProjects().length);
+
+                assertEquals("Project count should remain unchanged after error", initialProjects.getProjects().length,
+                                finalProjects.getProjects().length);
 
                 connection.disconnect();
 
@@ -547,7 +563,8 @@ public class DocumentedProjectsIdApiTest extends BaseApiTest {
                 System.out.println("Running testDeleteProjectsIdJson...");
 
                 // check initial project count
-                HttpURLConnection initialProjectsConnection = request(PROJECTS_ENDPOINT, GET_METHOD, JSON_FORMAT, JSON_FORMAT, null);
+                HttpURLConnection initialProjectsConnection = request(PROJECTS_ENDPOINT, GET_METHOD, JSON_FORMAT,
+                                JSON_FORMAT, null);
                 String initialProjectsResponse = readResponse(initialProjectsConnection);
                 ObjectMapper objectMapper = new ObjectMapper();
                 JsonProject initialProjects = objectMapper.readValue(initialProjectsResponse, JsonProject.class);
@@ -579,9 +596,10 @@ public class DocumentedProjectsIdApiTest extends BaseApiTest {
                 assertEquals(JSON_FORMAT, contentType);
                 assertEquals("", responseBody);
                 assertFalse(allProjects.contains(defaultProject));
-                
+
                 // verify project count decreased by 1
-                assertEquals("Project count should decrease by 1", initialProjectCount - 1, allProjects.getProjects().length);
+                assertEquals("Project count should decrease by 1", initialProjectCount - 1,
+                                allProjects.getProjects().length);
 
                 connection.disconnect();
                 connectionAll.disconnect();
@@ -593,15 +611,16 @@ public class DocumentedProjectsIdApiTest extends BaseApiTest {
         // Test deleting the same object again
         public void testDeleteProjectsIdJsonTwice() throws Exception {
                 System.out.println("Running testDeleteProjectsIdJsonTwice...");
-                
+
                 // check initial state
-                HttpURLConnection initialConnection = request(PROJECTS_ENDPOINT, GET_METHOD, JSON_FORMAT, JSON_FORMAT, null);
+                HttpURLConnection initialConnection = request(PROJECTS_ENDPOINT, GET_METHOD, JSON_FORMAT, JSON_FORMAT,
+                                null);
                 String initialResponse = readResponse(initialConnection);
                 ObjectMapper objectMapper = new ObjectMapper();
                 JsonProject initialProjects = objectMapper.readValue(initialResponse, JsonProject.class);
                 int initialCount = initialProjects.getProjects().length;
                 initialConnection.disconnect();
-                
+
                 String projectsId = defaultProject.getId();
 
                 // first delete
@@ -619,7 +638,8 @@ public class DocumentedProjectsIdApiTest extends BaseApiTest {
                 connectionFirst.disconnect();
 
                 // verify state after first delete
-                HttpURLConnection afterFirstConnection = request(PROJECTS_ENDPOINT, GET_METHOD, JSON_FORMAT, JSON_FORMAT, null);
+                HttpURLConnection afterFirstConnection = request(PROJECTS_ENDPOINT, GET_METHOD, JSON_FORMAT,
+                                JSON_FORMAT, null);
                 String afterFirstResponse = readResponse(afterFirstConnection);
                 JsonProject afterFirstProjects = objectMapper.readValue(afterFirstResponse, JsonProject.class);
                 int afterFirstCount = afterFirstProjects.getProjects().length;
@@ -644,16 +664,17 @@ public class DocumentedProjectsIdApiTest extends BaseApiTest {
                 assertEquals(JSON_FORMAT, contentType);
                 assertEquals("{\"errorMessages\":[\"Could not find any instances with projects/" + projectsId + "\"]}",
                                 responseBody);
-                
+
                 // verify second delete doesn't affect remaining projects
-                HttpURLConnection finalConnection = request(PROJECTS_ENDPOINT, GET_METHOD, JSON_FORMAT, JSON_FORMAT, null);
+                HttpURLConnection finalConnection = request(PROJECTS_ENDPOINT, GET_METHOD, JSON_FORMAT, JSON_FORMAT,
+                                null);
                 String finalResponse = readResponse(finalConnection);
                 JsonProject finalProjects = objectMapper.readValue(finalResponse, JsonProject.class);
                 int finalCount = finalProjects.getProjects().length;
                 finalConnection.disconnect();
                 assertEquals("Second delete should not change project count", afterFirstCount, finalCount);
                 assertEquals("Remaining projects should be unchanged", afterFirstResponse, finalResponse);
-                
+
                 connection.disconnect();
                 System.out.println("testDeleteProjectsIdJsonTwice passed.");
         }

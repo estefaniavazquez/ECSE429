@@ -16,10 +16,6 @@ public class XmlProject {
     public XmlProject(Project[] projects) {
         this.projects = projects;
     }
-    
-    public Project[] getProjects() {
-        return projects;
-    }
 
     public Project[] getProjects() {
         return projects != null ? projects.clone() : new Project[0];

@@ -5,7 +5,7 @@ import projects.Project;
 
 public class CommonConstants {
     public static final String BASE_URL = "http://localhost:4567/";
-    public static final String PATH_TO_SERVER_JAR = "src/lib/runTodoManagerRestAPI-1.5.5.jar";
+    public static final String PATH_TO_SERVER_JAR = "lib/runTodoManagerRestAPI-1.5.5.jar";
 
     public static final String CATEGORIES_ENDPOINT = "categories";
     public static final String PROJECTS_ENDPOINT = "projects";
