@@ -4,7 +4,7 @@ import java.net.HttpURLConnection;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
@@ -25,22 +25,24 @@ public class UndocumentedTodosIdApiTest extends BaseApiTest {
     // reuse same todo id for tests
     private static String baseId;
 
-    @BeforeClass
-    public static void setupTodo() throws Exception {
-        String body = "{\"title\":\"Baseline Undoc ID\",\"description\":\"For undocumented ID tests\"}";
-        HttpURLConnection c = request("todos", POST_METHOD, JSON_FORMAT, JSON_FORMAT, body);
-        int code = c.getResponseCode();
-        String resp = readResponse(c);
-        c.disconnect();
+    @Before
+    public void setupTodo() throws Exception {
+        if (baseId == null) {
+            String body = "{\"title\":\"Baseline Undoc ID\",\"description\":\"For undocumented ID tests\"}";
+            HttpURLConnection c = request("todos", POST_METHOD, JSON_FORMAT, JSON_FORMAT, body);
+            int code = c.getResponseCode();
+            String resp = readResponse(c);
+            c.disconnect();
 
-        assertEquals(201, code);
-        assertTrue(resp.contains("\"id\""));
+            assertEquals(201, code);
+            assertTrue(resp.contains("\"id\""));
 
-        int i = resp.indexOf("\"id\"");
-        int colon = resp.indexOf(":", i);
-        int qs = resp.indexOf("\"", colon+1);
-        int qe = resp.indexOf("\"", qs+1);
-        baseId = resp.substring(qs+1, qe);
+            int i = resp.indexOf("\"id\"");
+            int colon = resp.indexOf(":", i);
+            int qs = resp.indexOf("\"", colon + 1);
+            int qe = resp.indexOf("\"", qs + 1);
+            baseId = resp.substring(qs + 1, qe);
+        }
     }
 
     // patch /todos/{id} json
