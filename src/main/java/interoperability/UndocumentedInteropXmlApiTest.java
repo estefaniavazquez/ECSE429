@@ -32,19 +32,18 @@ import org.junit.runners.MethodSorters;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 
 import general.BaseApiTest;
+import interoperability.models.Todo;
+import interoperability.models.XmlRelationship;
 
 /**
  * Test class for undocumented interoperability API endpoints and methods using
  * XML format.
  * 
  * This class tests HTTP methods and endpoints that are not documented in the
- * API
- * specification but might be supported or should return appropriate error
- * responses
- * using XML content type. It verifies that unsupported methods return proper
- * HTTP
- * error codes and that nonexistent endpoints behave correctly when using XML
- * format.
+ * API specification but might be supported or should return appropriate error
+ * responses using XML content type. It verifies that unsupported methods return
+ * proper HTTP error codes and that nonexistent endpoints behave correctly when
+ * using XML format.
  * 
  * Tested scenarios:
  * - Unsupported HTTP methods (PUT, DELETE, PATCH) on relationship endpoints
@@ -58,8 +57,6 @@ import general.BaseApiTest;
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class UndocumentedInteropXmlApiTest extends BaseApiTest {
-
-        /* Test undocumented HTTP methods on relationship endpoints */
 
         /**
          * Tests the PUT /todos/{id}/categories endpoint with XML format.

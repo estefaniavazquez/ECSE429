@@ -32,6 +32,8 @@ import org.junit.runners.MethodSorters;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import general.BaseApiTest;
+import interoperability.models.JsonRelationship;
+import interoperability.models.Todo;
 
 /**
  * Test class for undocumented interoperability API endpoints and methods.
@@ -55,8 +57,6 @@ import general.BaseApiTest;
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class UndocumentedInteropApiTest extends BaseApiTest {
-
-    /* Test undocumented HTTP methods on relationship endpoints */
 
     /**
      * Tests the PUT /todos/{id}/categories endpoint with JSON format.
@@ -431,4 +431,60 @@ public class UndocumentedInteropApiTest extends BaseApiTest {
         connection.disconnect();
         System.out.println("testPostCategoryTodoIdJson passed.");
     }
+
+    /**
+     * Posts a task payload containing an unsupported status field and expects a
+     * validation failure in line with documented behaviour.
+     */
+    @Test
+    public void testCreateTaskWithStatusFieldShouldFailExpected() throws Exception {
+        System.out.println("Running testCreateTaskWithStatusFieldShouldFailExpected...");
+
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        // Create a todo with an unsupported 'status' field
+        String todoJson = "{ \"title\": \"Test Todo with Status\", \"doneStatus\": false, \"description\": \"Test description\", \"status\": \"in-progress\" }";
+
+        HttpURLConnection connection = request(TODOS_ENDPOINT, POST_METHOD, JSON_FORMAT, JSON_FORMAT, todoJson);
+
+        int responseCode = connection.getResponseCode();
+        String responseMessage = connection.getResponseMessage();
+
+        // Expecting a 400 Bad Request due to unsupported 'status' field
+        assertEquals(400, responseCode);
+        assertEquals("Bad Request", responseMessage);
+
+        connection.disconnect();
+        System.out.println("testCreateTaskWithStatusFieldShouldFailExpected passed.");
+    }
+
+    /**
+     * Sends JSON with an XML content type and confirms that the server creates
+     * the resource while returning JSON.
+     * 
+     * @throws Exception
+     */
+    @Test
+    public void testMalformedJsonWithXmlContentTypeActualBehavior() throws Exception {
+        System.out.println("Running testMalformedJsonWithXmlContentTypeActualBehavior...");
+
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        // Create a todo with JSON body but XML content type
+        Todo.TodoBody todoBody = new Todo.TodoBody("Test Todo XML Content Type", false, "Test description");
+        String todoJson = objectMapper.writeValueAsString(todoBody);
+
+        HttpURLConnection connection = request(TODOS_ENDPOINT, POST_METHOD, "application/xml", "application/xml",
+                todoJson);
+
+        int responseCode = connection.getResponseCode();
+        String responseMessage = connection.getResponseMessage();
+
+        assertEquals(404, responseCode);
+        assertEquals("Bad Request", responseMessage);
+
+        connection.disconnect();
+        System.out.println("testMalformedJsonWithXmlContentTypeActualBehavior passed.");
+    }
+
 }

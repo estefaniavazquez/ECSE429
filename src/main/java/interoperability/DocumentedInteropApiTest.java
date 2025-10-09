@@ -36,6 +36,9 @@ import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import categories.JsonCategory;
 import categories.XmlCategory;
 import general.BaseApiTest;
+import interoperability.models.JsonRelationship;
+import interoperability.models.JsonTodo;
+import interoperability.models.Todo;
 import projects.JsonProject;
 
 /**
@@ -829,4 +832,121 @@ public class DocumentedInteropApiTest extends BaseApiTest {
         connection.disconnect();
         System.out.println("testDeleteTodoTasksofRelationshipJson passed.");
     }
+
+    /**
+     * Creates a todo under a project with a boolean doneStatus and verifies it
+     * can be retrieved from the project's task list.
+     */
+    @Test
+    public void testCreateTodoUnderProjectWithBooleanDoneStatusJson() throws Exception {
+        System.out.println("Running testCreateTodoUnderProjectWithBooleanDoneStatusJson...");
+        ObjectMapper objectMapper = new ObjectMapper();
+        // Create a new todo with doneStatus as boolean
+        Todo.TodoBody todoBody = new Todo.TodoBody("Boolean DoneStatus Todo",
+                true, "Testing boolean doneStatus");
+        String todoJson = objectMapper.writeValueAsString(todoBody);
+        HttpURLConnection createTodoConnection = request(TODOS_ENDPOINT, POST_METHOD, JSON_FORMAT, JSON_FORMAT,
+                todoJson);
+        String createTodoResponse = readResponse(createTodoConnection);
+        Todo createdTodo = objectMapper.readValue(createTodoResponse, Todo.class);
+        createTodoConnection.disconnect();
+        // Associate the todo with an existing project (id "1")
+        JsonRelationship relationshipBody = new JsonRelationship("1");
+        String relationshipJson = objectMapper.writeValueAsString(relationshipBody);
+        String endpoint = String.format(TODOS_TASKSOF_ENDPOINT, createdTodo.getId());
+        HttpURLConnection connection = request(endpoint, POST_METHOD, JSON_FORMAT, JSON_FORMAT, relationshipJson
+
+        );
+        int responseCode = connection.getResponseCode();
+        String responseMessage = connection.getResponseMessage();
+        assertEquals(201, responseCode);
+        assertEquals("Created", responseMessage);
+        connection.disconnect();
+        // Retrieve tasks for the project to verify the todo is listed
+        String tasksEndpoint = String.format(PROJECTS_TASKS_ENDPOINT, "1");
+        HttpURLConnection tasksConnection = request(tasksEndpoint, GET_METHOD, JSON_FORMAT, JSON_FORMAT, null);
+        int tasksResponseCode = tasksConnection.getResponseCode();
+        String tasksResponseMessage = tasksConnection.getResponseMessage();
+        String tasksResponseBody = readResponse(tasksConnection);
+        JsonTodo projectTodos = objectMapper.readValue(tasksResponseBody, JsonTodo.class);
+        assertEquals(200, tasksResponseCode);
+        assertEquals("OK", tasksResponseMessage);
+        assertEquals(createdTodo.getId(), projectTodos.getTodos()[0].getId());
+    }
+
+    /**
+     * Attaches a category to a project using the documented JSON shape and
+     * verifies the link via retrieval.
+     */
+    @Test
+    public void testProjectCategoryByIdExpected() throws Exception {
+        System.out.println("Running testAttachCategoryByIdExpected...");
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        // Create relationship between existing project and category
+        JsonRelationship relationshipBody = new JsonRelationship("2");
+        String relationshipJson = objectMapper.writeValueAsString(relationshipBody);
+
+        String endpoint = String.format(PROJECTS_CATEGORIES_ENDPOINT, "1");
+        HttpURLConnection connection = request(endpoint, POST_METHOD, JSON_FORMAT, JSON_FORMAT, relationshipJson);
+
+        int responseCode = connection.getResponseCode();
+        String responseMessage = connection.getResponseMessage();
+
+        assertEquals(201, responseCode);
+        assertEquals("Created", responseMessage);
+
+        connection.disconnect();
+
+        // Verify the category is linked to the project
+        String getCategoriesEndpoint = String.format(PROJECTS_CATEGORIES_ENDPOINT, "1");
+        HttpURLConnection getConnection = request(getCategoriesEndpoint, GET_METHOD, JSON_FORMAT, JSON_FORMAT,
+                null);
+
+        int getResponseCode = getConnection.getResponseCode();
+        String getResponseMessage = getConnection.getResponseMessage();
+        String getResponseBody = readResponse(getConnection);
+
+        JsonCategory categories = objectMapper.readValue(getResponseBody, JsonCategory.class);
+
+        assertEquals(200, getResponseCode);
+        assertEquals("OK", getResponseMessage);
+        assertNotNull(categories);
+        assertTrue(getResponseBody.contains("\"id\":\"2\""));
+
+        getConnection.disconnect();
+        System.out.println("testAttachCategoryByIdExpected passed.");
+    }
+
+    /**
+     * Attaches a category to a todo using the documented contract and confirms it
+     * is reflected in the todo's category list.
+     */
+    @Test
+    public void testTodoCategoryToTodoValid() throws Exception {
+        System.out.println("Running testTodoCategoryToTodoValid...");
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        // First create a todo
+        Todo.TodoBody todoBody = new Todo.TodoBody("Test Todo Valid Category",
+                false, "Test description");
+        String todoJson = objectMapper.writeValueAsString(todoBody);
+        HttpURLConnection createTodoConnection = request(TODOS_ENDPOINT, POST_METHOD, JSON_FORMAT, JSON_FORMAT,
+                todoJson);
+        String createTodoResponse = readResponse(createTodoConnection);
+        Todo createdTodo = objectMapper.readValue(createTodoResponse, Todo.class);
+        createTodoConnection.disconnect();
+
+        // Create relationship between existing todo and category
+        JsonRelationship relationshipBody = new JsonRelationship("1");
+        String relationshipJson = objectMapper.writeValueAsString(relationshipBody);
+        String endpoint = String.format(TODOS_CATEGORIES_ENDPOINT, createdTodo.getId());
+        HttpURLConnection connection = request(endpoint, POST_METHOD, JSON_FORMAT, JSON_FORMAT, relationshipJson);
+        int responseCode = connection.getResponseCode();
+        String responseMessage = connection.getResponseMessage();
+        assertEquals(201, responseCode);
+        assertEquals("Created", responseMessage);
+        connection.disconnect();
+    }
+
 }

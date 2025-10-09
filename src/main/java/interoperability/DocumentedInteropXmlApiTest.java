@@ -28,6 +28,9 @@ import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 
 import categories.XmlCategory;
 import general.BaseApiTest;
+import interoperability.models.Todo;
+import interoperability.models.XmlRelationship;
+import interoperability.models.XmlTodo;
 import projects.XmlProject;
 
 /**
@@ -699,5 +702,48 @@ public class DocumentedInteropXmlApiTest extends BaseApiTest {
 
                 connection.disconnect();
                 System.out.println("testPostCategoryTodosXml passed.");
+        }
+
+        /**
+         * Creates a todo under a project with a boolean doneStatus and verifies it
+         * can be retrieved from the project's task list.
+         */
+        @Test
+        public void testCreateTodoUnderProjectWithBooleanDoneStatusXml() throws Exception {
+                System.out.println("Running testCreateTodoUnderProjectWithBooleanDoneStatusXml...");
+
+                XmlMapper xmlMapper = new XmlMapper();
+
+                // Create a project
+                String projectXml = "<project><title>Project for Boolean DoneStatus</title><completed>false</completed><active>true</active><description>Testing boolean doneStatus</description></project>";
+                HttpURLConnection createProjectConnection = request(PROJECTS_ENDPOINT, POST_METHOD, XML_FORMAT,
+                                XML_FORMAT,
+                                projectXml);
+                String createProjectResponse = readResponse(createProjectConnection);
+                projects.Project createdProject = xmlMapper.readValue(createProjectResponse, projects.Project.class);
+                String projectId = createdProject.getId();
+                createProjectConnection.disconnect();
+
+                // Create a todo with boolean doneStatus under the project
+                String todoXml = "<todo><title>Todo with Boolean DoneStatus</title><doneStatus>true</doneStatus><description>Testing boolean doneStatus</description></todo>";
+                String endpoint = String.format(PROJECTS_TASKS_ENDPOINT, projectId);
+                HttpURLConnection createTodoConnection = request(endpoint, POST_METHOD, XML_FORMAT, XML_FORMAT,
+                                todoXml);
+                String createTodoResponse = readResponse(createTodoConnection);
+                Todo createdTodo = xmlMapper.readValue(createTodoResponse, Todo.class);
+                createTodoConnection.disconnect();
+
+                // Verify the todo is created and associated with the project
+                HttpURLConnection getProjectTasksConnection = request(endpoint, GET_METHOD, XML_FORMAT, XML_FORMAT,
+                                null);
+                String getProjectTasksResponse = readResponse(getProjectTasksConnection);
+                XmlTodo projectTodos = xmlMapper.readValue(getProjectTasksResponse, XmlTodo.class);
+                getProjectTasksConnection.disconnect();
+
+                assertNotNull(projectTodos);
+                assertEquals(1, projectTodos.getTodos().length);
+                assertEquals(createdTodo.getId(), projectTodos.getTodos()[0].getId());
+
+                System.out.println("testCreateTodoUnderProjectWithBooleanDoneStatusXml passed.");
         }
 }

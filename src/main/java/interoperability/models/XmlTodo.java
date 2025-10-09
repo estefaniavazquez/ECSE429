@@ -1,12 +1,19 @@
-package interoperability;
+package interoperability.models;
 
-public class JsonTodo {
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
+
+@JacksonXmlRootElement(localName = "todos")
+public class XmlTodo {
+    @JacksonXmlElementWrapper(useWrapping = false)
+    @JacksonXmlProperty(localName = "todo")
     private Todo[] todos;
 
-    public JsonTodo() {
+    public XmlTodo() {
     }
 
-    public JsonTodo(Todo[] todos) {
+    public XmlTodo(Todo[] todos) {
         this.todos = todos;
     }
 

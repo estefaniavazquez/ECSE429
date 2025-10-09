@@ -1,8 +1,11 @@
 package interoperability;
 
 import static general.CommonConstants.DELETE_METHOD;
+import static general.CommonConstants.GET_METHOD;
 import static general.CommonConstants.JSON_FORMAT;
 import static general.CommonConstants.POST_METHOD;
+import static general.CommonConstants.PROJECTS_TASKS_ENDPOINT;
+import static general.CommonConstants.PROJECTS_TASKS_ID_ENDPOINT;
 import static general.CommonConstants.TODOS_CATEGORIES_ENDPOINT;
 import static general.CommonConstants.TODOS_CATEGORIES_ID_ENDPOINT;
 import static general.CommonConstants.TODOS_ENDPOINT;
@@ -21,6 +24,8 @@ import org.junit.runners.MethodSorters;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import general.BaseApiTest;
+import interoperability.models.JsonRelationship;
+import interoperability.models.Todo;
 
 /**
  * Test class for expected failure scenarios in interoperability API endpoints.
@@ -46,8 +51,6 @@ import general.BaseApiTest;
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class ExpectedBehaviourFailingInteropApiTest extends BaseApiTest {
-
-    /* Test expected failure scenarios for interoperability */
 
     /**
      * Tests creating a relationship with a nonexistent todo ID.
@@ -287,5 +290,106 @@ public class ExpectedBehaviourFailingInteropApiTest extends BaseApiTest {
 
         connection.disconnect();
         System.out.println("testCreateRelationshipWithMalformedJsonJson passed.");
+    }
+
+    /**
+     * Deletes a todo relationship from a project and verifies both the link is
+     * gone and the todo itself persists.
+     */
+    @Test
+    public void testDeleteTaskFromProject() throws Exception {
+        // Start by creating a new todo
+        System.out.println("Running testDeleteTaskFromProject...");
+        ObjectMapper objectMapper = new ObjectMapper();
+        Todo.TodoBody todoBody = new Todo.TodoBody("Task to Delete from Project", false,
+                "Testing deletion of task from project");
+        String todoJson = objectMapper.writeValueAsString(todoBody);
+        HttpURLConnection createTodoConnection = request(TODOS_ENDPOINT, POST_METHOD, JSON_FORMAT, JSON_FORMAT,
+                todoJson);
+        String createTodoResponse = readResponse(createTodoConnection);
+        Todo createdTodo = objectMapper.readValue(createTodoResponse, Todo.class);
+        createTodoConnection.disconnect();
+
+        // Associate the todo with an existing project (id "1")
+        JsonRelationship relationshipBody = new JsonRelationship(createdTodo.getId());
+        String relationshipJson = objectMapper.writeValueAsString(relationshipBody);
+        String endpoint = String.format(PROJECTS_TASKS_ENDPOINT, "1");
+        HttpURLConnection connection = request(endpoint, POST_METHOD, JSON_FORMAT, JSON_FORMAT, relationshipJson);
+        int responseCode = connection.getResponseCode();
+
+        String responseMessage = connection.getResponseMessage();
+        assertEquals(201, responseCode);
+        assertEquals("Created", responseMessage);
+        connection.disconnect();
+
+        // Now delete the task relationship from the project
+        String deleteEndpoint = String.format(PROJECTS_TASKS_ID_ENDPOINT, "1", createdTodo.getId());
+        HttpURLConnection deleteConnection = request(deleteEndpoint, DELETE_METHOD, JSON_FORMAT, JSON_FORMAT, null);
+        int deleteResponseCode = deleteConnection.getResponseCode();
+        String deleteResponseMessage = deleteConnection.getResponseMessage();
+        assertEquals(200, deleteResponseCode);
+        assertEquals("OK", deleteResponseMessage);
+        deleteConnection.disconnect();
+
+        // Verify the todo still exists independently
+        String getTodoEndpoint = String.format(TODOS_ENDPOINT + createdTodo.getId());
+        HttpURLConnection getTodoConnection = request(getTodoEndpoint, GET_METHOD, JSON_FORMAT, JSON_FORMAT, null);
+        int getTodoResponseCode = getTodoConnection.getResponseCode();
+        String getTodoResponseMessage = getTodoConnection.getResponseMessage();
+        String getTodoResponseBody = readResponse(getTodoConnection);
+        assertEquals(200, getTodoResponseCode);
+        assertEquals("OK", getTodoResponseMessage);
+        assertTrue(getTodoResponseBody.contains(createdTodo.getId()));
+        getTodoConnection.disconnect();
+        System.out.println("testDeleteTaskFromProject passed.");
+    }
+
+    /**
+     * Posts malformed JSON to /projects to assert the API returns a structured
+     * 400 error.
+     */
+    @Test
+    public void testMalformedJsonReturnsStructuredError() throws Exception {
+        System.out.println("Running testMalformedJsonReturnsStructuredError...");
+
+        // Malformed JSON (missing closing brace)
+        String malformedJson = "{\"name\":\"Malformed Project\",\"description\":\"Testing malformed JSON\"";
+
+        HttpURLConnection connection = request(PROJECTS_TASKS_ENDPOINT, POST_METHOD, JSON_FORMAT, JSON_FORMAT,
+                malformedJson);
+
+        int responseCode = connection.getResponseCode();
+        String responseMessage = connection.getResponseMessage();
+        String responseBody = readResponse(connection);
+
+        assertEquals(400, responseCode);
+        assertEquals("Bad Request", responseMessage);
+
+        connection.disconnect();
+        System.out.println("testMalformedJsonReturnsStructuredError passed.");
+    }
+
+    /**
+     * Sends JSON with an XML content type to highlight the server's error
+     * handling for mismatched headers.
+     */
+    @Test
+    public void testMalformedJsonWithXmlContentType() throws Exception {
+        System.out.println("Running testMalformedJsonWithXmlContentType...");
+
+        // Malformed JSON (missing closing brace)
+        String malformedJson = "{\"name\":\"Malformed Project\",\"description\":\"Testing malformed JSON\"";
+
+        HttpURLConnection connection = request(PROJECTS_TASKS_ENDPOINT, POST_METHOD, JSON_FORMAT, "application/xml",
+                malformedJson);
+
+        int responseCode = connection.getResponseCode();
+        String responseMessage = connection.getResponseMessage();
+
+        assertEquals(400, responseCode);
+        assertEquals("Bad Request", responseMessage);
+
+        connection.disconnect();
+        System.out.println("testMalformedJsonWithXmlContentType passed.");
     }
 }

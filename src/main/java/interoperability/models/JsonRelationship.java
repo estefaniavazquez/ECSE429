@@ -1,4 +1,4 @@
-package interoperability;
+package interoperability.models;
 
 public class JsonRelationship {
     private String id;
