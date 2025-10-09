@@ -170,12 +170,19 @@ public class DocumentedCategoriesApiTest extends BaseApiTest {
 
         Category createdCategory = objectMapper.readValue(responseBody, Category.class);
 
+        // Verify the category was added and nothing else was changed
+        HttpURLConnection connectionAll = request(CATEGORIES_ENDPOINT, GET_METHOD, JSON_FORMAT, JSON_FORMAT, null);
+        String allResponseBody = readResponse(connectionAll);
+        JsonCategory allCategories = objectMapper.readValue(allResponseBody, JsonCategory.class);
+
         assertEquals(201, responseCode);
         assertEquals("Created", responseMessage);
         assertTrue(contentType.contains(JSON_FORMAT));
         assertTrue(body.bodySameAsCategory(createdCategory));
+        assertTrue(allCategories.areIn(new Category[]{createdCategory, officeCategory, homeCategory}));
 
         connection.disconnect();
+        connectionAll.disconnect();
 
         System.out.println("testPostCategoriesJson passed.");
     }
@@ -196,12 +203,19 @@ public class DocumentedCategoriesApiTest extends BaseApiTest {
 
         Category createdCategory = xmlMapper.readValue(responseBody, Category.class);
 
+        // Verify the category was added and nothing else was changed
+        HttpURLConnection connectionAll = request(CATEGORIES_ENDPOINT, GET_METHOD, XML_FORMAT, XML_FORMAT, null);
+        String allResponseBody = readResponse(connectionAll);
+        XmlCategory allCategories = xmlMapper.readValue(allResponseBody, XmlCategory.class);
+
         assertEquals(201, responseCode);
         assertEquals("Created", responseMessage);
         assertTrue(contentType.contains(XML_FORMAT));
         assertTrue(body.bodySameAsCategory(createdCategory));
+        assertTrue(allCategories.areIn(new Category[]{createdCategory, officeCategory, homeCategory}));
 
         connection.disconnect();
+        connectionAll.disconnect();
 
         System.out.println("testPostCategoriesXml passed.");
     }
