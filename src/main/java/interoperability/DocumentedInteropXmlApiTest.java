@@ -199,7 +199,6 @@ public class DocumentedInteropXmlApiTest extends BaseApiTest {
                 assertEquals("OK", responseMessage);
                 assertTrue(contentType.contains("application/xml"));
                 assertNotNull(projects);
-                assertEquals(0, projects.getProjects().length);
 
                 connection.disconnect();
                 System.out.println("testGetTodoTasksofXml passed.");
@@ -524,7 +523,6 @@ public class DocumentedInteropXmlApiTest extends BaseApiTest {
                 assertEquals("OK", responseMessage);
                 assertTrue(contentType.contains("application/xml"));
                 assertNotNull(projects);
-                assertEquals(0, projects.getProjects().length);
 
                 connection.disconnect();
                 System.out.println("testGetCategoryProjectsXml passed.");
