@@ -5,7 +5,7 @@ import projects.Project;
 
 public class CommonConstants {
     public static final String BASE_URL = "http://localhost:4567/";
-    public static final String PATH_TO_SERVER_JAR = "src/lib/runTodoManagerRestAPI-1.5.5.jar";
+    public static final String PATH_TO_SERVER_JAR = "lib/runTodoManagerRestAPI-1.5.5.jar";
 
     public static final String CATEGORIES_ENDPOINT = "categories";
     public static final String PROJECTS_ENDPOINT = "projects";
@@ -45,6 +45,9 @@ public class CommonConstants {
 
     // Interoperability endpoints
     public static final String TODOS_ENDPOINT = "todos";
+    public static final String TODOS_EMPTY_TITLE_JSON = "{\"errorMessages\":[\"Failed Validation: title : can not be empty\"]}";
+    public static final String TODOS_OPTIONS = "OPTIONS, GET, HEAD, POST";
+    public static final String TODOS_MISSING_TITLE_JSON = "{\"errorMessages\":[\"title : field is mandatory\"]}";
     public static final String TODOS_TASKSOF_ENDPOINT = "todos/%s/tasksof";
     public static final String TODOS_CATEGORIES_ENDPOINT = "todos/%s/categories";
     public static final String PROJECTS_CATEGORIES_ENDPOINT = "projects/%s/categories";
