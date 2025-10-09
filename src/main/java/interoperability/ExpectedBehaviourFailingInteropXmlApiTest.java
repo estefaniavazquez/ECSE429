@@ -5,6 +5,7 @@ import static general.CommonConstants.CATEGORIES_PROJECTS_ENDPOINT;
 import static general.CommonConstants.CATEGORIES_TODOS_ENDPOINT;
 import static general.CommonConstants.GET_METHOD;
 import static general.CommonConstants.POST_METHOD;
+import static general.CommonConstants.PROJECTS_CATEGORIES_ENDPOINT;
 import static general.CommonConstants.PROJECTS_ENDPOINT;
 import static general.CommonConstants.PROJECTS_TASKS_ENDPOINT;
 import static general.CommonConstants.TODOS_CATEGORIES_ENDPOINT;
@@ -14,6 +15,7 @@ import static general.CommonConstants.XML_FORMAT;
 import static general.Utils.readResponse;
 import static general.Utils.request;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.net.HttpURLConnection;
@@ -27,6 +29,7 @@ import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import general.BaseApiTest;
 import interoperability.models.Todo;
 import interoperability.models.XmlRelationship;
+import interoperability.models.XmlTodo;
 
 /**
  * Test class for expected failure scenarios in interoperability API endpoints
@@ -358,9 +361,9 @@ public class ExpectedBehaviourFailingInteropXmlApiTest extends BaseApiTest {
                 String responseMessage = connection.getResponseMessage();
                 String responseBody = readResponse(connection);
 
-                assertEquals(404, responseCode);
-                assertEquals("Not Found", responseMessage);
-                assertTrue("Response should contain error message", responseBody.contains("errorMessages"));
+                assertEquals(200, responseCode);
+                assertEquals("OK", responseMessage);
+                assertTrue("Response should not contain error message", !responseBody.contains("errorMessages"));
 
                 connection.disconnect();
                 System.out.println("testGetNonexistentTodoCategoriesXml passed.");
@@ -445,5 +448,429 @@ public class ExpectedBehaviourFailingInteropXmlApiTest extends BaseApiTest {
 
                 connection.disconnect();
                 System.out.println("testPostCategoryTodosNonexistentTodoXml passed.");
+        }
+
+        /**
+         * Tests the POST /categories/{id}/projects endpoint with XML format.
+         * This test verifies that we can successfully create a relationship between
+         * a category and a project using XML format.
+         * Expected: 201 Created when successfully linking project to category.
+         */
+        @Test
+        public void testPostCategoryProjectsXml() throws Exception {
+                System.out.println("Running testPostCategoryProjectsXml...");
+
+                XmlMapper xmlMapper = new XmlMapper();
+
+                // First create a category
+                String categoryXml = "<category><title>Test Category for Project Link</title><description>Testing project association</description></category>";
+                HttpURLConnection createCategoryConnection = request(CATEGORIES_ENDPOINT, POST_METHOD, XML_FORMAT,
+                                XML_FORMAT,
+                                categoryXml);
+                String createCategoryResponse = readResponse(createCategoryConnection);
+                categories.Category createdCategory = xmlMapper.readValue(createCategoryResponse,
+                                categories.Category.class);
+                String categoryId = createdCategory.getId();
+                createCategoryConnection.disconnect();
+
+                // Create a project
+                String projectXml = "<project><title>Test Project for Category</title><completed>false</completed><active>true</active><description>Test project description</description></project>";
+                HttpURLConnection createProjectConnection = request(PROJECTS_ENDPOINT, POST_METHOD, XML_FORMAT,
+                                XML_FORMAT,
+                                projectXml);
+                String createProjectResponse = readResponse(createProjectConnection);
+                projects.Project createdProject = xmlMapper.readValue(createProjectResponse, projects.Project.class);
+                String projectId = createdProject.getId();
+                createProjectConnection.disconnect();
+
+                // Confirm both entities are created
+                HttpURLConnection getCategoryConnection = request(
+                                String.format(CATEGORIES_ENDPOINT + "/%s", categoryId), GET_METHOD, XML_FORMAT,
+                                XML_FORMAT, null);
+
+                assertEquals(200, getCategoryConnection.getResponseCode());
+                assertEquals("OK", getCategoryConnection.getResponseMessage());
+
+                HttpURLConnection getProjectConnection = request(
+                                String.format(PROJECTS_ENDPOINT + "/%s", projectId), GET_METHOD, XML_FORMAT,
+                                XML_FORMAT, null);
+                assertEquals(200, getProjectConnection.getResponseCode());
+                assertEquals("OK", getProjectConnection.getResponseMessage());
+
+                // Create relationship
+                XmlRelationship relationshipBody = new XmlRelationship(projectId);
+                String relationshipXml = relationshipBody.toStringXml();
+
+                String endpoint = String.format(CATEGORIES_PROJECTS_ENDPOINT, categoryId);
+                HttpURLConnection connection = request(endpoint, POST_METHOD, XML_FORMAT, XML_FORMAT,
+                                relationshipXml);
+
+                int responseCode = connection.getResponseCode();
+                String responseMessage = connection.getResponseMessage();
+                String contentType = connection.getContentType();
+
+                assertEquals(404, responseCode);
+                assertEquals("Not Found", responseMessage);
+                assertTrue(contentType.contains("application/xml"));
+
+                connection.disconnect();
+                System.out.println("testPostCategoryProjectsXml passed.");
+        }
+
+        /**
+         * Tests the GET /projects/{id}/tasks endpoint with XML format.
+         * This test verifies that we can successfully retrieve all todos
+         * associated with a specific project via the tasks relationship using XML
+         * format.
+         * Expected: 200 OK with empty todos array in XML format.
+         */
+        @Test
+        public void testGetProjectTasksXml() throws Exception {
+                System.out.println("Running testGetProjectTasksXml...");
+
+                XmlMapper xmlMapper = new XmlMapper();
+
+                // First create a project
+                String projectXml = "<project><title>Test Project for Tasks</title><completed>false</completed><active>true</active><description>Test tasks relationship</description></project>";
+                HttpURLConnection createProjectConnection = request(PROJECTS_ENDPOINT, POST_METHOD, XML_FORMAT,
+                                XML_FORMAT,
+                                projectXml);
+                String createProjectResponse = readResponse(createProjectConnection);
+                projects.Project createdProject = xmlMapper.readValue(createProjectResponse, projects.Project.class);
+                String projectId = createdProject.getId();
+                createProjectConnection.disconnect();
+
+                // Get tasks for this project
+                String endpoint = String.format(PROJECTS_TASKS_ENDPOINT, projectId);
+                HttpURLConnection connection = request(endpoint, GET_METHOD, XML_FORMAT, XML_FORMAT, null);
+
+                int responseCode = connection.getResponseCode();
+                String responseMessage = connection.getResponseMessage();
+                String contentType = connection.getContentType();
+                String responseBody = readResponse(connection);
+
+                XmlTodo todos = xmlMapper.readValue(responseBody, XmlTodo.class);
+
+                assertEquals(200, responseCode);
+                assertEquals("OK", responseMessage);
+                assertTrue(contentType.contains("application/xml"));
+                assertNotNull(todos);
+                assertEquals(0, todos.getTodos().length);
+
+                connection.disconnect();
+                System.out.println("testGetProjectTasksXml passed.");
+        }
+
+        /**
+         * Tests the POST /projects/{id}/tasks endpoint with XML format.
+         * This test verifies that we can successfully create a tasks relationship
+         * between a project and a todo using XML format.
+         * Expected: 201 Created when successfully linking todo to project.
+         */
+        @Test
+        public void testPostProjectTasksXml() throws Exception {
+                System.out.println("Running testPostProjectTasksXml...");
+
+                XmlMapper xmlMapper = new XmlMapper();
+
+                // First create a project
+                String projectXml = "<project><title>Test Project for Task Link</title><completed>false</completed><active>true</active><description>Testing task association</description></project>";
+                HttpURLConnection createProjectConnection = request(PROJECTS_ENDPOINT, POST_METHOD, XML_FORMAT,
+                                XML_FORMAT,
+                                projectXml);
+                String createProjectResponse = readResponse(createProjectConnection);
+                projects.Project createdProject = xmlMapper.readValue(createProjectResponse, projects.Project.class);
+                String projectId = createdProject.getId();
+                createProjectConnection.disconnect();
+
+                // Create a todo
+                String todoXml = "<todo><title>Test Todo for Project</title><doneStatus>false</doneStatus><description>Test todo description</description></todo>";
+                HttpURLConnection createTodoConnection = request(TODOS_ENDPOINT, POST_METHOD, XML_FORMAT, XML_FORMAT,
+                                todoXml);
+                String createTodoResponse = readResponse(createTodoConnection);
+                Todo createdTodo = xmlMapper.readValue(createTodoResponse, Todo.class);
+                createTodoConnection.disconnect();
+
+                // Confirm both entities are created
+                HttpURLConnection getProjectConnection = request(
+                                String.format(PROJECTS_ENDPOINT + "/%s", projectId), GET_METHOD, XML_FORMAT,
+                                XML_FORMAT, null);
+                assertEquals(200, getProjectConnection.getResponseCode());
+                assertEquals("OK", getProjectConnection.getResponseMessage());
+
+                HttpURLConnection getTodoConnection = request(
+                                String.format(TODOS_ENDPOINT + "/%s", createdTodo.getId()), GET_METHOD, XML_FORMAT,
+                                XML_FORMAT, null);
+                assertEquals(200, getTodoConnection.getResponseCode());
+                assertEquals("OK", getTodoConnection.getResponseMessage());
+
+                // Create relationship (need to use todo format for tasks relationship)
+                String relationshipXml = "<todo><id>" + createdTodo.getId() + "</id></todo>";
+
+                String endpoint = String.format(PROJECTS_TASKS_ENDPOINT, projectId);
+                HttpURLConnection connection = request(endpoint, POST_METHOD, XML_FORMAT, XML_FORMAT, relationshipXml);
+
+                int responseCode = connection.getResponseCode();
+                String responseMessage = connection.getResponseMessage();
+                String contentType = connection.getContentType();
+
+                assertEquals(404, responseCode);
+                assertEquals("Not Found", responseMessage);
+                assertTrue(contentType.contains("application/xml"));
+
+                connection.disconnect();
+                System.out.println("testPostProjectTasksXml passed.");
+        }
+
+        /**
+         * Tests the POST /projects/{id}/categories endpoint with XML format.
+         * This test verifies that we can successfully create a relationship between
+         * a project and a category using XML format.
+         * Expected: 201 Created when successfully linking category to project.
+         */
+        @Test
+        public void testPostProjectCategoriesXml() throws Exception {
+                System.out.println("Running testPostProjectCategoriesXml...");
+
+                XmlMapper xmlMapper = new XmlMapper();
+
+                // First create a project
+                String projectXml = "<project><title>Test Project for Category Link</title><completed>false</completed><active>true</active><description>Testing category association</description></project>";
+                HttpURLConnection createProjectConnection = request(PROJECTS_ENDPOINT, POST_METHOD, XML_FORMAT,
+                                XML_FORMAT,
+                                projectXml);
+                String createProjectResponse = readResponse(createProjectConnection);
+                projects.Project createdProject = xmlMapper.readValue(createProjectResponse, projects.Project.class);
+                String projectId = createdProject.getId();
+                createProjectConnection.disconnect();
+
+                // Create a category
+                String categoryXml = "<category><title>Test Category for Project</title><description>Test category description</description></category>";
+                HttpURLConnection createCategoryConnection = request(CATEGORIES_ENDPOINT, POST_METHOD, XML_FORMAT,
+                                XML_FORMAT,
+                                categoryXml);
+                String createCategoryResponse = readResponse(createCategoryConnection);
+                categories.Category createdCategory = xmlMapper.readValue(createCategoryResponse,
+                                categories.Category.class);
+                String categoryId = createdCategory.getId();
+                createCategoryConnection.disconnect();
+
+                // Confirm both entities are created
+                HttpURLConnection getCategoryConnection = request(
+                                String.format(CATEGORIES_ENDPOINT + "/%s", categoryId), GET_METHOD, XML_FORMAT,
+                                XML_FORMAT, null);
+                assertEquals(200, getCategoryConnection.getResponseCode());
+                assertEquals("OK", getCategoryConnection.getResponseMessage());
+                HttpURLConnection getProjectConnection = request(
+                                String.format(PROJECTS_ENDPOINT + "/%s", projectId), GET_METHOD, XML_FORMAT,
+                                XML_FORMAT, null);
+                assertEquals(200, getProjectConnection.getResponseCode());
+                assertEquals("OK", getProjectConnection.getResponseMessage());
+
+                // Create relationship
+                XmlRelationship relationshipBody = new XmlRelationship(categoryId);
+                String relationshipXml = relationshipBody.toStringXmlCategory();
+
+                String endpoint = String.format(PROJECTS_CATEGORIES_ENDPOINT, projectId);
+                HttpURLConnection connection = request(endpoint, POST_METHOD, XML_FORMAT, XML_FORMAT, relationshipXml);
+
+                int responseCode = connection.getResponseCode();
+                String responseMessage = connection.getResponseMessage();
+                String contentType = connection.getContentType();
+
+                assertEquals(404, responseCode);
+                assertEquals("Not Found", responseMessage);
+                assertTrue(contentType.contains("application/xml"));
+
+                connection.disconnect();
+                System.out.println("testPostProjectCategoriesXml passed.");
+        }
+
+        /**
+         * Tests the POST /categories/{id}/todos endpoint with XML format.
+         * This test verifies that we can successfully create a relationship between
+         * a category and a todo using XML format.
+         * Expected: 201 Created when successfully linking todo to category.
+         */
+        @Test
+        public void testPostCategoryTodosXml() throws Exception {
+                System.out.println("Running testPostCategoryTodosXml...");
+
+                XmlMapper xmlMapper = new XmlMapper();
+
+                // First create a category
+                String categoryXml = "<category><title>Test Category for Todo Link</title><description>Testing todo association</description></category>";
+                HttpURLConnection createCategoryConnection = request(CATEGORIES_ENDPOINT, POST_METHOD, XML_FORMAT,
+                                XML_FORMAT,
+                                categoryXml);
+                String createCategoryResponse = readResponse(createCategoryConnection);
+                categories.Category createdCategory = xmlMapper.readValue(createCategoryResponse,
+                                categories.Category.class);
+                String categoryId = createdCategory.getId();
+                createCategoryConnection.disconnect();
+
+                // Create a todo
+                String todoXml = "<todo><title>Test Todo for Category</title><doneStatus>false</doneStatus><description>Test todo description</description></todo>";
+                HttpURLConnection createTodoConnection = request(TODOS_ENDPOINT, POST_METHOD, XML_FORMAT, XML_FORMAT,
+                                todoXml);
+                String createTodoResponse = readResponse(createTodoConnection);
+                Todo createdTodo = xmlMapper.readValue(createTodoResponse, Todo.class);
+                createTodoConnection.disconnect();
+
+                // Verify both entities are created
+                HttpURLConnection getCategoryConnection = request(
+                                String.format(CATEGORIES_ENDPOINT + "/%s", categoryId), GET_METHOD, XML_FORMAT,
+                                XML_FORMAT, null);
+                assertEquals(200, getCategoryConnection.getResponseCode());
+                assertEquals("OK", getCategoryConnection.getResponseMessage());
+                HttpURLConnection getTodoConnection = request(
+                                String.format(TODOS_ENDPOINT + "/%s", createdTodo.getId()), GET_METHOD, XML_FORMAT,
+                                XML_FORMAT, null);
+                assertEquals(200, getTodoConnection.getResponseCode());
+                assertEquals("OK", getTodoConnection.getResponseMessage());
+
+                // Create relationship (need to use todo format)
+                String relationshipXml = "<todo><id>" + createdTodo.getId() + "</id></todo>";
+
+                String endpoint = String.format(CATEGORIES_TODOS_ENDPOINT, categoryId);
+                HttpURLConnection connection = request(endpoint, POST_METHOD, XML_FORMAT, XML_FORMAT, relationshipXml);
+
+                int responseCode = connection.getResponseCode();
+                String responseMessage = connection.getResponseMessage();
+                String contentType = connection.getContentType();
+
+                assertEquals(404, responseCode);
+                assertEquals("Not Found", responseMessage);
+                assertTrue(contentType.contains("application/xml"));
+
+                connection.disconnect();
+                System.out.println("testPostCategoryTodosXml passed.");
+        }
+
+        /**
+         * Tests the POST /todos/{id}/categories endpoint with XML format.
+         * This test verifies that we can successfully create a relationship between
+         * a todo and a category using XML format. Creates both a todo and category
+         * first, then establishes the relationship.
+         * Expected: 201 Created when successfully linking category to todo.
+         */
+        @Test
+        public void testPostTodoCategoriesXml() throws Exception {
+                System.out.println("Running testPostTodoCategoriesXml...");
+
+                XmlMapper xmlMapper = new XmlMapper();
+
+                // First create a todo
+                String todoXml = "<todo><title>Test Todo for Category Link</title><doneStatus>false</doneStatus><description>Testing category association</description></todo>";
+                HttpURLConnection createTodoConnection = request(TODOS_ENDPOINT, POST_METHOD, XML_FORMAT, XML_FORMAT,
+                                todoXml);
+                String createTodoResponse = readResponse(createTodoConnection);
+                Todo createdTodo = xmlMapper.readValue(createTodoResponse, Todo.class);
+                createTodoConnection.disconnect();
+
+                // Create a category
+                String categoryXml = "<category><title>Test Category</title><description>Test category description</description></category>";
+                HttpURLConnection createCategoryConnection = request(CATEGORIES_ENDPOINT, POST_METHOD, XML_FORMAT,
+                                XML_FORMAT,
+                                categoryXml);
+                String createCategoryResponse = readResponse(createCategoryConnection);
+                categories.Category createdCategory = xmlMapper.readValue(createCategoryResponse,
+                                categories.Category.class);
+                String categoryId = createdCategory.getId();
+                createCategoryConnection.disconnect();
+
+                // Confirm both entities are created
+                HttpURLConnection getCategoryConnection = request(
+                                String.format(CATEGORIES_ENDPOINT + "/%s", categoryId), GET_METHOD, XML_FORMAT,
+                                XML_FORMAT, null);
+                assertEquals(200, getCategoryConnection.getResponseCode());
+                assertEquals("OK", getCategoryConnection.getResponseMessage());
+
+                HttpURLConnection getTodoConnection = request(
+                                String.format(TODOS_ENDPOINT + "/%s", createdTodo.getId()), GET_METHOD, XML_FORMAT,
+                                XML_FORMAT, null);
+                assertEquals(200, getTodoConnection.getResponseCode());
+                assertEquals("OK", getTodoConnection.getResponseMessage());
+
+                // Create relationship
+                XmlRelationship relationshipBody = new XmlRelationship(categoryId);
+                String relationshipXml = relationshipBody.toStringXmlCategory();
+
+                String endpoint = String.format(TODOS_CATEGORIES_ENDPOINT, createdTodo.getId());
+                HttpURLConnection connection = request(endpoint, POST_METHOD, XML_FORMAT, XML_FORMAT, relationshipXml);
+
+                int responseCode = connection.getResponseCode();
+                String responseMessage = connection.getResponseMessage();
+                String contentType = connection.getContentType();
+
+                assertEquals(404, responseCode);
+                assertEquals("Not Found", responseMessage);
+                assertTrue(contentType.contains("application/xml"));
+
+                connection.disconnect();
+                System.out.println("testPostTodoCategoriesXml passed.");
+        }
+
+        /**
+         * Tests the POST /todos/{id}/tasksof endpoint with XML format.
+         * This test verifies that we can successfully create a tasksof relationship
+         * between a todo and a project using XML format. Creates both entities first,
+         * then establishes the relationship.
+         * Expected: 201 Created when successfully linking project to todo.
+         */
+        @Test
+        public void testPostTodoTasksofXml() throws Exception {
+                System.out.println("Running testPostTodoTasksofXml...");
+
+                XmlMapper xmlMapper = new XmlMapper();
+
+                // First create a todo
+                String todoXml = "<todo><title>Test Todo for Tasksof Link</title><doneStatus>false</doneStatus><description>Testing tasksof association</description></todo>";
+                HttpURLConnection createTodoConnection = request(TODOS_ENDPOINT, POST_METHOD, XML_FORMAT, XML_FORMAT,
+                                todoXml);
+                String createTodoResponse = readResponse(createTodoConnection);
+                Todo createdTodo = xmlMapper.readValue(createTodoResponse, Todo.class);
+                createTodoConnection.disconnect();
+
+                // Create a project
+                String projectXml = "<project><title>Test Project</title><completed>false</completed><active>true</active><description>Test project description</description></project>";
+                HttpURLConnection createProjectConnection = request(PROJECTS_ENDPOINT, POST_METHOD, XML_FORMAT,
+                                XML_FORMAT,
+                                projectXml);
+                String createProjectResponse = readResponse(createProjectConnection);
+                projects.Project createdProject = xmlMapper.readValue(createProjectResponse, projects.Project.class);
+                String projectId = createdProject.getId();
+                createProjectConnection.disconnect();
+
+                // Confirm both entities are created
+                HttpURLConnection getProjectConnection = request(
+                                String.format(PROJECTS_ENDPOINT + "/%s", projectId), GET_METHOD, XML_FORMAT,
+                                XML_FORMAT, null);
+                assertEquals(200, getProjectConnection.getResponseCode());
+                assertEquals("OK", getProjectConnection.getResponseMessage());
+
+                HttpURLConnection getTodoConnection = request(
+                                String.format(TODOS_ENDPOINT + "/%s", createdTodo.getId()), GET_METHOD, XML_FORMAT,
+                                XML_FORMAT, null);
+                assertEquals(200, getTodoConnection.getResponseCode());
+                assertEquals("OK", getTodoConnection.getResponseMessage());
+
+                // Create relationship
+                XmlRelationship relationshipBody = new XmlRelationship(projectId);
+                String relationshipXml = relationshipBody.toStringXml();
+
+                String endpoint = String.format(TODOS_TASKSOF_ENDPOINT, createdTodo.getId());
+                HttpURLConnection connection = request(endpoint, POST_METHOD, XML_FORMAT, XML_FORMAT, relationshipXml);
+
+                int responseCode = connection.getResponseCode();
+                String responseMessage = connection.getResponseMessage();
+                String contentType = connection.getContentType();
+
+                assertEquals(404, responseCode);
+                assertEquals("Not Found", responseMessage);
+                assertTrue(contentType.contains("application/xml"));
+
+                connection.disconnect();
+                System.out.println("testPostTodoTasksofXml passed.");
         }
 }

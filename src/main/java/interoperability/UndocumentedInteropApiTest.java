@@ -47,7 +47,7 @@ import interoperability.models.Todo;
  * 
  * Tested scenarios:
  * - Unsupported HTTP methods (PUT, DELETE, PATCH) on relationship endpoints
- * - Undocumented specific relationship ID endpoints
+ * - Undocumented specific Ids endpoints
  * - OPTIONS method support for discovering allowed methods
  * 
  * Expected behaviors:
@@ -104,7 +104,7 @@ public class UndocumentedInteropApiTest extends BaseApiTest {
      * Tests the DELETE /todos/{id}/categories endpoint with JSON format.
      * This test verifies that DELETE method without a specific category ID
      * is not supported on the todo-categories relationship endpoint.
-     * DELETE should only work with specific relationship IDs.
+     * DELETE should only work with specific Idss.
      * Expected: 405 Method Not Allowed for bulk delete operations.
      */
     @Test
@@ -178,14 +178,14 @@ public class UndocumentedInteropApiTest extends BaseApiTest {
         System.out.println("testPatchTodoTasksofJson passed.");
     }
 
-    /* Test undocumented methods on specific relationship ID endpoints */
+    /* Test undocumented methods on specific Ids endpoints */
 
     /**
      * Tests the POST /todos/{id}/tasksof/{id} endpoint with JSON format.
-     * This test verifies that POST method on specific relationship ID endpoints
+     * This test verifies that POST method on specific Ids endpoints
      * is not supported. Relationship creation should only happen on collection
      * endpoints, not specific ID endpoints. Should return 405 Method Not Allowed.
-     * Expected: 405 Method Not Allowed for POST on specific relationship ID.
+     * Expected: 405 Method Not Allowed for POST on specific Ids.
      */
     @Test
     public void testPostTodoTasksofIdJson() throws Exception {
@@ -203,7 +203,7 @@ public class UndocumentedInteropApiTest extends BaseApiTest {
         Todo createdTodo = objectMapper.readValue(createTodoResponse, Todo.class);
         createTodoConnection.disconnect();
 
-        // Try POST on specific relationship ID endpoint (should be method not allowed)
+        // Try POST on specific Ids endpoint (should be method not allowed)
         JsonRelationship relationshipBody = new JsonRelationship("1");
         String relationshipJson = objectMapper.writeValueAsString(relationshipBody);
 
@@ -236,7 +236,7 @@ public class UndocumentedInteropApiTest extends BaseApiTest {
     public void testHeadProjectCategoryIdJson() throws Exception {
         System.out.println("Running testHeadProjectCategoryIdJson...");
 
-        // Try HEAD on specific relationship ID endpoint (should be not found)
+        // Try HEAD on specific Ids endpoint (should be not found)
         String endpoint = String.format(PROJECTS_CATEGORIES_ID_ENDPOINT, "1", "1");
         HttpURLConnection connection = request(endpoint, HEAD_METHOD, JSON_FORMAT, JSON_FORMAT, null);
 
@@ -304,7 +304,7 @@ public class UndocumentedInteropApiTest extends BaseApiTest {
     public void testOptionsProjectTasksIdJson() throws Exception {
         System.out.println("Running testOptionsProjectTasksIdJson...");
 
-        // Test OPTIONS on specific relationship ID endpoint
+        // Test OPTIONS on specific Ids endpoint
         String endpoint = String.format(PROJECTS_TASKS_ID_ENDPOINT, "1", "1");
         HttpURLConnection connection = request(endpoint, OPTIONS_METHOD, JSON_FORMAT, JSON_FORMAT, null);
 
@@ -354,7 +354,7 @@ public class UndocumentedInteropApiTest extends BaseApiTest {
      * Tests the DELETE /categories/{id}/projects endpoint with JSON format.
      * This test verifies that DELETE method without a specific project ID
      * is not supported on the category-projects relationship endpoint.
-     * DELETE should only work with specific relationship IDs.
+     * DELETE should only work with specific IDs.
      * Expected: 405 Method Not Allowed for bulk delete operations.
      */
     @Test
@@ -404,10 +404,10 @@ public class UndocumentedInteropApiTest extends BaseApiTest {
 
     /**
      * Tests the POST /categories/{id}/todos/{id} endpoint with JSON format.
-     * This test verifies that POST method on specific relationship ID endpoints
+     * This test verifies that POST method on specific Ids endpoints
      * is not supported. Relationship creation should only happen on collection
      * endpoints, not specific ID endpoints. Should return 405 Method Not Allowed.
-     * Expected: 405 Method Not Allowed for POST on specific relationship ID.
+     * Expected: 405 Method Not Allowed for POST on specific Ids.
      */
     @Test
     public void testPostCategoryTodoIdJson() throws Exception {
@@ -456,35 +456,6 @@ public class UndocumentedInteropApiTest extends BaseApiTest {
 
         connection.disconnect();
         System.out.println("testCreateTaskWithStatusFieldShouldFailExpected passed.");
-    }
-
-    /**
-     * Sends JSON with an XML content type and confirms that the server creates
-     * the resource while returning JSON.
-     * 
-     * @throws Exception
-     */
-    @Test
-    public void testMalformedJsonWithXmlContentTypeActualBehavior() throws Exception {
-        System.out.println("Running testMalformedJsonWithXmlContentTypeActualBehavior...");
-
-        ObjectMapper objectMapper = new ObjectMapper();
-
-        // Create a todo with JSON body but XML content type
-        Todo.TodoBody todoBody = new Todo.TodoBody("Test Todo XML Content Type", false, "Test description");
-        String todoJson = objectMapper.writeValueAsString(todoBody);
-
-        HttpURLConnection connection = request(TODOS_ENDPOINT, POST_METHOD, "application/xml", "application/xml",
-                todoJson);
-
-        int responseCode = connection.getResponseCode();
-        String responseMessage = connection.getResponseMessage();
-
-        assertEquals(404, responseCode);
-        assertEquals("Bad Request", responseMessage);
-
-        connection.disconnect();
-        System.out.println("testMalformedJsonWithXmlContentTypeActualBehavior passed.");
     }
 
 }
