@@ -21,6 +21,47 @@ import static general.CommonConstants.*;
 public class DocumentedCategoriesApiTest extends BaseApiTest {
     /*   /categories endpoint tests    */
 
+    // Test malformed JSON/XML in request body
+    @Test
+    public void testMalformedJsonBody() throws Exception {
+        System.out.println("Running testMalformedJsonBody...");
+
+        String malformedJsonBody = "{\"title\":\"Malformed JSON\",\"description\":\"Missing ending brace\"";
+
+        HttpURLConnection connection = request(CATEGORIES_ENDPOINT, POST_METHOD, JSON_FORMAT, JSON_FORMAT, malformedJsonBody);
+        int responseCode = connection.getResponseCode();
+        String responseMessage = connection.getResponseMessage();
+        String responseBody = readResponse(connection);
+
+        assertEquals(400, responseCode);
+        assertEquals("Bad Request", responseMessage);
+        assertTrue(responseBody.contains("errorMessages"));
+
+        connection.disconnect();
+
+        System.out.println("testMalformedJsonBody passed.");
+    }
+
+    @Test
+    public void testMalformedXmlBody() throws Exception {
+        System.out.println("Running testMalformedXmlBody...");
+
+        String malformedXmlBody = "<category><title>Malformed XML</title><description>Missing ending tag</description>";
+
+        HttpURLConnection connection = request(CATEGORIES_ENDPOINT, POST_METHOD, XML_FORMAT, XML_FORMAT, malformedXmlBody);
+        int responseCode = connection.getResponseCode();
+        String responseMessage = connection.getResponseMessage();
+        String responseBody = readResponse(connection);
+
+        assertEquals(400, responseCode);
+        assertEquals("Bad Request", responseMessage);
+        assertTrue(responseBody.contains("errorMessages"));
+
+        connection.disconnect();
+
+        System.out.println("testMalformedXmlBody passed.");
+    }
+
     // Test GET /categories
 
     @Test
@@ -129,12 +170,19 @@ public class DocumentedCategoriesApiTest extends BaseApiTest {
 
         Category createdCategory = objectMapper.readValue(responseBody, Category.class);
 
+        // Verify the category was added and nothing else was changed
+        HttpURLConnection connectionAll = request(CATEGORIES_ENDPOINT, GET_METHOD, JSON_FORMAT, JSON_FORMAT, null);
+        String allResponseBody = readResponse(connectionAll);
+        JsonCategory allCategories = objectMapper.readValue(allResponseBody, JsonCategory.class);
+
         assertEquals(201, responseCode);
         assertEquals("Created", responseMessage);
         assertTrue(contentType.contains(JSON_FORMAT));
         assertTrue(body.bodySameAsCategory(createdCategory));
+        assertTrue(allCategories.areIn(new Category[]{createdCategory, officeCategory, homeCategory}));
 
         connection.disconnect();
+        connectionAll.disconnect();
 
         System.out.println("testPostCategoriesJson passed.");
     }
@@ -155,12 +203,19 @@ public class DocumentedCategoriesApiTest extends BaseApiTest {
 
         Category createdCategory = xmlMapper.readValue(responseBody, Category.class);
 
+        // Verify the category was added and nothing else was changed
+        HttpURLConnection connectionAll = request(CATEGORIES_ENDPOINT, GET_METHOD, XML_FORMAT, XML_FORMAT, null);
+        String allResponseBody = readResponse(connectionAll);
+        XmlCategory allCategories = xmlMapper.readValue(allResponseBody, XmlCategory.class);
+
         assertEquals(201, responseCode);
         assertEquals("Created", responseMessage);
         assertTrue(contentType.contains(XML_FORMAT));
         assertTrue(body.bodySameAsCategory(createdCategory));
+        assertTrue(allCategories.areIn(new Category[]{createdCategory, officeCategory, homeCategory}));
 
         connection.disconnect();
+        connectionAll.disconnect();
 
         System.out.println("testPostCategoriesXml passed.");
     }

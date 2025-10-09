@@ -16,6 +16,10 @@ public class XmlProject {
     public XmlProject(Project[] projects) {
         this.projects = projects;
     }
+    
+    public Project[] getProjects() {
+        return projects;
+    }
 
     public Project[] getProjects() {
         return projects != null ? projects.clone() : new Project[0];
@@ -33,8 +37,11 @@ public class XmlProject {
     }
 
     public boolean contains(Project project) {
+        if (projects == null || project == null) {
+            return false;
+        }
         for (Project p : projects) {
-            if (p.equals(project)) {
+            if (p != null && p.getId().equals(project.getId())) {
                 return true;
             }
         }

@@ -32,8 +32,11 @@ public class JsonProject {
     // Check if a specific project is in the array of projects that the JsonProject
     // object returned
     public boolean contains(Project project) {
+        if (projects == null || project == null) {
+            return false;
+        }
         for (Project p : projects) {
-            if (p.equals(project)) {
+            if (p != null && p.getId().equals(project.getId())) {
                 return true;
             }
         }

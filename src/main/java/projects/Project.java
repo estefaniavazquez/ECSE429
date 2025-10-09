@@ -26,6 +26,11 @@ public class Project {
         return id;
     }
 
+    public String setId(String id) {
+        this.id = id;
+        return this.id;
+    }
+
     public String getTitle() {
         return title;
     }

@@ -43,6 +43,11 @@ import projects.UndocumentedProjectsIdApiTest;
         DocumentedInteropXmlApiTest.class,
         UndocumentedInteropXmlApiTest.class,
         ExpectedBehaviourFailingInteropXmlApiTest.class,
+        ActualBehaviourWorkingCategoriesIdApiTest.class,
+        DocumentedProjectsApiTest.class,
+        DocumentedProjectsIdApiTest.class,
+        UndocumentedProjectsIdApiTest.class,
+        UndocumentedProjectsApiTest.class
 })
 
 public class AllApiTests {
