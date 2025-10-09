@@ -22,6 +22,11 @@ import projects.DocumentedProjectsApiTest;
 import projects.DocumentedProjectsIdApiTest;
 import projects.UndocumentedProjectsApiTest;
 import projects.UndocumentedProjectsIdApiTest;
+import todos.DocumentedTodosApiTest;
+import todos.DocumentedTodosIdApiTest;
+import todos.UndocumentedTodosApiTest;
+import todos.UndocumentedTodosIdApiTest;
+
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @RunWith(Suite.class)
@@ -47,7 +52,12 @@ import projects.UndocumentedProjectsIdApiTest;
         DocumentedProjectsApiTest.class,
         DocumentedProjectsIdApiTest.class,
         UndocumentedProjectsIdApiTest.class,
-        UndocumentedProjectsApiTest.class
+        UndocumentedProjectsApiTest.class,
+        DocumentedTodosApiTest.class,
+        UndocumentedTodosApiTest.class,
+        DocumentedTodosIdApiTest.class,
+        UndocumentedTodosIdApiTest.class
+
 })
 
 public class AllApiTests {
