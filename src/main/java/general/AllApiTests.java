@@ -30,33 +30,32 @@ import todos.UndocumentedTodosIdApiTest;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-                DocumentedCategoriesApiTest.class,
-                UndocumentedCategoriesApiTest.class,
-                DocumentedCategoriesIdApiTest.class,
-                UndocumentedCategoriesIdApiTest.class,
-                ExpectedBehaviourFailingCategoriesIdApiTest.class,
-                ActualBehaviourWorkingCategoriesIdApiTest.class,
-                DocumentedProjectsApiTest.class,
-                DocumentedProjectsIdApiTest.class,
-                UndocumentedProjectsIdApiTest.class,
-                UndocumentedProjectsApiTest.class,
-                DocumentedInteropApiTest.class,
-                UndocumentedInteropApiTest.class,
-                ExpectedBehaviourFailingInteropApiTest.class,
-                CrossRelationshipInteropApiTest.class,
-                DocumentedInteropXmlApiTest.class,
-                UndocumentedInteropXmlApiTest.class,
-                ExpectedBehaviourFailingInteropXmlApiTest.class,
-                ActualBehaviourWorkingCategoriesIdApiTest.class,
-                DocumentedProjectsApiTest.class,
-                DocumentedProjectsIdApiTest.class,
-                UndocumentedProjectsIdApiTest.class,
-                UndocumentedProjectsApiTest.class,
-                DocumentedTodosApiTest.class,
-                UndocumentedTodosApiTest.class,
-                DocumentedTodosIdApiTest.class,
-                UndocumentedTodosIdApiTest.class
+        DocumentedTodosApiTest.class,
+        DocumentedProjectsApiTest.class,
+        DocumentedCategoriesApiTest.class,
+        DocumentedInteropApiTest.class,
+        DocumentedInteropXmlApiTest.class,
+        CrossRelationshipInteropApiTest.class,
 
+        DocumentedTodosIdApiTest.class,
+        DocumentedProjectsIdApiTest.class,
+        DocumentedCategoriesIdApiTest.class,
+
+        UndocumentedTodosApiTest.class,
+        UndocumentedProjectsApiTest.class,
+        UndocumentedCategoriesApiTest.class,
+        UndocumentedInteropApiTest.class,
+        UndocumentedInteropXmlApiTest.class,
+
+        UndocumentedTodosIdApiTest.class,
+        UndocumentedProjectsIdApiTest.class,
+        UndocumentedCategoriesIdApiTest.class,
+
+        ExpectedBehaviourFailingCategoriesIdApiTest.class,
+        ExpectedBehaviourFailingInteropApiTest.class,
+        ExpectedBehaviourFailingInteropXmlApiTest.class,
+
+        ActualBehaviourWorkingCategoriesIdApiTest.class,
 })
 
 public class AllApiTests {
