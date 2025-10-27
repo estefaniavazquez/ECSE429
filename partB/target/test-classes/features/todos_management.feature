@@ -5,20 +5,22 @@ Feature: Todo Management API Testing
     So that I can manage my tasks effectively
 
     Background:
-        Given the Rest API Todo List Manager is running on localhost:4567
-        And the system is initialized with an empty todo list
+        # on localhost:4567
+        Given the Rest API Todo List Manager is running
+        And my list of tasks is cleared to start fresh
 
     @todo_create
-    Scenario Outline: Create a new todo task with optional fields
-        As a user, I want to create a new todo task with a title and an optional description to save the task.
-        When I send a POST request to "/todos" with body:
+    Scenario Outline: Create a new todo task with optional fields and check for errors
+        As a user, I want to create a new todo task with a title and an optional description to save the task to my list.
+        # POST request to /todos
+        When I send a request to create a task with these details:
             | title            | description                |  doneStatus         |
             | <title>          | <description>              |  <doneStatus>       |
-        Then the response status code should be <status_code>
-        And the response body should contain the value "<expected_title>" for the "title" field
-        And the response body should contain the value "<expected_description>" for the "description" field
-        And the response body should contain the value "<expected_doneStatus>" for the "doneStatus" field
-        And the response body should confirm the error message "<expected_error_message>" when applicable
+        Then the creation status should be <status_code>
+        And the saved task should show field "title" with value "<expected_title>"
+        And the saved task should show field "description" with value "<expected_description>"
+        And the saved task should show field "doneStatus" with value "<expected_doneStatus>"
+        And the system should tell me if there was an error: "<expected_error_message>"
 
         Examples: Creation Flows (Normal, Alternate, Error)
             # Normal Flow: provide all fields correctly
@@ -29,21 +31,22 @@ Feature: Todo Management API Testing
             # Error Flow: missing title
             |                   | No title provided.      | false      | 400         |                  |                           |                     | title : field is mandatory          |
 
-    Scenario Outline: Toggle status or update fields using POST
-        As a user, i want to toggle the doneStatus of an existing todo between true and false to reflect its completion status. (or update more fields)
+    Scenario Outline: Update an existing todo's doneStatus and/or description 
+        As a user, I want to change the done status of an existing task and update its description so that the task's details are up to date.
 
         #Setup: create a todo item to be updated
-        Given a todo item exists with title "POST Target Task", description "Original Content", and doneStatus "false"
+        Given a todo exists with title "POST Target Task", description "Original Content", and doneStatus "false"
         And its ID is stored as "todo_id"
 
-        When I send a POST request to "/todos/<target_id>" with body:
+        # POST request to /todos/{id}
+        When I send a request to update task "<todo_id>" with body:
             | description          | doneStatus       |
             | <description>        | <doneStatus>     |
-        Then the response status code should be <status_code>
-        And the response body should contain the value "<expected_title>" for the "title" field
-        And the response body should contain the value "<expected_description>" for the "description" field
-        And the response body should contain the value "<expected_doneStatus>" for the "doneStatus" field
-        And the response body should confirm the error message "<expected_error_message>" when applicable
+        Then the update status should be <status_code>
+        And the updated task should show field "title" with value "<expected_title>"
+        And the updated task should show field "description" with value "<expected_description>"
+        And the updated task should show field "doneStatus" with value "<expected_doneStatus>"
+        And the system should tell me if there was an error: "<expected_error_message>"
 
         Examples: Partial Update Flows (Normal, Alternate, Error)
             # Normal Flow: toggle doneStatus from false to true
@@ -54,20 +57,21 @@ Feature: Todo Management API Testing
             # Error Flow: Attempt to update a non-existent item
             | 999       | true       |                     | 404         | 999      |                      |                          |                     | "Todo item not found." |
 
-    Scenario Outline: Retrieve and filter Todos by doneStatus
-        As a user, I want to retrieve a list of todos filtered by their doneStatus to get the items I need to work on.
+    Scenario Outline: Retrieve and filter Todos by done status
+        As a user, I want to retrieve a list of todos filtered by their done status to get the items I need to work on.
 
-        #Setup: create multiple todo items with varying doneStatus
+        #Setup: create multiple todo items with varying done status
         Given a todo item exists with title "Completed Filter Test 1", description "This is done", and doneStatus "true"
         And a todo item exists with title "Completed Filter Test 2", description "This is also done", and doneStatus "true"
         And a todo item exists with title "Pending Filter Test 1", description "This is not done", and doneStatus "false"
         And a todo item exists with title "Pending Filter Test 2", description "This is also not done", and doneStatus "false"
 
-        When I send a GET request to "/todos<query_params>" with Accept header "<accept_header>"
-        Then the response status code should be <status_code>
-        And the response Content-Type should be "<expected_content_type>"
-        And the response body should contain <expected_count> todo items with doneStatus "<filter_status>"
-        And the response body should confirm the error message "<expected_error_message>" when applicable
+        # Get request to /todos<query_params>
+        When I send a request to view tasks filtered by the query "<query_params>" and requested format "<accept_header>"
+        Then the status code should be <status_code>
+        And the task list format should be "<expected_content_type>"
+        And the list should contain <expected_count> tasks with completion status "<filter_status>"
+        And the system should tell me if there was an error: "<expected_error_message>"
 
         Examples: Retrieval and Filtering Flows (Normal, Alternate, Error)
             # Normal Flow: retrieve todos with doneStatus false in JSON
@@ -79,17 +83,18 @@ Feature: Todo Management API Testing
             | ?doneStatus=maybe  | application/json     | 400         | application/json      | 0              |               | "Invalid doneStatus value." |
 
 
-    Scenario Outline: Delete an existing todo item
-        As a user, I want to delete an existing todo item to get the task permanently removed from the system's active list.
+    Scenario Outline: Delete a todo item
+        As a user, I want to delete an existing todo item to get the task permanently removed from my active list.
 
         #Setup: create a todo item to be deleted. A new ID is needed for each run to test idempotency and 404.
         Given a todo item exists with title "Deletion Target"
         And its ID is stored as "delete_todo_id"
 
-        When I send a DELETE request to "/todos/<target_id>" with Accept header "<accept_header>"
-        Then the response status code should be <status_code>
-        And the response body should confirm the error message "<expected_error_message>" when applicable
-        And the todo item with ID "<target_id>" should yield a "<check_status_code>" on a HEAD request
+        # DELETE request to /todos/<target_id>
+        When I send a request to delete task "<target_id>" with requested format "<accept_header>"
+        Then the deletion status should be <status_code>
+        And the system should tell me if there was an error: "<expected_error_message>"
+        And the task with ID "<target_id>" should yield a "<check_status_code>" on a quick check
 
         Examples: Deletion Flows (Normal, Alternate, Error)
             # Normal Flow: delete existing item
@@ -100,22 +105,22 @@ Feature: Todo Management API Testing
             # Error Flow: Attempt to delete a non-existent item
             | 999                | application/json   | 404         | 999                    | "Todo item not found." | 404               |
 
-    Scenario Outline: Replace an existing todo's entire data using PUT
+    Scenario Outline: Fully replace a todo item's data
         As a user, I want to replace an existing todo item's entire data to get the task completely refreshed.
 
         #Setup: create a todo item to be replaced
-        Given a todo item exists with title "PUT Target Task", description "Original Content", and doneStatus "false"
+        Given a todo item exists with title "PUT Target Task", description "Original Content", and done status "false"
         And its ID is stored as "put_todo_id"
 
-        When I send a PUT request to "/todos/<target_id>" with body:
+        # PUT request to /todos/<target_id>
+        When I send a request to fully replace task "<target_id>" with body:
             | title          | description          | doneStatus     |
             | <title>        | <description>        | <doneStatus>   |
-        Then the response status code should be <status_code>
-
-        And the todo item with ID "<target_id>" should contain the value "<expected_title>" for the "title" field
-        And the todo item with ID "<target_id>" should contain the value "<expected_description>" for the "description" field
-        And the todo item with ID "<target_id>" should contain the value "<expected_doneStatus>" for the "doneStatus" field
-        And the response body should confirm the error message "<expected_error_message>" when applicable
+        Then the replacement status should be <status_code>
+        And the updated task should show the field "title" with value "<expected_title>"
+        And the updated task should show the field "description" with value "<expected_description>"
+        And the updated task should show the field "doneStatus" with value "<expected_doneStatus
+        And the system should tell me if there was an error: "<expected_error_message>"
 
         Examples: Full Replacement Flows (Normal, Alternate, Error)
             # Normal Flow: replace all fields correctly (all original data is overwritten)

@@ -28,8 +28,8 @@ public class TodoStepDefinitions {
     // ==============================================================================
     // STEP 1: WHEN - ACTION (T1)
     // ==============================================================================
-    @When("I send a POST request to {string} with body:")
-    public void i_send_a_post_request_to_with_body(String endpoint, DataTable dataTable) {
+    @When("I send a request to create a task with these details:")
+    public void i_send_a_request_to_create_a_task_with_these_details(DataTable dataTable) {
         // 1. Extract the single row of input data from the Gherkin table
         Map<String, String> data = dataTable.asMaps().get(0);
         
@@ -45,7 +45,7 @@ public class TodoStepDefinitions {
         String jsonBody = api.toJson(payloadMap);
 
         // 4. Send the request and store the response
-        Response response = api.postRequest(endpoint, jsonBody);
+        Response response = api.postRequest("/todos", jsonBody);
         context.setLastResponse(response);
 
         // 5. If successful (201), store the new ID
@@ -58,8 +58,8 @@ public class TodoStepDefinitions {
     // ==============================================================================
     // STEP 2: THEN - ASSERTION (Status Code)
     // ==============================================================================
-    @Then("the response status code should be {int}")
-    public void the_response_status_code_should_be(int expectedStatusCode) {
+    @Then("the creation status should be {int}")
+    public void the_creation_status_should_be(int expectedStatusCode) {
         Response response = context.getLastResponse();
         assertEquals(expectedStatusCode, 
                      response.statusCode(),
@@ -69,8 +69,8 @@ public class TodoStepDefinitions {
     // ==============================================================================
     // STEP 3: AND - ASSERTION (Verify individual field value in success response)
     // ==============================================================================
-    @And("the response body should contain the value {string} for the {string} field")
-    public void the_response_body_should_contain_the_value_for_the_field(String expectedValue, String fieldName) {
+    @And("the saved task should show field {string} with value {string}")
+    public void the_saved_task_should_show_field_with_value(String fieldName, String expectedValue) {
         Response response = context.getLastResponse();
         
         if (response.statusCode() == 201 || response.statusCode() == 200) {
@@ -107,8 +107,8 @@ public class TodoStepDefinitions {
     // ==============================================================================
     // STEP 4: AND - ASSERTION (Verify error message in failure response)
     // ==============================================================================
-    @And("the response body should confirm the error message {string} when applicable")
-    public void the_response_body_should_confirm_the_error_message_when_applicable(String expectedMessage) {
+    @And("the system should tell me if there was an error: {string}")
+    public void the_system_should_tell_me_if_there_was_an_error(String expectedMessage) {
         Response response = context.getLastResponse();
     
         // 1. CASE: Success Expected (The Examples cell is empty, so expectedMessage == "")
@@ -135,5 +135,8 @@ public class TodoStepDefinitions {
             fullResponseBody.contains(messageToCheck),
             String.format("Expected error message '%s' not found in response body: %s", messageToCheck, fullResponseBody)
         );
+
+        // print confirmation
+        System.out.println("Confirmed presence of expected error message: " + messageToCheck);
     }
 }
