@@ -1,3 +1,4 @@
+@todo
 Feature: Todo Management API Testing
     As a user of the Rest API Todo List Manager
     I want to be able to create, read, update, and delete todo items
@@ -7,6 +8,7 @@ Feature: Todo Management API Testing
         Given the Rest API Todo List Manager is running on localhost:4567
         And the system is initialized with an empty todo list
 
+    @todo_create
     Scenario Outline: Create a new todo task with optional fields
         As a user, I want to create a new todo task with a title and an optional description to save the task.
         When I send a POST request to "/todos" with body:
@@ -25,7 +27,7 @@ Feature: Todo Management API Testing
             # Alternate Flow: omit optional description
             | Quick task        |                         | true       | 201         | Quick task       |                           | true                |                                      |
             # Error Flow: missing title
-            |                   | No title provided.      | false      | 400         |                  |                           |                     | "Title is required."                 |
+            |                   | No title provided.      | false      | 400         |                  |                           |                     | title : field is mandatory          |
 
     Scenario Outline: Toggle status or update fields using POST
         As a user, i want to toggle the doneStatus of an existing todo between true and false to reflect its completion status. (or update more fields)
