@@ -9,7 +9,7 @@ import java.util.Map;
 import com.google.gson.Gson;
 
 /**
- * Handles low-level interaction with the Todo Manager REST API.
+ * Handles interaction with the Todo Manager REST API.
  */
 public class TodoApi {
 
@@ -21,7 +21,7 @@ public class TodoApi {
     }
 
     /**
-     * Utility to convert a Todo object (or map) into a JSON string payload.
+     * Converts a Todo object (or map) into a JSON string payload.
      */
     public String toJson(Map<String, Object> payloadMap) {
         // Use Gson to convert the map containing only the necessary fields to a JSON string
@@ -73,7 +73,7 @@ public class TodoApi {
 
     /**
      * Implements the logic for GIVEN the system is initialized with an empty todo list.
-     * This is crucial for test isolation.
+     * Crucial for test isolation.
      */
     public void deleteAllData() {
         // Step 1: Get all current todos
@@ -90,7 +90,6 @@ public class TodoApi {
                 }
             }
         }
-        // Note: You would repeat this logic for /projects and /categories when needed.
     }
     
     /**

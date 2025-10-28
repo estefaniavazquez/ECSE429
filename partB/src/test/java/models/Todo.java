@@ -31,7 +31,7 @@ public class Todo {
     public Todo() {}
 
     /**
-     * Creates a Map suitable for JSON serialization, omitting fields that are null or empty.
+     * Creates a Map suitable for JSON serialization, omits fields that are null or empty.
      */
     public Map<String, Object> toPayloadMap() {
         Map<String, Object> payload = new HashMap<>();
@@ -51,7 +51,7 @@ public class Todo {
         return payload;
     }
 
-    // Standard Getters (for assertions)
+    // Getters
     public String getId() { return id; }
     public String getTitle() { return title; }
     public String getDescription() { return description; }

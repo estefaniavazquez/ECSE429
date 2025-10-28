@@ -38,26 +38,26 @@ public class TodoStepDefinitions {
     // ==============================================================================
     @When("I send a request to create a task with these details:")
     public void i_send_a_request_to_create_a_task_with_these_details(DataTable dataTable) {
-        // 1. Extract the single row of input data from the Gherkin table
+        // Extract the single row of input data from the Gherkin table
         Map<String, String> data = dataTable.asMaps().get(0);
         
-        // 2. Create a Todo object from the input data (The Todo constructor handles String-to-Boolean conversion)
+        // Create a Todo object from the input data
         String title = data.get("title");
         String description = data.get("description");
         String doneStatus = data.get("doneStatus");
         
         Todo newTodo = new Todo(title, description, doneStatus);
 
-        // 3. Convert the Todo object to a Map<String, Object> (to ensure boolean primitive)
+        // Convert the Todo object to a Map<String, Object>
         Map<String, Object> payloadMap = newTodo.toPayloadMap();
         String jsonBody = api.toJson(payloadMap);
 
-        // 4. Send the request and store the response
+        // Send the request and store the response
         Response response = api.postRequest("/todos", jsonBody, "application/json");
         assertNotNull(response, "API postRequest returned null response");
         context.setLastResponse(response);
 
-        // 5. If successful (201), store the new ID
+        // If successful (201), store the new ID
         if (response.getStatusCode() == 201) {
             String newId = response.jsonPath().getString("id");
             context.storeId("last_created_id", newId); 
@@ -87,7 +87,6 @@ public class TodoStepDefinitions {
         if (response.statusCode() == 201 || response.statusCode() == 200) {
             
             if (fieldName.equals("doneStatus")) {
-                // --- BOOLEAN ASSERTION BRANCH ---
                 Boolean expectedBoolean = Boolean.parseBoolean(expectedValue);
                 // Use getBoolean() to correctly extract the unquoted primitive value
                 Boolean actualBoolean = response.jsonPath().getBoolean(fieldName); 
@@ -97,14 +96,12 @@ public class TodoStepDefinitions {
                                   fieldName, expectedBoolean, actualBoolean));
             
             } else if (expectedValue.isEmpty()) {
-                // --- EMPTY STRING ASSERTION BRANCH (for description in Alternate Flow) ---
                 String actualValue = response.jsonPath().getString(fieldName);
                 assertTrue(
                     actualValue == null || actualValue.isEmpty(),
                     String.format("Field '%s' was expected to be empty but was '%s'.", fieldName, actualValue)
                 );
             } else {
-                // --- STANDARD STRING ASSERTION BRANCH (for title and description) ---
                 String actualValue = response.jsonPath().getString(fieldName);
                 assertEquals(
                     expectedValue, 
@@ -123,23 +120,23 @@ public class TodoStepDefinitions {
         Response response = context.getLastResponse();
         assertNotNull(response, "Response object is null - API call may have failed");
     
-        // 1. CASE: Success Expected (The Examples cell is empty, so expectedMessage == "")
+        // Success 
         if (expectedMessage.isEmpty()) {
             // Assert that we did NOT receive a 4xx error.
             assertFalse(response.statusCode() >= 400, 
                     "Did not expect an error, but received status code: " + response.statusCode() + 
                     ". Body: " + response.getBody().asString());
-            return; // Exit the step, test passed for this assertion.
+            return;
         }
 
-        // 2. CASE: Failure Expected (expectedMessage is non-empty, i.e., "title : field is mandatory")
+        // Failure
     
         // Assert that we received a 4xx error status code
         assertTrue(response.statusCode() >= 400, 
                "Expected error status code (4xx) but received: " + response.statusCode());
                
         String fullResponseBody = response.getBody().asString();
-        // Remove quotes if they were mistakenly left in the Examples table
+
         String messageToCheck = expectedMessage.replace("\"", "").trim(); 
 
         // Assert that the error message is contained in the response body
@@ -317,17 +314,17 @@ public class TodoStepDefinitions {
     public void i_send_a_request_to_fully_replace_task_with_body(String targetIdKey, DataTable dataTable) {
         // Extract the target ID from the context
         String targetId = context.retrieveId(targetIdKey);
-        // 1. Extract the single row of input data from the Gherkin table
+        // Extract the single row of input data from the Gherkin table
         Map<String, String> data = dataTable.asMaps().get(0);
         
-        // 2. Create a Todo object from the input data (The Todo constructor handles String-to-Boolean conversion)
+        // Create a Todo object from the input data (The Todo constructor handles String-to-Boolean conversion)
         String title = data.get("title");
         String description = data.get("description");
         String doneStatus = data.get("doneStatus");
         
         Todo newTodo = new Todo(title, description, doneStatus);
 
-        // 3. Convert the Todo object to a Map<String, Object> (to ensure boolean primitive)
+        // Convert the Todo object to a Map<String, Object> (to ensure boolean primitive)
         Map<String, Object> payloadMap = newTodo.toPayloadMap();
         String jsonBody = api.toJson(payloadMap);
         // Send PUT request with JSON body

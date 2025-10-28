@@ -9,9 +9,9 @@ import static io.cucumber.junit.platform.engine.Constants.FEATURES_PROPERTY_NAME
 
 @Suite
 @IncludeEngines("cucumber")
-// CRITICAL: Ensure these paths match your package structure
+// Ensure paths match the project structure
 @ConfigurationParameter(key = FEATURES_PROPERTY_NAME, value = "src/test/resources/features")
 @ConfigurationParameter(key = GLUE_PROPERTY_NAME, value = "setup,steps,api, models") // Added 'api' just in case
 public class TestRunner {
-    // This class runs the entire Cucumber suite using the JUnit 5 platform.
+
 }

@@ -19,8 +19,8 @@ public class ScenarioHooks {
     }
 
     // ==============================================================================
-    // BACKGROUND STEP 1: Check Service Status
-    // Corresponds to: Given the Rest API Todo List Manager is running
+    // Check Service Status
+    // Given the Rest API Todo List Manager is running
     // ==============================================================================
     @Given("the Rest API Todo List Manager is running")
     public void the_rest_api_todo_list_manager_is_running() {
@@ -29,12 +29,12 @@ public class ScenarioHooks {
     }
 
     // ==============================================================================
-    // BACKGROUND STEP 2: System Reset (CRITICAL for test isolation)
-    // Corresponds to: And my list of tasks is cleared to start fresh
+    // System Reset
+    // And my list of tasks is cleared to start fresh
     // ==============================================================================
     @Given("my list of tasks is cleared to start fresh")
     public void the_system_is_initialized_with_an_empty_todo_list() {
-        // This method must delete ALL existing todo items to ensure a clean slate.
+        // This method deletes ALL existing todo items to ensure a clean slate.
         api.deleteAllData();
     }
 }
