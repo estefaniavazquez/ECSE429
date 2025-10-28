@@ -16,10 +16,12 @@ public class CategoryApi {
         RestAssured.baseURI = BASE_URL;
     }
 
+    // make json from map
     public String toJson(Map<String, Object> payloadMap) {
         return GSON.toJson(payloadMap);
     }
 
+    // send post request
     public Response postRequest(String endpoint, String body) {
         return RestAssured.given()
                 .baseUri(BASE_URL)
@@ -29,6 +31,7 @@ public class CategoryApi {
                 .then().extract().response();
     }
 
+    // send get request
     public Response getRequest(String endpoint) {
         return RestAssured.given()
                 .baseUri(BASE_URL)
@@ -37,6 +40,7 @@ public class CategoryApi {
                 .then().extract().response();
     }
 
+    // send delete request
     public Response deleteRequest(String endpoint) {
         return RestAssured.given()
                 .baseUri(BASE_URL)
@@ -44,12 +48,9 @@ public class CategoryApi {
                 .then().extract().response();
     }
 
-    /**
-     * Clears all categories (used by Background step for isolation).
-     */
+    // delete all categories
     public void deleteAllCategories() {
         Response r = getRequest("/categories");
-        // API returns: { "categories": [ {id,title,description}, ... ] }
         CategoryDTO[] cats = r.jsonPath().getObject("categories", CategoryDTO[].class);
         if (cats != null) {
             for (CategoryDTO c : cats) {
@@ -60,16 +61,14 @@ public class CategoryApi {
         }
     }
 
-    // minimal DTO just for cleanup loop
+    // simple category object
     private static class CategoryDTO {
         String id;
         String title;
         String description;
     }
 
-    /**
-     * Quick reachability check (shared wording with your Background style).
-     */
+    // check if service is running
     public void checkServiceUp() {
         try {
             Response response = RestAssured.get(BASE_URL + "/categories");
