@@ -21,4 +21,6 @@ public class Relationship {
 
         return payload;
     }
+
+    public String getId() { return id; }
 }

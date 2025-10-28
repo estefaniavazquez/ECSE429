@@ -62,4 +62,20 @@ public class TodoInteroperability {
     public Boolean getDoneStatus() { return doneStatus; }
     public List<Relationship> getTaskof() { return taskof; }
     public List<Relationship> getCategories() { return categories; }
+
+    // Add taskof relationships
+    public void addTaskof(Relationship taskof) {
+        if (this.taskof == null) {
+            this.taskof = new java.util.ArrayList<>();
+        }
+        this.taskof.add(taskof);
+    }
+
+    // Add categories relationships
+    public void addCategories(Relationship categories) {
+        if (this.categories == null) {
+            this.categories = new java.util.ArrayList<>();
+        }
+        this.categories.add(categories);
+    }
 }

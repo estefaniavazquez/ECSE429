@@ -6,8 +6,6 @@ import io.cucumber.java.Before;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.nio.file.Paths;
 
 
