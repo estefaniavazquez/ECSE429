@@ -161,14 +161,6 @@ public class InteroperabilityStepDefinitions {
     public void theUserAssignsTheCategoryWithIdToTheProjectWithId(String categoryId, String projectId) {
     }
 
-    @Then("an instance of a relationship taskof exists in the todo with id {string} that points to the project with id {string}")
-    public void anInstanceOfARelationshipTaskofExistsInTheTodoWithIdThatPointsToTheProjectWithId(String todoId, String projectId) {
-    }
-
-    @Then("no instance of a relationship taskof exists in the todo with id {string} that points to the project with id {string}")
-    public void noInstanceOfARelationshipTaskofExistsInTheTodoWithIdThatPointsToTheProjectWithId(String todoId, String projectId) {
-    }
-
     @Then("no instance of a todo with id {string} exists")
     public void noInstanceOfATodoWithIdExists(String todoId) {
     }
@@ -228,14 +220,6 @@ public class InteroperabilityStepDefinitions {
 
     @And("the entries in the relationship tasks of the project with id {string} contain:")
     public void theEntriesInTheRelationshipTasksOfTheProjectWithIdContain(String projectId, DataTable dataTable) {
-    }
-
-    @And("the entries in the relationship todos of the category with id {string} contain:")
-    public void theEntriesInTheRelationshipTodosOfTheCategoryWithIdContain(String categoryId, DataTable dataTable) {
-    }
-
-    @And("the entries in the relationship categories of the todo with id {string} contain:")
-    public void theEntriesInTheRelationshipCategoriesOfTheTodoWithIdContain(String todoId, DataTable dataTable) {
     }
 
     @And("the entries in the relationship projects of the category with id {string} contain:")

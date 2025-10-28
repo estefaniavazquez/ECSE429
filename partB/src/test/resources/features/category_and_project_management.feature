@@ -7,53 +7,53 @@ Feature: Create projects relationship
 #  As a user, I want to assign a category instance to a project instance,
 #  so I can classify my projects.
 
-  Scenario: User assigns an existing category to an existing project. (Normal flow)
+  Scenario Outline: User assigns an existing category to an existing project. (Normal flow)
     Given the following projects exist:
       | projectId | projectTitle      | projectCompleted | projectActive | projectDescription                      |
-      | 1         | "ECSE429 Project" | false            | true          | "Test API for a project management app" |
+      | 2         | "ECSE429 Project" | false            | true          | "Test API for a project management app" |
     And the following categories exist:
       | categoryId | categoryTitle | categoryDescription       |
-      | 1          | "School"      | "Tasks related to school" |
+      | 3          | "School"      | "Tasks related to school" |
     When the user assigns the category with id "<categoryId>" to the project with id "<projectId>"
     Then the entries in the relationship projects of the category with id "<categoryId>" now contain:
       | id |
-      | 1  |
-    And the response status code is "<statusCode>"
-
-      | projectId | categoryId | statusCode |
-      | 1         | 1          | 201        |
-
-  Scenario: User assigns an existing category to an existing project that already has a different category assigned. (Alternate flow)
-    Given the following projects exist:
-      | projectId | projectTitle      | projectCompleted | projectActive | projectDescription                      |
-      | 1         | "ECSE429 Project" | false            | true          | "Test API for a project management app" |
-    And the entries in the relationship projects of the category with id "<categoryId>" contain:
-      | id |
-      | 1  |
-    And the following categories exist:
-      | categoryId | categoryTitle | categoryDescription       |
-      | 1          | "School"      | "Tasks related to school" |
-      | 2          | "Work"        | "Tasks related to work"   |
-    When the user assigns the category with id "<categoryId>" to the project with id "<projectId>"
-    Then the entries in the relationship projects of the category with id "<categoryId>" now contain:
-      | id |
-      | 1  |
       | 2  |
     And the response status code is "<statusCode>"
-
+    Examples:
       | projectId | categoryId | statusCode |
-      | 1         | 2          | 201        |
+      | 2         | 3          | 201        |
 
-  Scenario: User assigns an inexistent category to an existing project. (Error flow)
+  Scenario Outline: User assigns an existing category, which has already been associated with a project, to an existing project. (Alternate flow)
     Given the following projects exist:
       | projectId | projectTitle      | projectCompleted | projectActive | projectDescription                      |
-      | 1         | "ECSE429 Project" | false            | true          | "Test API for a project management app" |
+      | 2         | "ECSE429 Project" | false            | true          | "Test API for a project management app" |
+      | 3         | "ECSE428 Project" | false            | true          | ""Build app in Agile mode"              |
+    And the entries in the relationship projects of the category with id "<categoryId>" contain:
+      | id |
+      | 2  |
     And the following categories exist:
       | categoryId | categoryTitle | categoryDescription       |
-      | 1          | "School"      | "Tasks related to school" |
+      | 3          | "School"      | "Tasks related to school" |
+    When the user assigns the category with id "<categoryId>" to the project with id "<projectId>"
+    Then the entries in the relationship projects of the category with id "<categoryId>" now contain:
+      | id |
+      | 2  |
+      | 3  |
+    And the response status code is "<statusCode>"
+    Examples:
+      | projectId | categoryId | statusCode |
+      | 3         | 3          | 201        |
+
+  Scenario Outline: User assigns an inexistent category to an existing project. (Error flow)
+    Given the following projects exist:
+      | projectId | projectTitle      | projectCompleted | projectActive | projectDescription                      |
+      | 2         | "ECSE429 Project" | false            | true          | "Test API for a project management app" |
+    And the following categories exist:
+      | categoryId | categoryTitle | categoryDescription       |
+      | 3          | "School"      | "Tasks related to school" |
     When the user assigns the category with id "<categoryId>" to the project with id "<projectId>"
     Then an error message "<errorMessage>" is returned
     And the response status code is "<statusCode>"
-
+    Examples:
       | projectId | categoryId | errorMessage                                 | statusCode |
-      | 1         | 2          | "Could not find thing matching value for id" | 404        |
+      | 2         | 3          | "Could not find thing matching value for id" | 404        |
