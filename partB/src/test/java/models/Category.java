@@ -10,13 +10,13 @@ public class Category {
 
     public Category() {}
 
-    // Convenience ctor for step table inputs
+    // make new with title and description
     public Category(String title, String description) {
         this.title = title;
         this.description = description;
     }
 
-    /** Only include non-empty fields (so we can test “missing title” cases). */
+    // only add fields if not empty
     public Map<String, Object> toPayloadMap() {
         Map<String, Object> m = new HashMap<>();
         if (title != null && !title.isEmpty()) m.put("title", title);
@@ -24,8 +24,10 @@ public class Category {
         return m;
     }
 
-    // Getters for assertions if needed
+    // get id
     public String getId() { return id; }
+    // get title
     public String getTitle() { return title; }
+    // get description
     public String getDescription() { return description; }
 }
