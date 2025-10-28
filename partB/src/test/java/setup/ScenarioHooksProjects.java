@@ -4,6 +4,7 @@ import api.TodoApi;
 import io.cucumber.java.en.Given;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
+import api.ProjectsAPI;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -11,11 +12,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * Handles all setup, teardown, and environment checks for the Gherkin
  * Background.
  */
-public class ScenarioHooks {
+public class ScenarioHooksProjects {
 
-    private final TodoApi api;
+    private final ProjectsAPI api;
 
-    public ScenarioHooks(TodoApi api) {
+    public ScenarioHooks(ProjectsAPI api) {
         this.api = api;
     }
 

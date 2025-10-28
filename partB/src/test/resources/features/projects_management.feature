@@ -1,0 +1,125 @@
+@projects
+Feature: Project Management API Testing
+    As a user of the Rest API Project Manager
+    I want to be able to create, read, update, and delete project items
+    So that I can manage my high-level goals
+
+    Background:
+        # on localhost:4567
+        Given the Rest API Todo List Manager is running
+        And my list of projects is cleared to start fresh
+
+    @project_create
+    Scenario Outline: Create a new project with optional fields and check for errors
+        As a user, I want to create a new project, so I can track its status and description.
+        # POST request to /projects
+        When I send a request to create a project with these details:
+            | title   | description   | active   |
+            | <title> | <description> | <active> |
+        Then the creation status should be <status_code>
+        And the saved project should show field "title" with value "<expected_title>"
+        And the saved project should show field "description" with value "<expected_description>"
+        And the saved project should show field "active" with value "<expected_active>"
+        And the system should tell me if there was an error: "<expected_error_message>"
+
+        Examples: Creation Flows (Normal, Alternate, Error)
+            # Normal Flow: provide all fields correctly
+            | title               | description           | active | status_code | expected_title | expected_description  | expected_active | expected_error_message |
+            | Finish ECSE429      | Complete Part B and C | true   | 201         | Finish ECSE429 | Complete Part B and C | true            |                        |
+            # Alternate Flow: omit optional fields (description, active)
+            | New Project         |                       |        | 201         | New Project    |                       | false           |                        |
+            # Error Flow: invalid key (as per user story)
+            | Invalid Key Project | This should not work  | true   | 400         |                |                       |                 | Could not find field   |
+
+    @project_update_post
+    Scenario Outline: Update an existing project's fields using POST
+        As a user, I want to update the fields of existing projects, so I can keep track of updates done in projects.
+        # POST request to /projects/{id}
+        Given a project exists with title "POST Target Project", description "Original Content", and active "false"
+        And its ID is stored as "project_id"
+
+        When I send a request to update project "<target_id>" with body:
+            | title   | description   | active   |
+            | <title> | <description> | <active> |
+        Then the update status should be <status_code>
+        And the updated project should show field "title" with value "<expected_title>"
+        And the updated project should show field "description" with value "<expected_description>"
+        And the updated project should show field "active" with value "<expected_active>"
+        And the system should tell me if there was an error: "<expected_error_message>"
+
+        Examples: Partial Update Flows (Normal, Alternate, Error)
+            # Normal Flow: update all fields
+            | target_id  | title                 | description         | active | status_code | expected_title        | expected_description | expected_active | expected_error_message |
+            | project_id | Updated Project Title | Updated Description | true   | 200         | Updated Project Title | Updated Description  | true            |                        |
+            # Alternate Flow: update only active status
+            | project_id |                       |                     | true   | 200         | POST Target Project   | Original Content     | true            |                        |
+            # Error Flow: invalid ID (not found)
+            | 999        |                       | New Description     | true   | 404         |                       |                      |                 | No project with_id 999 |
+            # Error Flow: malformed ID (non-numeric string)
+            | "abc"      |                       | New Description     | true   | 404         |                       |                      |                 | No project with_id abc |
+
+    @project_get_all
+    Scenario Outline: Retrieve and filter all projects
+        As a user, I want to view all projects that exist.
+        # GET request to /projects
+        Given a project exists with title "Active Project", description "A", and active "true"
+        And a project exists with title "Inactive Project", description "B", and active "false"
+
+        When I send a request to view projects filtered by the query "<query_params>"
+        Then the status code should be <status_code>
+        And the list should contain <expected_count> projects
+        And the system should tell me if there was an error: "<expected_error_message>"
+
+        Examples: Retrieval and Filtering Flows (Normal, Alternate, Error)
+            # Normal Flow: retrieve all projects (no filter)
+            | query_params | status_code | expected_count | expected_error_message        |
+            |              | 200         | 2              |                               |
+            # Alternate Flow: filter for active projects
+            | ?active=true | 200         | 1              |                               |
+            # Error Flow: invalid filter value
+            | ?active=foo  | 400         | 0              | Failed to convert foo to bool |
+
+    @project_delete
+    Scenario Outline: Delete a project by ID
+        As a user, I want to delete an existing project.
+        # DELETE request to /projects/{id}
+        Given a project exists with title "Deletion Target"
+        And its ID is stored as "delete_project_id"
+
+        When I send a request to delete project "<target_id>"
+        Then the deletion status should be <status_code>
+        And the system should tell me if there was an error: "<expected_error_message>"
+        And the project with ID "<target_id>" should yield a "<check_status_code>" on a quick check
+
+        Examples: Deletion Flows (Normal, Error)
+            # Normal Flow: delete existing item
+            | target_id         | status_code | expected_error_message | check_status_code |
+            | delete_project_id | 200         |                        | 404               |
+            # Alternate Flow: Attempt to delete a non-existent item
+            | 999               | 404         | No project with_id 999 | 404               |
+            # Error Flow: Attempt to delete with malformed ID
+            | "abc"             | 404         | No project with_id abc | 404               |
+
+    @project_get_one
+    Scenario Outline: Retrieve a single project by ID with format selection
+        As a user, I want to view the details of only one project.
+        # GET request to /projects/{id}
+        Given a project exists with title "Get Me", description "Project details here", and active "true"
+        And its ID is stored as "get_project_id"
+
+        When I send a request to view project "<target_id>" with requested format "<accept_header>"
+        Then the status code should be <status_code>
+        And the response format should be "<expected_content_type>"
+        And the project should show field "title" with value "<expected_title>"
+        And the system should tell me if there was an error: "<expected_error_message>"
+
+        Examples: Retrieval Flows (Normal, Alternate, Error)
+            # Normal Flow: retrieve existing item as JSON
+            | target_id      | accept_header    | status_code | expected_content_type | expected_title | expected_error_message |
+            | get_project_id | application/json | 200         | application/json      | Get Me         |                        |
+            # Alternate Flow: retrieve existing item as XML
+            | get_project_id | application/xml  | 200         | application/xml       | Get Me         |                        |
+            # Error Flow: retrieve non-existent item
+            | 999            | application/json | 404         | application/json      |                | No project with_id 999 |
+            # Error Flow: retrieve with malformed ID
+            | "abc"          | application/json | 404         | application/json      |                | No project with_id abc |
