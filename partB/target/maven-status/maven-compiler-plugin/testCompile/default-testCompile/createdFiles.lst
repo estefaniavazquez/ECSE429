@@ -1,5 +1,6 @@
 runner/TestRunner.class
-models/Todo.class
 setup/ScenarioContext.class
-setup/ScenarioHooks.class
 api/TodoApi.class
+models/Todo.class
+steps/TodoStepDefinitions.class
+setup/ScenarioHooks.class

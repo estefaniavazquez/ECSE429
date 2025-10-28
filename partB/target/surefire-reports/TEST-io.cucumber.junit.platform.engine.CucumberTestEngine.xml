@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="io.cucumber.junit.platform.engine.CucumberTestEngine" time="0.827" tests="15" errors="0" skipped="12" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="io.cucumber.junit.platform.engine.CucumberTestEngine" time="1.26" tests="15" errors="0" skipped="0" failures="1">
   <properties>
     <property name="java.specification.version" value="25"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
@@ -13,7 +13,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="CA"/>
     <property name="sun.boot.library.path" value="/opt/homebrew/Cellar/openjdk/25/libexec/openjdk.jdk/Contents/Home/lib"/>
-    <property name="sun.java.command" value="/Users/williamzhang/Documents/GitHub/ECSE429/partB/target/surefire/surefirebooter-20251027163918821_3.jar /Users/williamzhang/Documents/GitHub/ECSE429/partB/target/surefire 2025-10-27T16-39-18_776-jvmRun1 surefire-20251027163918821_1tmp surefire_0-20251027163918821_2tmp"/>
+    <property name="sun.java.command" value="/Users/williamzhang/Documents/GitHub/ECSE429/partB/target/surefire/surefirebooter-20251028144146494_3.jar /Users/williamzhang/Documents/GitHub/ECSE429/partB/target/surefire 2025-10-28T14-41-46_454-jvmRun1 surefire-20251028144146494_1tmp surefire_0-20251028144146494_2tmp"/>
     <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="/Users/williamzhang/Documents/GitHub/ECSE429/partB/target/test-classes:/Users/williamzhang/Documents/GitHub/ECSE429/partB/target/classes:/Users/williamzhang/.m2/repository/io/cucumber/cucumber-java/7.18.1/cucumber-java-7.18.1.jar:/Users/williamzhang/.m2/repository/io/cucumber/cucumber-core/7.18.1/cucumber-core-7.18.1.jar:/Users/williamzhang/.m2/repository/io/cucumber/cucumber-gherkin/7.18.1/cucumber-gherkin-7.18.1.jar:/Users/williamzhang/.m2/repository/io/cucumber/cucumber-gherkin-messages/7.18.1/cucumber-gherkin-messages-7.18.1.jar:/Users/williamzhang/.m2/repository/io/cucumber/gherkin/28.0.0/gherkin-28.0.0.jar:/Users/williamzhang/.m2/repository/io/cucumber/messages/24.1.0/messages-24.1.0.jar:/Users/williamzhang/.m2/repository/io/cucumber/testng-xml-formatter/0.2.0/testng-xml-formatter-0.2.0.jar:/Users/williamzhang/.m2/repository/io/cucumber/query/12.2.0/query-12.2.0.jar:/Users/williamzhang/.m2/repository/io/cucumber/tag-expressions/6.1.0/tag-expressions-6.1.0.jar:/Users/williamzhang/.m2/repository/io/cucumber/cucumber-expressions/17.1.0/cucumber-expressions-17.1.0.jar:/Users/williamzhang/.m2/repository/io/cucumber/datatable/7.18.1/datatable-7.18.1.jar:/Users/williamzhang/.m2/repository/io/cucumber/cucumber-plugin/7.18.1/cucumber-plugin-7.18.1.jar:/Users/williamzhang/.m2/repository/io/cucumber/docstring/7.18.1/docstring-7.18.1.jar:/Users/williamzhang/.m2/repository/io/cucumber/html-formatter/21.4.1/html-formatter-21.4.1.jar:/Users/williamzhang/.m2/repository/io/cucumber/junit-xml-formatter/0.5.0/junit-xml-formatter-0.5.0.jar:/Users/williamzhang/.m2/repository/io/cucumber/ci-environment/10.0.1/ci-environment-10.0.1.jar:/Users/williamzhang/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/Users/williamzhang/.m2/repository/io/cucumber/cucumber-junit-platform-engine/7.18.1/cucumber-junit-platform-engine-7.18.1.jar:/Users/williamzhang/.m2/repository/org/junit/platform/junit-platform-engine/1.10.3/junit-platform-engine-1.10.3.jar:/Users/williamzhang/.m2/repository/org/junit/platform/junit-platform-suite/1.11.0/junit-platform-suite-1.11.0.jar:/Users/williamzhang/.m2/repository/org/junit/platform/junit-platform-suite-api/1.11.0/junit-platform-suite-api-1.11.0.jar:/Users/williamzhang/.m2/repository/org/junit/platform/junit-platform-suite-engine/1.11.0/junit-platform-suite-engine-1.11.0.jar:/Users/williamzhang/.m2/repository/org/junit/platform/junit-platform-suite-commons/1.11.0/junit-platform-suite-commons-1.11.0.jar:/Users/williamzhang/.m2/repository/org/junit/platform/junit-platform-launcher/1.11.0/junit-platform-launcher-1.11.0.jar:/Users/williamzhang/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.jar:/Users/williamzhang/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/Users/williamzhang/.m2/repository/org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.jar:/Users/williamzhang/.m2/repository/io/rest-assured/rest-assured/5.4.0/rest-assured-5.4.0.jar:/Users/williamzhang/.m2/repository/org/apache/groovy/groovy/4.0.16/groovy-4.0.16.jar:/Users/williamzhang/.m2/repository/org/apache/groovy/groovy-xml/4.0.16/groovy-xml-4.0.16.jar:/Users/williamzhang/.m2/repository/org/apache/httpcomponents/httpclient/4.5.13/httpclient-4.5.13.jar:/Users/williamzhang/.m2/repository/org/apache/httpcomponents/httpcore/4.4.13/httpcore-4.4.13.jar:/Users/williamzhang/.m2/repository/commons-logging/commons-logging/1.2/commons-logging-1.2.jar:/Users/williamzhang/.m2/repository/commons-codec/commons-codec/1.11/commons-codec-1.11.jar:/Users/williamzhang/.m2/repository/org/apache/httpcomponents/httpmime/4.5.13/httpmime-4.5.13.jar:/Users/williamzhang/.m2/repository/org/hamcrest/hamcrest/2.2/hamcrest-2.2.jar:/Users/williamzhang/.m2/repository/org/ccil/cowan/tagsoup/tagsoup/1.2.1/tagsoup-1.2.1.jar:/Users/williamzhang/.m2/repository/io/rest-assured/json-path/5.4.0/json-path-5.4.0.jar:/Users/williamzhang/.m2/repository/org/apache/groovy/groovy-json/4.0.16/groovy-json-4.0.16.jar:/Users/williamzhang/.m2/repository/io/rest-assured/rest-assured-common/5.4.0/rest-assured-common-5.4.0.jar:/Users/williamzhang/.m2/repository/io/rest-assured/xml-path/5.4.0/xml-path-5.4.0.jar:/Users/williamzhang/.m2/repository/org/apache/commons/commons-lang3/3.11/commons-lang3-3.11.jar:/Users/williamzhang/.m2/repository/com/google/code/gson/gson/2.10.1/gson-2.10.1.jar:/Users/williamzhang/.m2/repository/io/cucumber/cucumber-picocontainer/7.18.1/cucumber-picocontainer-7.18.1.jar:/Users/williamzhang/.m2/repository/org/picocontainer/picocontainer/2.15/picocontainer-2.15.jar:"/>
@@ -30,7 +30,7 @@
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="apple.awt.application.name" value="ForkedBooter"/>
-    <property name="surefire.real.class.path" value="/Users/williamzhang/Documents/GitHub/ECSE429/partB/target/surefire/surefirebooter-20251027163918821_3.jar"/>
+    <property name="surefire.real.class.path" value="/Users/williamzhang/Documents/GitHub/ECSE429/partB/target/surefire/surefirebooter-20251028144146494_3.jar"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="java.runtime.version" value="25"/>
@@ -46,7 +46,6 @@
     <property name="java.vendor.url.bug" value="https://github.com/Homebrew/homebrew-core/issues"/>
     <property name="java.io.tmpdir" value="/var/folders/qq/k74129797ssfpzmmlwlj82jc0000gn/T/"/>
     <property name="java.version" value="25"/>
-    <property name="cucumber.filter.tags" value="@todo_create"/>
     <property name="user.dir" value="/Users/williamzhang/Documents/GitHub/ECSE429/partB"/>
     <property name="os.arch" value="aarch64"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
@@ -61,8 +60,8 @@
     <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="java.class.version" value="69.0"/>
   </properties>
-  <testcase name="Example #1.1" classname="Creation Flows (Normal, Alternate, Error)" time="0.74">
-    <system-err><![CDATA[Oct 27, 2025 4:39:19 P.M. io.cucumber.junit.platform.engine.DiscoverySelectorResolver warnWhenCucumberFeaturesPropertyIsUsed
+  <testcase name="Example #1.1" classname="Creation Flows (Normal, Alternate, Error)" time="0.742">
+    <system-err><![CDATA[Oct 28, 2025 2:41:46 P.M. io.cucumber.junit.platform.engine.DiscoverySelectorResolver warnWhenCucumberFeaturesPropertyIsUsed
 WARNING: Discovering tests using the cucumber.features property. Other discovery selectors are ignored!
 
 This is a work around for the limited JUnit 5 support in Maven and Gradle. Please request/upvote/sponsor/ect better support for JUnit 5 discovery selectors. For details see: https://github.com/cucumber/cucumber-jvm/pull/2498
@@ -70,45 +69,41 @@ This is a work around for the limited JUnit 5 support in Maven and Gradle. Pleas
 If you are using the JUnit 5 Suite Engine, Platform Launcher API or Console Launcher you should not use this property. Please consult the JUnit 5 documentation on test selection.
 ]]></system-err>
   </testcase>
-  <testcase name="Example #1.2" classname="Creation Flows (Normal, Alternate, Error)" time="0.04"/>
-  <testcase name="Example #1.3" classname="Creation Flows (Normal, Alternate, Error)" time="0.027">
+  <testcase name="Example #1.2" classname="Creation Flows (Normal, Alternate, Error)" time="0.036"/>
+  <testcase name="Example #1.3" classname="Creation Flows (Normal, Alternate, Error)" time="0.029">
     <system-out><![CDATA[Confirmed presence of expected error message: title : field is mandatory
 ]]></system-out>
   </testcase>
-  <testcase name="Example #1.1" classname="Partial Update Flows (Normal, Alternate, Error)" time="0.0">
-    <skipped message="&apos;cucumber.filter.tags=@todo_create&apos; did not match this scenario"/>
+  <testcase name="Example #1.1" classname="Partial Update Flows (Normal, Alternate, Error)" time="0.035"/>
+  <testcase name="Example #1.2" classname="Partial Update Flows (Normal, Alternate, Error)" time="0.033"/>
+  <testcase name="Example #1.3" classname="Partial Update Flows (Normal, Alternate, Error)" time="0.026">
+    <system-out><![CDATA[Confirmed presence of expected error message: No such todo entity instance with GUID or ID null found
+]]></system-out>
   </testcase>
-  <testcase name="Example #1.2" classname="Partial Update Flows (Normal, Alternate, Error)" time="0.0">
-    <skipped message="&apos;cucumber.filter.tags=@todo_create&apos; did not match this scenario"/>
+  <testcase name="Example #1.1" classname="Retrieval and Filtering Flows (Normal, Alternate, Error)" time="0.044">
+    <system-out><![CDATA[Retrieved 2 todos from response for filtering check.
+]]></system-out>
   </testcase>
-  <testcase name="Example #1.3" classname="Partial Update Flows (Normal, Alternate, Error)" time="0.0">
-    <skipped message="&apos;cucumber.filter.tags=@todo_create&apos; did not match this scenario"/>
+  <testcase name="Example #1.2" classname="Retrieval and Filtering Flows (Normal, Alternate, Error)" time="0.084">
+    <system-out><![CDATA[Retrieved 2 todos from response for filtering check.
+]]></system-out>
   </testcase>
-  <testcase name="Example #1.1" classname="Retrieval and Filtering Flows (Normal, Alternate, Error)" time="0.0">
-    <skipped message="&apos;cucumber.filter.tags=@todo_create&apos; did not match this scenario"/>
+  <testcase name="Example #1.3" classname="Retrieval and Filtering Flows (Normal, Alternate, Error)" time="0.069">
+    <failure message="Expected status code did not match actual code. Response body: {&quot;todos&quot;:[]} ==&gt; expected: &lt;400&gt; but was: &lt;200&gt;" type="org.opentest4j.AssertionFailedError"><![CDATA[org.opentest4j.AssertionFailedError: Expected status code did not match actual code. Response body: {"todos":[]} ==> expected: <400> but was: <200>
+	at steps.TodoStepDefinitions.the_creation_status_should_be(TodoStepDefinitions.java:74)
+	at ✽.the status code should be 400(file:///Users/williamzhang/Documents/GitHub/ECSE429/partB/src/test/resources/features/todos_management.feature:71)
+]]></failure>
   </testcase>
-  <testcase name="Example #1.2" classname="Retrieval and Filtering Flows (Normal, Alternate, Error)" time="0.0">
-    <skipped message="&apos;cucumber.filter.tags=@todo_create&apos; did not match this scenario"/>
+  <testcase name="Example #1.1" classname="Deletion Flows (Normal, Alternate, Error)" time="0.029"/>
+  <testcase name="Example #1.2" classname="Deletion Flows (Normal, Alternate, Error)" time="0.017"/>
+  <testcase name="Example #1.3" classname="Deletion Flows (Normal, Alternate, Error)" time="0.015">
+    <system-out><![CDATA[Confirmed presence of expected error message: Could not find any instances with todos/null
+]]></system-out>
   </testcase>
-  <testcase name="Example #1.3" classname="Retrieval and Filtering Flows (Normal, Alternate, Error)" time="0.0">
-    <skipped message="&apos;cucumber.filter.tags=@todo_create&apos; did not match this scenario"/>
-  </testcase>
-  <testcase name="Example #1.1" classname="Deletion Flows (Normal, Alternate, Error)" time="0.0">
-    <skipped message="&apos;cucumber.filter.tags=@todo_create&apos; did not match this scenario"/>
-  </testcase>
-  <testcase name="Example #1.2" classname="Deletion Flows (Normal, Alternate, Error)" time="0.0">
-    <skipped message="&apos;cucumber.filter.tags=@todo_create&apos; did not match this scenario"/>
-  </testcase>
-  <testcase name="Example #1.3" classname="Deletion Flows (Normal, Alternate, Error)" time="0.0">
-    <skipped message="&apos;cucumber.filter.tags=@todo_create&apos; did not match this scenario"/>
-  </testcase>
-  <testcase name="Example #1.1" classname="Full Replacement Flows (Normal, Alternate, Error)" time="0.0">
-    <skipped message="&apos;cucumber.filter.tags=@todo_create&apos; did not match this scenario"/>
-  </testcase>
-  <testcase name="Example #1.2" classname="Full Replacement Flows (Normal, Alternate, Error)" time="0.0">
-    <skipped message="&apos;cucumber.filter.tags=@todo_create&apos; did not match this scenario"/>
-  </testcase>
-  <testcase name="Example #1.3" classname="Full Replacement Flows (Normal, Alternate, Error)" time="0.0">
-    <skipped message="&apos;cucumber.filter.tags=@todo_create&apos; did not match this scenario"/>
+  <testcase name="Example #1.1" classname="Full Replacement Flows (Normal, Alternate, Error)" time="0.026"/>
+  <testcase name="Example #1.2" classname="Full Replacement Flows (Normal, Alternate, Error)" time="0.035"/>
+  <testcase name="Example #1.3" classname="Full Replacement Flows (Normal, Alternate, Error)" time="0.019">
+    <system-out><![CDATA[Confirmed presence of expected error message: title : field is mandatory
+]]></system-out>
   </testcase>
 </testsuite>

@@ -31,24 +31,43 @@ public class TodoApi {
     /**
      * Sends a POST request to an endpoint with a JSON body.
      */
-    public Response postRequest(String endpoint, String body) {
+    public Response postRequest(String endpoint, String body, String contentType) {
         // Implementation for POST request using RestAssured...
         return RestAssured.given()
                 .baseUri(BASE_URL)
-                .header("Content-Type", "application/json")
+                .header("Content-Type", contentType)
                 .body(body)
                 .post(endpoint);
     }
-    
-    // --- Placeholder for other methods needed in the setup/steps ---
-    
+
+    /**
+     * Sends a PUT request to an endpoint with a JSON body.
+     */
+    public Response putRequest(String endpoint, String body, String contentType) {
+        return RestAssured.given()
+                .baseUri(BASE_URL)
+                .header("Content-Type", contentType)
+                .body(body)
+                .put(endpoint);
+    }
+
     /**
      * Sends a GET request to an endpoint.
      */
-    public Response getRequest(String endpoint) {
+    public Response getRequest(String endpoint, String acceptHeader) {
         return RestAssured.given()
-            .header("Accept", "application/json")
+            .header("Accept", acceptHeader)
             .get(endpoint)
+            .then().extract().response();
+    }
+
+    /**
+     * Sends a DELETE request to an endpoint.
+     */
+    public Response deleteRequest(String endpoint, String acceptHeader) {
+        return RestAssured.given()
+            .header("Accept", acceptHeader)
+            .delete(endpoint)
             .then().extract().response();
     }
 
@@ -58,7 +77,7 @@ public class TodoApi {
      */
     public void deleteAllData() {
         // Step 1: Get all current todos
-        Response response = getRequest("/todos");
+        Response response = getRequest("/todos", "application/json");
         
         // Use a list of Todo objects to ensure all items in the array are processed
         Todo[] todos = response.jsonPath().getObject("todos", Todo[].class);
