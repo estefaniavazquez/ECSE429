@@ -25,24 +25,26 @@ Feature: Manage todos/categories relationships
       | todoId | categoryId | statusCode |
       | 3      | 3          | 201        |
 
-  Scenario Outline: User assigns an existing todo to an existing category. (Alternate flow)
+  Scenario Outline: User assigns an existing category, which has already been associated with a todo, to a different existing todo. (Alternate flow)
     Given the following todos exist:
       | todoId | todoTitle         | todoDoneStatus | todoDescription                         |
       | 3      | Create repository | false          | Create the project repository on GitHub |
+      | 4      | Write tests       | false          | Write unit tests for the project        |
     And the following categories exist:
       | categoryId | categoryTitle | categoryDescription     |
       | 3          | School        | Tasks related to school |
-    When the user assigns the todo with id "<todoId>" to the category with id "<categoryId>"
-    Then the entries in the relationship categories of the todo with id "<todoId>" now contain:
+    And the entries in the relationship todos of the category with id "<categoryId>" contain:
       | id |
       | 3  |
-    And the entries in the relationship todos of the category with id "<categoryId>" now contain:
+    When the user assigns the category with id "<categoryId>" to the todo with id "<todoId>"
+    Then the entries in the relationship todos of the category with id "<categoryId>" now contain:
       | id |
       | 3  |
+      | 4  |
     And the response status code is "<statusCode>"
     Examples:
       | todoId | categoryId | statusCode |
-      | 3      | 3          | 201        |
+      | 4      | 3          | 201        |
 
   Scenario Outline: User assigns an existing category to an inexistent todo. (Error flow)
     Given the following todos exist:

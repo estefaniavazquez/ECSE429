@@ -20,7 +20,6 @@ public class SystemHooks {
         System.out.println("=======================Starting server...");
         serverProcess = new ProcessBuilder("java", "-jar", PATH_TO_SERVER_JAR).start();
 
-        String endpointToTestConnection = BASE_URL + "docs";
         for (int attempt = 0; attempt < 10; attempt++) {
             try {
                 Thread.sleep(500);

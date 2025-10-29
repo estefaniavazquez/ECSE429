@@ -89,7 +89,6 @@ public class InteroperabilityStepDefinitions {
                 String newId = response.jsonPath().getString("id");
                 if (id.equals(newId)) {
                     // IDs match, store the body response in the objectStore
-                    context.storeObject("todo", response.getBody());
                     System.out.println("Created todo: " + response.getBody().asPrettyString() + "\n");
                 }
                 else {
@@ -122,7 +121,6 @@ public class InteroperabilityStepDefinitions {
                 String newId = response.jsonPath().getString("id");
                 if (id.equals(newId)) {
                     // Ids match, store the body response in the objectStore
-                    context.storeObject("project", response.getBody());
                     System.out.println("Created project: " + response.getBody().asPrettyString() + "\n");
                 }
                 else {
@@ -151,7 +149,6 @@ public class InteroperabilityStepDefinitions {
             String newId = response.jsonPath().getString("id");
             if (id.equals(newId)) {
                 // IDs match, store the body response in the objectStore
-                context.storeObject("category", response.getBody());
                 System.out.println("Created category: " + response.getBody().asPrettyString() + "\n");
             }
             else {
@@ -166,12 +163,6 @@ public class InteroperabilityStepDefinitions {
         Relationship tasksof = new Relationship(projectId);
         Map<String, Object> payloadMap = tasksof.toPayloadMap();
         String jsonBody = api.toJson(payloadMap);
-
-        // Verify both todo and project exist before association
-        Response todoResponse = api.getRequest("/todos/" + todoId);
-        Response projectResponse = api.getRequest("/projects/" + projectId);
-        System.out.println("Todo Response Status: " + todoResponse.getStatusCode() + ". With body: " + todoResponse.getBody().asPrettyString());
-        System.out.println("Project Response Status: " + projectResponse.getStatusCode() + ". With body: " + projectResponse.getBody().asPrettyString());
 
         Response response = api.postRequest("/todos/" + todoId + "/tasksof", jsonBody);
         context.setLastResponse(response);
@@ -237,23 +228,6 @@ public class InteroperabilityStepDefinitions {
         }
         else {
             System.out.println("Failed to assign category " + categoryId + " to todo " + todoId + ". Status code: " + response.getStatusCode());
-        }
-    }
-
-    @When("the user assigns the todo with id {string} to the category with id {string}")
-    public void theUserAssignsTheTodoWithIdToTheCategoryWithId(String todoId, String categoryId) {
-        Relationship categories = new Relationship(categoryId);
-        Map<String, Object> payloadMap = categories.toPayloadMap();
-        String jsonBody = api.toJson(payloadMap);
-
-        Response response = api.postRequest("/todos/" + todoId + "/categories", jsonBody);
-        context.setLastResponse(response);
-
-        if (response.getStatusCode() == 201) {
-            System.out.println("Successfully assigned todo " + todoId + " to category " + categoryId);
-        }
-        else {
-            System.out.println("Failed to assign todo " + todoId + " to category " + categoryId + ". Status code: " + response.getStatusCode());
         }
     }
 
@@ -423,11 +397,15 @@ public class InteroperabilityStepDefinitions {
 
         Response response = context.getLastResponse();
         System.out.println("\nObtained the following response body: " + response.getBody().asPrettyString() + "\n");
-        List<String> errorMessages = response.jsonPath().getList("errorMessages.flatten()");
-        String actualErrorMessage = String.join(", ", errorMessages);
-        System.out.println("Actual error message: " + actualErrorMessage);
+        try {
+            List<String> errorMessages = response.jsonPath().getList("errorMessages.flatten()");
+            String actualErrorMessage = String.join(", ", errorMessages);
+            System.out.println("Actual error message: " + actualErrorMessage);
 
-        assert(actualErrorMessage.equals(expectedErrorMessage));
+            assert (actualErrorMessage.equals(expectedErrorMessage));
+        } catch (Exception e) {
+            throw new RuntimeException("Error message not found in response.");
+        }
     }
 
     @Then("the response status code is {string}")
@@ -482,6 +460,30 @@ public class InteroperabilityStepDefinitions {
             }
             else {
                 throw new RuntimeException("Failed to associate project " + projectId + " with todo " + todoId + ". Status code: " + response.getStatusCode());
+            }
+        }
+    }
+
+    @And("the entries in the relationship todos of the category with id {string} contain:")
+    public void theEntriesInTheRelationshipTodosOfTheCategoryWithIdContain(String categoryId, DataTable dataTable) {
+        // Get all the column entries from the data table
+        List<String> desiredTodos = dataTable.asMaps().stream()
+                .map(row -> row.get("id"))
+                .toList();
+
+        for (String todoId : desiredTodos) {
+            Relationship todos = new Relationship(todoId);
+            Map<String, Object> payloadMap = todos.toPayloadMap();
+            String jsonBody = api.toJson(payloadMap);
+
+            Response response = api.postRequest("/categories/" + categoryId + "/todos", jsonBody);
+
+            if (response.getStatusCode() == 201) {
+                // Add the todos relationship to the category
+                System.out.println("Associated category " + categoryId + " with todo " + todoId + "\n");
+            }
+            else {
+                throw new RuntimeException("Failed to associate category " + categoryId + " with todo " + todoId + ". Status code: " + response.getStatusCode());
             }
         }
     }

@@ -1,4 +1,4 @@
-Feature: Create projects relationship
+Feature: Manage projects relationship
 
   Background: The system is running and there is no data stored.
     Given the system is running
@@ -23,7 +23,7 @@ Feature: Create projects relationship
       | projectId | categoryId | statusCode |
       | 2         | 3          | 201        |
 
-  Scenario Outline: User assigns an existing category, which has already been associated with a project, to an existing project. (Alternate flow)
+  Scenario Outline: User assigns an existing category, which has already been associated with a project, to a different existing project. (Alternate flow)
     Given the following projects exist:
       | projectId | projectTitle    | projectCompleted | projectActive | projectDescription                    |
       | 2         | ECSE429 Project | false            | true          | Test API for a project management app |
