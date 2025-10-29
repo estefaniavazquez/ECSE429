@@ -14,9 +14,9 @@ import models.TodoInteroperability;
 import models.Relationship;
 import setup.ScenarioContext;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class InteroperabilityStepDefinitions {
     private final ScenarioContext context;
@@ -41,7 +41,11 @@ public class InteroperabilityStepDefinitions {
         // Delete each todo
         if (todos != null) {
             for (TodoInteroperability todo : todos) {
-                api.deleteRequest("/todos/" + todo.getId());
+                Response response = api.deleteRequest("/todos/" + todo.getId());
+
+                if (response.getStatusCode() != 200) {
+                    throw new RuntimeException("Failed to delete todo with id " + todo.getId());
+                }
             }
         }
 
@@ -52,7 +56,11 @@ public class InteroperabilityStepDefinitions {
         // Delete each project
         if (projects != null) {
             for (ProjectInteroperability project : projects) {
-                api.deleteRequest("/projects/" + project.getId());
+                Response response = api.deleteRequest("/projects/" + project.getId());
+
+                if (response.getStatusCode() != 200) {
+                    throw new RuntimeException("Failed to delete project with id " + project.getId());
+                }
             }
         }
 
@@ -63,7 +71,11 @@ public class InteroperabilityStepDefinitions {
         // Delete each category
         if (categories != null) {
             for (CategoryInteroperability category : categories) {
-                api.deleteRequest("/categories/" + category.getId());
+                Response response = api.deleteRequest("/categories/" + category.getId());
+
+                if (response.getStatusCode() != 200) {
+                    throw new RuntimeException("Failed to delete category with id " + category.getId());
+                }
             }
         }
     }
@@ -88,11 +100,9 @@ public class InteroperabilityStepDefinitions {
             if (response.getStatusCode() == 201) {
                 String newId = response.jsonPath().getString("id");
                 if (id.equals(newId)) {
-                    // IDs match, store the body response in the objectStore
                     System.out.println("Created todo: " + response.getBody().asPrettyString() + "\n");
                 }
                 else {
-                    // IDs do not match, handle the discrepancy
                     throw new RuntimeException("Expected todo ID " + id + " but got " + newId);
                 }
             }
@@ -120,11 +130,9 @@ public class InteroperabilityStepDefinitions {
             if (response.getStatusCode() == 201) {
                 String newId = response.jsonPath().getString("id");
                 if (id.equals(newId)) {
-                    // Ids match, store the body response in the objectStore
                     System.out.println("Created project: " + response.getBody().asPrettyString() + "\n");
                 }
                 else {
-                    // IDs do not match, handle the discrepancy
                     throw new RuntimeException("Expected project ID " + id + " but got " + newId);
                 }
             }
@@ -148,11 +156,9 @@ public class InteroperabilityStepDefinitions {
         if (response.getStatusCode() == 201) {
             String newId = response.jsonPath().getString("id");
             if (id.equals(newId)) {
-                // IDs match, store the body response in the objectStore
                 System.out.println("Created category: " + response.getBody().asPrettyString() + "\n");
             }
             else {
-                // IDs do not match, handle the discrepancy
                 throw new RuntimeException("Expected category ID " + id + " but got " + newId);
             }
         }
@@ -207,10 +213,10 @@ public class InteroperabilityStepDefinitions {
         context.setLastResponse(response);
 
         if (response.getStatusCode() == 200) {
-            System.out.println("Successfully retrieved todos associated with project " + projectId);
+            System.out.println("Successfully got todos associated with project " + projectId);
         }
         else {
-            System.out.println("Failed to retrieve todos associated with project " + projectId + ". Status code: " + response.getStatusCode());
+            System.out.println("Failed to get todos associated with project " + projectId + ". Status code: " + response.getStatusCode());
         }
     }
 
@@ -254,6 +260,7 @@ public class InteroperabilityStepDefinitions {
 
         Response response = api.getRequest("/todos/" + todoId);
 
+        // Trying to get a non-existing todo should return 404
         assert(response.getStatusCode() == 404);
     }
 
@@ -261,20 +268,49 @@ public class InteroperabilityStepDefinitions {
     public void theReturnedTodosAssociatedWithTheProjectWithIdContain(String projectId, DataTable dataTable) {
         System.out.println("\nRetrieving todos associated with the project with id " + projectId);
 
-        // Get all the column entries from the data table
-        List<String> expectedTodoIds = dataTable.asMaps().stream()
-                .map(row -> row.get("todoId"))
-                .toList();
-        System.out.println("Expected Todo IDs: " + expectedTodoIds);
+        TodoInteroperability[] expectedTodos = dataTable.asMaps().stream()
+                .map(row -> {
+                    String id = row.get("todoId");
+                    String title = row.get("todoTitle");
+                    String description = row.get("todoDescription");
+                    String doneStatus = row.get("todoDoneStatus");
+                    String tasksofId = row.get("tasksofId");
+                    List<Relationship> tasksof = new ArrayList<>();
+                    if (tasksofId != null && !tasksofId.isEmpty()) {
+                        tasksof.add(new Relationship(tasksofId));
+                    }
+                    return new TodoInteroperability(id, title, description, doneStatus, tasksof, null);
+                })
+                .toArray(TodoInteroperability[]::new);
+
+        System.out.println("Expected Todos: ");
+        for (TodoInteroperability todo : expectedTodos) {
+            System.out.println(api.toJson(todo.toPayloadMap()));
+        }
 
         // Make a GET request to retrieve the current todos in the project
         Response response = api.getRequest("/projects/" + projectId + "/tasks");
         System.out.println("\nObtained the following response body: " + response.getBody().asPrettyString() + "\n");
 
-        List<String> actualTodoIds = response.jsonPath().getList("todos.id.flatten()");
-        System.out.println("Actual Todos IDs: " + actualTodoIds);
+        TodoInteroperability[] actualTodos = response.jsonPath().getObject("todos", TodoInteroperability[].class);
 
-        assert(actualTodoIds.containsAll(expectedTodoIds) && expectedTodoIds.containsAll(actualTodoIds));
+        System.out.println("Actual Todos: ");
+        for (TodoInteroperability todo : actualTodos) {
+            System.out.println(api.toJson(todo.toPayloadMap()));
+        }
+
+        // Ensure both objects are equal
+        assert(actualTodos.length == expectedTodos.length);
+        for(TodoInteroperability expectedTodo : expectedTodos) {
+            boolean matchFound = false;
+            for(TodoInteroperability actualTodo : actualTodos) {
+                if (actualTodo.equals(expectedTodo)) {
+                    matchFound = true;
+                    break;
+                }
+            }
+            assert(matchFound);
+        }
     }
 
     @Then("the returned todos associated with the project with id {string} is empty")

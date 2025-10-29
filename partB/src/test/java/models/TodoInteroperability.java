@@ -3,6 +3,7 @@ package models;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 
 public class TodoInteroperability {
@@ -10,7 +11,7 @@ public class TodoInteroperability {
     private String title;
     private String description;
     private Boolean doneStatus;
-    private List<Relationship> taskof;
+    private List<Relationship> tasksof;
     private List<Relationship> categories;
 
     public TodoInteroperability() {}
@@ -26,8 +27,24 @@ public class TodoInteroperability {
         }
 
         // Relationships initialized as null
-        this.taskof = null;
+        this.tasksof = null;
         this.categories = null;
+    }
+
+    public TodoInteroperability(String id, String title, String description, String doneStatus, List<Relationship> tasksof, List<Relationship> categories) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+
+        if (doneStatus != null && !doneStatus.isEmpty()) {
+            this.doneStatus = Boolean.parseBoolean(doneStatus);
+        }
+        else {
+            this.doneStatus = null;
+        }
+
+        this.tasksof = tasksof;
+        this.categories = categories;
     }
 
     public Map<String, Object> toPayloadMap() {
@@ -45,8 +62,8 @@ public class TodoInteroperability {
             payload.put("doneStatus", this.doneStatus); 
         }
 
-        if (this.taskof != null) {
-            payload.put("taskof", this.taskof);
+        if (this.tasksof != null) {
+            payload.put("tasksof", this.tasksof);
         }
 
         if (this.categories != null) {
@@ -56,26 +73,25 @@ public class TodoInteroperability {
         return payload;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        TodoInteroperability that = (TodoInteroperability) o;
+
+        return Objects.equals(id, that.id) &&
+               Objects.equals(title, that.title) &&
+               Objects.equals(description, that.description) &&
+               Objects.equals(doneStatus, that.doneStatus) &&
+               Objects.equals(tasksof, that.tasksof) &&
+               Objects.equals(categories, that.categories);
+    }
+
     public String getId() { return id; }
     public String getTitle() { return title; }
     public String getDescription() { return description; }
     public Boolean getDoneStatus() { return doneStatus; }
-    public List<Relationship> getTaskof() { return taskof; }
+    public List<Relationship> getTasksof() { return tasksof; }
     public List<Relationship> getCategories() { return categories; }
-
-    // Add taskof relationships
-    public void addTaskof(Relationship taskof) {
-        if (this.taskof == null) {
-            this.taskof = new java.util.ArrayList<>();
-        }
-        this.taskof.add(taskof);
-    }
-
-    // Add categories relationships
-    public void addCategories(Relationship categories) {
-        if (this.categories == null) {
-            this.categories = new java.util.ArrayList<>();
-        }
-        this.categories.add(categories);
-    }
 }

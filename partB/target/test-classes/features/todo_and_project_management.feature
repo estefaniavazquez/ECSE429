@@ -166,6 +166,7 @@ Feature: Manage tasks/tasksof relationships
       | projectId | statusCode |
       | 2         | 200        |
 
+  # BUG: The below scenario should return 404 with an error message but currently returns 200 with empty list of todos
   Scenario Outline: User gets the existing todos associated with an inexistent project. (Error flow)
     Given the following todos exist:
       | todoId | todoTitle         | todoDoneStatus | todoDescription                         |

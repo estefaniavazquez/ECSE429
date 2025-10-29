@@ -1,6 +1,5 @@
 package models;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -68,12 +67,4 @@ public class ProjectInteroperability {
     public Boolean getCompleted() { return completed; }
     public Boolean getActive() { return active; }
     public List<Relationship> getTasks() { return tasks; }
-
-    // Add tasks relationship
-    public void setTasks(Relationship tasks) {
-        if (this.tasks == null) {
-            this.tasks = new ArrayList<>();
-        }
-        this.tasks.add(tasks);
-    }
 }

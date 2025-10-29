@@ -12,6 +12,11 @@ public class Relationship {
         this.id = id;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        return (o instanceof Relationship) && ((Relationship) o).id.equals(this.id);
+    }
+
     public Map<String, Object> toPayloadMap() {
         Map<String, Object> payload = new HashMap<>();
 

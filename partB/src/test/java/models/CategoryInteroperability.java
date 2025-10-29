@@ -50,20 +50,4 @@ public class CategoryInteroperability {
     public String getDescription() { return description; }
     public List<Relationship> getTodos() { return todos; }
     public List<Relationship> getProjects() { return projects; }
-
-    // Add todos relationships
-    public void addTodos(Relationship todos) {
-        if (this.todos == null) {
-            this.todos = new ArrayList<>();
-        }
-        this.todos.add(todos);
-    }
-
-    // Add projects relationships
-    public void addProjects(Relationship projects) {
-        if (this.projects == null) {
-            this.projects = new ArrayList<>();
-        }
-        this.projects.add(projects);
-    }
 }
