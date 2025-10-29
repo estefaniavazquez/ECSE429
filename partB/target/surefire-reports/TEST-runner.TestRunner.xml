@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="runner.TestRunner" time="1.274" tests="0" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="runner.TestRunner" time="35.467" tests="33" errors="0" skipped="0" failures="2">
   <properties>
     <property name="java.specification.version" value="25"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
-    <property name="java.class.path" value="/Users/williamzhang/Documents/GitHub/ECSE429/partB/target/test-classes:/Users/williamzhang/Documents/GitHub/ECSE429/partB/target/classes:/Users/williamzhang/.m2/repository/io/cucumber/cucumber-java/7.18.1/cucumber-java-7.18.1.jar:/Users/williamzhang/.m2/repository/io/cucumber/cucumber-core/7.18.1/cucumber-core-7.18.1.jar:/Users/williamzhang/.m2/repository/io/cucumber/cucumber-gherkin/7.18.1/cucumber-gherkin-7.18.1.jar:/Users/williamzhang/.m2/repository/io/cucumber/cucumber-gherkin-messages/7.18.1/cucumber-gherkin-messages-7.18.1.jar:/Users/williamzhang/.m2/repository/io/cucumber/gherkin/28.0.0/gherkin-28.0.0.jar:/Users/williamzhang/.m2/repository/io/cucumber/messages/24.1.0/messages-24.1.0.jar:/Users/williamzhang/.m2/repository/io/cucumber/testng-xml-formatter/0.2.0/testng-xml-formatter-0.2.0.jar:/Users/williamzhang/.m2/repository/io/cucumber/query/12.2.0/query-12.2.0.jar:/Users/williamzhang/.m2/repository/io/cucumber/tag-expressions/6.1.0/tag-expressions-6.1.0.jar:/Users/williamzhang/.m2/repository/io/cucumber/cucumber-expressions/17.1.0/cucumber-expressions-17.1.0.jar:/Users/williamzhang/.m2/repository/io/cucumber/datatable/7.18.1/datatable-7.18.1.jar:/Users/williamzhang/.m2/repository/io/cucumber/cucumber-plugin/7.18.1/cucumber-plugin-7.18.1.jar:/Users/williamzhang/.m2/repository/io/cucumber/docstring/7.18.1/docstring-7.18.1.jar:/Users/williamzhang/.m2/repository/io/cucumber/html-formatter/21.4.1/html-formatter-21.4.1.jar:/Users/williamzhang/.m2/repository/io/cucumber/junit-xml-formatter/0.5.0/junit-xml-formatter-0.5.0.jar:/Users/williamzhang/.m2/repository/io/cucumber/ci-environment/10.0.1/ci-environment-10.0.1.jar:/Users/williamzhang/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/Users/williamzhang/.m2/repository/io/cucumber/cucumber-junit-platform-engine/7.18.1/cucumber-junit-platform-engine-7.18.1.jar:/Users/williamzhang/.m2/repository/org/junit/platform/junit-platform-engine/1.10.3/junit-platform-engine-1.10.3.jar:/Users/williamzhang/.m2/repository/org/junit/platform/junit-platform-suite/1.11.0/junit-platform-suite-1.11.0.jar:/Users/williamzhang/.m2/repository/org/junit/platform/junit-platform-suite-api/1.11.0/junit-platform-suite-api-1.11.0.jar:/Users/williamzhang/.m2/repository/org/junit/platform/junit-platform-suite-engine/1.11.0/junit-platform-suite-engine-1.11.0.jar:/Users/williamzhang/.m2/repository/org/junit/platform/junit-platform-suite-commons/1.11.0/junit-platform-suite-commons-1.11.0.jar:/Users/williamzhang/.m2/repository/org/junit/platform/junit-platform-launcher/1.11.0/junit-platform-launcher-1.11.0.jar:/Users/williamzhang/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.jar:/Users/williamzhang/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/Users/williamzhang/.m2/repository/org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.jar:/Users/williamzhang/.m2/repository/io/rest-assured/rest-assured/5.4.0/rest-assured-5.4.0.jar:/Users/williamzhang/.m2/repository/org/apache/groovy/groovy/4.0.16/groovy-4.0.16.jar:/Users/williamzhang/.m2/repository/org/apache/groovy/groovy-xml/4.0.16/groovy-xml-4.0.16.jar:/Users/williamzhang/.m2/repository/org/apache/httpcomponents/httpclient/4.5.13/httpclient-4.5.13.jar:/Users/williamzhang/.m2/repository/org/apache/httpcomponents/httpcore/4.4.13/httpcore-4.4.13.jar:/Users/williamzhang/.m2/repository/commons-logging/commons-logging/1.2/commons-logging-1.2.jar:/Users/williamzhang/.m2/repository/commons-codec/commons-codec/1.11/commons-codec-1.11.jar:/Users/williamzhang/.m2/repository/org/apache/httpcomponents/httpmime/4.5.13/httpmime-4.5.13.jar:/Users/williamzhang/.m2/repository/org/hamcrest/hamcrest/2.2/hamcrest-2.2.jar:/Users/williamzhang/.m2/repository/org/ccil/cowan/tagsoup/tagsoup/1.2.1/tagsoup-1.2.1.jar:/Users/williamzhang/.m2/repository/io/rest-assured/json-path/5.4.0/json-path-5.4.0.jar:/Users/williamzhang/.m2/repository/org/apache/groovy/groovy-json/4.0.16/groovy-json-4.0.16.jar:/Users/williamzhang/.m2/repository/io/rest-assured/rest-assured-common/5.4.0/rest-assured-common-5.4.0.jar:/Users/williamzhang/.m2/repository/io/rest-assured/xml-path/5.4.0/xml-path-5.4.0.jar:/Users/williamzhang/.m2/repository/org/apache/commons/commons-lang3/3.11/commons-lang3-3.11.jar:/Users/williamzhang/.m2/repository/com/google/code/gson/gson/2.10.1/gson-2.10.1.jar:/Users/williamzhang/.m2/repository/io/cucumber/cucumber-picocontainer/7.18.1/cucumber-picocontainer-7.18.1.jar:/Users/williamzhang/.m2/repository/org/picocontainer/picocontainer/2.15/picocontainer-2.15.jar:"/>
+    <property name="java.class.path" value="/Users/estefania/IdeaProjects/ECSE429/partB/target/test-classes:/Users/estefania/IdeaProjects/ECSE429/partB/target/classes:/Users/estefania/.m2/repository/io/cucumber/cucumber-java/7.18.1/cucumber-java-7.18.1.jar:/Users/estefania/.m2/repository/io/cucumber/cucumber-core/7.18.1/cucumber-core-7.18.1.jar:/Users/estefania/.m2/repository/io/cucumber/cucumber-gherkin/7.18.1/cucumber-gherkin-7.18.1.jar:/Users/estefania/.m2/repository/io/cucumber/cucumber-gherkin-messages/7.18.1/cucumber-gherkin-messages-7.18.1.jar:/Users/estefania/.m2/repository/io/cucumber/gherkin/28.0.0/gherkin-28.0.0.jar:/Users/estefania/.m2/repository/io/cucumber/messages/24.1.0/messages-24.1.0.jar:/Users/estefania/.m2/repository/io/cucumber/testng-xml-formatter/0.2.0/testng-xml-formatter-0.2.0.jar:/Users/estefania/.m2/repository/io/cucumber/query/12.2.0/query-12.2.0.jar:/Users/estefania/.m2/repository/io/cucumber/tag-expressions/6.1.0/tag-expressions-6.1.0.jar:/Users/estefania/.m2/repository/io/cucumber/cucumber-expressions/17.1.0/cucumber-expressions-17.1.0.jar:/Users/estefania/.m2/repository/io/cucumber/datatable/7.18.1/datatable-7.18.1.jar:/Users/estefania/.m2/repository/io/cucumber/cucumber-plugin/7.18.1/cucumber-plugin-7.18.1.jar:/Users/estefania/.m2/repository/io/cucumber/docstring/7.18.1/docstring-7.18.1.jar:/Users/estefania/.m2/repository/io/cucumber/html-formatter/21.4.1/html-formatter-21.4.1.jar:/Users/estefania/.m2/repository/io/cucumber/junit-xml-formatter/0.5.0/junit-xml-formatter-0.5.0.jar:/Users/estefania/.m2/repository/io/cucumber/ci-environment/10.0.1/ci-environment-10.0.1.jar:/Users/estefania/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/Users/estefania/.m2/repository/io/cucumber/cucumber-junit-platform-engine/7.18.1/cucumber-junit-platform-engine-7.18.1.jar:/Users/estefania/.m2/repository/org/junit/platform/junit-platform-engine/1.10.3/junit-platform-engine-1.10.3.jar:/Users/estefania/.m2/repository/org/junit/platform/junit-platform-suite/1.11.0/junit-platform-suite-1.11.0.jar:/Users/estefania/.m2/repository/org/junit/platform/junit-platform-suite-api/1.11.0/junit-platform-suite-api-1.11.0.jar:/Users/estefania/.m2/repository/org/junit/platform/junit-platform-suite-engine/1.11.0/junit-platform-suite-engine-1.11.0.jar:/Users/estefania/.m2/repository/org/junit/platform/junit-platform-suite-commons/1.11.0/junit-platform-suite-commons-1.11.0.jar:/Users/estefania/.m2/repository/org/junit/platform/junit-platform-launcher/1.11.0/junit-platform-launcher-1.11.0.jar:/Users/estefania/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.jar:/Users/estefania/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/Users/estefania/.m2/repository/org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.jar:/Users/estefania/.m2/repository/io/rest-assured/rest-assured/5.4.0/rest-assured-5.4.0.jar:/Users/estefania/.m2/repository/org/apache/groovy/groovy/4.0.16/groovy-4.0.16.jar:/Users/estefania/.m2/repository/org/apache/groovy/groovy-xml/4.0.16/groovy-xml-4.0.16.jar:/Users/estefania/.m2/repository/org/apache/httpcomponents/httpclient/4.5.13/httpclient-4.5.13.jar:/Users/estefania/.m2/repository/org/apache/httpcomponents/httpcore/4.4.13/httpcore-4.4.13.jar:/Users/estefania/.m2/repository/commons-logging/commons-logging/1.2/commons-logging-1.2.jar:/Users/estefania/.m2/repository/commons-codec/commons-codec/1.11/commons-codec-1.11.jar:/Users/estefania/.m2/repository/org/apache/httpcomponents/httpmime/4.5.13/httpmime-4.5.13.jar:/Users/estefania/.m2/repository/org/hamcrest/hamcrest/2.2/hamcrest-2.2.jar:/Users/estefania/.m2/repository/org/ccil/cowan/tagsoup/tagsoup/1.2.1/tagsoup-1.2.1.jar:/Users/estefania/.m2/repository/io/rest-assured/json-path/5.4.0/json-path-5.4.0.jar:/Users/estefania/.m2/repository/org/apache/groovy/groovy-json/4.0.16/groovy-json-4.0.16.jar:/Users/estefania/.m2/repository/io/rest-assured/rest-assured-common/5.4.0/rest-assured-common-5.4.0.jar:/Users/estefania/.m2/repository/io/rest-assured/xml-path/5.4.0/xml-path-5.4.0.jar:/Users/estefania/.m2/repository/org/apache/commons/commons-lang3/3.11/commons-lang3-3.11.jar:/Users/estefania/.m2/repository/com/google/code/gson/gson/2.10.1/gson-2.10.1.jar:/Users/estefania/.m2/repository/io/cucumber/cucumber-picocontainer/7.18.1/cucumber-picocontainer-7.18.1.jar:/Users/estefania/.m2/repository/org/picocontainer/picocontainer/2.15/picocontainer-2.15.jar:"/>
     <property name="java.vm.vendor" value="Homebrew"/>
     <property name="sun.arch.data.model" value="64"/>
     <property name="java.vendor.url" value="https://github.com/Homebrew/homebrew-core/issues"/>
@@ -13,44 +13,46 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="CA"/>
     <property name="sun.boot.library.path" value="/opt/homebrew/Cellar/openjdk/25/libexec/openjdk.jdk/Contents/Home/lib"/>
-    <property name="sun.java.command" value="/Users/williamzhang/Documents/GitHub/ECSE429/partB/target/surefire/surefirebooter-20251028144146494_3.jar /Users/williamzhang/Documents/GitHub/ECSE429/partB/target/surefire 2025-10-28T14-41-46_454-jvmRun1 surefire-20251028144146494_1tmp surefire_0-20251028144146494_2tmp"/>
+    <property name="sun.java.command" value="/Users/estefania/IdeaProjects/ECSE429/partB/target/surefire/surefirebooter-20251028222525354_3.jar /Users/estefania/IdeaProjects/ECSE429/partB/target/surefire 2025-10-28T22-25-25_306-jvmRun1 surefire-20251028222525354_1tmp surefire_0-20251028222525354_2tmp"/>
     <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="jdk.debug" value="release"/>
-    <property name="surefire.test.class.path" value="/Users/williamzhang/Documents/GitHub/ECSE429/partB/target/test-classes:/Users/williamzhang/Documents/GitHub/ECSE429/partB/target/classes:/Users/williamzhang/.m2/repository/io/cucumber/cucumber-java/7.18.1/cucumber-java-7.18.1.jar:/Users/williamzhang/.m2/repository/io/cucumber/cucumber-core/7.18.1/cucumber-core-7.18.1.jar:/Users/williamzhang/.m2/repository/io/cucumber/cucumber-gherkin/7.18.1/cucumber-gherkin-7.18.1.jar:/Users/williamzhang/.m2/repository/io/cucumber/cucumber-gherkin-messages/7.18.1/cucumber-gherkin-messages-7.18.1.jar:/Users/williamzhang/.m2/repository/io/cucumber/gherkin/28.0.0/gherkin-28.0.0.jar:/Users/williamzhang/.m2/repository/io/cucumber/messages/24.1.0/messages-24.1.0.jar:/Users/williamzhang/.m2/repository/io/cucumber/testng-xml-formatter/0.2.0/testng-xml-formatter-0.2.0.jar:/Users/williamzhang/.m2/repository/io/cucumber/query/12.2.0/query-12.2.0.jar:/Users/williamzhang/.m2/repository/io/cucumber/tag-expressions/6.1.0/tag-expressions-6.1.0.jar:/Users/williamzhang/.m2/repository/io/cucumber/cucumber-expressions/17.1.0/cucumber-expressions-17.1.0.jar:/Users/williamzhang/.m2/repository/io/cucumber/datatable/7.18.1/datatable-7.18.1.jar:/Users/williamzhang/.m2/repository/io/cucumber/cucumber-plugin/7.18.1/cucumber-plugin-7.18.1.jar:/Users/williamzhang/.m2/repository/io/cucumber/docstring/7.18.1/docstring-7.18.1.jar:/Users/williamzhang/.m2/repository/io/cucumber/html-formatter/21.4.1/html-formatter-21.4.1.jar:/Users/williamzhang/.m2/repository/io/cucumber/junit-xml-formatter/0.5.0/junit-xml-formatter-0.5.0.jar:/Users/williamzhang/.m2/repository/io/cucumber/ci-environment/10.0.1/ci-environment-10.0.1.jar:/Users/williamzhang/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/Users/williamzhang/.m2/repository/io/cucumber/cucumber-junit-platform-engine/7.18.1/cucumber-junit-platform-engine-7.18.1.jar:/Users/williamzhang/.m2/repository/org/junit/platform/junit-platform-engine/1.10.3/junit-platform-engine-1.10.3.jar:/Users/williamzhang/.m2/repository/org/junit/platform/junit-platform-suite/1.11.0/junit-platform-suite-1.11.0.jar:/Users/williamzhang/.m2/repository/org/junit/platform/junit-platform-suite-api/1.11.0/junit-platform-suite-api-1.11.0.jar:/Users/williamzhang/.m2/repository/org/junit/platform/junit-platform-suite-engine/1.11.0/junit-platform-suite-engine-1.11.0.jar:/Users/williamzhang/.m2/repository/org/junit/platform/junit-platform-suite-commons/1.11.0/junit-platform-suite-commons-1.11.0.jar:/Users/williamzhang/.m2/repository/org/junit/platform/junit-platform-launcher/1.11.0/junit-platform-launcher-1.11.0.jar:/Users/williamzhang/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.jar:/Users/williamzhang/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/Users/williamzhang/.m2/repository/org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.jar:/Users/williamzhang/.m2/repository/io/rest-assured/rest-assured/5.4.0/rest-assured-5.4.0.jar:/Users/williamzhang/.m2/repository/org/apache/groovy/groovy/4.0.16/groovy-4.0.16.jar:/Users/williamzhang/.m2/repository/org/apache/groovy/groovy-xml/4.0.16/groovy-xml-4.0.16.jar:/Users/williamzhang/.m2/repository/org/apache/httpcomponents/httpclient/4.5.13/httpclient-4.5.13.jar:/Users/williamzhang/.m2/repository/org/apache/httpcomponents/httpcore/4.4.13/httpcore-4.4.13.jar:/Users/williamzhang/.m2/repository/commons-logging/commons-logging/1.2/commons-logging-1.2.jar:/Users/williamzhang/.m2/repository/commons-codec/commons-codec/1.11/commons-codec-1.11.jar:/Users/williamzhang/.m2/repository/org/apache/httpcomponents/httpmime/4.5.13/httpmime-4.5.13.jar:/Users/williamzhang/.m2/repository/org/hamcrest/hamcrest/2.2/hamcrest-2.2.jar:/Users/williamzhang/.m2/repository/org/ccil/cowan/tagsoup/tagsoup/1.2.1/tagsoup-1.2.1.jar:/Users/williamzhang/.m2/repository/io/rest-assured/json-path/5.4.0/json-path-5.4.0.jar:/Users/williamzhang/.m2/repository/org/apache/groovy/groovy-json/4.0.16/groovy-json-4.0.16.jar:/Users/williamzhang/.m2/repository/io/rest-assured/rest-assured-common/5.4.0/rest-assured-common-5.4.0.jar:/Users/williamzhang/.m2/repository/io/rest-assured/xml-path/5.4.0/xml-path-5.4.0.jar:/Users/williamzhang/.m2/repository/org/apache/commons/commons-lang3/3.11/commons-lang3-3.11.jar:/Users/williamzhang/.m2/repository/com/google/code/gson/gson/2.10.1/gson-2.10.1.jar:/Users/williamzhang/.m2/repository/io/cucumber/cucumber-picocontainer/7.18.1/cucumber-picocontainer-7.18.1.jar:/Users/williamzhang/.m2/repository/org/picocontainer/picocontainer/2.15/picocontainer-2.15.jar:"/>
+    <property name="surefire.test.class.path" value="/Users/estefania/IdeaProjects/ECSE429/partB/target/test-classes:/Users/estefania/IdeaProjects/ECSE429/partB/target/classes:/Users/estefania/.m2/repository/io/cucumber/cucumber-java/7.18.1/cucumber-java-7.18.1.jar:/Users/estefania/.m2/repository/io/cucumber/cucumber-core/7.18.1/cucumber-core-7.18.1.jar:/Users/estefania/.m2/repository/io/cucumber/cucumber-gherkin/7.18.1/cucumber-gherkin-7.18.1.jar:/Users/estefania/.m2/repository/io/cucumber/cucumber-gherkin-messages/7.18.1/cucumber-gherkin-messages-7.18.1.jar:/Users/estefania/.m2/repository/io/cucumber/gherkin/28.0.0/gherkin-28.0.0.jar:/Users/estefania/.m2/repository/io/cucumber/messages/24.1.0/messages-24.1.0.jar:/Users/estefania/.m2/repository/io/cucumber/testng-xml-formatter/0.2.0/testng-xml-formatter-0.2.0.jar:/Users/estefania/.m2/repository/io/cucumber/query/12.2.0/query-12.2.0.jar:/Users/estefania/.m2/repository/io/cucumber/tag-expressions/6.1.0/tag-expressions-6.1.0.jar:/Users/estefania/.m2/repository/io/cucumber/cucumber-expressions/17.1.0/cucumber-expressions-17.1.0.jar:/Users/estefania/.m2/repository/io/cucumber/datatable/7.18.1/datatable-7.18.1.jar:/Users/estefania/.m2/repository/io/cucumber/cucumber-plugin/7.18.1/cucumber-plugin-7.18.1.jar:/Users/estefania/.m2/repository/io/cucumber/docstring/7.18.1/docstring-7.18.1.jar:/Users/estefania/.m2/repository/io/cucumber/html-formatter/21.4.1/html-formatter-21.4.1.jar:/Users/estefania/.m2/repository/io/cucumber/junit-xml-formatter/0.5.0/junit-xml-formatter-0.5.0.jar:/Users/estefania/.m2/repository/io/cucumber/ci-environment/10.0.1/ci-environment-10.0.1.jar:/Users/estefania/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/Users/estefania/.m2/repository/io/cucumber/cucumber-junit-platform-engine/7.18.1/cucumber-junit-platform-engine-7.18.1.jar:/Users/estefania/.m2/repository/org/junit/platform/junit-platform-engine/1.10.3/junit-platform-engine-1.10.3.jar:/Users/estefania/.m2/repository/org/junit/platform/junit-platform-suite/1.11.0/junit-platform-suite-1.11.0.jar:/Users/estefania/.m2/repository/org/junit/platform/junit-platform-suite-api/1.11.0/junit-platform-suite-api-1.11.0.jar:/Users/estefania/.m2/repository/org/junit/platform/junit-platform-suite-engine/1.11.0/junit-platform-suite-engine-1.11.0.jar:/Users/estefania/.m2/repository/org/junit/platform/junit-platform-suite-commons/1.11.0/junit-platform-suite-commons-1.11.0.jar:/Users/estefania/.m2/repository/org/junit/platform/junit-platform-launcher/1.11.0/junit-platform-launcher-1.11.0.jar:/Users/estefania/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.jar:/Users/estefania/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/Users/estefania/.m2/repository/org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.jar:/Users/estefania/.m2/repository/io/rest-assured/rest-assured/5.4.0/rest-assured-5.4.0.jar:/Users/estefania/.m2/repository/org/apache/groovy/groovy/4.0.16/groovy-4.0.16.jar:/Users/estefania/.m2/repository/org/apache/groovy/groovy-xml/4.0.16/groovy-xml-4.0.16.jar:/Users/estefania/.m2/repository/org/apache/httpcomponents/httpclient/4.5.13/httpclient-4.5.13.jar:/Users/estefania/.m2/repository/org/apache/httpcomponents/httpcore/4.4.13/httpcore-4.4.13.jar:/Users/estefania/.m2/repository/commons-logging/commons-logging/1.2/commons-logging-1.2.jar:/Users/estefania/.m2/repository/commons-codec/commons-codec/1.11/commons-codec-1.11.jar:/Users/estefania/.m2/repository/org/apache/httpcomponents/httpmime/4.5.13/httpmime-4.5.13.jar:/Users/estefania/.m2/repository/org/hamcrest/hamcrest/2.2/hamcrest-2.2.jar:/Users/estefania/.m2/repository/org/ccil/cowan/tagsoup/tagsoup/1.2.1/tagsoup-1.2.1.jar:/Users/estefania/.m2/repository/io/rest-assured/json-path/5.4.0/json-path-5.4.0.jar:/Users/estefania/.m2/repository/org/apache/groovy/groovy-json/4.0.16/groovy-json-4.0.16.jar:/Users/estefania/.m2/repository/io/rest-assured/rest-assured-common/5.4.0/rest-assured-common-5.4.0.jar:/Users/estefania/.m2/repository/io/rest-assured/xml-path/5.4.0/xml-path-5.4.0.jar:/Users/estefania/.m2/repository/org/apache/commons/commons-lang3/3.11/commons-lang3-3.11.jar:/Users/estefania/.m2/repository/com/google/code/gson/gson/2.10.1/gson-2.10.1.jar:/Users/estefania/.m2/repository/io/cucumber/cucumber-picocontainer/7.18.1/cucumber-picocontainer-7.18.1.jar:/Users/estefania/.m2/repository/org/picocontainer/picocontainer/2.15/picocontainer-2.15.jar:"/>
     <property name="sun.cpu.endian" value="little"/>
-    <property name="user.home" value="/Users/williamzhang"/>
+    <property name="user.home" value="/Users/estefania"/>
     <property name="user.language" value="en"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
     <property name="java.version.date" value="2025-09-16"/>
     <property name="java.home" value="/opt/homebrew/Cellar/openjdk/25/libexec/openjdk.jdk/Contents/Home"/>
     <property name="file.separator" value="/"/>
-    <property name="basedir" value="/Users/williamzhang/Documents/GitHub/ECSE429/partB"/>
-    <property name="java.vm.compressedOopsMode" value="Zero based"/>
+    <property name="basedir" value="/Users/estefania/IdeaProjects/ECSE429/partB"/>
+    <property name="java.vm.compressedOopsMode" value="Non-zero based"/>
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="startServer" value="true"/>
     <property name="apple.awt.application.name" value="ForkedBooter"/>
-    <property name="surefire.real.class.path" value="/Users/williamzhang/Documents/GitHub/ECSE429/partB/target/surefire/surefirebooter-20251028144146494_3.jar"/>
+    <property name="surefire.real.class.path" value="/Users/estefania/IdeaProjects/ECSE429/partB/target/surefire/surefirebooter-20251028222525354_3.jar"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="java.runtime.version" value="25"/>
-    <property name="user.name" value="williamzhang"/>
+    <property name="user.name" value="estefania"/>
     <property name="stdout.encoding" value="UTF-8"/>
     <property name="path.separator" value=":"/>
-    <property name="os.version" value="15.6.1"/>
+    <property name="os.version" value="26.0"/>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
     <property name="file.encoding" value="UTF-8"/>
     <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
     <property name="java.vendor.version" value="Homebrew"/>
-    <property name="localRepository" value="/Users/williamzhang/.m2/repository"/>
+    <property name="localRepository" value="/Users/estefania/.m2/repository"/>
     <property name="java.vendor.url.bug" value="https://github.com/Homebrew/homebrew-core/issues"/>
-    <property name="java.io.tmpdir" value="/var/folders/qq/k74129797ssfpzmmlwlj82jc0000gn/T/"/>
+    <property name="java.io.tmpdir" value="/var/folders/9b/q9c8z2t11k993lyt6jjdfxpc0000gn/T/"/>
     <property name="java.version" value="25"/>
-    <property name="user.dir" value="/Users/williamzhang/Documents/GitHub/ECSE429/partB"/>
+    <property name="user.dir" value="/Users/estefania/IdeaProjects/ECSE429/partB"/>
     <property name="os.arch" value="aarch64"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="cucumber.execution.order" value="random"/>
     <property name="native.encoding" value="UTF-8"/>
-    <property name="java.library.path" value="/Users/williamzhang/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:."/>
+    <property name="java.library.path" value="/Users/estefania/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:."/>
     <property name="java.vm.info" value="mixed mode, sharing"/>
     <property name="stderr.encoding" value="UTF-8"/>
     <property name="java.vendor" value="Homebrew"/>
@@ -60,4 +62,612 @@
     <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="java.class.version" value="69.0"/>
   </properties>
+  <testcase name="Create a category with title and description" classname="Categories management" time="1.78">
+    <system-out><![CDATA[
+Scenario: Create a category with title and description                                    &amp#27;[90m# features/categories_management.feature:11&amp#27;[0m
+  &amp#27;[32mGiven &amp#27;[0m&amp#27;[32mthe Category API is reachable&amp#27;[0m                                                     &amp#27;[90m# steps.CategoryStepDefinitions.the_category_api_is_reachable()&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mmy list of categories is cleared to start fresh&amp#27;[0m                                     &amp#27;[90m# steps.CategoryStepDefinitions.my_list_of_categories_is_cleared_to_start_fresh()&amp#27;[0m
+  &amp#27;[32mWhen &amp#27;[0m&amp#27;[32mI send a request to create a category with these details:&amp#27;[0m                          &amp#27;[90m# steps.CategoryStepDefinitions.i_send_a_request_to_create_a_category_with_these_details(io.cucumber.datatable.DataTable)&amp#27;[0m
+    | title       | description         |
+    | School Work | Midterm preparation |
+  &amp#27;[32mThen &amp#27;[0m&amp#27;[32mthe category creation status should be &amp#27;[0m&amp#27;[32m&amp#27;[1m201&amp#27;[0m                                         &amp#27;[90m# steps.CategoryStepDefinitions.the_category_creation_status_should_be(java.lang.Integer)&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe saved category should show field &amp#27;[0m&amp#27;[32m&amp#27;[1m"title"&amp#27;[0m&amp#27;[32m with value &amp#27;[0m&amp#27;[32m&amp#27;[1m"School Work"&amp#27;[0m               &amp#27;[90m# steps.CategoryStepDefinitions.the_saved_category_should_show_field_with_value(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe saved category should show field &amp#27;[0m&amp#27;[32m&amp#27;[1m"description"&amp#27;[0m&amp#27;[32m with value &amp#27;[0m&amp#27;[32m&amp#27;[1m"Midterm preparation"&amp#27;[0m &amp#27;[90m# steps.CategoryStepDefinitions.the_saved_category_should_show_field_with_value(java.lang.String,java.lang.String)&amp#27;[0m
+]]></system-out>
+  </testcase>
+  <testcase name="Create a category with only title" classname="Categories management" time="1.033">
+    <system-out><![CDATA[
+Scenario: Create a category with only title                             &amp#27;[90m# features/categories_management.feature:20&amp#27;[0m
+  &amp#27;[32mGiven &amp#27;[0m&amp#27;[32mthe Category API is reachable&amp#27;[0m                                   &amp#27;[90m# steps.CategoryStepDefinitions.the_category_api_is_reachable()&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mmy list of categories is cleared to start fresh&amp#27;[0m                   &amp#27;[90m# steps.CategoryStepDefinitions.my_list_of_categories_is_cleared_to_start_fresh()&amp#27;[0m
+  &amp#27;[32mWhen &amp#27;[0m&amp#27;[32mI send a request to create a category with these details:&amp#27;[0m        &amp#27;[90m# steps.CategoryStepDefinitions.i_send_a_request_to_create_a_category_with_these_details(io.cucumber.datatable.DataTable)&amp#27;[0m
+    | title   | description |
+    | Fitness | [empty]     |
+  &amp#27;[32mThen &amp#27;[0m&amp#27;[32mthe category creation status should be &amp#27;[0m&amp#27;[32m&amp#27;[1m201&amp#27;[0m                       &amp#27;[90m# steps.CategoryStepDefinitions.the_category_creation_status_should_be(java.lang.Integer)&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe saved category should show field &amp#27;[0m&amp#27;[32m&amp#27;[1m"title"&amp#27;[0m&amp#27;[32m with value &amp#27;[0m&amp#27;[32m&amp#27;[1m"Fitness"&amp#27;[0m &amp#27;[90m# steps.CategoryStepDefinitions.the_saved_category_should_show_field_with_value(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe saved category should show field &amp#27;[0m&amp#27;[32m&amp#27;[1m"description"&amp#27;[0m&amp#27;[32m with value &amp#27;[0m&amp#27;[32m&amp#27;[1m""&amp#27;[0m  &amp#27;[90m# steps.CategoryStepDefinitions.the_saved_category_should_show_field_with_value(java.lang.String,java.lang.String)&amp#27;[0m
+]]></system-out>
+  </testcase>
+  <testcase name="Fail to create a category without title" classname="Categories management" time="1.031">
+    <system-out><![CDATA[
+Scenario: Fail to create a category without title                    &amp#27;[90m# features/categories_management.feature:29&amp#27;[0m
+  &amp#27;[32mGiven &amp#27;[0m&amp#27;[32mthe Category API is reachable&amp#27;[0m                                &amp#27;[90m# steps.CategoryStepDefinitions.the_category_api_is_reachable()&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mmy list of categories is cleared to start fresh&amp#27;[0m                &amp#27;[90m# steps.CategoryStepDefinitions.my_list_of_categories_is_cleared_to_start_fresh()&amp#27;[0m
+  &amp#27;[32mWhen &amp#27;[0m&amp#27;[32mI send a request to create a category with these details:&amp#27;[0m     &amp#27;[90m# steps.CategoryStepDefinitions.i_send_a_request_to_create_a_category_with_these_details(io.cucumber.datatable.DataTable)&amp#27;[0m
+    | title   | description      |
+    | [empty] | no title present |
+  &amp#27;[32mThen &amp#27;[0m&amp#27;[32mthe category creation status should be &amp#27;[0m&amp#27;[32m&amp#27;[1m400&amp#27;[0m                    &amp#27;[90m# steps.CategoryStepDefinitions.the_category_creation_status_should_be(java.lang.Integer)&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe category error should contain &amp#27;[0m&amp#27;[32m&amp#27;[1m"title : field is mandatory"&amp#27;[0m &amp#27;[90m# steps.CategoryStepDefinitions.the_category_error_should_contain(java.lang.String)&amp#27;[0m
+]]></system-out>
+  </testcase>
+  <testcase name="Example #1.1" classname="Examples" time="1.084">
+    <system-out><![CDATA[
+Scenario Outline: User assigns an existing category to an existing project. (Normal flow) &amp#27;[90m# features/category_and_project_management.feature:24&amp#27;[0m
+  &amp#27;[32mGiven &amp#27;[0m&amp#27;[32mthe system is running&amp#27;[0m                                                             &amp#27;[90m# steps.InteroperabilityStepDefinitions.theSystemIsRunning()&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe system is initialized with no data&amp#27;[0m                                              &amp#27;[90m# steps.InteroperabilityStepDefinitions.theSystemIsInitializedWithNoData()&amp#27;[0m
+  &amp#27;[32mGiven &amp#27;[0m&amp#27;[32mthe following projects exist:&amp#27;[0m                                                     &amp#27;[90m# steps.InteroperabilityStepDefinitions.theFollowingProjectsExist(io.cucumber.datatable.DataTable)&amp#27;[0m
+    | projectId | projectTitle    | projectCompleted | projectActive | projectDescription                    |
+    | 2         | ECSE429 Project | false            | true          | Test API for a project management app |
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe following categories exist:&amp#27;[0m                                                     &amp#27;[90m# steps.InteroperabilityStepDefinitions.theFollowingCategoriesExist(io.cucumber.datatable.DataTable)&amp#27;[0m
+    | categoryId | categoryTitle | categoryDescription     |
+    | 3          | School        | Tasks related to school |
+  &amp#27;[32mWhen &amp#27;[0m&amp#27;[32mthe user assigns the category with id &amp#27;[0m&amp#27;[32m&amp#27;[1m"3"&amp#27;[0m&amp#27;[32m to the project with id &amp#27;[0m&amp#27;[32m&amp#27;[1m"2"&amp#27;[0m               &amp#27;[90m# steps.InteroperabilityStepDefinitions.theUserAssignsTheCategoryWithIdToTheProjectWithId(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mThen &amp#27;[0m&amp#27;[32mthe entries in the relationship projects of the category with id &amp#27;[0m&amp#27;[32m&amp#27;[1m"3"&amp#27;[0m&amp#27;[32m now contain:&amp#27;[0m  &amp#27;[90m# steps.InteroperabilityStepDefinitions.theEntriesInTheRelationshipProjectsOfTheCategoryWithIdNowContain(java.lang.String,io.cucumber.datatable.DataTable)&amp#27;[0m
+    | id |
+    | 2  |
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe response status code is &amp#27;[0m&amp#27;[32m&amp#27;[1m"201"&amp#27;[0m                                                   &amp#27;[90m# steps.InteroperabilityStepDefinitions.theResponseStatusCodeIs(java.lang.String)&amp#27;[0m
+]]></system-out>
+  </testcase>
+  <testcase name="Example #1.1" classname="Examples" time="1.073">
+    <system-out><![CDATA[
+Scenario Outline: User assigns an existing category, which has already been associated with a project, to a different existing project. (Alternate flow) &amp#27;[90m# features/category_and_project_management.feature:45&amp#27;[0m
+  &amp#27;[32mGiven &amp#27;[0m&amp#27;[32mthe system is running&amp#27;[0m                                                                                                                            &amp#27;[90m# steps.InteroperabilityStepDefinitions.theSystemIsRunning()&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe system is initialized with no data&amp#27;[0m                                                                                                             &amp#27;[90m# steps.InteroperabilityStepDefinitions.theSystemIsInitializedWithNoData()&amp#27;[0m
+  &amp#27;[32mGiven &amp#27;[0m&amp#27;[32mthe following projects exist:&amp#27;[0m                                                                                                                    &amp#27;[90m# steps.InteroperabilityStepDefinitions.theFollowingProjectsExist(io.cucumber.datatable.DataTable)&amp#27;[0m
+    | projectId | projectTitle    | projectCompleted | projectActive | projectDescription                    |
+    | 2         | ECSE429 Project | false            | true          | Test API for a project management app |
+    | 3         | ECSE428 Project | false            | true          | Build app in Agile mode               |
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe following categories exist:&amp#27;[0m                                                                                                                    &amp#27;[90m# steps.InteroperabilityStepDefinitions.theFollowingCategoriesExist(io.cucumber.datatable.DataTable)&amp#27;[0m
+    | categoryId | categoryTitle | categoryDescription     |
+    | 3          | School        | Tasks related to school |
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe entries in the relationship projects of the category with id &amp#27;[0m&amp#27;[32m&amp#27;[1m"3"&amp#27;[0m&amp#27;[32m contain:&amp#27;[0m                                                                      &amp#27;[90m# steps.InteroperabilityStepDefinitions.theEntriesInTheRelationshipProjectsOfTheCategoryWithIdContain(java.lang.String,io.cucumber.datatable.DataTable)&amp#27;[0m
+    | id |
+    | 2  |
+  &amp#27;[32mWhen &amp#27;[0m&amp#27;[32mthe user assigns the category with id &amp#27;[0m&amp#27;[32m&amp#27;[1m"3"&amp#27;[0m&amp#27;[32m to the project with id &amp#27;[0m&amp#27;[32m&amp#27;[1m"3"&amp#27;[0m                                                                              &amp#27;[90m# steps.InteroperabilityStepDefinitions.theUserAssignsTheCategoryWithIdToTheProjectWithId(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mThen &amp#27;[0m&amp#27;[32mthe entries in the relationship projects of the category with id &amp#27;[0m&amp#27;[32m&amp#27;[1m"3"&amp#27;[0m&amp#27;[32m now contain:&amp#27;[0m                                                                 &amp#27;[90m# steps.InteroperabilityStepDefinitions.theEntriesInTheRelationshipProjectsOfTheCategoryWithIdNowContain(java.lang.String,io.cucumber.datatable.DataTable)&amp#27;[0m
+    | id |
+    | 2  |
+    | 3  |
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe response status code is &amp#27;[0m&amp#27;[32m&amp#27;[1m"201"&amp#27;[0m                                                                                                                  &amp#27;[90m# steps.InteroperabilityStepDefinitions.theResponseStatusCodeIs(java.lang.String)&amp#27;[0m
+]]></system-out>
+  </testcase>
+  <testcase name="Example #1.1" classname="Examples" time="1.068">
+    <system-out><![CDATA[
+Scenario Outline: User assigns an inexistent category to an existing project. (Error flow)                 &amp#27;[90m# features/category_and_project_management.feature:59&amp#27;[0m
+  &amp#27;[32mGiven &amp#27;[0m&amp#27;[32mthe system is running&amp#27;[0m                                                                              &amp#27;[90m# steps.InteroperabilityStepDefinitions.theSystemIsRunning()&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe system is initialized with no data&amp#27;[0m                                                               &amp#27;[90m# steps.InteroperabilityStepDefinitions.theSystemIsInitializedWithNoData()&amp#27;[0m
+  &amp#27;[32mGiven &amp#27;[0m&amp#27;[32mthe following projects exist:&amp#27;[0m                                                                      &amp#27;[90m# steps.InteroperabilityStepDefinitions.theFollowingProjectsExist(io.cucumber.datatable.DataTable)&amp#27;[0m
+    | projectId | projectTitle    | projectCompleted | projectActive | projectDescription                    |
+    | 2         | ECSE429 Project | false            | true          | Test API for a project management app |
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe following categories exist:&amp#27;[0m                                                                      &amp#27;[90m# steps.InteroperabilityStepDefinitions.theFollowingCategoriesExist(io.cucumber.datatable.DataTable)&amp#27;[0m
+    | categoryId | categoryTitle | categoryDescription     |
+    | 3          | School        | Tasks related to school |
+  &amp#27;[32mWhen &amp#27;[0m&amp#27;[32mthe user assigns the category with id &amp#27;[0m&amp#27;[32m&amp#27;[1m"100"&amp#27;[0m&amp#27;[32m to the project with id &amp#27;[0m&amp#27;[32m&amp#27;[1m"2"&amp#27;[0m                              &amp#27;[90m# steps.InteroperabilityStepDefinitions.theUserAssignsTheCategoryWithIdToTheProjectWithId(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mThen &amp#27;[0m&amp#27;[32man error message &amp#27;[0m&amp#27;[32m&amp#27;[1m"Could not find parent thing for relationship categories/100/projects"&amp#27;[0m&amp#27;[32m is returned&amp#27;[0m &amp#27;[90m# steps.InteroperabilityStepDefinitions.anErrorMessageIsReturned(java.lang.String)&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe response status code is &amp#27;[0m&amp#27;[32m&amp#27;[1m"404"&amp#27;[0m                                                                    &amp#27;[90m# steps.InteroperabilityStepDefinitions.theResponseStatusCodeIs(java.lang.String)&amp#27;[0m
+]]></system-out>
+  </testcase>
+  <testcase name="Example #1.1" classname="Examples" time="1.09">
+    <system-out><![CDATA[
+Scenario Outline: User assigns an existing category to an existing todo. (Normal flow) &amp#27;[90m# features/category_and_todo_management.feature:26&amp#27;[0m
+  &amp#27;[32mGiven &amp#27;[0m&amp#27;[32mthe Rest API Todo List Manager is running&amp#27;[0m                                      &amp#27;[90m# setup.ScenarioHooks.the_rest_api_todo_list_manager_is_running()&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe system is initialized with no data&amp#27;[0m                                           &amp#27;[90m# steps.InteroperabilityStepDefinitions.theSystemIsInitializedWithNoData()&amp#27;[0m
+  &amp#27;[32mGiven &amp#27;[0m&amp#27;[32mthe following todos exist:&amp#27;[0m                                                     &amp#27;[90m# steps.InteroperabilityStepDefinitions.theFollowingTodosExist(io.cucumber.datatable.DataTable)&amp#27;[0m
+    | todoId | todoTitle         | todoDoneStatus | todoDescription                         |
+    | 3      | Create repository | false          | Create the project repository on GitHub |
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe following categories exist:&amp#27;[0m                                                  &amp#27;[90m# steps.InteroperabilityStepDefinitions.theFollowingCategoriesExist(io.cucumber.datatable.DataTable)&amp#27;[0m
+    | categoryId | categoryTitle | categoryDescription     |
+    | 3          | School        | Tasks related to school |
+  &amp#27;[32mWhen &amp#27;[0m&amp#27;[32mthe user assigns the category with id &amp#27;[0m&amp#27;[32m&amp#27;[1m"3"&amp#27;[0m&amp#27;[32m to the todo with id &amp#27;[0m&amp#27;[32m&amp#27;[1m"3"&amp#27;[0m               &amp#27;[90m# steps.InteroperabilityStepDefinitions.theUserAssignsTheCategoryWithIdToTheTodoWithId(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mThen &amp#27;[0m&amp#27;[32mthe entries in the relationship todos of the category with id &amp#27;[0m&amp#27;[32m&amp#27;[1m"3"&amp#27;[0m&amp#27;[32m now contain:&amp#27;[0m  &amp#27;[90m# steps.InteroperabilityStepDefinitions.theEntriesInTheRelationshipTodosOfTheCategoryWithIdNowContain(java.lang.String,io.cucumber.datatable.DataTable)&amp#27;[0m
+    | id |
+    | 3  |
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe response status code is &amp#27;[0m&amp#27;[32m&amp#27;[1m"201"&amp#27;[0m                                                &amp#27;[90m# steps.InteroperabilityStepDefinitions.theResponseStatusCodeIs(java.lang.String)&amp#27;[0m
+]]></system-out>
+  </testcase>
+  <testcase name="Example #1.1" classname="Examples" time="1.081">
+    <system-out><![CDATA[
+Scenario Outline: User assigns an existing category, which has already been associated with a todo, to a different existing todo. (Alternate flow) &amp#27;[90m# features/category_and_todo_management.feature:47&amp#27;[0m
+  &amp#27;[32mGiven &amp#27;[0m&amp#27;[32mthe Rest API Todo List Manager is running&amp#27;[0m                                                                                                  &amp#27;[90m# setup.ScenarioHooks.the_rest_api_todo_list_manager_is_running()&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe system is initialized with no data&amp#27;[0m                                                                                                       &amp#27;[90m# steps.InteroperabilityStepDefinitions.theSystemIsInitializedWithNoData()&amp#27;[0m
+  &amp#27;[32mGiven &amp#27;[0m&amp#27;[32mthe following todos exist:&amp#27;[0m                                                                                                                 &amp#27;[90m# steps.InteroperabilityStepDefinitions.theFollowingTodosExist(io.cucumber.datatable.DataTable)&amp#27;[0m
+    | todoId | todoTitle         | todoDoneStatus | todoDescription                         |
+    | 3      | Create repository | false          | Create the project repository on GitHub |
+    | 4      | Write tests       | false          | Write unit tests for the project        |
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe following categories exist:&amp#27;[0m                                                                                                              &amp#27;[90m# steps.InteroperabilityStepDefinitions.theFollowingCategoriesExist(io.cucumber.datatable.DataTable)&amp#27;[0m
+    | categoryId | categoryTitle | categoryDescription     |
+    | 3          | School        | Tasks related to school |
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe entries in the relationship todos of the category with id &amp#27;[0m&amp#27;[32m&amp#27;[1m"3"&amp#27;[0m&amp#27;[32m contain:&amp#27;[0m                                                                   &amp#27;[90m# steps.InteroperabilityStepDefinitions.theEntriesInTheRelationshipTodosOfTheCategoryWithIdContain(java.lang.String,io.cucumber.datatable.DataTable)&amp#27;[0m
+    | id |
+    | 3  |
+  &amp#27;[32mWhen &amp#27;[0m&amp#27;[32mthe user assigns the category with id &amp#27;[0m&amp#27;[32m&amp#27;[1m"3"&amp#27;[0m&amp#27;[32m to the todo with id &amp#27;[0m&amp#27;[32m&amp#27;[1m"4"&amp#27;[0m                                                                           &amp#27;[90m# steps.InteroperabilityStepDefinitions.theUserAssignsTheCategoryWithIdToTheTodoWithId(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mThen &amp#27;[0m&amp#27;[32mthe entries in the relationship todos of the category with id &amp#27;[0m&amp#27;[32m&amp#27;[1m"3"&amp#27;[0m&amp#27;[32m now contain:&amp#27;[0m                                                              &amp#27;[90m# steps.InteroperabilityStepDefinitions.theEntriesInTheRelationshipTodosOfTheCategoryWithIdNowContain(java.lang.String,io.cucumber.datatable.DataTable)&amp#27;[0m
+    | id |
+    | 3  |
+    | 4  |
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe response status code is &amp#27;[0m&amp#27;[32m&amp#27;[1m"201"&amp#27;[0m                                                                                                            &amp#27;[90m# steps.InteroperabilityStepDefinitions.theResponseStatusCodeIs(java.lang.String)&amp#27;[0m
+]]></system-out>
+  </testcase>
+  <testcase name="Example #1.1" classname="Examples" time="1.045">
+    <system-out><![CDATA[
+Scenario Outline: User assigns an existing category to an inexistent todo. (Error flow) &amp#27;[90m# features/category_and_todo_management.feature:61&amp#27;[0m
+  &amp#27;[32mGiven &amp#27;[0m&amp#27;[32mthe Rest API Todo List Manager is running&amp#27;[0m                                       &amp#27;[90m# setup.ScenarioHooks.the_rest_api_todo_list_manager_is_running()&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe system is initialized with no data&amp#27;[0m                                            &amp#27;[90m# steps.InteroperabilityStepDefinitions.theSystemIsInitializedWithNoData()&amp#27;[0m
+  &amp#27;[32mGiven &amp#27;[0m&amp#27;[32mthe following todos exist:&amp#27;[0m                                                      &amp#27;[90m# steps.InteroperabilityStepDefinitions.theFollowingTodosExist(io.cucumber.datatable.DataTable)&amp#27;[0m
+    | todoId | todoTitle         | todoDoneStatus | todoDescription                         |
+    | 3      | Create repository | false          | Create the project repository on GitHub |
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe following categories exist:&amp#27;[0m                                                   &amp#27;[90m# steps.InteroperabilityStepDefinitions.theFollowingCategoriesExist(io.cucumber.datatable.DataTable)&amp#27;[0m
+    | categoryId | categoryTitle | categoryDescription     |
+    | 3          | School        | Tasks related to school |
+  &amp#27;[32mWhen &amp#27;[0m&amp#27;[32mthe user assigns the category with id &amp#27;[0m&amp#27;[32m&amp#27;[1m"3"&amp#27;[0m&amp#27;[32m to the todo with id &amp#27;[0m&amp#27;[32m&amp#27;[1m"100"&amp#27;[0m              &amp#27;[90m# steps.InteroperabilityStepDefinitions.theUserAssignsTheCategoryWithIdToTheTodoWithId(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mThen &amp#27;[0m&amp#27;[32man error message &amp#27;[0m&amp#27;[32m&amp#27;[1m"Could not find thing matching value for id"&amp#27;[0m&amp#27;[32m is returned&amp#27;[0m        &amp#27;[90m# steps.InteroperabilityStepDefinitions.anErrorMessageIsReturned(java.lang.String)&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe response status code is &amp#27;[0m&amp#27;[32m&amp#27;[1m"404"&amp#27;[0m                                                 &amp#27;[90m# steps.InteroperabilityStepDefinitions.theResponseStatusCodeIs(java.lang.String)&amp#27;[0m
+]]></system-out>
+  </testcase>
+  <testcase name="Example #1.1" classname="Examples" time="1.06">
+    <system-out><![CDATA[
+Scenario Outline: User associates an existing todo with an existing project. (Normal flow) &amp#27;[90m# features/todo_and_project_management.feature:26&amp#27;[0m
+  &amp#27;[32mGiven &amp#27;[0m&amp#27;[32mthe Rest API Todo List Manager is running&amp#27;[0m                                          &amp#27;[90m# setup.ScenarioHooks.the_rest_api_todo_list_manager_is_running()&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe system is initialized with no data&amp#27;[0m                                               &amp#27;[90m# steps.InteroperabilityStepDefinitions.theSystemIsInitializedWithNoData()&amp#27;[0m
+  &amp#27;[32mGiven &amp#27;[0m&amp#27;[32mthe following todos exist:&amp#27;[0m                                                         &amp#27;[90m# steps.InteroperabilityStepDefinitions.theFollowingTodosExist(io.cucumber.datatable.DataTable)&amp#27;[0m
+    | todoId | todoTitle         | todoDoneStatus | todoDescription                         |
+    | 3      | Create repository | false          | Create the project repository on GitHub |
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe following projects exist:&amp#27;[0m                                                        &amp#27;[90m# steps.InteroperabilityStepDefinitions.theFollowingProjectsExist(io.cucumber.datatable.DataTable)&amp#27;[0m
+    | projectId | projectTitle    | projectCompleted | projectActive | projectDescription                    |
+    | 2         | ECSE429 Project | false            | true          | Test API for a project management app |
+  &amp#27;[32mWhen &amp#27;[0m&amp#27;[32mthe user associates the todo with id &amp#27;[0m&amp#27;[32m&amp#27;[1m"3"&amp#27;[0m&amp#27;[32m with the project with id &amp#27;[0m&amp#27;[32m&amp#27;[1m"2"&amp#27;[0m               &amp#27;[90m# steps.InteroperabilityStepDefinitions.theUserAssociatesTheTodoWithIdWithTheProjectWithId(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mThen &amp#27;[0m&amp#27;[32mthe entries in the relationship tasksof of the todo with id &amp#27;[0m&amp#27;[32m&amp#27;[1m"3"&amp#27;[0m&amp#27;[32m now contain:&amp#27;[0m        &amp#27;[90m# steps.InteroperabilityStepDefinitions.theEntriesInTheRelationshipTasksofOfTheTodoWithIdNowContain(java.lang.String,io.cucumber.datatable.DataTable)&amp#27;[0m
+    | id |
+    | 2  |
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe response status code is &amp#27;[0m&amp#27;[32m&amp#27;[1m"201"&amp#27;[0m                                                    &amp#27;[90m# steps.InteroperabilityStepDefinitions.theResponseStatusCodeIs(java.lang.String)&amp#27;[0m
+]]></system-out>
+  </testcase>
+  <testcase name="Example #1.1" classname="Examples" time="1.083">
+    <system-out><![CDATA[
+Scenario Outline: User assigns an existing todo, which has already been associated with a project, to a different existing project. (Alternate flow) &amp#27;[90m# features/todo_and_project_management.feature:47&amp#27;[0m
+  &amp#27;[32mGiven &amp#27;[0m&amp#27;[32mthe Rest API Todo List Manager is running&amp#27;[0m                                                                                                    &amp#27;[90m# setup.ScenarioHooks.the_rest_api_todo_list_manager_is_running()&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe system is initialized with no data&amp#27;[0m                                                                                                         &amp#27;[90m# steps.InteroperabilityStepDefinitions.theSystemIsInitializedWithNoData()&amp#27;[0m
+  &amp#27;[32mGiven &amp#27;[0m&amp#27;[32mthe following todos exist:&amp#27;[0m                                                                                                                   &amp#27;[90m# steps.InteroperabilityStepDefinitions.theFollowingTodosExist(io.cucumber.datatable.DataTable)&amp#27;[0m
+    | todoId | todoTitle         | todoDoneStatus | todoDescription                         |
+    | 3      | Create repository | false          | Create the project repository on GitHub |
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe following projects exist:&amp#27;[0m                                                                                                                  &amp#27;[90m# steps.InteroperabilityStepDefinitions.theFollowingProjectsExist(io.cucumber.datatable.DataTable)&amp#27;[0m
+    | projectId | projectTitle    | projectCompleted | projectActive | projectDescription                    |
+    | 2         | ECSE429 Project | false            | true          | Test API for a project management app |
+    | 3         | ECSE428 Project | false            | true          | Build app in Agile mode               |
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe entries in the relationship tasksof of the todo with id &amp#27;[0m&amp#27;[32m&amp#27;[1m"3"&amp#27;[0m&amp#27;[32m contain:&amp#27;[0m                                                                       &amp#27;[90m# steps.InteroperabilityStepDefinitions.theEntriesInTheRelationshipTasksofOfTheTodoWithIdContain(java.lang.String,io.cucumber.datatable.DataTable)&amp#27;[0m
+    | id |
+    | 2  |
+  &amp#27;[32mWhen &amp#27;[0m&amp#27;[32mthe user associates the todo with id &amp#27;[0m&amp#27;[32m&amp#27;[1m"3"&amp#27;[0m&amp#27;[32m with the project with id &amp#27;[0m&amp#27;[32m&amp#27;[1m"3"&amp#27;[0m                                                                         &amp#27;[90m# steps.InteroperabilityStepDefinitions.theUserAssociatesTheTodoWithIdWithTheProjectWithId(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mThen &amp#27;[0m&amp#27;[32mthe entries in the relationship tasksof of the todo with id &amp#27;[0m&amp#27;[32m&amp#27;[1m"3"&amp#27;[0m&amp#27;[32m now contain:&amp#27;[0m                                                                  &amp#27;[90m# steps.InteroperabilityStepDefinitions.theEntriesInTheRelationshipTasksofOfTheTodoWithIdNowContain(java.lang.String,io.cucumber.datatable.DataTable)&amp#27;[0m
+    | id |
+    | 2  |
+    | 3  |
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe response status code is &amp#27;[0m&amp#27;[32m&amp#27;[1m"201"&amp#27;[0m                                                                                                              &amp#27;[90m# steps.InteroperabilityStepDefinitions.theResponseStatusCodeIs(java.lang.String)&amp#27;[0m
+]]></system-out>
+  </testcase>
+  <testcase name="Example #1.1" classname="Examples" time="1.078">
+    <system-out><![CDATA[
+Scenario Outline: User associates an existing todo with an inexistent project. (Error flow) &amp#27;[90m# features/todo_and_project_management.feature:61&amp#27;[0m
+  &amp#27;[32mGiven &amp#27;[0m&amp#27;[32mthe Rest API Todo List Manager is running&amp#27;[0m                                           &amp#27;[90m# setup.ScenarioHooks.the_rest_api_todo_list_manager_is_running()&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe system is initialized with no data&amp#27;[0m                                                &amp#27;[90m# steps.InteroperabilityStepDefinitions.theSystemIsInitializedWithNoData()&amp#27;[0m
+  &amp#27;[32mGiven &amp#27;[0m&amp#27;[32mthe following todos exist:&amp#27;[0m                                                          &amp#27;[90m# steps.InteroperabilityStepDefinitions.theFollowingTodosExist(io.cucumber.datatable.DataTable)&amp#27;[0m
+    | todoId | todoTitle         | todoDoneStatus | todoDescription                         |
+    | 3      | Create repository | false          | Create the project repository on GitHub |
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe following projects exist:&amp#27;[0m                                                         &amp#27;[90m# steps.InteroperabilityStepDefinitions.theFollowingProjectsExist(io.cucumber.datatable.DataTable)&amp#27;[0m
+    | projectId | projectTitle    | projectCompleted | projectActive | projectDescription                    |
+    | 2         | ECSE429 Project | false            | true          | Test API for a project management app |
+  &amp#27;[32mWhen &amp#27;[0m&amp#27;[32mthe user associates the todo with id &amp#27;[0m&amp#27;[32m&amp#27;[1m"3"&amp#27;[0m&amp#27;[32m with the project with id &amp#27;[0m&amp#27;[32m&amp#27;[1m"100"&amp#27;[0m              &amp#27;[90m# steps.InteroperabilityStepDefinitions.theUserAssociatesTheTodoWithIdWithTheProjectWithId(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mThen &amp#27;[0m&amp#27;[32man error message &amp#27;[0m&amp#27;[32m&amp#27;[1m"Could not find thing matching value for id"&amp#27;[0m&amp#27;[32m is returned&amp#27;[0m            &amp#27;[90m# steps.InteroperabilityStepDefinitions.anErrorMessageIsReturned(java.lang.String)&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe response status code is &amp#27;[0m&amp#27;[32m&amp#27;[1m"404"&amp#27;[0m                                                     &amp#27;[90m# steps.InteroperabilityStepDefinitions.theResponseStatusCodeIs(java.lang.String)&amp#27;[0m
+]]></system-out>
+  </testcase>
+  <testcase name="Example #1.1" classname="Examples" time="1.079">
+    <system-out><![CDATA[
+Scenario Outline: User removes an existing association between an existing todo and an existing project. (Normal flow) &amp#27;[90m# features/todo_and_project_management.feature:87&amp#27;[0m
+  &amp#27;[32mGiven &amp#27;[0m&amp#27;[32mthe Rest API Todo List Manager is running&amp#27;[0m                                                                      &amp#27;[90m# setup.ScenarioHooks.the_rest_api_todo_list_manager_is_running()&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe system is initialized with no data&amp#27;[0m                                                                           &amp#27;[90m# steps.InteroperabilityStepDefinitions.theSystemIsInitializedWithNoData()&amp#27;[0m
+  &amp#27;[32mGiven &amp#27;[0m&amp#27;[32mthe following todos exist:&amp#27;[0m                                                                                     &amp#27;[90m# steps.InteroperabilityStepDefinitions.theFollowingTodosExist(io.cucumber.datatable.DataTable)&amp#27;[0m
+    | todoId | todoTitle         | todoDoneStatus | todoDescription                         |
+    | 3      | Create repository | false          | Create the project repository on GitHub |
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe following projects exist:&amp#27;[0m                                                                                    &amp#27;[90m# steps.InteroperabilityStepDefinitions.theFollowingProjectsExist(io.cucumber.datatable.DataTable)&amp#27;[0m
+    | projectId | projectTitle    | projectCompleted | projectActive | projectDescription                    |
+    | 2         | ECSE429 Project | false            | true          | Test API for a project management app |
+    | 3         | ECSE428 Project | false            | true          | Build app in Agile mode               |
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe entries in the relationship tasksof of the todo with id &amp#27;[0m&amp#27;[32m&amp#27;[1m"3"&amp#27;[0m&amp#27;[32m contain:&amp#27;[0m                                         &amp#27;[90m# steps.InteroperabilityStepDefinitions.theEntriesInTheRelationshipTasksofOfTheTodoWithIdContain(java.lang.String,io.cucumber.datatable.DataTable)&amp#27;[0m
+    | id |
+    | 2  |
+    | 3  |
+  &amp#27;[32mWhen &amp#27;[0m&amp#27;[32mthe user removes the association between the todo with id &amp#27;[0m&amp#27;[32m&amp#27;[1m"3"&amp#27;[0m&amp#27;[32m and the project with id &amp#27;[0m&amp#27;[32m&amp#27;[1m"3"&amp#27;[0m                       &amp#27;[90m# steps.InteroperabilityStepDefinitions.theUserRemovesTheAssociationBetweenTheTodoWithIdAndTheProjectWithId(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mThen &amp#27;[0m&amp#27;[32mthe entries in the relationship tasksof of the todo with id &amp#27;[0m&amp#27;[32m&amp#27;[1m"3"&amp#27;[0m&amp#27;[32m now contain:&amp#27;[0m                                    &amp#27;[90m# steps.InteroperabilityStepDefinitions.theEntriesInTheRelationshipTasksofOfTheTodoWithIdNowContain(java.lang.String,io.cucumber.datatable.DataTable)&amp#27;[0m
+    | id |
+    | 2  |
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe response status code is &amp#27;[0m&amp#27;[32m&amp#27;[1m"200"&amp#27;[0m                                                                                &amp#27;[90m# steps.InteroperabilityStepDefinitions.theResponseStatusCodeIs(java.lang.String)&amp#27;[0m
+]]></system-out>
+  </testcase>
+  <testcase name="Example #1.1" classname="Examples" time="1.073">
+    <system-out><![CDATA[
+Scenario Outline: User deletes an existing todo that is associated with an existing project. (Alternate flow) &amp#27;[90m# features/todo_and_project_management.feature:112&amp#27;[0m
+  &amp#27;[32mGiven &amp#27;[0m&amp#27;[32mthe Rest API Todo List Manager is running&amp#27;[0m                                                             &amp#27;[90m# setup.ScenarioHooks.the_rest_api_todo_list_manager_is_running()&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe system is initialized with no data&amp#27;[0m                                                                  &amp#27;[90m# steps.InteroperabilityStepDefinitions.theSystemIsInitializedWithNoData()&amp#27;[0m
+  &amp#27;[32mGiven &amp#27;[0m&amp#27;[32mthe following todos exist:&amp#27;[0m                                                                            &amp#27;[90m# steps.InteroperabilityStepDefinitions.theFollowingTodosExist(io.cucumber.datatable.DataTable)&amp#27;[0m
+    | todoId | todoTitle         | todoDoneStatus | todoDescription                         |
+    | 3      | Create repository | false          | Create the project repository on GitHub |
+    | 4      | Write tests       | false          | Write unit tests for the project        |
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe following projects exist:&amp#27;[0m                                                                           &amp#27;[90m# steps.InteroperabilityStepDefinitions.theFollowingProjectsExist(io.cucumber.datatable.DataTable)&amp#27;[0m
+    | projectId | projectTitle    | projectCompleted | projectActive | projectDescription                    |
+    | 2         | ECSE429 Project | false            | true          | Test API for a project management app |
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe entries in the relationship tasksof of the todo with id &amp#27;[0m&amp#27;[32m&amp#27;[1m"4"&amp#27;[0m&amp#27;[32m contain:&amp#27;[0m                                &amp#27;[90m# steps.InteroperabilityStepDefinitions.theEntriesInTheRelationshipTasksofOfTheTodoWithIdContain(java.lang.String,io.cucumber.datatable.DataTable)&amp#27;[0m
+    | id |
+    | 2  |
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe entries in the relationship tasks of the project with id &amp#27;[0m&amp#27;[32m&amp#27;[1m"2"&amp#27;[0m&amp#27;[32m contain:&amp#27;[0m                               &amp#27;[90m# steps.InteroperabilityStepDefinitions.theEntriesInTheRelationshipTasksOfTheProjectWithIdContain(java.lang.String,io.cucumber.datatable.DataTable)&amp#27;[0m
+    | id |
+    | 3  |
+    | 4  |
+  &amp#27;[32mWhen &amp#27;[0m&amp#27;[32mthe user deletes the todo with id &amp#27;[0m&amp#27;[32m&amp#27;[1m"4"&amp#27;[0m                                                                  &amp#27;[90m# steps.InteroperabilityStepDefinitions.theUserDeletesTheTodoWithId(java.lang.String)&amp#27;[0m
+  &amp#27;[32mThen &amp#27;[0m&amp#27;[32mno instance of a todo with id &amp#27;[0m&amp#27;[32m&amp#27;[1m"4"&amp#27;[0m&amp#27;[32m exists&amp#27;[0m                                                               &amp#27;[90m# steps.InteroperabilityStepDefinitions.noInstanceOfATodoWithIdExists(java.lang.String)&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe entries in the relationship tasks of the project with id &amp#27;[0m&amp#27;[32m&amp#27;[1m"2"&amp#27;[0m&amp#27;[32m now contain:&amp#27;[0m                           &amp#27;[90m# steps.InteroperabilityStepDefinitions.theEntriesInTheRelationshipTasksOfTheProjectWithIdNowContain(java.lang.String,io.cucumber.datatable.DataTable)&amp#27;[0m
+    | id |
+    | 3  |
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe response status code is &amp#27;[0m&amp#27;[32m&amp#27;[1m"200"&amp#27;[0m                                                                       &amp#27;[90m# steps.InteroperabilityStepDefinitions.theResponseStatusCodeIs(java.lang.String)&amp#27;[0m
+]]></system-out>
+  </testcase>
+  <testcase name="Example #1.1" classname="Examples" time="1.048">
+    <system-out><![CDATA[
+Scenario Outline: User removes an existing association between an inexistent todo and an existing project. (Error flow) &amp#27;[90m# features/todo_and_project_management.feature:126&amp#27;[0m
+  &amp#27;[32mGiven &amp#27;[0m&amp#27;[32mthe Rest API Todo List Manager is running&amp#27;[0m                                                                       &amp#27;[90m# setup.ScenarioHooks.the_rest_api_todo_list_manager_is_running()&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe system is initialized with no data&amp#27;[0m                                                                            &amp#27;[90m# steps.InteroperabilityStepDefinitions.theSystemIsInitializedWithNoData()&amp#27;[0m
+  &amp#27;[32mGiven &amp#27;[0m&amp#27;[32mthe following todos exist:&amp#27;[0m                                                                                      &amp#27;[90m# steps.InteroperabilityStepDefinitions.theFollowingTodosExist(io.cucumber.datatable.DataTable)&amp#27;[0m
+    | todoId | todoTitle         | todoDoneStatus | todoDescription                         |
+    | 3      | Create repository | false          | Create the project repository on GitHub |
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe following projects exist:&amp#27;[0m                                                                                     &amp#27;[90m# steps.InteroperabilityStepDefinitions.theFollowingProjectsExist(io.cucumber.datatable.DataTable)&amp#27;[0m
+    | projectId | projectTitle    | projectCompleted | projectActive | projectDescription                    |
+    | 2         | ECSE429 Project | false            | true          | Test API for a project management app |
+  &amp#27;[32mWhen &amp#27;[0m&amp#27;[32mthe user removes the association between the todo with id &amp#27;[0m&amp#27;[32m&amp#27;[1m"100"&amp#27;[0m&amp#27;[32m and the project with id &amp#27;[0m&amp#27;[32m&amp#27;[1m"2"&amp#27;[0m                      &amp#27;[90m# steps.InteroperabilityStepDefinitions.theUserRemovesTheAssociationBetweenTheTodoWithIdAndTheProjectWithId(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mThen &amp#27;[0m&amp#27;[32man error message &amp#27;[0m&amp#27;[32m&amp#27;[1m"Could not find any instances with todos/100/tasksof/2"&amp#27;[0m&amp#27;[32m is returned&amp#27;[0m                             &amp#27;[90m# steps.InteroperabilityStepDefinitions.anErrorMessageIsReturned(java.lang.String)&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe response status code is &amp#27;[0m&amp#27;[32m&amp#27;[1m"404"&amp#27;[0m                                                                                 &amp#27;[90m# steps.InteroperabilityStepDefinitions.theResponseStatusCodeIs(java.lang.String)&amp#27;[0m
+]]></system-out>
+  </testcase>
+  <testcase name="Example #1.1" classname="Examples" time="1.071">
+    <system-out><![CDATA[
+Scenario Outline: User gets the existing todos associated with an existing project. (Normal flow) &amp#27;[90m# features/todo_and_project_management.feature:153&amp#27;[0m
+  &amp#27;[32mGiven &amp#27;[0m&amp#27;[32mthe Rest API Todo List Manager is running&amp#27;[0m                                                 &amp#27;[90m# setup.ScenarioHooks.the_rest_api_todo_list_manager_is_running()&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe system is initialized with no data&amp#27;[0m                                                      &amp#27;[90m# steps.InteroperabilityStepDefinitions.theSystemIsInitializedWithNoData()&amp#27;[0m
+  &amp#27;[32mGiven &amp#27;[0m&amp#27;[32mthe following todos exist:&amp#27;[0m                                                                &amp#27;[90m# steps.InteroperabilityStepDefinitions.theFollowingTodosExist(io.cucumber.datatable.DataTable)&amp#27;[0m
+    | todoId | todoTitle         | todoDoneStatus | todoDescription                         |
+    | 3      | Create repository | false          | Create the project repository on GitHub |
+    | 4      | Write tests       | false          | Write unit tests for the project        |
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe following projects exist:&amp#27;[0m                                                               &amp#27;[90m# steps.InteroperabilityStepDefinitions.theFollowingProjectsExist(io.cucumber.datatable.DataTable)&amp#27;[0m
+    | projectId | projectTitle    | projectCompleted | projectActive | projectDescription                    |
+    | 2         | ECSE429 Project | false            | true          | Test API for a project management app |
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe entries in the relationship tasks of the project with id &amp#27;[0m&amp#27;[32m&amp#27;[1m"2"&amp#27;[0m&amp#27;[32m contain:&amp#27;[0m                   &amp#27;[90m# steps.InteroperabilityStepDefinitions.theEntriesInTheRelationshipTasksOfTheProjectWithIdContain(java.lang.String,io.cucumber.datatable.DataTable)&amp#27;[0m
+    | id |
+    | 3  |
+    | 4  |
+  &amp#27;[32mWhen &amp#27;[0m&amp#27;[32mthe user gets the todos associated with the project with id &amp#27;[0m&amp#27;[32m&amp#27;[1m"2"&amp#27;[0m                            &amp#27;[90m# steps.InteroperabilityStepDefinitions.theUserGetsTheTodosAssociatedWithTheProjectWithId(java.lang.String)&amp#27;[0m
+  &amp#27;[32mThen &amp#27;[0m&amp#27;[32mthe returned todos are:&amp#27;[0m                                                                    &amp#27;[90m# steps.InteroperabilityStepDefinitions.theReturnedTodosAre(io.cucumber.datatable.DataTable)&amp#27;[0m
+    | todoId | todoTitle         | todoDoneStatus | todoDescription                         | tasksofId |
+    | 3      | Create repository | false          | Create the project repository on GitHub | 2         |
+    | 4      | Write tests       | false          | Write unit tests for the project        | 2         |
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe response status code is &amp#27;[0m&amp#27;[32m&amp#27;[1m"200"&amp#27;[0m                                                           &amp#27;[90m# steps.InteroperabilityStepDefinitions.theResponseStatusCodeIs(java.lang.String)&amp#27;[0m
+]]></system-out>
+  </testcase>
+  <testcase name="Example #1.1" classname="Examples" time="1.056">
+    <system-out><![CDATA[
+Scenario Outline: User gets the existing todos associated with an existing project that has no todos associated. (Alternate flow) &amp#27;[90m# features/todo_and_project_management.feature:167&amp#27;[0m
+  &amp#27;[32mGiven &amp#27;[0m&amp#27;[32mthe Rest API Todo List Manager is running&amp#27;[0m                                                                                 &amp#27;[90m# setup.ScenarioHooks.the_rest_api_todo_list_manager_is_running()&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe system is initialized with no data&amp#27;[0m                                                                                      &amp#27;[90m# steps.InteroperabilityStepDefinitions.theSystemIsInitializedWithNoData()&amp#27;[0m
+  &amp#27;[32mGiven &amp#27;[0m&amp#27;[32mthe following todos exist:&amp#27;[0m                                                                                                &amp#27;[90m# steps.InteroperabilityStepDefinitions.theFollowingTodosExist(io.cucumber.datatable.DataTable)&amp#27;[0m
+    | todoId | todoTitle         | todoDoneStatus | todoDescription                         |
+    | 3      | Create repository | false          | Create the project repository on GitHub |
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe following projects exist:&amp#27;[0m                                                                                               &amp#27;[90m# steps.InteroperabilityStepDefinitions.theFollowingProjectsExist(io.cucumber.datatable.DataTable)&amp#27;[0m
+    | projectId | projectTitle    | projectCompleted | projectActive | projectDescription                    |
+    | 2         | ECSE429 Project | false            | true          | "est API for a project management app |
+  &amp#27;[32mWhen &amp#27;[0m&amp#27;[32mthe user gets the todos associated with the project with id &amp#27;[0m&amp#27;[32m&amp#27;[1m"2"&amp#27;[0m                                                            &amp#27;[90m# steps.InteroperabilityStepDefinitions.theUserGetsTheTodosAssociatedWithTheProjectWithId(java.lang.String)&amp#27;[0m
+  &amp#27;[32mThen &amp#27;[0m&amp#27;[32mthe returned todos is empty&amp#27;[0m                                                                                                &amp#27;[90m# steps.InteroperabilityStepDefinitions.theReturnedTodosIsEmpty()&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe response status code is &amp#27;[0m&amp#27;[32m&amp#27;[1m"200"&amp#27;[0m                                                                                           &amp#27;[90m# steps.InteroperabilityStepDefinitions.theResponseStatusCodeIs(java.lang.String)&amp#27;[0m
+]]></system-out>
+  </testcase>
+  <testcase name="Example #1.1" classname="Examples" time="1.062">
+    <failure type="java.lang.AssertionError"><![CDATA[java.lang.AssertionError
+	at steps.InteroperabilityStepDefinitions.anErrorMessageIsReturned(InteroperabilityStepDefinitions.java:323)
+	at ✽.an error message "Could not find any instances with projects/100/tasks" is returned(classpath:features/todo_and_project_management.feature:178)
+]]></failure>
+    <system-out><![CDATA[
+Scenario Outline: User gets the existing todos associated with an inexistent project. (Error flow) &amp#27;[90m# features/todo_and_project_management.feature:182&amp#27;[0m
+  &amp#27;[32mGiven &amp#27;[0m&amp#27;[32mthe Rest API Todo List Manager is running&amp#27;[0m                                                  &amp#27;[90m# setup.ScenarioHooks.the_rest_api_todo_list_manager_is_running()&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe system is initialized with no data&amp#27;[0m                                                       &amp#27;[90m# steps.InteroperabilityStepDefinitions.theSystemIsInitializedWithNoData()&amp#27;[0m
+  &amp#27;[32mGiven &amp#27;[0m&amp#27;[32mthe following todos exist:&amp#27;[0m                                                                 &amp#27;[90m# steps.InteroperabilityStepDefinitions.theFollowingTodosExist(io.cucumber.datatable.DataTable)&amp#27;[0m
+    | todoId | todoTitle         | todoDoneStatus | todoDescription                         |
+    | 3      | Create repository | false          | Create the project repository on GitHub |
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe following projects exist:&amp#27;[0m                                                                &amp#27;[90m# steps.InteroperabilityStepDefinitions.theFollowingProjectsExist(io.cucumber.datatable.DataTable)&amp#27;[0m
+    | projectId | projectTitle    | projectCompleted | projectActive | projectDescription                    |
+    | 2         | ECSE429 Project | false            | true          | Test API for a project management app |
+  &amp#27;[32mWhen &amp#27;[0m&amp#27;[32mthe user gets the todos associated with the project with id &amp#27;[0m&amp#27;[32m&amp#27;[1m"100"&amp#27;[0m                           &amp#27;[90m# steps.InteroperabilityStepDefinitions.theUserGetsTheTodosAssociatedWithTheProjectWithId(java.lang.String)&amp#27;[0m
+Failed to retrieve error message from response.
+  &amp#27;[31mThen &amp#27;[0m&amp#27;[31man error message &amp#27;[0m&amp#27;[31m&amp#27;[1m"Could not find any instances with projects/100/tasks"&amp#27;[0m&amp#27;[31m is returned&amp#27;[0m         &amp#27;[90m# steps.InteroperabilityStepDefinitions.anErrorMessageIsReturned(java.lang.String)&amp#27;[0m
+      &amp#27;[31mjava.lang.AssertionError
+	at steps.InteroperabilityStepDefinitions.anErrorMessageIsReturned(InteroperabilityStepDefinitions.java:323)
+	at ✽.an error message "Could not find any instances with projects/100/tasks" is returned(classpath:features/todo_and_project_management.feature:178)
+&amp#27;[0m
+  &amp#27;[36mAnd &amp#27;[0m&amp#27;[36mthe response status code is &amp#27;[0m&amp#27;[36m&amp#27;[1m"404"&amp#27;[0m                                                            &amp#27;[90m# steps.InteroperabilityStepDefinitions.theResponseStatusCodeIs(java.lang.String)&amp#27;[0m
+]]></system-out>
+  </testcase>
+  <testcase name="Example #1.1" classname="Creation Flows (Normal, Alternate, Error)" time="1.025">
+    <system-out><![CDATA[
+@todo
+Scenario Outline: Create a new todo task with optional fields and check for errors   &amp#27;[90m# features/todos_management.feature:27&amp#27;[0m
+  &amp#27;[32mGiven &amp#27;[0m&amp#27;[32mthe Rest API Todo List Manager is running&amp#27;[0m                                    &amp#27;[90m# setup.ScenarioHooks.the_rest_api_todo_list_manager_is_running()&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mmy list of tasks is cleared to start fresh&amp#27;[0m                                     &amp#27;[90m# setup.ScenarioHooks.the_system_is_initialized_with_an_empty_todo_list()&amp#27;[0m
+  &amp#27;[32mWhen &amp#27;[0m&amp#27;[32mI send a request to create a task with these details:&amp#27;[0m                         &amp#27;[90m# steps.TodoStepDefinitions.i_send_a_request_to_create_a_task_with_these_details(io.cucumber.datatable.DataTable)&amp#27;[0m
+    | title        | description        | doneStatus |
+    | Full testing | Full testing task. | false      |
+  &amp#27;[32mThen &amp#27;[0m&amp#27;[32mthe status code should be &amp#27;[0m&amp#27;[32m&amp#27;[1m201&amp#27;[0m                                                 &amp#27;[90m# steps.TodoStepDefinitions.the_creation_status_should_be(int)&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe saved task should show field &amp#27;[0m&amp#27;[32m&amp#27;[1m"title"&amp#27;[0m&amp#27;[32m with value &amp#27;[0m&amp#27;[32m&amp#27;[1m"Full testing"&amp#27;[0m             &amp#27;[90m# steps.TodoStepDefinitions.the_saved_task_should_show_field_with_value(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe saved task should show field &amp#27;[0m&amp#27;[32m&amp#27;[1m"description"&amp#27;[0m&amp#27;[32m with value &amp#27;[0m&amp#27;[32m&amp#27;[1m"Full testing task."&amp#27;[0m &amp#27;[90m# steps.TodoStepDefinitions.the_saved_task_should_show_field_with_value(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe saved task should show field &amp#27;[0m&amp#27;[32m&amp#27;[1m"doneStatus"&amp#27;[0m&amp#27;[32m with value &amp#27;[0m&amp#27;[32m&amp#27;[1m"false"&amp#27;[0m               &amp#27;[90m# steps.TodoStepDefinitions.the_saved_task_should_show_field_with_value(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe system should tell me if there was an error: &amp#27;[0m&amp#27;[32m&amp#27;[1m""&amp#27;[0m                            &amp#27;[90m# steps.TodoStepDefinitions.the_system_should_tell_me_if_there_was_an_error(java.lang.String)&amp#27;[0m
+]]></system-out>
+  </testcase>
+  <testcase name="Example #1.2" classname="Creation Flows (Normal, Alternate, Error)" time="1.032">
+    <system-out><![CDATA[
+@todo
+Scenario Outline: Create a new todo task with optional fields and check for errors &amp#27;[90m# features/todos_management.feature:29&amp#27;[0m
+  &amp#27;[32mGiven &amp#27;[0m&amp#27;[32mthe Rest API Todo List Manager is running&amp#27;[0m                                  &amp#27;[90m# setup.ScenarioHooks.the_rest_api_todo_list_manager_is_running()&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mmy list of tasks is cleared to start fresh&amp#27;[0m                                   &amp#27;[90m# setup.ScenarioHooks.the_system_is_initialized_with_an_empty_todo_list()&amp#27;[0m
+  &amp#27;[32mWhen &amp#27;[0m&amp#27;[32mI send a request to create a task with these details:&amp#27;[0m                       &amp#27;[90m# steps.TodoStepDefinitions.i_send_a_request_to_create_a_task_with_these_details(io.cucumber.datatable.DataTable)&amp#27;[0m
+    | title      | description | doneStatus |
+    | Quick task | [empty]     | true       |
+  &amp#27;[32mThen &amp#27;[0m&amp#27;[32mthe status code should be &amp#27;[0m&amp#27;[32m&amp#27;[1m201&amp#27;[0m                                               &amp#27;[90m# steps.TodoStepDefinitions.the_creation_status_should_be(int)&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe saved task should show field &amp#27;[0m&amp#27;[32m&amp#27;[1m"title"&amp#27;[0m&amp#27;[32m with value &amp#27;[0m&amp#27;[32m&amp#27;[1m"Quick task"&amp#27;[0m             &amp#27;[90m# steps.TodoStepDefinitions.the_saved_task_should_show_field_with_value(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe saved task should show field &amp#27;[0m&amp#27;[32m&amp#27;[1m"description"&amp#27;[0m&amp#27;[32m with value &amp#27;[0m&amp#27;[32m&amp#27;[1m""&amp#27;[0m                 &amp#27;[90m# steps.TodoStepDefinitions.the_saved_task_should_show_field_with_value(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe saved task should show field &amp#27;[0m&amp#27;[32m&amp#27;[1m"doneStatus"&amp#27;[0m&amp#27;[32m with value &amp#27;[0m&amp#27;[32m&amp#27;[1m"true"&amp#27;[0m              &amp#27;[90m# steps.TodoStepDefinitions.the_saved_task_should_show_field_with_value(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe system should tell me if there was an error: &amp#27;[0m&amp#27;[32m&amp#27;[1m""&amp#27;[0m                          &amp#27;[90m# steps.TodoStepDefinitions.the_system_should_tell_me_if_there_was_an_error(java.lang.String)&amp#27;[0m
+]]></system-out>
+  </testcase>
+  <testcase name="Example #1.3" classname="Creation Flows (Normal, Alternate, Error)" time="1.036">
+    <system-out><![CDATA[
+@todo
+Scenario Outline: Create a new todo task with optional fields and check for errors  &amp#27;[90m# features/todos_management.feature:31&amp#27;[0m
+  &amp#27;[32mGiven &amp#27;[0m&amp#27;[32mthe Rest API Todo List Manager is running&amp#27;[0m                                   &amp#27;[90m# setup.ScenarioHooks.the_rest_api_todo_list_manager_is_running()&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mmy list of tasks is cleared to start fresh&amp#27;[0m                                    &amp#27;[90m# setup.ScenarioHooks.the_system_is_initialized_with_an_empty_todo_list()&amp#27;[0m
+  &amp#27;[32mWhen &amp#27;[0m&amp#27;[32mI send a request to create a task with these details:&amp#27;[0m                        &amp#27;[90m# steps.TodoStepDefinitions.i_send_a_request_to_create_a_task_with_these_details(io.cucumber.datatable.DataTable)&amp#27;[0m
+    | title   | description        | doneStatus |
+    | [empty] | No title provided. | false      |
+  &amp#27;[32mThen &amp#27;[0m&amp#27;[32mthe status code should be &amp#27;[0m&amp#27;[32m&amp#27;[1m400&amp#27;[0m                                                &amp#27;[90m# steps.TodoStepDefinitions.the_creation_status_should_be(int)&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe saved task should show field &amp#27;[0m&amp#27;[32m&amp#27;[1m"title"&amp#27;[0m&amp#27;[32m with value &amp#27;[0m&amp#27;[32m&amp#27;[1m""&amp#27;[0m                        &amp#27;[90m# steps.TodoStepDefinitions.the_saved_task_should_show_field_with_value(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe saved task should show field &amp#27;[0m&amp#27;[32m&amp#27;[1m"description"&amp#27;[0m&amp#27;[32m with value &amp#27;[0m&amp#27;[32m&amp#27;[1m""&amp#27;[0m                  &amp#27;[90m# steps.TodoStepDefinitions.the_saved_task_should_show_field_with_value(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe saved task should show field &amp#27;[0m&amp#27;[32m&amp#27;[1m"doneStatus"&amp#27;[0m&amp#27;[32m with value &amp#27;[0m&amp#27;[32m&amp#27;[1m""&amp#27;[0m                   &amp#27;[90m# steps.TodoStepDefinitions.the_saved_task_should_show_field_with_value(java.lang.String,java.lang.String)&amp#27;[0m
+Confirmed presence of expected error message: title : field is mandatory
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe system should tell me if there was an error: &amp#27;[0m&amp#27;[32m&amp#27;[1m"title : field is mandatory"&amp#27;[0m &amp#27;[90m# steps.TodoStepDefinitions.the_system_should_tell_me_if_there_was_an_error(java.lang.String)&amp#27;[0m
+]]></system-out>
+  </testcase>
+  <testcase name="Example #1.1" classname="Partial Update Flows (Normal, Alternate, Error)" time="1.047">
+    <system-out><![CDATA[
+@todo
+Scenario Outline: Update an existing todo's doneStatus and/or description                                        &amp#27;[90m# features/todos_management.feature:54&amp#27;[0m
+  &amp#27;[32mGiven &amp#27;[0m&amp#27;[32mthe Rest API Todo List Manager is running&amp#27;[0m                                                                &amp#27;[90m# setup.ScenarioHooks.the_rest_api_todo_list_manager_is_running()&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mmy list of tasks is cleared to start fresh&amp#27;[0m                                                                 &amp#27;[90m# setup.ScenarioHooks.the_system_is_initialized_with_an_empty_todo_list()&amp#27;[0m
+  &amp#27;[32mGiven &amp#27;[0m&amp#27;[32ma todo item exists with title &amp#27;[0m&amp#27;[32m&amp#27;[1m"POST Target Task"&amp#27;[0m&amp#27;[32m, description &amp#27;[0m&amp#27;[32m&amp#27;[1m"Original Content"&amp#27;[0m&amp#27;[32m, and doneStatus &amp#27;[0m&amp#27;[32m&amp#27;[1m"false"&amp#27;[0m &amp#27;[90m# steps.TodoStepDefinitions.a_todo_exists_with_title_description_and_doneStatus(java.lang.String,java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mits ID is stored as &amp#27;[0m&amp#27;[32m&amp#27;[1m"target_todo_id"&amp#27;[0m                                                                       &amp#27;[90m# steps.TodoStepDefinitions.its_id_is_stored_as(java.lang.String)&amp#27;[0m
+  &amp#27;[32mWhen &amp#27;[0m&amp#27;[32mI send a request to update task &amp#27;[0m&amp#27;[32m&amp#27;[1m"target_todo_id"&amp#27;[0m&amp#27;[32m with body:&amp#27;[0m                                               &amp#27;[90m# steps.TodoStepDefinitions.i_send_a_request_to_update_task_with_body(java.lang.String,io.cucumber.datatable.DataTable)&amp#27;[0m
+    | description | doneStatus |
+    | [empty]     | true       |
+  &amp#27;[32mThen &amp#27;[0m&amp#27;[32mthe status code should be &amp#27;[0m&amp#27;[32m&amp#27;[1m200&amp#27;[0m                                                                             &amp#27;[90m# steps.TodoStepDefinitions.the_creation_status_should_be(int)&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe saved task should show field &amp#27;[0m&amp#27;[32m&amp#27;[1m"title"&amp#27;[0m&amp#27;[32m with value &amp#27;[0m&amp#27;[32m&amp#27;[1m"POST Target Task"&amp#27;[0m                                     &amp#27;[90m# steps.TodoStepDefinitions.the_saved_task_should_show_field_with_value(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe saved task should show field &amp#27;[0m&amp#27;[32m&amp#27;[1m"description"&amp#27;[0m&amp#27;[32m with value &amp#27;[0m&amp#27;[32m&amp#27;[1m"Original Content"&amp#27;[0m                               &amp#27;[90m# steps.TodoStepDefinitions.the_saved_task_should_show_field_with_value(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe saved task should show field &amp#27;[0m&amp#27;[32m&amp#27;[1m"doneStatus"&amp#27;[0m&amp#27;[32m with value &amp#27;[0m&amp#27;[32m&amp#27;[1m"true"&amp#27;[0m                                            &amp#27;[90m# steps.TodoStepDefinitions.the_saved_task_should_show_field_with_value(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe system should tell me if there was an error: &amp#27;[0m&amp#27;[32m&amp#27;[1m""&amp#27;[0m                                                        &amp#27;[90m# steps.TodoStepDefinitions.the_system_should_tell_me_if_there_was_an_error(java.lang.String)&amp#27;[0m
+]]></system-out>
+  </testcase>
+  <testcase name="Example #1.2" classname="Partial Update Flows (Normal, Alternate, Error)" time="1.043">
+    <system-out><![CDATA[
+@todo
+Scenario Outline: Update an existing todo's doneStatus and/or description                                        &amp#27;[90m# features/todos_management.feature:56&amp#27;[0m
+  &amp#27;[32mGiven &amp#27;[0m&amp#27;[32mthe Rest API Todo List Manager is running&amp#27;[0m                                                                &amp#27;[90m# setup.ScenarioHooks.the_rest_api_todo_list_manager_is_running()&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mmy list of tasks is cleared to start fresh&amp#27;[0m                                                                 &amp#27;[90m# setup.ScenarioHooks.the_system_is_initialized_with_an_empty_todo_list()&amp#27;[0m
+  &amp#27;[32mGiven &amp#27;[0m&amp#27;[32ma todo item exists with title &amp#27;[0m&amp#27;[32m&amp#27;[1m"POST Target Task"&amp#27;[0m&amp#27;[32m, description &amp#27;[0m&amp#27;[32m&amp#27;[1m"Original Content"&amp#27;[0m&amp#27;[32m, and doneStatus &amp#27;[0m&amp#27;[32m&amp#27;[1m"false"&amp#27;[0m &amp#27;[90m# steps.TodoStepDefinitions.a_todo_exists_with_title_description_and_doneStatus(java.lang.String,java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mits ID is stored as &amp#27;[0m&amp#27;[32m&amp#27;[1m"target_todo_id"&amp#27;[0m                                                                       &amp#27;[90m# steps.TodoStepDefinitions.its_id_is_stored_as(java.lang.String)&amp#27;[0m
+  &amp#27;[32mWhen &amp#27;[0m&amp#27;[32mI send a request to update task &amp#27;[0m&amp#27;[32m&amp#27;[1m"target_todo_id"&amp#27;[0m&amp#27;[32m with body:&amp#27;[0m                                               &amp#27;[90m# steps.TodoStepDefinitions.i_send_a_request_to_update_task_with_body(java.lang.String,io.cucumber.datatable.DataTable)&amp#27;[0m
+    | description         | doneStatus |
+    | Updated description | false      |
+  &amp#27;[32mThen &amp#27;[0m&amp#27;[32mthe status code should be &amp#27;[0m&amp#27;[32m&amp#27;[1m200&amp#27;[0m                                                                             &amp#27;[90m# steps.TodoStepDefinitions.the_creation_status_should_be(int)&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe saved task should show field &amp#27;[0m&amp#27;[32m&amp#27;[1m"title"&amp#27;[0m&amp#27;[32m with value &amp#27;[0m&amp#27;[32m&amp#27;[1m"POST Target Task"&amp#27;[0m                                     &amp#27;[90m# steps.TodoStepDefinitions.the_saved_task_should_show_field_with_value(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe saved task should show field &amp#27;[0m&amp#27;[32m&amp#27;[1m"description"&amp#27;[0m&amp#27;[32m with value &amp#27;[0m&amp#27;[32m&amp#27;[1m"Updated description"&amp#27;[0m                            &amp#27;[90m# steps.TodoStepDefinitions.the_saved_task_should_show_field_with_value(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe saved task should show field &amp#27;[0m&amp#27;[32m&amp#27;[1m"doneStatus"&amp#27;[0m&amp#27;[32m with value &amp#27;[0m&amp#27;[32m&amp#27;[1m"false"&amp#27;[0m                                           &amp#27;[90m# steps.TodoStepDefinitions.the_saved_task_should_show_field_with_value(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe system should tell me if there was an error: &amp#27;[0m&amp#27;[32m&amp#27;[1m""&amp#27;[0m                                                        &amp#27;[90m# steps.TodoStepDefinitions.the_system_should_tell_me_if_there_was_an_error(java.lang.String)&amp#27;[0m
+]]></system-out>
+  </testcase>
+  <testcase name="Example #1.3" classname="Partial Update Flows (Normal, Alternate, Error)" time="1.027">
+    <system-out><![CDATA[
+@todo
+Scenario Outline: Update an existing todo's doneStatus and/or description                                        &amp#27;[90m# features/todos_management.feature:58&amp#27;[0m
+  &amp#27;[32mGiven &amp#27;[0m&amp#27;[32mthe Rest API Todo List Manager is running&amp#27;[0m                                                                &amp#27;[90m# setup.ScenarioHooks.the_rest_api_todo_list_manager_is_running()&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mmy list of tasks is cleared to start fresh&amp#27;[0m                                                                 &amp#27;[90m# setup.ScenarioHooks.the_system_is_initialized_with_an_empty_todo_list()&amp#27;[0m
+  &amp#27;[32mGiven &amp#27;[0m&amp#27;[32ma todo item exists with title &amp#27;[0m&amp#27;[32m&amp#27;[1m"POST Target Task"&amp#27;[0m&amp#27;[32m, description &amp#27;[0m&amp#27;[32m&amp#27;[1m"Original Content"&amp#27;[0m&amp#27;[32m, and doneStatus &amp#27;[0m&amp#27;[32m&amp#27;[1m"false"&amp#27;[0m &amp#27;[90m# steps.TodoStepDefinitions.a_todo_exists_with_title_description_and_doneStatus(java.lang.String,java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mits ID is stored as &amp#27;[0m&amp#27;[32m&amp#27;[1m"target_todo_id"&amp#27;[0m                                                                       &amp#27;[90m# steps.TodoStepDefinitions.its_id_is_stored_as(java.lang.String)&amp#27;[0m
+  &amp#27;[32mWhen &amp#27;[0m&amp#27;[32mI send a request to update task &amp#27;[0m&amp#27;[32m&amp#27;[1m"999"&amp#27;[0m&amp#27;[32m with body:&amp#27;[0m                                                          &amp#27;[90m# steps.TodoStepDefinitions.i_send_a_request_to_update_task_with_body(java.lang.String,io.cucumber.datatable.DataTable)&amp#27;[0m
+    | description | doneStatus |
+    | [empty]     | true       |
+  &amp#27;[32mThen &amp#27;[0m&amp#27;[32mthe status code should be &amp#27;[0m&amp#27;[32m&amp#27;[1m404&amp#27;[0m                                                                             &amp#27;[90m# steps.TodoStepDefinitions.the_creation_status_should_be(int)&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe saved task should show field &amp#27;[0m&amp#27;[32m&amp#27;[1m"title"&amp#27;[0m&amp#27;[32m with value &amp#27;[0m&amp#27;[32m&amp#27;[1m""&amp#27;[0m                                                     &amp#27;[90m# steps.TodoStepDefinitions.the_saved_task_should_show_field_with_value(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe saved task should show field &amp#27;[0m&amp#27;[32m&amp#27;[1m"description"&amp#27;[0m&amp#27;[32m with value &amp#27;[0m&amp#27;[32m&amp#27;[1m""&amp#27;[0m                                               &amp#27;[90m# steps.TodoStepDefinitions.the_saved_task_should_show_field_with_value(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe saved task should show field &amp#27;[0m&amp#27;[32m&amp#27;[1m"doneStatus"&amp#27;[0m&amp#27;[32m with value &amp#27;[0m&amp#27;[32m&amp#27;[1m""&amp#27;[0m                                                &amp#27;[90m# steps.TodoStepDefinitions.the_saved_task_should_show_field_with_value(java.lang.String,java.lang.String)&amp#27;[0m
+Confirmed presence of expected error message: No such todo entity instance with GUID or ID null found
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe system should tell me if there was an error: &amp#27;[0m&amp#27;[32m&amp#27;[1m"No such todo entity instance with GUID or ID null found"&amp#27;[0m &amp#27;[90m# steps.TodoStepDefinitions.the_system_should_tell_me_if_there_was_an_error(java.lang.String)&amp#27;[0m
+]]></system-out>
+  </testcase>
+  <testcase name="Example #1.1" classname="Retrieval and Filtering Flows (Normal, Alternate, Error)" time="1.035">
+    <system-out><![CDATA[
+@todo
+Scenario Outline: Retrieve and filter Todos by done status                                                               &amp#27;[90m# features/todos_management.feature:79&amp#27;[0m
+  &amp#27;[32mGiven &amp#27;[0m&amp#27;[32mthe Rest API Todo List Manager is running&amp#27;[0m                                                                        &amp#27;[90m# setup.ScenarioHooks.the_rest_api_todo_list_manager_is_running()&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mmy list of tasks is cleared to start fresh&amp#27;[0m                                                                         &amp#27;[90m# setup.ScenarioHooks.the_system_is_initialized_with_an_empty_todo_list()&amp#27;[0m
+  &amp#27;[32mGiven &amp#27;[0m&amp#27;[32ma todo item exists with title &amp#27;[0m&amp#27;[32m&amp#27;[1m"Completed Filter Test 1"&amp#27;[0m&amp#27;[32m, description &amp#27;[0m&amp#27;[32m&amp#27;[1m"This is done"&amp#27;[0m&amp#27;[32m, and doneStatus &amp#27;[0m&amp#27;[32m&amp#27;[1m"true"&amp#27;[0m       &amp#27;[90m# steps.TodoStepDefinitions.a_todo_exists_with_title_description_and_doneStatus(java.lang.String,java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32ma todo item exists with title &amp#27;[0m&amp#27;[32m&amp#27;[1m"Completed Filter Test 2"&amp#27;[0m&amp#27;[32m, description &amp#27;[0m&amp#27;[32m&amp#27;[1m"This is also done"&amp#27;[0m&amp#27;[32m, and doneStatus &amp#27;[0m&amp#27;[32m&amp#27;[1m"true"&amp#27;[0m    &amp#27;[90m# steps.TodoStepDefinitions.a_todo_exists_with_title_description_and_doneStatus(java.lang.String,java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32ma todo item exists with title &amp#27;[0m&amp#27;[32m&amp#27;[1m"Pending Filter Test 1"&amp#27;[0m&amp#27;[32m, description &amp#27;[0m&amp#27;[32m&amp#27;[1m"This is not done"&amp#27;[0m&amp#27;[32m, and doneStatus &amp#27;[0m&amp#27;[32m&amp#27;[1m"false"&amp#27;[0m      &amp#27;[90m# steps.TodoStepDefinitions.a_todo_exists_with_title_description_and_doneStatus(java.lang.String,java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32ma todo item exists with title &amp#27;[0m&amp#27;[32m&amp#27;[1m"Pending Filter Test 2"&amp#27;[0m&amp#27;[32m, description &amp#27;[0m&amp#27;[32m&amp#27;[1m"This is also not done"&amp#27;[0m&amp#27;[32m, and doneStatus &amp#27;[0m&amp#27;[32m&amp#27;[1m"false"&amp#27;[0m &amp#27;[90m# steps.TodoStepDefinitions.a_todo_exists_with_title_description_and_doneStatus(java.lang.String,java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mWhen &amp#27;[0m&amp#27;[32mI send a request to view tasks filtered by the query &amp#27;[0m&amp#27;[32m&amp#27;[1m"?doneStatus=false"&amp#27;[0m&amp#27;[32m and requested format &amp#27;[0m&amp#27;[32m&amp#27;[1m"application/json"&amp#27;[0m  &amp#27;[90m# steps.TodoStepDefinitions.i_send_a_request_to_view_tasks_filtered_by_the_query_and_requested_format(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mThen &amp#27;[0m&amp#27;[32mthe status code should be &amp#27;[0m&amp#27;[32m&amp#27;[1m200&amp#27;[0m                                                                                     &amp#27;[90m# steps.TodoStepDefinitions.the_creation_status_should_be(int)&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe task list format should be &amp#27;[0m&amp#27;[32m&amp#27;[1m"application/json"&amp#27;[0m                                                                  &amp#27;[90m# steps.TodoStepDefinitions.the_task_list_format_should_be(java.lang.String)&amp#27;[0m
+Retrieved 2 todos from response for filtering check.
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe list should contain &amp#27;[0m&amp#27;[32m&amp#27;[1m2&amp#27;[0m&amp#27;[32m tasks with completion status &amp#27;[0m&amp#27;[32m&amp#27;[1m"false"&amp#27;[0m                                                     &amp#27;[90m# steps.TodoStepDefinitions.the_list_should_contain_tasks_with_completion_status(int,java.lang.String)&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe system should tell me if there was an error: &amp#27;[0m&amp#27;[32m&amp#27;[1m""&amp#27;[0m                                                                &amp#27;[90m# steps.TodoStepDefinitions.the_system_should_tell_me_if_there_was_an_error(java.lang.String)&amp#27;[0m
+]]></system-out>
+  </testcase>
+  <testcase name="Example #1.2" classname="Retrieval and Filtering Flows (Normal, Alternate, Error)" time="1.088">
+    <system-out><![CDATA[
+@todo
+Scenario Outline: Retrieve and filter Todos by done status                                                               &amp#27;[90m# features/todos_management.feature:81&amp#27;[0m
+  &amp#27;[32mGiven &amp#27;[0m&amp#27;[32mthe Rest API Todo List Manager is running&amp#27;[0m                                                                        &amp#27;[90m# setup.ScenarioHooks.the_rest_api_todo_list_manager_is_running()&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mmy list of tasks is cleared to start fresh&amp#27;[0m                                                                         &amp#27;[90m# setup.ScenarioHooks.the_system_is_initialized_with_an_empty_todo_list()&amp#27;[0m
+  &amp#27;[32mGiven &amp#27;[0m&amp#27;[32ma todo item exists with title &amp#27;[0m&amp#27;[32m&amp#27;[1m"Completed Filter Test 1"&amp#27;[0m&amp#27;[32m, description &amp#27;[0m&amp#27;[32m&amp#27;[1m"This is done"&amp#27;[0m&amp#27;[32m, and doneStatus &amp#27;[0m&amp#27;[32m&amp#27;[1m"true"&amp#27;[0m       &amp#27;[90m# steps.TodoStepDefinitions.a_todo_exists_with_title_description_and_doneStatus(java.lang.String,java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32ma todo item exists with title &amp#27;[0m&amp#27;[32m&amp#27;[1m"Completed Filter Test 2"&amp#27;[0m&amp#27;[32m, description &amp#27;[0m&amp#27;[32m&amp#27;[1m"This is also done"&amp#27;[0m&amp#27;[32m, and doneStatus &amp#27;[0m&amp#27;[32m&amp#27;[1m"true"&amp#27;[0m    &amp#27;[90m# steps.TodoStepDefinitions.a_todo_exists_with_title_description_and_doneStatus(java.lang.String,java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32ma todo item exists with title &amp#27;[0m&amp#27;[32m&amp#27;[1m"Pending Filter Test 1"&amp#27;[0m&amp#27;[32m, description &amp#27;[0m&amp#27;[32m&amp#27;[1m"This is not done"&amp#27;[0m&amp#27;[32m, and doneStatus &amp#27;[0m&amp#27;[32m&amp#27;[1m"false"&amp#27;[0m      &amp#27;[90m# steps.TodoStepDefinitions.a_todo_exists_with_title_description_and_doneStatus(java.lang.String,java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32ma todo item exists with title &amp#27;[0m&amp#27;[32m&amp#27;[1m"Pending Filter Test 2"&amp#27;[0m&amp#27;[32m, description &amp#27;[0m&amp#27;[32m&amp#27;[1m"This is also not done"&amp#27;[0m&amp#27;[32m, and doneStatus &amp#27;[0m&amp#27;[32m&amp#27;[1m"false"&amp#27;[0m &amp#27;[90m# steps.TodoStepDefinitions.a_todo_exists_with_title_description_and_doneStatus(java.lang.String,java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mWhen &amp#27;[0m&amp#27;[32mI send a request to view tasks filtered by the query &amp#27;[0m&amp#27;[32m&amp#27;[1m"?doneStatus=false"&amp#27;[0m&amp#27;[32m and requested format &amp#27;[0m&amp#27;[32m&amp#27;[1m"application/xml"&amp#27;[0m   &amp#27;[90m# steps.TodoStepDefinitions.i_send_a_request_to_view_tasks_filtered_by_the_query_and_requested_format(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mThen &amp#27;[0m&amp#27;[32mthe status code should be &amp#27;[0m&amp#27;[32m&amp#27;[1m200&amp#27;[0m                                                                                     &amp#27;[90m# steps.TodoStepDefinitions.the_creation_status_should_be(int)&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe task list format should be &amp#27;[0m&amp#27;[32m&amp#27;[1m"application/xml"&amp#27;[0m                                                                   &amp#27;[90m# steps.TodoStepDefinitions.the_task_list_format_should_be(java.lang.String)&amp#27;[0m
+Retrieved 2 todos from response for filtering check.
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe list should contain &amp#27;[0m&amp#27;[32m&amp#27;[1m2&amp#27;[0m&amp#27;[32m tasks with completion status &amp#27;[0m&amp#27;[32m&amp#27;[1m"false"&amp#27;[0m                                                     &amp#27;[90m# steps.TodoStepDefinitions.the_list_should_contain_tasks_with_completion_status(int,java.lang.String)&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe system should tell me if there was an error: &amp#27;[0m&amp#27;[32m&amp#27;[1m""&amp#27;[0m                                                                &amp#27;[90m# steps.TodoStepDefinitions.the_system_should_tell_me_if_there_was_an_error(java.lang.String)&amp#27;[0m
+]]></system-out>
+  </testcase>
+  <testcase name="Example #1.3" classname="Retrieval and Filtering Flows (Normal, Alternate, Error)" time="1.025">
+    <failure message="Expected status code did not match actual code. Response body: {&quot;todos&quot;:[]} ==&gt; expected: &lt;400&gt; but was: &lt;200&gt;" type="org.opentest4j.AssertionFailedError"><![CDATA[org.opentest4j.AssertionFailedError: Expected status code did not match actual code. Response body: {"todos":[]} ==> expected: <400> but was: <200>
+	at steps.TodoStepDefinitions.the_creation_status_should_be(TodoStepDefinitions.java:74)
+	at ✽.the status code should be 400(classpath:features/todos_management.feature:71)
+]]></failure>
+    <system-out><![CDATA[
+@todo
+Scenario Outline: Retrieve and filter Todos by done status                                                               &amp#27;[90m# features/todos_management.feature:83&amp#27;[0m
+  &amp#27;[32mGiven &amp#27;[0m&amp#27;[32mthe Rest API Todo List Manager is running&amp#27;[0m                                                                        &amp#27;[90m# setup.ScenarioHooks.the_rest_api_todo_list_manager_is_running()&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mmy list of tasks is cleared to start fresh&amp#27;[0m                                                                         &amp#27;[90m# setup.ScenarioHooks.the_system_is_initialized_with_an_empty_todo_list()&amp#27;[0m
+  &amp#27;[32mGiven &amp#27;[0m&amp#27;[32ma todo item exists with title &amp#27;[0m&amp#27;[32m&amp#27;[1m"Completed Filter Test 1"&amp#27;[0m&amp#27;[32m, description &amp#27;[0m&amp#27;[32m&amp#27;[1m"This is done"&amp#27;[0m&amp#27;[32m, and doneStatus &amp#27;[0m&amp#27;[32m&amp#27;[1m"true"&amp#27;[0m       &amp#27;[90m# steps.TodoStepDefinitions.a_todo_exists_with_title_description_and_doneStatus(java.lang.String,java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32ma todo item exists with title &amp#27;[0m&amp#27;[32m&amp#27;[1m"Completed Filter Test 2"&amp#27;[0m&amp#27;[32m, description &amp#27;[0m&amp#27;[32m&amp#27;[1m"This is also done"&amp#27;[0m&amp#27;[32m, and doneStatus &amp#27;[0m&amp#27;[32m&amp#27;[1m"true"&amp#27;[0m    &amp#27;[90m# steps.TodoStepDefinitions.a_todo_exists_with_title_description_and_doneStatus(java.lang.String,java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32ma todo item exists with title &amp#27;[0m&amp#27;[32m&amp#27;[1m"Pending Filter Test 1"&amp#27;[0m&amp#27;[32m, description &amp#27;[0m&amp#27;[32m&amp#27;[1m"This is not done"&amp#27;[0m&amp#27;[32m, and doneStatus &amp#27;[0m&amp#27;[32m&amp#27;[1m"false"&amp#27;[0m      &amp#27;[90m# steps.TodoStepDefinitions.a_todo_exists_with_title_description_and_doneStatus(java.lang.String,java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32ma todo item exists with title &amp#27;[0m&amp#27;[32m&amp#27;[1m"Pending Filter Test 2"&amp#27;[0m&amp#27;[32m, description &amp#27;[0m&amp#27;[32m&amp#27;[1m"This is also not done"&amp#27;[0m&amp#27;[32m, and doneStatus &amp#27;[0m&amp#27;[32m&amp#27;[1m"false"&amp#27;[0m &amp#27;[90m# steps.TodoStepDefinitions.a_todo_exists_with_title_description_and_doneStatus(java.lang.String,java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mWhen &amp#27;[0m&amp#27;[32mI send a request to view tasks filtered by the query &amp#27;[0m&amp#27;[32m&amp#27;[1m"?doneStatus=maybe"&amp#27;[0m&amp#27;[32m and requested format &amp#27;[0m&amp#27;[32m&amp#27;[1m"application/json"&amp#27;[0m  &amp#27;[90m# steps.TodoStepDefinitions.i_send_a_request_to_view_tasks_filtered_by_the_query_and_requested_format(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[31mThen &amp#27;[0m&amp#27;[31mthe status code should be &amp#27;[0m&amp#27;[31m&amp#27;[1m400&amp#27;[0m                                                                                     &amp#27;[90m# steps.TodoStepDefinitions.the_creation_status_should_be(int)&amp#27;[0m
+      &amp#27;[31morg.opentest4j.AssertionFailedError: Expected status code did not match actual code. Response body: {"todos":[]} ==> expected: <400> but was: <200>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:150)
+	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:563)
+	at steps.TodoStepDefinitions.the_creation_status_should_be(TodoStepDefinitions.java:74)
+	at ✽.the status code should be 400(classpath:features/todos_management.feature:71)
+&amp#27;[0m
+  &amp#27;[36mAnd &amp#27;[0m&amp#27;[36mthe task list format should be &amp#27;[0m&amp#27;[36m&amp#27;[1m"application/json"&amp#27;[0m                                                                  &amp#27;[90m# steps.TodoStepDefinitions.the_task_list_format_should_be(java.lang.String)&amp#27;[0m
+  &amp#27;[36mAnd &amp#27;[0m&amp#27;[36mthe list should contain &amp#27;[0m&amp#27;[36m&amp#27;[1m0&amp#27;[0m&amp#27;[36m tasks with completion status &amp#27;[0m&amp#27;[36m&amp#27;[1m""&amp#27;[0m                                                          &amp#27;[90m# steps.TodoStepDefinitions.the_list_should_contain_tasks_with_completion_status(int,java.lang.String)&amp#27;[0m
+  &amp#27;[36mAnd &amp#27;[0m&amp#27;[36mthe system should tell me if there was an error: &amp#27;[0m&amp#27;[36m&amp#27;[1m"Invalid doneStatus value"&amp#27;[0m                                        &amp#27;[90m# steps.TodoStepDefinitions.the_system_should_tell_me_if_there_was_an_error(java.lang.String)&amp#27;[0m
+]]></system-out>
+  </testcase>
+  <testcase name="Example #1.1" classname="Deletion Flows (Normal, Alternate, Error)" time="1.05">
+    <system-out><![CDATA[
+@todo
+Scenario Outline: Delete a todo item                                                                              &amp#27;[90m# features/todos_management.feature:102&amp#27;[0m
+  &amp#27;[32mGiven &amp#27;[0m&amp#27;[32mthe Rest API Todo List Manager is running&amp#27;[0m                                                                 &amp#27;[90m# setup.ScenarioHooks.the_rest_api_todo_list_manager_is_running()&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mmy list of tasks is cleared to start fresh&amp#27;[0m                                                                  &amp#27;[90m# setup.ScenarioHooks.the_system_is_initialized_with_an_empty_todo_list()&amp#27;[0m
+  &amp#27;[32mGiven &amp#27;[0m&amp#27;[32ma todo item exists with title &amp#27;[0m&amp#27;[32m&amp#27;[1m"Deletion Target"&amp#27;[0m&amp#27;[32m, description &amp#27;[0m&amp#27;[32m&amp#27;[1m"Task to be deleted"&amp#27;[0m&amp#27;[32m, and doneStatus &amp#27;[0m&amp#27;[32m&amp#27;[1m"false"&amp#27;[0m &amp#27;[90m# steps.TodoStepDefinitions.a_todo_exists_with_title_description_and_doneStatus(java.lang.String,java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mits ID is stored as &amp#27;[0m&amp#27;[32m&amp#27;[1m"delete_todo_id"&amp#27;[0m                                                                        &amp#27;[90m# steps.TodoStepDefinitions.its_id_is_stored_as(java.lang.String)&amp#27;[0m
+  &amp#27;[32mWhen &amp#27;[0m&amp#27;[32mI send a request to delete task &amp#27;[0m&amp#27;[32m&amp#27;[1m"delete_todo_id"&amp#27;[0m&amp#27;[32m with requested format &amp#27;[0m&amp#27;[32m&amp#27;[1m"application/json"&amp#27;[0m                  &amp#27;[90m# steps.TodoStepDefinitions.i_send_a_request_to_delete_task_with_requested_format(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mThen &amp#27;[0m&amp#27;[32mthe status code should be &amp#27;[0m&amp#27;[32m&amp#27;[1m200&amp#27;[0m                                                                              &amp#27;[90m# steps.TodoStepDefinitions.the_creation_status_should_be(int)&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe system should tell me if there was an error: &amp#27;[0m&amp#27;[32m&amp#27;[1m""&amp#27;[0m                                                         &amp#27;[90m# steps.TodoStepDefinitions.the_system_should_tell_me_if_there_was_an_error(java.lang.String)&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe task with ID &amp#27;[0m&amp#27;[32m&amp#27;[1m"delete_todo_id"&amp#27;[0m&amp#27;[32m should yield a &amp#27;[0m&amp#27;[32m&amp#27;[1m"404"&amp#27;[0m&amp#27;[32m on a quick check&amp#27;[0m                                     &amp#27;[90m# steps.TodoStepDefinitions.the_task_with_id_should_yield_a_on_a_quick_check(java.lang.String,java.lang.String)&amp#27;[0m
+]]></system-out>
+  </testcase>
+  <testcase name="Example #1.2" classname="Deletion Flows (Normal, Alternate, Error)" time="1.01">
+    <system-out><![CDATA[
+@todo
+Scenario Outline: Delete a todo item                                                                              &amp#27;[90m# features/todos_management.feature:104&amp#27;[0m
+  &amp#27;[32mGiven &amp#27;[0m&amp#27;[32mthe Rest API Todo List Manager is running&amp#27;[0m                                                                 &amp#27;[90m# setup.ScenarioHooks.the_rest_api_todo_list_manager_is_running()&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mmy list of tasks is cleared to start fresh&amp#27;[0m                                                                  &amp#27;[90m# setup.ScenarioHooks.the_system_is_initialized_with_an_empty_todo_list()&amp#27;[0m
+  &amp#27;[32mGiven &amp#27;[0m&amp#27;[32ma todo item exists with title &amp#27;[0m&amp#27;[32m&amp#27;[1m"Deletion Target"&amp#27;[0m&amp#27;[32m, description &amp#27;[0m&amp#27;[32m&amp#27;[1m"Task to be deleted"&amp#27;[0m&amp#27;[32m, and doneStatus &amp#27;[0m&amp#27;[32m&amp#27;[1m"false"&amp#27;[0m &amp#27;[90m# steps.TodoStepDefinitions.a_todo_exists_with_title_description_and_doneStatus(java.lang.String,java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mits ID is stored as &amp#27;[0m&amp#27;[32m&amp#27;[1m"delete_todo_id"&amp#27;[0m                                                                        &amp#27;[90m# steps.TodoStepDefinitions.its_id_is_stored_as(java.lang.String)&amp#27;[0m
+  &amp#27;[32mWhen &amp#27;[0m&amp#27;[32mI send a request to delete task &amp#27;[0m&amp#27;[32m&amp#27;[1m"delete_todo_id"&amp#27;[0m&amp#27;[32m with requested format &amp#27;[0m&amp#27;[32m&amp#27;[1m"application/xml"&amp#27;[0m                   &amp#27;[90m# steps.TodoStepDefinitions.i_send_a_request_to_delete_task_with_requested_format(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mThen &amp#27;[0m&amp#27;[32mthe status code should be &amp#27;[0m&amp#27;[32m&amp#27;[1m200&amp#27;[0m                                                                              &amp#27;[90m# steps.TodoStepDefinitions.the_creation_status_should_be(int)&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe system should tell me if there was an error: &amp#27;[0m&amp#27;[32m&amp#27;[1m""&amp#27;[0m                                                         &amp#27;[90m# steps.TodoStepDefinitions.the_system_should_tell_me_if_there_was_an_error(java.lang.String)&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe task with ID &amp#27;[0m&amp#27;[32m&amp#27;[1m"delete_todo_id"&amp#27;[0m&amp#27;[32m should yield a &amp#27;[0m&amp#27;[32m&amp#27;[1m"404"&amp#27;[0m&amp#27;[32m on a quick check&amp#27;[0m                                     &amp#27;[90m# steps.TodoStepDefinitions.the_task_with_id_should_yield_a_on_a_quick_check(java.lang.String,java.lang.String)&amp#27;[0m
+]]></system-out>
+  </testcase>
+  <testcase name="Example #1.3" classname="Deletion Flows (Normal, Alternate, Error)" time="1.042">
+    <system-out><![CDATA[
+@todo
+Scenario Outline: Delete a todo item                                                                              &amp#27;[90m# features/todos_management.feature:106&amp#27;[0m
+  &amp#27;[32mGiven &amp#27;[0m&amp#27;[32mthe Rest API Todo List Manager is running&amp#27;[0m                                                                 &amp#27;[90m# setup.ScenarioHooks.the_rest_api_todo_list_manager_is_running()&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mmy list of tasks is cleared to start fresh&amp#27;[0m                                                                  &amp#27;[90m# setup.ScenarioHooks.the_system_is_initialized_with_an_empty_todo_list()&amp#27;[0m
+  &amp#27;[32mGiven &amp#27;[0m&amp#27;[32ma todo item exists with title &amp#27;[0m&amp#27;[32m&amp#27;[1m"Deletion Target"&amp#27;[0m&amp#27;[32m, description &amp#27;[0m&amp#27;[32m&amp#27;[1m"Task to be deleted"&amp#27;[0m&amp#27;[32m, and doneStatus &amp#27;[0m&amp#27;[32m&amp#27;[1m"false"&amp#27;[0m &amp#27;[90m# steps.TodoStepDefinitions.a_todo_exists_with_title_description_and_doneStatus(java.lang.String,java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mits ID is stored as &amp#27;[0m&amp#27;[32m&amp#27;[1m"delete_todo_id"&amp#27;[0m                                                                        &amp#27;[90m# steps.TodoStepDefinitions.its_id_is_stored_as(java.lang.String)&amp#27;[0m
+  &amp#27;[32mWhen &amp#27;[0m&amp#27;[32mI send a request to delete task &amp#27;[0m&amp#27;[32m&amp#27;[1m"999"&amp#27;[0m&amp#27;[32m with requested format &amp#27;[0m&amp#27;[32m&amp#27;[1m"application/json"&amp#27;[0m                             &amp#27;[90m# steps.TodoStepDefinitions.i_send_a_request_to_delete_task_with_requested_format(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mThen &amp#27;[0m&amp#27;[32mthe status code should be &amp#27;[0m&amp#27;[32m&amp#27;[1m404&amp#27;[0m                                                                              &amp#27;[90m# steps.TodoStepDefinitions.the_creation_status_should_be(int)&amp#27;[0m
+Confirmed presence of expected error message: Could not find any instances with todos/null
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe system should tell me if there was an error: &amp#27;[0m&amp#27;[32m&amp#27;[1m"Could not find any instances with todos/null"&amp#27;[0m             &amp#27;[90m# steps.TodoStepDefinitions.the_system_should_tell_me_if_there_was_an_error(java.lang.String)&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe task with ID &amp#27;[0m&amp#27;[32m&amp#27;[1m"999"&amp#27;[0m&amp#27;[32m should yield a &amp#27;[0m&amp#27;[32m&amp#27;[1m"404"&amp#27;[0m&amp#27;[32m on a quick check&amp#27;[0m                                                &amp#27;[90m# steps.TodoStepDefinitions.the_task_with_id_should_yield_a_on_a_quick_check(java.lang.String,java.lang.String)&amp#27;[0m
+]]></system-out>
+  </testcase>
+  <testcase name="Example #1.1" classname="Full Replacement Flows (Normal, Alternate, Error)" time="1.006">
+    <system-out><![CDATA[
+@todo
+Scenario Outline: Fully replace a todo item's data                                                              &amp#27;[90m# features/todos_management.feature:128&amp#27;[0m
+  &amp#27;[32mGiven &amp#27;[0m&amp#27;[32mthe Rest API Todo List Manager is running&amp#27;[0m                                                               &amp#27;[90m# setup.ScenarioHooks.the_rest_api_todo_list_manager_is_running()&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mmy list of tasks is cleared to start fresh&amp#27;[0m                                                                &amp#27;[90m# setup.ScenarioHooks.the_system_is_initialized_with_an_empty_todo_list()&amp#27;[0m
+  &amp#27;[32mGiven &amp#27;[0m&amp#27;[32ma todo item exists with title &amp#27;[0m&amp#27;[32m&amp#27;[1m"PUT Target Task"&amp#27;[0m&amp#27;[32m, description &amp#27;[0m&amp#27;[32m&amp#27;[1m"Original Content"&amp#27;[0m&amp#27;[32m, and doneStatus &amp#27;[0m&amp#27;[32m&amp#27;[1m"false"&amp#27;[0m &amp#27;[90m# steps.TodoStepDefinitions.a_todo_exists_with_title_description_and_doneStatus(java.lang.String,java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mits ID is stored as &amp#27;[0m&amp#27;[32m&amp#27;[1m"put_todo_id"&amp#27;[0m                                                                         &amp#27;[90m# steps.TodoStepDefinitions.its_id_is_stored_as(java.lang.String)&amp#27;[0m
+  &amp#27;[32mWhen &amp#27;[0m&amp#27;[32mI send a request to fully replace task &amp#27;[0m&amp#27;[32m&amp#27;[1m"put_todo_id"&amp#27;[0m&amp#27;[32m with body:&amp#27;[0m                                          &amp#27;[90m# steps.TodoStepDefinitions.i_send_a_request_to_fully_replace_task_with_body(java.lang.String,io.cucumber.datatable.DataTable)&amp#27;[0m
+    | title         | description                  | doneStatus |
+    | Replaced Task | This task has been replaced. | true       |
+  &amp#27;[32mThen &amp#27;[0m&amp#27;[32mthe status code should be &amp#27;[0m&amp#27;[32m&amp#27;[1m200&amp#27;[0m                                                                            &amp#27;[90m# steps.TodoStepDefinitions.the_creation_status_should_be(int)&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe saved task should show field &amp#27;[0m&amp#27;[32m&amp#27;[1m"title"&amp#27;[0m&amp#27;[32m with value &amp#27;[0m&amp#27;[32m&amp#27;[1m"Replaced Task"&amp#27;[0m                                       &amp#27;[90m# steps.TodoStepDefinitions.the_saved_task_should_show_field_with_value(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe saved task should show field &amp#27;[0m&amp#27;[32m&amp#27;[1m"description"&amp#27;[0m&amp#27;[32m with value &amp#27;[0m&amp#27;[32m&amp#27;[1m"This task has been replaced."&amp#27;[0m                  &amp#27;[90m# steps.TodoStepDefinitions.the_saved_task_should_show_field_with_value(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe saved task should show field &amp#27;[0m&amp#27;[32m&amp#27;[1m"doneStatus"&amp#27;[0m&amp#27;[32m with value &amp#27;[0m&amp#27;[32m&amp#27;[1m"true"&amp#27;[0m                                           &amp#27;[90m# steps.TodoStepDefinitions.the_saved_task_should_show_field_with_value(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe system should tell me if there was an error: &amp#27;[0m&amp#27;[32m&amp#27;[1m""&amp#27;[0m                                                       &amp#27;[90m# steps.TodoStepDefinitions.the_system_should_tell_me_if_there_was_an_error(java.lang.String)&amp#27;[0m
+]]></system-out>
+  </testcase>
+  <testcase name="Example #1.2" classname="Full Replacement Flows (Normal, Alternate, Error)" time="1.009">
+    <system-out><![CDATA[
+@todo
+Scenario Outline: Fully replace a todo item's data                                                              &amp#27;[90m# features/todos_management.feature:131&amp#27;[0m
+  &amp#27;[32mGiven &amp#27;[0m&amp#27;[32mthe Rest API Todo List Manager is running&amp#27;[0m                                                               &amp#27;[90m# setup.ScenarioHooks.the_rest_api_todo_list_manager_is_running()&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mmy list of tasks is cleared to start fresh&amp#27;[0m                                                                &amp#27;[90m# setup.ScenarioHooks.the_system_is_initialized_with_an_empty_todo_list()&amp#27;[0m
+  &amp#27;[32mGiven &amp#27;[0m&amp#27;[32ma todo item exists with title &amp#27;[0m&amp#27;[32m&amp#27;[1m"PUT Target Task"&amp#27;[0m&amp#27;[32m, description &amp#27;[0m&amp#27;[32m&amp#27;[1m"Original Content"&amp#27;[0m&amp#27;[32m, and doneStatus &amp#27;[0m&amp#27;[32m&amp#27;[1m"false"&amp#27;[0m &amp#27;[90m# steps.TodoStepDefinitions.a_todo_exists_with_title_description_and_doneStatus(java.lang.String,java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mits ID is stored as &amp#27;[0m&amp#27;[32m&amp#27;[1m"put_todo_id"&amp#27;[0m                                                                         &amp#27;[90m# steps.TodoStepDefinitions.its_id_is_stored_as(java.lang.String)&amp#27;[0m
+  &amp#27;[32mWhen &amp#27;[0m&amp#27;[32mI send a request to fully replace task &amp#27;[0m&amp#27;[32m&amp#27;[1m"put_todo_id"&amp#27;[0m&amp#27;[32m with body:&amp#27;[0m                                          &amp#27;[90m# steps.TodoStepDefinitions.i_send_a_request_to_fully_replace_task_with_body(java.lang.String,io.cucumber.datatable.DataTable)&amp#27;[0m
+    | title        | description | doneStatus |
+    | Minimal Task | [empty]     | false      |
+  &amp#27;[32mThen &amp#27;[0m&amp#27;[32mthe status code should be &amp#27;[0m&amp#27;[32m&amp#27;[1m200&amp#27;[0m                                                                            &amp#27;[90m# steps.TodoStepDefinitions.the_creation_status_should_be(int)&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe saved task should show field &amp#27;[0m&amp#27;[32m&amp#27;[1m"title"&amp#27;[0m&amp#27;[32m with value &amp#27;[0m&amp#27;[32m&amp#27;[1m"Minimal Task"&amp#27;[0m                                        &amp#27;[90m# steps.TodoStepDefinitions.the_saved_task_should_show_field_with_value(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe saved task should show field &amp#27;[0m&amp#27;[32m&amp#27;[1m"description"&amp#27;[0m&amp#27;[32m with value &amp#27;[0m&amp#27;[32m&amp#27;[1m""&amp#27;[0m                                              &amp#27;[90m# steps.TodoStepDefinitions.the_saved_task_should_show_field_with_value(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe saved task should show field &amp#27;[0m&amp#27;[32m&amp#27;[1m"doneStatus"&amp#27;[0m&amp#27;[32m with value &amp#27;[0m&amp#27;[32m&amp#27;[1m"false"&amp#27;[0m                                          &amp#27;[90m# steps.TodoStepDefinitions.the_saved_task_should_show_field_with_value(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe system should tell me if there was an error: &amp#27;[0m&amp#27;[32m&amp#27;[1m""&amp#27;[0m                                                       &amp#27;[90m# steps.TodoStepDefinitions.the_system_should_tell_me_if_there_was_an_error(java.lang.String)&amp#27;[0m
+]]></system-out>
+  </testcase>
+  <testcase name="Example #1.3" classname="Full Replacement Flows (Normal, Alternate, Error)" time="1.021">
+    <system-out><![CDATA[
+@todo
+Scenario Outline: Fully replace a todo item's data                                                              &amp#27;[90m# features/todos_management.feature:133&amp#27;[0m
+  &amp#27;[32mGiven &amp#27;[0m&amp#27;[32mthe Rest API Todo List Manager is running&amp#27;[0m                                                               &amp#27;[90m# setup.ScenarioHooks.the_rest_api_todo_list_manager_is_running()&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mmy list of tasks is cleared to start fresh&amp#27;[0m                                                                &amp#27;[90m# setup.ScenarioHooks.the_system_is_initialized_with_an_empty_todo_list()&amp#27;[0m
+  &amp#27;[32mGiven &amp#27;[0m&amp#27;[32ma todo item exists with title &amp#27;[0m&amp#27;[32m&amp#27;[1m"PUT Target Task"&amp#27;[0m&amp#27;[32m, description &amp#27;[0m&amp#27;[32m&amp#27;[1m"Original Content"&amp#27;[0m&amp#27;[32m, and doneStatus &amp#27;[0m&amp#27;[32m&amp#27;[1m"false"&amp#27;[0m &amp#27;[90m# steps.TodoStepDefinitions.a_todo_exists_with_title_description_and_doneStatus(java.lang.String,java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mits ID is stored as &amp#27;[0m&amp#27;[32m&amp#27;[1m"put_todo_id"&amp#27;[0m                                                                         &amp#27;[90m# steps.TodoStepDefinitions.its_id_is_stored_as(java.lang.String)&amp#27;[0m
+  &amp#27;[32mWhen &amp#27;[0m&amp#27;[32mI send a request to fully replace task &amp#27;[0m&amp#27;[32m&amp#27;[1m"put_todo_id"&amp#27;[0m&amp#27;[32m with body:&amp#27;[0m                                          &amp#27;[90m# steps.TodoStepDefinitions.i_send_a_request_to_fully_replace_task_with_body(java.lang.String,io.cucumber.datatable.DataTable)&amp#27;[0m
+    | title   | description                   | doneStatus |
+    | [empty] | No title in this replacement. | true       |
+  &amp#27;[32mThen &amp#27;[0m&amp#27;[32mthe status code should be &amp#27;[0m&amp#27;[32m&amp#27;[1m400&amp#27;[0m                                                                            &amp#27;[90m# steps.TodoStepDefinitions.the_creation_status_should_be(int)&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe saved task should show field &amp#27;[0m&amp#27;[32m&amp#27;[1m"title"&amp#27;[0m&amp#27;[32m with value &amp#27;[0m&amp#27;[32m&amp#27;[1m"PUT Target Task"&amp#27;[0m                                     &amp#27;[90m# steps.TodoStepDefinitions.the_saved_task_should_show_field_with_value(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe saved task should show field &amp#27;[0m&amp#27;[32m&amp#27;[1m"description"&amp#27;[0m&amp#27;[32m with value &amp#27;[0m&amp#27;[32m&amp#27;[1m"Original Content"&amp#27;[0m                              &amp#27;[90m# steps.TodoStepDefinitions.the_saved_task_should_show_field_with_value(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe saved task should show field &amp#27;[0m&amp#27;[32m&amp#27;[1m"doneStatus"&amp#27;[0m&amp#27;[32m with value &amp#27;[0m&amp#27;[32m&amp#27;[1m"false"&amp#27;[0m                                          &amp#27;[90m# steps.TodoStepDefinitions.the_saved_task_should_show_field_with_value(java.lang.String,java.lang.String)&amp#27;[0m
+Confirmed presence of expected error message: title : field is mandatory
+  &amp#27;[32mAnd &amp#27;[0m&amp#27;[32mthe system should tell me if there was an error: &amp#27;[0m&amp#27;[32m&amp#27;[1m"title : field is mandatory"&amp#27;[0m                             &amp#27;[90m# steps.TodoStepDefinitions.the_system_should_tell_me_if_there_was_an_error(java.lang.String)&amp#27;[0m
+]]></system-out>
+  </testcase>
 </testsuite>

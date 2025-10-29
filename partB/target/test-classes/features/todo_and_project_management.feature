@@ -143,7 +143,7 @@ Feature: Manage tasks/tasksof relationships
       | 3  |
       | 4  |
     When the user gets the todos associated with the project with id "<projectId>"
-    Then the returned todos associated with the project with id "<projectId>" contain:
+    Then the returned todos are:
       | todoId | todoTitle         | todoDoneStatus | todoDescription                         | tasksofId |
       | 3      | Create repository | false          | Create the project repository on GitHub | 2         |
       | 4      | Write tests       | false          | Write unit tests for the project        | 2         |
@@ -160,7 +160,7 @@ Feature: Manage tasks/tasksof relationships
       | projectId | projectTitle    | projectCompleted | projectActive | projectDescription                    |
       | 2         | ECSE429 Project | false            | true          | "est API for a project management app |
     When the user gets the todos associated with the project with id "<projectId>"
-    Then the returned todos associated with the project with id "<projectId>" is empty
+    Then the returned todos is empty
     And the response status code is "<statusCode>"
     Examples:
       | projectId | statusCode |

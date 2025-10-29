@@ -43,9 +43,7 @@ public class InteroperabilityStepDefinitions {
             for (TodoInteroperability todo : todos) {
                 Response response = api.deleteRequest("/todos/" + todo.getId());
 
-                if (response.getStatusCode() != 200) {
-                    throw new RuntimeException("Failed to delete todo with id " + todo.getId());
-                }
+                assert(response.getStatusCode() == 200);
             }
         }
 
@@ -58,9 +56,7 @@ public class InteroperabilityStepDefinitions {
             for (ProjectInteroperability project : projects) {
                 Response response = api.deleteRequest("/projects/" + project.getId());
 
-                if (response.getStatusCode() != 200) {
-                    throw new RuntimeException("Failed to delete project with id " + project.getId());
-                }
+                assert(response.getStatusCode() == 200);
             }
         }
 
@@ -73,9 +69,7 @@ public class InteroperabilityStepDefinitions {
             for (CategoryInteroperability category : categories) {
                 Response response = api.deleteRequest("/categories/" + category.getId());
 
-                if (response.getStatusCode() != 200) {
-                    throw new RuntimeException("Failed to delete category with id " + category.getId());
-                }
+                assert(response.getStatusCode() == 200);
             }
         }
     }
@@ -96,16 +90,10 @@ public class InteroperabilityStepDefinitions {
             String jsonBody = api.toJson(payloadMap);
 
             Response response = api.postRequest("/todos", jsonBody);
+            String newId = response.jsonPath().getString("id");
 
-            if (response.getStatusCode() == 201) {
-                String newId = response.jsonPath().getString("id");
-                if (id.equals(newId)) {
-                    System.out.println("Created todo: " + response.getBody().asPrettyString() + "\n");
-                }
-                else {
-                    throw new RuntimeException("Expected todo ID " + id + " but got " + newId);
-                }
-            }
+            assert(response.getStatusCode() == 201);
+            assert(id.equals(newId));
         }
     }
 
@@ -126,16 +114,10 @@ public class InteroperabilityStepDefinitions {
             String jsonBody = api.toJson(payloadMap);
 
             Response response = api.postRequest("/projects", jsonBody);
+            String newId = response.jsonPath().getString("id");
 
-            if (response.getStatusCode() == 201) {
-                String newId = response.jsonPath().getString("id");
-                if (id.equals(newId)) {
-                    System.out.println("Created project: " + response.getBody().asPrettyString() + "\n");
-                }
-                else {
-                    throw new RuntimeException("Expected project ID " + id + " but got " + newId);
-                }
-            }
+            assert(response.getStatusCode() == 201);
+            assert(id.equals(newId));
         }
     }
 
@@ -152,16 +134,10 @@ public class InteroperabilityStepDefinitions {
         String jsonBody = api.toJson(payloadMap);
 
         Response response = api.postRequest("/categories", jsonBody);
+        String newId = response.jsonPath().getString("id");
 
-        if (response.getStatusCode() == 201) {
-            String newId = response.jsonPath().getString("id");
-            if (id.equals(newId)) {
-                System.out.println("Created category: " + response.getBody().asPrettyString() + "\n");
-            }
-            else {
-                throw new RuntimeException("Expected category ID " + id + " but got " + newId);
-            }
-        }
+        assert(response.getStatusCode() == 201);
+        assert(id.equals(newId));
     }
 
     @When("the user associates the todo with id {string} with the project with id {string}")
@@ -172,52 +148,24 @@ public class InteroperabilityStepDefinitions {
 
         Response response = api.postRequest("/todos/" + todoId + "/tasksof", jsonBody);
         context.setLastResponse(response);
-
-        if (response.getStatusCode() == 201) {
-            System.out.println("Successfully associated todo " + todoId + " with project " + projectId);
-        }
-        else {
-            System.out.println("Failed to associate todo " + todoId + " with project " + projectId + ". Status code: " + response.getStatusCode() + ". Response body: " + response.getBody().asPrettyString());
-        }
     }
 
     @When("the user removes the association between the todo with id {string} and the project with id {string}")
     public void theUserRemovesTheAssociationBetweenTheTodoWithIdAndTheProjectWithId(String todoId, String projectId) {
         Response response = api.deleteRequest("/todos/" + todoId + "/tasksof/" + projectId);
         context.setLastResponse(response);
-
-        if (response.getStatusCode() == 200) {
-            System.out.println("Successfully removed association between todo " + todoId + " and project " + projectId);
-        }
-        else {
-            System.out.println("Failed to remove association between todo " + todoId + " and project " + projectId + ". Status code: " + response.getStatusCode());
-        }
     }
 
     @When("the user deletes the todo with id {string}")
     public void theUserDeletesTheTodoWithId(String todoId) {
         Response response = api.deleteRequest("/todos/" + todoId);
         context.setLastResponse(response);
-
-        if (response.getStatusCode() == 200) {
-            System.out.println("Successfully deleted todo with id " + todoId);
-        }
-        else {
-            System.out.println("Failed to delete todo with id " + todoId + ". Status code: " + response.getStatusCode());
-        }
     }
 
     @When("the user gets the todos associated with the project with id {string}")
     public void theUserGetsTheTodosAssociatedWithTheProjectWithId(String projectId) {
         Response response = api.getRequest("/projects/" + projectId + "/tasks");
         context.setLastResponse(response);
-
-        if (response.getStatusCode() == 200) {
-            System.out.println("Successfully got todos associated with project " + projectId);
-        }
-        else {
-            System.out.println("Failed to get todos associated with project " + projectId + ". Status code: " + response.getStatusCode());
-        }
     }
 
     @When("the user assigns the category with id {string} to the todo with id {string}")
@@ -228,13 +176,6 @@ public class InteroperabilityStepDefinitions {
 
         Response response = api.postRequest("/categories/" + categoryId + "/todos", jsonBody);
         context.setLastResponse(response);
-
-        if (response.getStatusCode() == 201) {
-            System.out.println("Successfully assigned category " + categoryId + " to todo " + todoId);
-        }
-        else {
-            System.out.println("Failed to assign category " + categoryId + " to todo " + todoId + ". Status code: " + response.getStatusCode());
-        }
     }
 
     @When("the user assigns the category with id {string} to the project with id {string}")
@@ -245,29 +186,18 @@ public class InteroperabilityStepDefinitions {
 
         Response response = api.postRequest("/categories/" + categoryId + "/projects", jsonBody);
         context.setLastResponse(response);
-
-        if (response.getStatusCode() == 201) {
-            System.out.println("Successfully assigned category " + categoryId + " to project " + projectId);
-        }
-        else {
-            System.out.println("Failed to assign category " + categoryId + " to project " + projectId + ". Status code: " + response.getStatusCode());
-        }
     }
 
     @Then("no instance of a todo with id {string} exists")
     public void noInstanceOfATodoWithIdExists(String todoId) {
-        System.out.println("\nVerifying that todo with id " + todoId + " does not exist");
-
         Response response = api.getRequest("/todos/" + todoId);
 
         // Trying to get a non-existing todo should return 404
         assert(response.getStatusCode() == 404);
     }
 
-    @Then("the returned todos associated with the project with id {string} contain:")
-    public void theReturnedTodosAssociatedWithTheProjectWithIdContain(String projectId, DataTable dataTable) {
-        System.out.println("\nRetrieving todos associated with the project with id " + projectId);
-
+    @Then("the returned todos are:")
+    public void theReturnedTodosAre(DataTable dataTable) {
         TodoInteroperability[] expectedTodos = dataTable.asMaps().stream()
                 .map(row -> {
                     String id = row.get("todoId");
@@ -283,21 +213,9 @@ public class InteroperabilityStepDefinitions {
                 })
                 .toArray(TodoInteroperability[]::new);
 
-        System.out.println("Expected Todos: ");
-        for (TodoInteroperability todo : expectedTodos) {
-            System.out.println(api.toJson(todo.toPayloadMap()));
-        }
-
         // Make a GET request to retrieve the current todos in the project
-        Response response = api.getRequest("/projects/" + projectId + "/tasks");
-        System.out.println("\nObtained the following response body: " + response.getBody().asPrettyString() + "\n");
-
+        Response response = context.getLastResponse();
         TodoInteroperability[] actualTodos = response.jsonPath().getObject("todos", TodoInteroperability[].class);
-
-        System.out.println("Actual Todos: ");
-        for (TodoInteroperability todo : actualTodos) {
-            System.out.println(api.toJson(todo.toPayloadMap()));
-        }
 
         // Ensure both objects are equal
         assert(actualTodos.length == expectedTodos.length);
@@ -313,141 +231,102 @@ public class InteroperabilityStepDefinitions {
         }
     }
 
-    @Then("the returned todos associated with the project with id {string} is empty")
-    public void theReturnedTodosAssociatedWithTheProjectWithIdIsEmpty(String projectId) {
-        System.out.println("\nRetrieving todos associated with the project with id " + projectId);
-
+    @Then("the returned todos is empty")
+    public void theReturnedTodosIsEmpty() {
         // Make a GET request to retrieve the current todos in the project
-        Response response = api.getRequest("/projects/" + projectId + "/tasks");
-        System.out.println("\nObtained the following response body: " + response.getBody().asPrettyString() + "\n");
-
+        Response response = context.getLastResponse();
         List<String> actualTodoIds = response.jsonPath().getList("todos.id.flatten()");
-        System.out.println("Actual Todos IDs: " + actualTodoIds);
 
         assert(actualTodoIds.isEmpty());
     }
 
     @Then("the entries in the relationship tasksof of the todo with id {string} now contain:")
     public void theEntriesInTheRelationshipTasksofOfTheTodoWithIdNowContain(String todoId, DataTable dataTable) {
-        System.out.println("\nRetrieving todos associated with the project with id " + todoId);
-
         // Get all the column entries from the data table
         List<String> expectedProjectIds = dataTable.asMaps().stream()
                 .map(row -> row.get("id"))
                 .toList();
-        System.out.println("Expected Project IDs: " + expectedProjectIds);
 
         // Make a GET request to retrieve the current tasksof relationships of the todo
         Response response = api.getRequest("/todos/" + todoId);
-        System.out.println("\nObtained the following response body: " + response.getBody().asPrettyString() + "\n");
-
         List<String> actualProjectIds = response.jsonPath().getList("todos.tasksof.id.flatten()");
-        System.out.println("Actual Project IDs: " + actualProjectIds);
 
         assert(actualProjectIds.containsAll(expectedProjectIds) && expectedProjectIds.containsAll(actualProjectIds));
     }
 
     @Then("the entries in the relationship tasks of the project with id {string} now contain:")
     public void theEntriesInTheRelationshipTasksOfTheProjectWithIdNowContain(String projectId, DataTable dataTable) {
-        System.out.println("\nRetrieving todos associated with the project with id " + projectId);
-
         // Get all the column entries from the data table
         List<String> expectedTodoIds = dataTable.asMaps().stream()
                 .map(row -> row.get("id"))
                 .toList();
-        System.out.println("Expected Todo IDs: " + expectedTodoIds);
 
         // Make a GET request to retrieve the current tasks in the project
         Response response = api.getRequest("/projects/" + projectId);
-        System.out.println("\nObtained the following response body: " + response.getBody().asPrettyString() + "\n");
-
         List<String> actualTodoIds = response.jsonPath().getList("projects.tasks.id.flatten()");
-        System.out.println("Actual Todos IDs: " + actualTodoIds);
 
         assert(actualTodoIds.containsAll(expectedTodoIds) && expectedTodoIds.containsAll(actualTodoIds));
     }
 
     @Then("the entries in the relationship todos of the category with id {string} now contain:")
     public void theEntriesInTheRelationshipTodosOfTheCategoryWithIdNowContain(String categoryId, DataTable dataTable) {
-        System.out.println("\nRetrieving todos associated with the category with id " + categoryId);
-
         // Get all the column entries from the data table
         List<String> expectedTodoIds = dataTable.asMaps().stream()
                 .map(row -> row.get("id"))
                 .toList();
-        System.out.println("Expected Todo IDs: " + expectedTodoIds);
 
         // Make a GET request to retrieve the current todos in the category
         Response response = api.getRequest("/categories/" + categoryId);
-        System.out.println("\nObtained the following response body: " + response.getBody().asPrettyString() + "\n");
-
         List<String> actualTodoIds = response.jsonPath().getList("categories.todos.id.flatten()");
-        System.out.println("Actual Todos IDs: " + actualTodoIds);
 
         assert(actualTodoIds.containsAll(expectedTodoIds) && expectedTodoIds.containsAll(actualTodoIds));
     }
 
     @Then("the entries in the relationship categories of the todo with id {string} now contain:")
     public void theEntriesInTheRelationshipCategoriesOfTheTodoWithIdNowContain(String todoId, DataTable dataTable) {
-        System.out.println("\nRetrieving todos associated with the category with id " + todoId);
-
         // Get all the column entries from the data table
         List<String> expectedCategoryIds = dataTable.asMaps().stream()
                 .map(row -> row.get("id"))
                 .toList();
-        System.out.println("Expected Category IDs: " + expectedCategoryIds);
 
         // Make a GET request to retrieve the current categories of the todo
         Response response = api.getRequest("/todos/" + todoId);
-        System.out.println("\nObtained the following response body: " + response.getBody().asPrettyString() + "\n");
-
         List<String> actualCategoryIds = response.jsonPath().getList("todos.categories.id.flatten()");
-        System.out.println("Actual Category IDs: " + actualCategoryIds);
 
         assert(actualCategoryIds.containsAll(expectedCategoryIds) && expectedCategoryIds.containsAll(actualCategoryIds));
     }
 
     @Then("the entries in the relationship projects of the category with id {string} now contain:")
     public void theEntriesInTheRelationshipProjectsOfTheCategoryWithIdNowContain(String categoryId, DataTable dataTable) {
-        System.out.println("\nRetrieving todos associated with the category with id " + categoryId);
-
         // Get all the column entries from the data table
         List<String> expectedProjectIds = dataTable.asMaps().stream()
                 .map(row -> row.get("id"))
                 .toList();
-        System.out.println("Expected Project IDs: " + expectedProjectIds);
 
         // Make a GET request to retrieve the current projects of the category
         Response response = api.getRequest("/categories/" + categoryId);
-        System.out.println("\nObtained the following response body: " + response.getBody().asPrettyString() + "\n");
-
         List<String> actualProjectIds = response.jsonPath().getList("categories.projects.id.flatten()");
-        System.out.println("Actual Project IDs: " + actualProjectIds);
 
         assert(actualProjectIds.containsAll(expectedProjectIds) && expectedProjectIds.containsAll(actualProjectIds));
     }
 
     @Then("an error message {string} is returned")
     public void anErrorMessageIsReturned(String expectedErrorMessage) {
-        System.out.println("\nExpected error message: " + expectedErrorMessage);
-
         Response response = context.getLastResponse();
-        System.out.println("\nObtained the following response body: " + response.getBody().asPrettyString() + "\n");
         try {
             List<String> errorMessages = response.jsonPath().getList("errorMessages.flatten()");
             String actualErrorMessage = String.join(", ", errorMessages);
-            System.out.println("Actual error message: " + actualErrorMessage);
 
-            assert (actualErrorMessage.equals(expectedErrorMessage));
+            assert(actualErrorMessage.equals(expectedErrorMessage));
         } catch (Exception e) {
-            throw new RuntimeException("Error message not found in response.");
+            System.out.println("Failed to retrieve error message from response.");
+            assert(false);
         }
     }
 
     @Then("the response status code is {string}")
     public void theResponseStatusCodeIs(String expectedStatusCode) {
         Response response = context.getLastResponse();
-        System.out.println("Status code: " + response.getStatusCode());
 
         assert(response.getStatusCode() == Integer.parseInt(expectedStatusCode));
     }
@@ -466,11 +345,7 @@ public class InteroperabilityStepDefinitions {
 
             Response response = api.postRequest("/todos/" + todoId + "/tasksof", jsonBody);
 
-            if (response.getStatusCode() == 201) {
-                // Add the tasksof relationship to the todo
-                System.out.println("Associated todo " + todoId + " with project " + projectId + "\n");
-            }
-            else {
+            if (response.getStatusCode() != 201) {
                 throw new RuntimeException("Failed to associate todo " + todoId + " with project " + projectId + ". Status code: " + response.getStatusCode());
             }
         }
@@ -490,13 +365,7 @@ public class InteroperabilityStepDefinitions {
 
             Response response = api.postRequest("/projects/" + projectId + "/tasks", jsonBody);
 
-            if (response.getStatusCode() == 201) {
-                // Add the tasks relationship to the project
-                System.out.println("Associated project " + projectId + " with todo " + todoId + "\n");
-            }
-            else {
-                throw new RuntimeException("Failed to associate project " + projectId + " with todo " + todoId + ". Status code: " + response.getStatusCode());
-            }
+            assert(response.getStatusCode() == 201);
         }
     }
 
@@ -514,13 +383,7 @@ public class InteroperabilityStepDefinitions {
 
             Response response = api.postRequest("/categories/" + categoryId + "/todos", jsonBody);
 
-            if (response.getStatusCode() == 201) {
-                // Add the todos relationship to the category
-                System.out.println("Associated category " + categoryId + " with todo " + todoId + "\n");
-            }
-            else {
-                throw new RuntimeException("Failed to associate category " + categoryId + " with todo " + todoId + ". Status code: " + response.getStatusCode());
-            }
+            assert(response.getStatusCode() == 201);
         }
     }
 
@@ -538,13 +401,7 @@ public class InteroperabilityStepDefinitions {
 
             Response response = api.postRequest("/categories/" + categoryId + "/projects", jsonBody);
 
-            if (response.getStatusCode() == 201) {
-                // Add the projects relationship to the category
-                System.out.println("Associated category " + categoryId + " with project " + projectId + "\n");
-            }
-            else {
-                throw new RuntimeException("Failed to associate category " + categoryId + " with project " + projectId + ". Status code: " + response.getStatusCode());
-            }
+            assert(response.getStatusCode() == 201);
         }
     }
 }
