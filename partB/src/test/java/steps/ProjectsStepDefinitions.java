@@ -163,15 +163,14 @@ public class ProjectsStepDefinitions {
         a_project_exists_with_title_description_and_active(title, "", "false");
     }
 
-    // ==============================================================================
-    // STEP 6: AND - Store ID
-    // ==============================================================================
-    @And("its ID is stored as {string}")
-    public void its_id_is_stored_as(String key) {
-        // Retrieve the last created ID and store it with the specified key
-        String lastId = context.retrieveId("last_created_id");
-        context.storeId(key, lastId);
-    }
+    // // STEP 6: AND - Store ID
+    // // ==============================================================================
+    // @And("its ID is stored as {string}")
+    // public void its_id_is_stored_as(String key) {
+    //     // Retrieve the last created ID and store it with the specified key
+    //     String lastId = context.retrieveId("last_created_id");
+    //     context.storeId(key, lastId);
+    // }
 
     // ==============================================================================
     // STEP 6B: AND - Mark project as completed
