@@ -1,0 +1,17 @@
+runner/TestRunner.class
+steps/InteroperabilityStepDefinitions.class
+setup/ScenarioContext.class
+api/CategoryApi.class
+api/TodoApi.class
+models/TodoInteroperability.class
+setup/SystemHooks.class
+setup/ScenarioHooks.class
+models/Category.class
+api/CategoryApi$CategoryDTO.class
+api/InteroperabilityApi.class
+models/ProjectInteroperability.class
+models/CategoryInteroperability.class
+steps/CategoryStepDefinitions.class
+models/Todo.class
+models/Relationship.class
+steps/TodoStepDefinitions.class
