@@ -1,5 +1,8 @@
 package models;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Projects {
     private String id;
     private String title;
@@ -11,8 +14,6 @@ public class Projects {
         this.id = id;
         this.title = title;
         this.description = description;
-        this.completed = completed;
-        this.active = active;
 
         if (completed != null && !completed.isEmpty()) {
             this.completed = Boolean.parseBoolean(completed);

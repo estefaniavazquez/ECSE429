@@ -1,5 +1,13 @@
 package api;
 
+import java.util.Map;
+
+import com.google.gson.Gson;
+
+import io.restassured.RestAssured;
+import io.restassured.response.Response;
+import models.Projects;
+
 public class ProjectsAPI {
     private static final String BASE_URL = "http://localhost:4567";
     private static final Gson GSON = new Gson();
@@ -40,22 +48,41 @@ public class ProjectsAPI {
     }
 
     /**
+     * Sends a GET request with a specific Accept header.
+     */
+    public Response getRequest(String endpoint, String acceptHeader) {
+        return RestAssured.given()
+                .header("Accept", acceptHeader)
+                .get(endpoint)
+                .then().extract().response();
+    }
+
+    /**
+     * Sends a DELETE request to an endpoint.
+     */
+    public Response deleteRequest(String endpoint) {
+        return RestAssured.given()
+                .delete(endpoint)
+                .then().extract().response();
+    }
+
+    /**
      * Implements the logic for GIVEN the system is initialized with an empty todo
      * list.
      * This is crucial for test isolation.
      */
     public void deleteAllData() {
-        // Step 1: Get all current todos
-        Response response = getRequest("/project");
+        // Step 1: Get all current projects
+        Response response = getRequest("/projects");
 
         // Use a list of Todo objects to ensure all items in the array are processed
-        Todo[] todos = response.jsonPath().getObject("projects", Todo[].class);
+        Projects[] projects = response.jsonPath().getObject("projects", Projects[].class);
 
-        if (todos != null) {
-            for (Todo todo : todos) {
-                // Step 2: Delete each todo item
-                if (todo.getId() != null) {
-                    RestAssured.given().delete("/projects/" + todo.getId());
+        if (projects != null) {
+            for (Projects project : projects) {
+                // Step 2: Delete each project item
+                if (project.getId() != null) {
+                    RestAssured.given().delete("/projects/" + project.getId());
                 }
             }
         }
@@ -66,7 +93,7 @@ public class ProjectsAPI {
      */
     public void checkServiceStatus() {
         try {
-            Response response = RestAssured.get(BASE_URL + "/todos");
+            Response response = RestAssured.get(BASE_URL + "/projects");
             // If we get any successful response (even empty), the service is up
             if (response.getStatusCode() < 200 || response.getStatusCode() >= 300) {
                 fail("Service is reachable but returned non-2xx status: " + response.getStatusCode());
