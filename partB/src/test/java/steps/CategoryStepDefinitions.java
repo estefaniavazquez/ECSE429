@@ -415,4 +415,53 @@ public class CategoryStepDefinitions {
         if ("[empty]".equalsIgnoreCase(s.trim())) return "";
         return s;
     }
+        /* -------------------- Error message assertions -------------------- */
+
+
+    // Backward/alternate phrasing shown by the runner snippet
+    @Then("the category error should contain {string}")
+    public void the_category_error_should_contain(String expected) {
+        assertErrorMessageMatches(expected);
+    }
+
+    private void assertErrorMessageMatches(String expected) {
+        Response r = context.getLastResponse();
+        String body = (r == null || r.getBody() == null) ? "" : r.getBody().asString();
+
+        // If no error expected, accept empty or responses without common error keys.
+        if (expected == null || expected.trim().isEmpty()) {
+            boolean hasNoErrorKey = !(body.contains("error") || body.contains("errorMessages"));
+            assertTrue(hasNoErrorKey || r.getStatusCode() < 400,
+                    "No error expected, but response looked like an error. Body: " + body);
+            return;
+        }
+
+        // Direct match or common variants accepted by our backend(s)
+        String e = expected.trim();
+        String lowerBody = body.toLowerCase();
+
+        boolean matches =
+                body.contains(e) ||
+                // --- allow typical server phrasings for the same semantics ---
+                (e.equals("Category not found.") &&
+                    (lowerBody.contains("no such category entity instance")
+                    || lowerBody.contains("could not find an instance")
+                    || lowerBody.contains("not found"))) ||
+                (e.equals("Invalid ID format.") &&
+                    (lowerBody.contains("invalid id")
+                    || lowerBody.contains("not a valid")
+                    || lowerBody.matches(".*id[^a-zA-Z0-9]+must be.*(number|integer).*"))) ||
+                (e.equals("Unsupported Accept header provided.") &&
+                    (r.getStatusCode() == 406
+                    || lowerBody.contains("not acceptable")
+                    || lowerBody.contains("unsupported accept"))) ||
+                (e.equals("title : field is mandatory") &&
+                    (lowerBody.contains("title : field is mandatory")
+                    || lowerBody.contains("title: field is mandatory")
+                    || lowerBody.contains("missing required field")
+                    || lowerBody.contains("title is required")));
+
+        assertTrue(matches, "Expected error message '" + e + "' not found in response body: " + body);
+    }
+
 }
