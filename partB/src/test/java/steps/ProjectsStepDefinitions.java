@@ -63,7 +63,7 @@ public class ProjectsStepDefinitions {
     // ==============================================================================
     // EXCEPTION: Verify Error Message
     // ==============================================================================
-    @And("the system should tell me if there was an error: {string}")
+    @And("the system should notify me if there was an error: {string}")
     public void the_system_should_tell_me_if_there_was_an_error(String expectedErrorMessage) {
         Response response = context.getLastResponse();
 

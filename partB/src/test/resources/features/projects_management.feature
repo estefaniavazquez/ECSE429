@@ -20,7 +20,7 @@ Feature: Project Management API Testing
         And the project details should show field "title" with value "<expected_title>"
         And the project details should show field "description" with value "<expected_description>"
         And the project details should show field "active" with value "<expected_active>"
-        And the system should tell me if there was an error: "<expected_error_message>"
+        And the system should notify me if there was an error: "<expected_error_message>"
 
         Examples: Creation Flows (Normal, Alternate, Error)
             # Normal Flow: provide all fields correctly
@@ -45,7 +45,7 @@ Feature: Project Management API Testing
         And the updated project should show field "title" with value "<expected_title>"
         And the updated project should show field "description" with value "<expected_description>"
         And the updated project should show field "active" with value "<expected_active>"
-        And the system should tell me if there was an error: "<expected_error_message>"
+        And the system should notify me if there was an error: "<expected_error_message>"
 
         Examples: Update Flows (Normal, Alternate, Error)
             # Normal Flow: update all fields
@@ -66,7 +66,7 @@ Feature: Project Management API Testing
         When I send a request to view projects filtered by the query "<query_params>"
         Then the status code should be "<status_code>"
         And the list should contain <expected_count> projects
-        And the system should tell me if there was an error: "<expected_error_message>"
+        And the system should notify me if there was an error: "<expected_error_message>"
 
         Examples: Retrieval All and Filtering Flows (Normal, Alternate, Error)
             # Normal Flow: retrieve all projects (no filter)
@@ -89,7 +89,7 @@ Feature: Project Management API Testing
 
         When I send a request to delete project "<target_id>"
         Then the deletion status should be "<status_code>"
-        And the system should tell me if there was an error: "<expected_error_message>"
+        And the system should notify me if there was an error: "<expected_error_message>"
         And the project with ID "<target_id>" should yield a "<check_status_code>" on a quick check
 
         Examples: Deletion Flows (Normal, Error)
@@ -117,7 +117,7 @@ Feature: Project Management API Testing
         And the project should show field "title" with value "<expected_title>"
         And the project should show field "description" with value "<expected_description>"
         And the project should show field "active" with value "<expected_active>"
-        And the system should tell me if there was an error: "<expected_error_message>"
+        And the system should notify me if there was an error: "<expected_error_message>"
 
         Examples: Retrieval Flows (Normal, Alternate, Error)
             # Normal Flow: retrieve existing project that has not been updated
