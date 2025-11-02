@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 import java.util.List;
 import java.util.Map;
 
-import api.ProjectsAPI;
+import api.Api;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -24,9 +24,9 @@ import setup.ScenarioContext;
  */
 public class ProjectsStepDefinitions {
     private final ScenarioContext context;
-    private final ProjectsAPI api;
+    private final Api api;
 
-    public ProjectsStepDefinitions(ScenarioContext context, ProjectsAPI api) {
+    public ProjectsStepDefinitions(ScenarioContext context, Api api) {
         this.context = context;
         this.api = api;
     }

@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import api.TodoApi;
+import api.Api;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -25,9 +25,9 @@ import setup.ScenarioContext;
 public class TodoStepDefinitions {
 
     private final ScenarioContext context;
-    private final TodoApi api; 
+    private final Api api;
 
-    public TodoStepDefinitions(ScenarioContext context, TodoApi api) {
+    public TodoStepDefinitions(ScenarioContext context, Api api) {
         this.context = context;
         this.api = api;
     }

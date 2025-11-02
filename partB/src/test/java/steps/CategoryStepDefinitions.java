@@ -7,7 +7,7 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import api.CategoryApi;
+import api.Api;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -24,22 +24,17 @@ public class CategoryStepDefinitions {
     private static final String BASE_URL = "http://localhost:4567";
 
     private final ScenarioContext context;
-    private final CategoryApi api;
+    private final Api api;
 
     // Local alias store (e.g., "category_id" -> "123"); kept internal to this class.
     private final Map<String, String> idAliases = new HashMap<>();
 
     public CategoryStepDefinitions(ScenarioContext context) {
         this.context = context;
-        this.api = new CategoryApi();
+        this.api = new Api();
     }
 
     /* -------------------- Background -------------------- */
-
-    @Given("the Category API is reachable")
-    public void the_category_api_is_reachable() {
-        api.checkServiceUp();
-    }
 
     @Given("my list of categories is cleared to start fresh")
     public void my_list_of_categories_is_cleared_to_start_fresh() {

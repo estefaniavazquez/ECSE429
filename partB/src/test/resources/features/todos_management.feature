@@ -7,7 +7,7 @@ Feature: Todo Management API Testing
     Background:
         # on localhost:4567
         Given the Rest API Todo List Manager is running
-        And my list of tasks is cleared to start fresh
+        And my list of tasks, projects and categories is cleared to start fresh
 
     Scenario Outline: Create a new todo task with optional fields and check for errors
         As a user, I want to create a new todo task with a title and an optional description to save the task to my list.
