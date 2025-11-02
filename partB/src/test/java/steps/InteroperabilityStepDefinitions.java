@@ -6,7 +6,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
-import api.InteroperabilityApi;
+import api.Api;
 import io.restassured.response.Response;
 import models.CategoryInteroperability;
 import models.ProjectInteroperability;
@@ -20,9 +20,9 @@ import java.util.Map;
 
 public class InteroperabilityStepDefinitions {
     private final ScenarioContext context;
-    private final InteroperabilityApi api;
+    private final Api api;
 
-    public InteroperabilityStepDefinitions(ScenarioContext context, InteroperabilityApi api) {
+    public InteroperabilityStepDefinitions(ScenarioContext context, Api api) {
         this.context = context;
         this.api = api;
     }

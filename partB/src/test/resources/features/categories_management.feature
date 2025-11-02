@@ -5,7 +5,7 @@ Feature: Category Management API Testing
   So that I can classify and organize my todos and projects effectively
 
   Background:
-    Given the Category API is reachable
+    Given the system is running
     And my list of categories is cleared to start fresh
 
   @category_create

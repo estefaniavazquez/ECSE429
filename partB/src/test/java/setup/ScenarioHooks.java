@@ -1,6 +1,6 @@
 package setup;
 
-import api.TodoApi;
+import api.Api;
 import io.cucumber.java.en.Given;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
@@ -12,9 +12,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  */
 public class ScenarioHooks {
 
-    private final TodoApi api;
+    private final Api api;
 
-    public ScenarioHooks(TodoApi api) {
+    public ScenarioHooks(Api api) {
         this.api = api;
     }
 
@@ -30,9 +30,9 @@ public class ScenarioHooks {
 
     // ==============================================================================
     // System Reset
-    // And my list of tasks is cleared to start fresh
+    // And my list of tasks, projects and categories is cleared to start fresh
     // ==============================================================================
-    @Given("my list of tasks is cleared to start fresh")
+    @Given("my list of tasks, projects and categories is cleared to start fresh")
     public void the_system_is_initialized_with_an_empty_todo_list() {
         // This method deletes ALL existing todo items to ensure a clean slate.
         api.deleteAllData();
