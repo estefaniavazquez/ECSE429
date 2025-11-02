@@ -54,7 +54,7 @@ Feature: Manage todos/categories relationships
       | categoryId | categoryTitle | categoryDescription     |
       | 3          | School        | Tasks related to school |
     When the user assigns the category with id "<categoryId>" to the todo with id "<todoId>"
-    Then an error message "<errorMessage>" is returned
+    And the system should tell me if there was an error: "<errorMessage>"
     And the response status code is "<statusCode>"
     Examples:
       | todoId | categoryId | errorMessage                               | statusCode |

@@ -1,26 +1,26 @@
 package steps;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import api.Api;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
-import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.restassured.response.Response;
 import models.Todo;
-import setup.ScenarioContext; 
+import setup.ScenarioContext;
 
 /**
- * Implements the Gherkin steps for CRUD and verification related to the /todos endpoint.
+ * Implements the Gherkin steps for CRUD and verification related to the /todos
+ * endpoint.
  */
 public class TodoStepDefinitions {
 
@@ -39,12 +39,12 @@ public class TodoStepDefinitions {
     public void i_send_a_request_to_create_a_task_with_these_details(DataTable dataTable) {
         // Extract the single row of input data from the Gherkin table
         Map<String, String> data = dataTable.asMaps().get(0);
-        
+
         // Create a Todo object from the input data
         String title = data.get("title");
         String description = data.get("description");
         String doneStatus = data.get("doneStatus");
-        
+
         Todo newTodo = new Todo(title, description, doneStatus);
 
         // Convert the Todo object to a Map<String, Object>
@@ -59,22 +59,25 @@ public class TodoStepDefinitions {
         // If successful (201), store the new ID
         if (response.getStatusCode() == 201) {
             String newId = response.jsonPath().getString("id");
-            context.storeId("last_created_id", newId); 
+            context.storeId("last_created_id", newId);
         }
     }
 
     // ==============================================================================
     // Generic Status Code Assertion Step
     // ==============================================================================
-    @Then("the status code should be {int}")
-    public void the_creation_status_should_be(int expectedStatusCode) {
-        Response response = context.getLastResponse();
-        assertNotNull(response, "Response object is null - API call may have failed");
-        assertEquals(expectedStatusCode, 
-                     response.statusCode(),
-                     "Expected status code did not match actual code. Response body: " + response.getBody().asString());
-    }
-    
+    // REFACTORED TO CommonStepDefinitions
+    // @Then("the status code should be {int}")
+    // public void the_creation_status_should_be(int expectedStatusCode) {
+    // Response response = context.getLastResponse();
+    // assertNotNull(response, "Response object is null - API call may have
+    // failed");
+    // assertEquals(expectedStatusCode,
+    // response.statusCode(),
+    // "Expected status code did not match actual code. Response body: " +
+    // response.getBody().asString());
+    // }
+
     // ==============================================================================
     // And Assertions for verifying saved/updated fields
     // ==============================================================================
@@ -82,125 +85,57 @@ public class TodoStepDefinitions {
     public void the_saved_task_should_show_field_with_value(String fieldName, String expectedValue) {
         Response response = context.getLastResponse();
         assertNotNull(response, "Response object is null - API call may have failed");
-        
+
         if (response.statusCode() == 201 || response.statusCode() == 200) {
-            
+
             if (fieldName.equals("doneStatus")) {
                 Boolean expectedBoolean = Boolean.parseBoolean(expectedValue);
                 // Use getBoolean() to correctly extract the unquoted primitive value
-                Boolean actualBoolean = response.jsonPath().getBoolean(fieldName); 
-                
+                Boolean actualBoolean = response.jsonPath().getBoolean(fieldName);
+
                 assertEquals(expectedBoolean, actualBoolean,
-                    String.format("Field '%s' boolean value did not match. Expected: %s, Actual: %s", 
-                                  fieldName, expectedBoolean, actualBoolean));
-            
+                        String.format("Field '%s' boolean value did not match. Expected: %s, Actual: %s",
+                                fieldName, expectedBoolean, actualBoolean));
+
             } else if (expectedValue.isEmpty()) {
                 String actualValue = response.jsonPath().getString(fieldName);
                 assertTrue(
-                    actualValue == null || actualValue.isEmpty(),
-                    String.format("Field '%s' was expected to be empty but was '%s'.", fieldName, actualValue)
-                );
+                        actualValue == null || actualValue.isEmpty(),
+                        String.format("Field '%s' was expected to be empty but was '%s'.", fieldName, actualValue));
             } else {
                 String actualValue = response.jsonPath().getString(fieldName);
                 assertEquals(
-                    expectedValue, 
-                    actualValue,
-                    String.format("Field '%s' value did not match.", fieldName)
-                );
+                        expectedValue,
+                        actualValue,
+                        String.format("Field '%s' value did not match.", fieldName));
             }
         }
     }
-    
+
     // ==============================================================================
     // And Error Message Verification Step
     // ==============================================================================
-    @And("the system should tell me if there was an error: {string}")
-    public void the_system_should_tell_me_if_there_was_an_error(String expectedMessage) {
-        Response response = context.getLastResponse();
-        assertNotNull(response, "Response object is null - API call may have failed");
-
-        String exp = expectedMessage == null ? "" : expectedMessage.trim();
-
-        // Success path: expecting no error message
-        if (exp.isEmpty()) {
-            assertTrue(response.getStatusCode() < 400,
-                    "Did not expect an error, but received status=" + response.getStatusCode()
-                            + ". Body: " + (response.getBody() == null ? "" : response.getBody().asString()));
-            return;
-        }
-
-        // Error path
-        assertTrue(response.getStatusCode() >= 400,
-                "Expected an error (4xx/5xx) but got " + response.getStatusCode());
-
-        String body = response.getBody() == null ? "" : response.getBody().asString();
-        String haystackLower = body.toLowerCase();
-
-        // If body is JSON with errorMessages array, join them for easier matching
-        try {
-            java.util.List<String> msgs = response.jsonPath().getList("errorMessages");
-            if (msgs != null && !msgs.isEmpty()) {
-                haystackLower = String.join(" | ", msgs).toLowerCase();
-            }
-        } catch (Exception ignored) { /* keep raw body */ }
-
-        String expLower = exp.toLowerCase();
-
-        // Map the three expected phrases to tolerant variants produced by different backends
-        String[] candidates;
-        switch (exp) {
-            case "Category not found.":
-                candidates = new String[]{
-                        "category not found",
-                        "no such category entity instance",
-                        "could not find an instance",
-                        "could not find any instances"
-                };
-                break;
-
-            case "Invalid ID format.":
-                candidates = new String[]{
-                        "invalid id format",
-                        "invalid id",
-                        "malformed id",
-                        "guid or id",                    // e.g., "... with GUID or ID abc found"
-                        "categories/abc",               // e.g., "... with categories/abc"
-                        "categories/invalid"            // e.g., "... with categories/invalid"
-                };
-                break;
-
-            case "Unsupported Accept header provided.":
-                candidates = new String[]{
-                        "unsupported accept header provided",
-                        "unrecognised accept type",
-                        "not acceptable"                // some servers use 406 wording
-                };
-                break;
-
-            default:
-                candidates = new String[]{expLower};     // fall back to literal contains
-        }
-
-        boolean matched = false;
-        for (String c : candidates) {
-            if (haystackLower.contains(c)) {
-                matched = true;
-                break;
-            }
-        }
-
-        assertTrue(matched,
-                String.format("Expected error message '%s' not found in response body: %s", exp, body));
-
-        System.out.println("Confirmed presence of expected error (tolerant match): " + exp);
-    }
-
-
+    // ==============================================================================
+    // And Error Message Verification Step
+    // ==============================================================================
+    // REFACTORED TO CommonStepDefinitions - using consolidated error message
+    // verification
+    // Now handled by: the_system_should_tell_me_if_there_was_an_error() in
+    // CommonStepDefinitions
+    // which supports both "the system should tell me/notify me if there was an
+    // error"
+    // and "an error message is returned" step phrases with tolerant matching
+    // @And("the system should tell me if there was an error: {string}")
+    // public void the_system_should_tell_me_if_there_was_an_error(String
+    // expectedMessage) {
+    // ... (full implementation commented out for brevity)
+    // }
     // ==============================================================================
     // Given (T2, T3, T4, T5)
     // ==============================================================================
     @Given("a todo item exists with title {string}, description {string}, and doneStatus {string}")
-    public void a_todo_exists_with_title_description_and_doneStatus(String title, String description, String doneStatus) {
+    public void a_todo_exists_with_title_description_and_doneStatus(String title, String description,
+            String doneStatus) {
         // Create a new todo item with the provided details
         Todo todo = new Todo(title, description, doneStatus);
 
@@ -216,15 +151,18 @@ public class TodoStepDefinitions {
     // ==============================================================================
     // Id Storage Step (T2, T3, T4, T5)
     // ==============================================================================
-    @And("its ID is stored as {string}")
-    public void its_id_is_stored_as(String key) {
-        Response response = context.getLastResponse();
-        assertNotNull(response, "Response object is null - API call may have failed");
-        assertEquals(201, response.statusCode(), "Expected status code 201 when creating todo item.");
-        
-        String newId = response.jsonPath().getString("id");
-        context.storeId(key, newId);
-    }
+    // REFACTORED TO CommonStepDefinitions
+    // @And("its ID is stored as {string}")
+    // public void its_id_is_stored_as(String key) {
+    // Response response = context.getLastResponse();
+    // assertNotNull(response, "Response object is null - API call may have
+    // failed");
+    // assertEquals(201, response.statusCode(), "Expected status code 201 when
+    // creating todo item.");
+
+    // String newId = response.jsonPath().getString("id");
+    // context.storeId(key, newId);
+    // }
 
     // ==============================================================================
     // Update Step (T2)
@@ -249,12 +187,12 @@ public class TodoStepDefinitions {
         context.setLastResponse(response);
     }
 
-
     // ==============================================================================
     // When (T3)
     // ==============================================================================
     @When("I send a request to view tasks filtered by the query {string} and requested format {string}")
-    public void i_send_a_request_to_view_tasks_filtered_by_the_query_and_requested_format(String queryParams, String acceptHeader) {
+    public void i_send_a_request_to_view_tasks_filtered_by_the_query_and_requested_format(String queryParams,
+            String acceptHeader) {
         // Send GET request with query parameters and Accept header
         Response response = api.getRequest("/todos" + queryParams, acceptHeader);
         assertNotNull(response, "API getRequest returned null response");
@@ -270,9 +208,9 @@ public class TodoStepDefinitions {
         assertNotNull(response, "Response object is null - API call may have failed");
         String actualContentType = response.getHeader("Content-Type");
         assertTrue(
-            actualContentType.contains(expectedContentType),
-            String.format("Expected Content-Type to contain '%s' but was '%s'", expectedContentType, actualContentType)
-        );
+                actualContentType.contains(expectedContentType),
+                String.format("Expected Content-Type to contain '%s' but was '%s'", expectedContentType,
+                        actualContentType));
     }
 
     // ==============================================================================
@@ -285,12 +223,13 @@ public class TodoStepDefinitions {
         List<Map<String, Object>> todos;
         Boolean expectedDoneStatus = Boolean.parseBoolean(filterStatus);
         if (response.getHeader("Content-Type").contains("application/xml")) {
-            // For XML, we need to parse each field individually since XML structure is different
+            // For XML, we need to parse each field individually since XML structure is
+            // different
             List<String> doneStatusList = response.xmlPath().getList("todos.todo.doneStatus");
             List<String> titleList = response.xmlPath().getList("todos.todo.title");
             List<String> descriptionList = response.xmlPath().getList("todos.todo.description");
             List<String> idList = response.xmlPath().getList("todos.todo.id");
-            
+
             // Convert XML data to Map structure for consistency
             todos = new ArrayList<>();
             for (int i = 0; i < doneStatusList.size(); i++) {
@@ -306,23 +245,23 @@ public class TodoStepDefinitions {
             todos = response.jsonPath().getList("todos");
             assertNotNull(todos, "Failed to parse todos from response");
         }
-        
+
         assertNotNull(todos, "Failed to parse todos from response");
         System.out.println("Retrieved " + todos.size() + " todos from response for filtering check.");
         long actualCount = todos.stream()
-            .filter(todo -> {
-                Object doneStatusObj = todo.get("doneStatus");
-                if (doneStatusObj instanceof String) {
-                    return Boolean.parseBoolean((String) doneStatusObj) == expectedDoneStatus;
-                } else if (doneStatusObj instanceof Boolean) {
-                    return ((Boolean) doneStatusObj).booleanValue() == expectedDoneStatus;
-                }
-                return false;
-            })
-            .count();
+                .filter(todo -> {
+                    Object doneStatusObj = todo.get("doneStatus");
+                    if (doneStatusObj instanceof String) {
+                        return Boolean.parseBoolean((String) doneStatusObj) == expectedDoneStatus;
+                    } else if (doneStatusObj instanceof Boolean) {
+                        return ((Boolean) doneStatusObj).booleanValue() == expectedDoneStatus;
+                    }
+                    return false;
+                })
+                .count();
         assertEquals(expectedCount, actualCount,
-            String.format("Expected %d tasks with doneStatus %s, but found %d.",
-                          expectedCount, filterStatus, actualCount));
+                String.format("Expected %d tasks with doneStatus %s, but found %d.",
+                        expectedCount, filterStatus, actualCount));
     }
 
     // ==============================================================================
@@ -350,9 +289,9 @@ public class TodoStepDefinitions {
         Response response = api.getRequest("/todos/" + targetId, "application/json");
         assertNotNull(response, "API getRequest returned null response during existence check");
         assertEquals(expectedStatusCode, response.getStatusCode(),
-            String.format("Expected status code %d when checking existence of todo ID %s, but got %d.",
-                          expectedStatusCode, targetId, response.getStatusCode()));
-    }   
+                String.format("Expected status code %d when checking existence of todo ID %s, but got %d.",
+                        expectedStatusCode, targetId, response.getStatusCode()));
+    }
 
     // ==============================================================================
     // When (T5)
@@ -363,15 +302,17 @@ public class TodoStepDefinitions {
         String targetId = context.retrieveId(targetIdKey);
         // Extract the single row of input data from the Gherkin table
         Map<String, String> data = dataTable.asMaps().get(0);
-        
-        // Create a Todo object from the input data (The Todo constructor handles String-to-Boolean conversion)
+
+        // Create a Todo object from the input data (The Todo constructor handles
+        // String-to-Boolean conversion)
         String title = data.get("title");
         String description = data.get("description");
         String doneStatus = data.get("doneStatus");
-        
+
         Todo newTodo = new Todo(title, description, doneStatus);
 
-        // Convert the Todo object to a Map<String, Object> (to ensure boolean primitive)
+        // Convert the Todo object to a Map<String, Object> (to ensure boolean
+        // primitive)
         Map<String, Object> payloadMap = newTodo.toPayloadMap();
         String jsonBody = api.toJson(payloadMap);
         // Send PUT request with JSON body

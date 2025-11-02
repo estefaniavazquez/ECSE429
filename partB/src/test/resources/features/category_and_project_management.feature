@@ -4,8 +4,8 @@ Feature: Manage projects relationship
     Given the system is running
     And the system is initialized with no data
 
-#  As a user, I want to assign a category instance to a project instance,
-#  so I can classify my projects.
+  #  As a user, I want to assign a category instance to a project instance,
+  #  so I can classify my projects.
 
   Scenario Outline: User assigns an existing category to an existing project. (Normal flow)
     Given the following projects exist:
@@ -52,7 +52,7 @@ Feature: Manage projects relationship
       | categoryId | categoryTitle | categoryDescription     |
       | 3          | School        | Tasks related to school |
     When the user assigns the category with id "<categoryId>" to the project with id "<projectId>"
-    Then an error message "<errorMessage>" is returned
+    And the system should tell me if there was an error: "<errorMessage>"
     And the response status code is "<statusCode>"
     Examples:
       | projectId | categoryId | errorMessage                                                         | statusCode |

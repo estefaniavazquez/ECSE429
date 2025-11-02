@@ -1,8 +1,6 @@
 package steps;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.List;
@@ -12,7 +10,6 @@ import api.Api;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
-import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.restassured.response.Response;
 import models.Projects;
@@ -63,45 +60,49 @@ public class ProjectsStepDefinitions {
     // ==============================================================================
     // EXCEPTION: Verify Error Message
     // ==============================================================================
-    @And("the system should notify me if there was an error: {string}")
-    public void the_system_should_tell_me_if_there_was_an_error(String expectedErrorMessage) {
-        Response response = context.getLastResponse();
-
-        // 1. Success Expected
-        if (expectedErrorMessage.isEmpty()) {
-            // Assert that we did not receive an error
-            assertFalse(
-                    response.getStatusCode() >= 400,
-                    "Expected a successful response, but received error status code: "
-                            + response.getStatusCode() + ". Response body: " + response.getBody().asString());
-            return;
-        }
-
-        // 2. Error Expected
-        // Assert that we did receive an error
-        assertTrue(response.getStatusCode() >= 400,
-                "Expected an error response, but received successful status code: "
-                        + response.getStatusCode() + ". Response body: " + response.getBody().asString());
-
-        // Verify the error message is present in the response body
-        String responseBody = response.getBody().asString();
-
-        assertTrue(
-                responseBody.contains(expectedErrorMessage),
-                "Expected error message '" + expectedErrorMessage + "' not found in response body: "
-                        + responseBody);
-    }
+    // REFACTORED TO CommonStepDefinitions - using consolidated error message
+    // verification
+    // Now handled by: the_system_should_tell_me_if_there_was_an_error() in
+    // CommonStepDefinitions
+    // which supports both "the system should tell me/notify me if there was an
+    // error"
+    // and "an error message is returned" step phrases
+    // @And("the system should notify me if there was an error: {string}")
+    // public void the_system_should_tell_me_if_there_was_an_error(String
+    // expectedErrorMessage) {
+    // Response response = context.getLastResponse();
+    // // 1. Success Expected
+    // if (expectedErrorMessage.isEmpty()) {
+    // assertFalse(response.getStatusCode() >= 400,
+    // "Expected a successful response, but received error status code: "
+    // + response.getStatusCode() + ". Response body: " +
+    // response.getBody().asString());
+    // return;
+    // }
+    // // 2. Error Expected
+    // assertTrue(response.getStatusCode() >= 400,
+    // "Expected an error response, but received successful status code: "
+    // + response.getStatusCode() + ". Response body: " +
+    // response.getBody().asString());
+    // String responseBody = response.getBody().asString();
+    // assertTrue(responseBody.contains(expectedErrorMessage),
+    // "Expected error message '" + expectedErrorMessage + "' not found in response
+    // body: "
+    // + responseBody);
+    // }
 
     // ==============================================================================
     // STEP 2: THEN - ASSERTION (Status Code)
     // ==============================================================================
-    @Then("the response status code should be {int}")
-    public void the_response_status_code_should_be(Integer expectedStatusCode) {
-        Response response = context.getLastResponse();
-        assertEquals(expectedStatusCode,
-                response.statusCode(),
-                "Expected status code did not match actual code. Response body: " + response.getBody().asString());
-    }
+    // REFACTORED TO CommonStepDefinitions
+    // @Then("the response status code should be {int}")
+    // public void the_response_status_code_should_be(Integer expectedStatusCode) {
+    // Response response = context.getLastResponse();
+    // assertEquals(expectedStatusCode,
+    // response.statusCode(),
+    // "Expected status code did not match actual code. Response body: " +
+    // response.getBody().asString());
+    // }
 
     // ==============================================================================
     // STEP 3: AND - ASSERTION (Verify Response Data)
@@ -164,12 +165,13 @@ public class ProjectsStepDefinitions {
     }
 
     // // STEP 6: AND - Store ID
-    // // ==============================================================================
+    // //
+    // ==============================================================================
     // @And("its ID is stored as {string}")
     // public void its_id_is_stored_as(String key) {
-    //     // Retrieve the last created ID and store it with the specified key
-    //     String lastId = context.retrieveId("last_created_id");
-    //     context.storeId(key, lastId);
+    // // Retrieve the last created ID and store it with the specified key
+    // String lastId = context.retrieveId("last_created_id");
+    // context.storeId(key, lastId);
     // }
 
     // ==============================================================================
@@ -283,12 +285,15 @@ public class ProjectsStepDefinitions {
     // ==============================================================================
     // STEP 8: THEN - Update status
     // ==============================================================================
-    @Then("the update status should be {string}")
-    public void the_update_status_should_be(String expectedStatusCode) {
-        Response response = context.getLastResponse();
-        assertEquals(Integer.parseInt(expectedStatusCode), response.statusCode(),
-                "Expected update status code did not match. Response: " + response.getBody().asString());
-    }
+    // REFACTORED TO CommonStepDefinitions - using "the response status code is
+    // {string}"
+    // @Then("the update status should be {string}")
+    // public void the_update_status_should_be(String expectedStatusCode) {
+    // Response response = context.getLastResponse();
+    // assertEquals(Integer.parseInt(expectedStatusCode), response.statusCode(),
+    // "Expected update status code did not match. Response: " +
+    // response.getBody().asString());
+    // }
 
     // ==============================================================================
     // STEP 9: AND - Verify updated project fields
@@ -312,12 +317,14 @@ public class ProjectsStepDefinitions {
     // ==============================================================================
     // STEP 11: THEN - Status code (generic)
     // ==============================================================================
-    @Then("the status code should be {string}")
-    public void the_status_code_should_be(String expectedStatusCode) {
-        Response response = context.getLastResponse();
-        assertEquals(Integer.parseInt(expectedStatusCode), response.statusCode(),
-                "Expected status code did not match. Response: " + response.getBody().asString());
-    }
+    // REFACTORED TO CommonStepDefinitions
+    // @Then("the status code should be {string}")
+    // public void the_status_code_should_be(String expectedStatusCode) {
+    // Response response = context.getLastResponse();
+    // assertEquals(Integer.parseInt(expectedStatusCode), response.statusCode(),
+    // "Expected status code did not match. Response: " +
+    // response.getBody().asString());
+    // }
 
     // ==============================================================================
     // STEP 12: AND - Verify list count
@@ -359,12 +366,15 @@ public class ProjectsStepDefinitions {
     // ==============================================================================
     // STEP 14: THEN - Deletion status
     // ==============================================================================
-    @Then("the deletion status should be {string}")
-    public void the_deletion_status_should_be(String expectedStatusCode) {
-        Response response = context.getLastResponse();
-        assertEquals(Integer.parseInt(expectedStatusCode), response.statusCode(),
-                "Expected deletion status code did not match. Response: " + response.getBody().asString());
-    }
+    // REFACTORED TO CommonStepDefinitions - using "the response status code is
+    // {string}"
+    // @Then("the deletion status should be {string}")
+    // public void the_deletion_status_should_be(String expectedStatusCode) {
+    // Response response = context.getLastResponse();
+    // assertEquals(Integer.parseInt(expectedStatusCode), response.statusCode(),
+    // "Expected deletion status code did not match. Response: " +
+    // response.getBody().asString());
+    // }
 
     // ==============================================================================
     // STEP 15: AND - Verify deletion via GET
