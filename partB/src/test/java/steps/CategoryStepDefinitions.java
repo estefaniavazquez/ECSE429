@@ -68,16 +68,6 @@ public class CategoryStepDefinitions {
         }
     }
 
-    // REFACTORED TO CommonStepDefinitions - using "the response status code is
-    // {string}"
-    // @Then("the category creation status should be {int}")
-    // public void the_category_creation_status_should_be(Integer expected) {
-    // Response r = context.getLastResponse();
-    // assertEquals(expected.intValue(), r.statusCode(),
-    // "Status mismatch. Body: " + (r.getBody() == null ? "" :
-    // r.getBody().asString()));
-    // }
-
     @And("the saved category should show field {string} with value {string}")
     public void the_saved_category_should_show_field_with_value(String field, String expectedValue) {
         Response r = context.getLastResponse();
@@ -136,16 +126,6 @@ public class CategoryStepDefinitions {
         context.setLastResponse(r);
     }
 
-    // REFACTORED TO CommonStepDefinitions - using "the response status code is
-    // {string}"
-    // @Then("the update status should be {int}")
-    // public void the_update_status_should_be(Integer expected) {
-    // Response r = context.getLastResponse();
-    // assertTrue(statusAcceptable(expected, r),
-    // "Update status mismatch. Expected " + expected + ", got " + r.getStatusCode()
-    // + ". Body: " + (r.getBody() == null ? "" : r.getBody().asString()));
-    // }
-
     @And("the updated category should show field {string} with value {string}")
     public void the_updated_category_should_show_field_with_value(String field, String expectedValue) {
         the_saved_category_should_show_field_with_value(field, expectedValue);
@@ -172,15 +152,6 @@ public class CategoryStepDefinitions {
                 .then().extract().response();
         context.setLastResponse(r);
     }
-
-    // REFACTORED TO CommonStepDefinitions
-    // @Then("the response status should be {int}")
-    // public void the_response_status_should_be(Integer expected) {
-    // Response r = context.getLastResponse();
-    // assertTrue(statusAcceptable(expected, r),
-    // "Status mismatch. Expected " + expected + ", got " + r.getStatusCode()
-    // + ". Body: " + (r.getBody() == null ? "" : r.getBody().asString()));
-    // }
 
     @And("the response format should be {string}")
     public void the_response_format_should_be(String expectedContentType) {
@@ -275,17 +246,6 @@ public class CategoryStepDefinitions {
         context.setLastResponse(r);
         idAliases.put("last_deleted_candidate_id", id);
     }
-
-    // REFACTORED TO CommonStepDefinitions - using "the response status code is
-    // {string}"
-    // @Then("the deletion status should be {int}")
-    // public void the_deletion_status_should_be(Integer expected) {
-    // Response r = context.getLastResponse();
-    // assertTrue(statusAcceptable(expected, r),
-    // "Deletion status mismatch. Expected " + expected + ", got " +
-    // r.getStatusCode()
-    // + ". Body: " + (r.getBody() == null ? "" : r.getBody().asString()));
-    // }
 
     @And("when I verify deletion by requesting GET \\/categories\\/{string}, the response should be {int}")
     public void when_i_verify_deletion_by_requesting_get_categories_the_response_should_be(String targetId,

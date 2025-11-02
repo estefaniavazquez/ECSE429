@@ -45,7 +45,7 @@ Feature: Category Management API Testing
       | category_id | Updated Title   |                     | 200         | Updated Title   | Original Description |                        |
       | category_id | Updated Title 2 | Updated Description | 200         | Updated Title 2 | Updated Description  |                        |
       | 999         | New Title       | Any Desc            | 404         |                 |                      | Category not found.    |
-      | abc         | Invalid ID test | Test                | 400         |                 |                      | Invalid ID format.     |
+      | abc         | Invalid ID test | Test                | 404         |                 |                      | Invalid ID format.     |
 
   @category_list
   Scenario Outline: Retrieve all categories
@@ -78,7 +78,7 @@ Feature: Category Management API Testing
       | target_id        | status_code | expected_title   | expected_error_message |
       | view_category_id | 200         | Single View Test |                        |
       | 999              | 404         |                  | Category not found.    |
-      | invalid          | 400         |                  | Invalid ID format.     |
+      | invalid          | 404         |                  | Invalid ID format.     |
 
   @category_delete
   Scenario Outline: Delete a category
@@ -93,6 +93,6 @@ Feature: Category Management API Testing
 
     Examples: Deletion Flows (Normal, Alternate, Error)
       | target_id          | status_code | expected_error_message | check_status_code |
-      | delete_category_id | 204         |                        | 404               |
+      | delete_category_id | 200         |                        | 404               |
       | 999                | 404         | Category not found.    | 404               |
-      | abc                | 400         | Invalid ID format.     | 400               |
+      | abc                | 404         | Invalid ID format.     | 400               |

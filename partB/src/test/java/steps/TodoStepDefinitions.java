@@ -64,21 +64,6 @@ public class TodoStepDefinitions {
     }
 
     // ==============================================================================
-    // Generic Status Code Assertion Step
-    // ==============================================================================
-    // REFACTORED TO CommonStepDefinitions
-    // @Then("the status code should be {int}")
-    // public void the_creation_status_should_be(int expectedStatusCode) {
-    // Response response = context.getLastResponse();
-    // assertNotNull(response, "Response object is null - API call may have
-    // failed");
-    // assertEquals(expectedStatusCode,
-    // response.statusCode(),
-    // "Expected status code did not match actual code. Response body: " +
-    // response.getBody().asString());
-    // }
-
-    // ==============================================================================
     // And Assertions for verifying saved/updated fields
     // ==============================================================================
     @And("the saved task should show field {string} with value {string}")
@@ -113,24 +98,6 @@ public class TodoStepDefinitions {
     }
 
     // ==============================================================================
-    // And Error Message Verification Step
-    // ==============================================================================
-    // ==============================================================================
-    // And Error Message Verification Step
-    // ==============================================================================
-    // REFACTORED TO CommonStepDefinitions - using consolidated error message
-    // verification
-    // Now handled by: the_system_should_tell_me_if_there_was_an_error() in
-    // CommonStepDefinitions
-    // which supports both "the system should tell me/notify me if there was an
-    // error"
-    // and "an error message is returned" step phrases with tolerant matching
-    // @And("the system should tell me if there was an error: {string}")
-    // public void the_system_should_tell_me_if_there_was_an_error(String
-    // expectedMessage) {
-    // ... (full implementation commented out for brevity)
-    // }
-    // ==============================================================================
     // Given (T2, T3, T4, T5)
     // ==============================================================================
     @Given("a todo item exists with title {string}, description {string}, and doneStatus {string}")
@@ -147,22 +114,6 @@ public class TodoStepDefinitions {
         context.storeId("preexisting_todo_id", newId);
         context.setLastResponse(response);
     }
-
-    // ==============================================================================
-    // Id Storage Step (T2, T3, T4, T5)
-    // ==============================================================================
-    // REFACTORED TO CommonStepDefinitions
-    // @And("its ID is stored as {string}")
-    // public void its_id_is_stored_as(String key) {
-    // Response response = context.getLastResponse();
-    // assertNotNull(response, "Response object is null - API call may have
-    // failed");
-    // assertEquals(201, response.statusCode(), "Expected status code 201 when
-    // creating todo item.");
-
-    // String newId = response.jsonPath().getString("id");
-    // context.storeId(key, newId);
-    // }
 
     // ==============================================================================
     // Update Step (T2)

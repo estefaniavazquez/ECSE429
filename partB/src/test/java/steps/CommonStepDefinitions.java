@@ -143,17 +143,6 @@ public class CommonStepDefinitions {
                 String.format("Expected error message '%s' not found in response body: %s", exp, body));
     }
 
-    /**
-     * Alternative phrasing for error message verification.
-     * This delegates to the main error checking method for consistency.
-     * Used in interoperability/relationship tests.
-     */
-    // @Then("an error message {string} is returned")
-    // public void an_error_message_is_returned(String expectedErrorMessage) {
-    // // Delegate to the main error checking method
-    // the_system_should_tell_me_if_there_was_an_error(expectedErrorMessage);
-    // }
-
     // ==============================================================================
     // ID Storage
     // ==============================================================================

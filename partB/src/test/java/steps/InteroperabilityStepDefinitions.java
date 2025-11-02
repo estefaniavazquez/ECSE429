@@ -313,33 +313,6 @@ public class InteroperabilityStepDefinitions {
         assert (actualProjectIds.containsAll(expectedProjectIds) && expectedProjectIds.containsAll(actualProjectIds));
     }
 
-    // REFACTORED TO CommonStepDefinitions - using consolidated error message
-    // verification
-    // Now handled by: the_system_should_tell_me_if_there_was_an_error() in
-    // CommonStepDefinitions
-    // which also supports the "an error message {string} is returned" step phrase
-    // @Then("an error message {string} is returned")
-    // public void anErrorMessageIsReturned(String expectedErrorMessage) {
-    // Response response = context.getLastResponse();
-    // try {
-    // List<String> errorMessages =
-    // response.jsonPath().getList("errorMessages.flatten()");
-    // String actualErrorMessage = String.join(", ", errorMessages);
-    // assert(actualErrorMessage.equals(expectedErrorMessage));
-    // } catch (Exception e) {
-    // System.out.println("Failed to retrieve error message from response.");
-    // assert(false);
-    // }
-    // }
-
-    // REFACTORED TO CommonStepDefinitions
-    // @Then("the response status code is {string}")
-    // public void theResponseStatusCodeIs(String expectedStatusCode) {
-    // Response response = context.getLastResponse();
-
-    // assert(response.getStatusCode() == Integer.parseInt(expectedStatusCode));
-    // }
-
     @And("the entries in the relationship tasksof of the todo with id {string} contain:")
     public void theEntriesInTheRelationshipTasksofOfTheTodoWithIdContain(String todoId, DataTable dataTable) {
         // Get all the column entries from the data table
