@@ -1,22 +1,21 @@
 package steps;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import api.Api;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-
-import api.Api;
 import io.restassured.response.Response;
 import models.CategoryInteroperability;
 import models.ProjectInteroperability;
-import models.TodoInteroperability;
 import models.Relationship;
+import models.TodoInteroperability;
 import setup.ScenarioContext;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 public class InteroperabilityStepDefinitions {
     private final ScenarioContext context;
@@ -43,33 +42,35 @@ public class InteroperabilityStepDefinitions {
             for (TodoInteroperability todo : todos) {
                 Response response = api.deleteRequest("/todos/" + todo.getId());
 
-                assert(response.getStatusCode() == 200);
+                assert (response.getStatusCode() == 200);
             }
         }
 
         // Get all projects
         Response projectsResponse = api.getRequest("/projects");
-        ProjectInteroperability[] projects = projectsResponse.jsonPath().getObject("projects", ProjectInteroperability[].class);
+        ProjectInteroperability[] projects = projectsResponse.jsonPath().getObject("projects",
+                ProjectInteroperability[].class);
 
         // Delete each project
         if (projects != null) {
             for (ProjectInteroperability project : projects) {
                 Response response = api.deleteRequest("/projects/" + project.getId());
 
-                assert(response.getStatusCode() == 200);
+                assert (response.getStatusCode() == 200);
             }
         }
 
         // Get all categories
         Response categoriesResponse = api.getRequest("/categories");
-        CategoryInteroperability[] categories = categoriesResponse.jsonPath().getObject("categories", models.CategoryInteroperability[].class);
+        CategoryInteroperability[] categories = categoriesResponse.jsonPath().getObject("categories",
+                models.CategoryInteroperability[].class);
 
         // Delete each category
         if (categories != null) {
             for (CategoryInteroperability category : categories) {
                 Response response = api.deleteRequest("/categories/" + category.getId());
 
-                assert(response.getStatusCode() == 200);
+                assert (response.getStatusCode() == 200);
             }
         }
     }
@@ -92,8 +93,8 @@ public class InteroperabilityStepDefinitions {
             Response response = api.postRequest("/todos", jsonBody);
             String newId = response.jsonPath().getString("id");
 
-            assert(response.getStatusCode() == 201);
-            assert(id.equals(newId));
+            assert (response.getStatusCode() == 201);
+            assert (id.equals(newId));
         }
     }
 
@@ -116,8 +117,8 @@ public class InteroperabilityStepDefinitions {
             Response response = api.postRequest("/projects", jsonBody);
             String newId = response.jsonPath().getString("id");
 
-            assert(response.getStatusCode() == 201);
-            assert(id.equals(newId));
+            assert (response.getStatusCode() == 201);
+            assert (id.equals(newId));
         }
     }
 
@@ -136,8 +137,8 @@ public class InteroperabilityStepDefinitions {
         Response response = api.postRequest("/categories", jsonBody);
         String newId = response.jsonPath().getString("id");
 
-        assert(response.getStatusCode() == 201);
-        assert(id.equals(newId));
+        assert (response.getStatusCode() == 201);
+        assert (id.equals(newId));
     }
 
     @When("the user associates the todo with id {string} with the project with id {string}")
@@ -193,7 +194,7 @@ public class InteroperabilityStepDefinitions {
         Response response = api.getRequest("/todos/" + todoId);
 
         // Trying to get a non-existing todo should return 404
-        assert(response.getStatusCode() == 404);
+        assert (response.getStatusCode() == 404);
     }
 
     @Then("the returned todos are:")
@@ -218,16 +219,16 @@ public class InteroperabilityStepDefinitions {
         TodoInteroperability[] actualTodos = response.jsonPath().getObject("todos", TodoInteroperability[].class);
 
         // Ensure both objects are equal
-        assert(actualTodos.length == expectedTodos.length);
-        for(TodoInteroperability expectedTodo : expectedTodos) {
+        assert (actualTodos.length == expectedTodos.length);
+        for (TodoInteroperability expectedTodo : expectedTodos) {
             boolean matchFound = false;
-            for(TodoInteroperability actualTodo : actualTodos) {
+            for (TodoInteroperability actualTodo : actualTodos) {
                 if (actualTodo.equals(expectedTodo)) {
                     matchFound = true;
                     break;
                 }
             }
-            assert(matchFound);
+            assert (matchFound);
         }
     }
 
@@ -237,7 +238,7 @@ public class InteroperabilityStepDefinitions {
         Response response = context.getLastResponse();
         List<String> actualTodoIds = response.jsonPath().getList("todos.id.flatten()");
 
-        assert(actualTodoIds.isEmpty());
+        assert (actualTodoIds.isEmpty());
     }
 
     @Then("the entries in the relationship tasksof of the todo with id {string} now contain:")
@@ -251,7 +252,7 @@ public class InteroperabilityStepDefinitions {
         Response response = api.getRequest("/todos/" + todoId);
         List<String> actualProjectIds = response.jsonPath().getList("todos.tasksof.id.flatten()");
 
-        assert(actualProjectIds.containsAll(expectedProjectIds) && expectedProjectIds.containsAll(actualProjectIds));
+        assert (actualProjectIds.containsAll(expectedProjectIds) && expectedProjectIds.containsAll(actualProjectIds));
     }
 
     @Then("the entries in the relationship tasks of the project with id {string} now contain:")
@@ -265,7 +266,7 @@ public class InteroperabilityStepDefinitions {
         Response response = api.getRequest("/projects/" + projectId);
         List<String> actualTodoIds = response.jsonPath().getList("projects.tasks.id.flatten()");
 
-        assert(actualTodoIds.containsAll(expectedTodoIds) && expectedTodoIds.containsAll(actualTodoIds));
+        assert (actualTodoIds.containsAll(expectedTodoIds) && expectedTodoIds.containsAll(actualTodoIds));
     }
 
     @Then("the entries in the relationship todos of the category with id {string} now contain:")
@@ -279,7 +280,7 @@ public class InteroperabilityStepDefinitions {
         Response response = api.getRequest("/categories/" + categoryId);
         List<String> actualTodoIds = response.jsonPath().getList("categories.todos.id.flatten()");
 
-        assert(actualTodoIds.containsAll(expectedTodoIds) && expectedTodoIds.containsAll(actualTodoIds));
+        assert (actualTodoIds.containsAll(expectedTodoIds) && expectedTodoIds.containsAll(actualTodoIds));
     }
 
     @Then("the entries in the relationship categories of the todo with id {string} now contain:")
@@ -293,11 +294,13 @@ public class InteroperabilityStepDefinitions {
         Response response = api.getRequest("/todos/" + todoId);
         List<String> actualCategoryIds = response.jsonPath().getList("todos.categories.id.flatten()");
 
-        assert(actualCategoryIds.containsAll(expectedCategoryIds) && expectedCategoryIds.containsAll(actualCategoryIds));
+        assert (actualCategoryIds.containsAll(expectedCategoryIds)
+                && expectedCategoryIds.containsAll(actualCategoryIds));
     }
 
     @Then("the entries in the relationship projects of the category with id {string} now contain:")
-    public void theEntriesInTheRelationshipProjectsOfTheCategoryWithIdNowContain(String categoryId, DataTable dataTable) {
+    public void theEntriesInTheRelationshipProjectsOfTheCategoryWithIdNowContain(String categoryId,
+            DataTable dataTable) {
         // Get all the column entries from the data table
         List<String> expectedProjectIds = dataTable.asMaps().stream()
                 .map(row -> row.get("id"))
@@ -307,28 +310,7 @@ public class InteroperabilityStepDefinitions {
         Response response = api.getRequest("/categories/" + categoryId);
         List<String> actualProjectIds = response.jsonPath().getList("categories.projects.id.flatten()");
 
-        assert(actualProjectIds.containsAll(expectedProjectIds) && expectedProjectIds.containsAll(actualProjectIds));
-    }
-
-    @Then("an error message {string} is returned")
-    public void anErrorMessageIsReturned(String expectedErrorMessage) {
-        Response response = context.getLastResponse();
-        try {
-            List<String> errorMessages = response.jsonPath().getList("errorMessages.flatten()");
-            String actualErrorMessage = String.join(", ", errorMessages);
-
-            assert(actualErrorMessage.equals(expectedErrorMessage));
-        } catch (Exception e) {
-            System.out.println("Failed to retrieve error message from response.");
-            assert(false);
-        }
-    }
-
-    @Then("the response status code is {string}")
-    public void theResponseStatusCodeIs(String expectedStatusCode) {
-        Response response = context.getLastResponse();
-
-        assert(response.getStatusCode() == Integer.parseInt(expectedStatusCode));
+        assert (actualProjectIds.containsAll(expectedProjectIds) && expectedProjectIds.containsAll(actualProjectIds));
     }
 
     @And("the entries in the relationship tasksof of the todo with id {string} contain:")
@@ -346,7 +328,8 @@ public class InteroperabilityStepDefinitions {
             Response response = api.postRequest("/todos/" + todoId + "/tasksof", jsonBody);
 
             if (response.getStatusCode() != 201) {
-                throw new RuntimeException("Failed to associate todo " + todoId + " with project " + projectId + ". Status code: " + response.getStatusCode());
+                throw new RuntimeException("Failed to associate todo " + todoId + " with project " + projectId
+                        + ". Status code: " + response.getStatusCode());
             }
         }
     }
@@ -365,7 +348,7 @@ public class InteroperabilityStepDefinitions {
 
             Response response = api.postRequest("/projects/" + projectId + "/tasks", jsonBody);
 
-            assert(response.getStatusCode() == 201);
+            assert (response.getStatusCode() == 201);
         }
     }
 
@@ -383,7 +366,7 @@ public class InteroperabilityStepDefinitions {
 
             Response response = api.postRequest("/categories/" + categoryId + "/todos", jsonBody);
 
-            assert(response.getStatusCode() == 201);
+            assert (response.getStatusCode() == 201);
         }
     }
 
@@ -401,7 +384,7 @@ public class InteroperabilityStepDefinitions {
 
             Response response = api.postRequest("/categories/" + categoryId + "/projects", jsonBody);
 
-            assert(response.getStatusCode() == 201);
+            assert (response.getStatusCode() == 201);
         }
     }
 }

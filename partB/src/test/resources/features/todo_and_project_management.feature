@@ -54,7 +54,7 @@ Feature: Manage tasks/tasksof relationships
       | projectId | projectTitle    | projectCompleted | projectActive | projectDescription                    |
       | 2         | ECSE429 Project | false            | true          | Test API for a project management app |
     When the user associates the todo with id "<todoId>" with the project with id "<projectId>"
-    Then an error message "<errorMessage>" is returned
+    And the system should tell me if there was an error: "<errorMessage>"
     And the response status code is "<statusCode>"
     Examples:
       | todoId | projectId | errorMessage                               | statusCode |
@@ -62,8 +62,8 @@ Feature: Manage tasks/tasksof relationships
 
 
 
-#  As a user, I want to remove a todo instance from its associated project instance,
-#  so I can exclude a task that is no longer required in that project.
+  #  As a user, I want to remove a todo instance from its associated project instance,
+  #  so I can exclude a task that is no longer required in that project.
 
   Scenario Outline: User removes an existing association between an existing todo and an existing project. (Normal flow)
     Given the following todos exist:
@@ -119,7 +119,7 @@ Feature: Manage tasks/tasksof relationships
       | projectId | projectTitle    | projectCompleted | projectActive | projectDescription                    |
       | 2         | ECSE429 Project | false            | true          | Test API for a project management app |
     When the user removes the association between the todo with id "<todoId>" and the project with id "<projectId>"
-    Then an error message "<errorMessage>" is returned
+    And the system should tell me if there was an error: "<errorMessage>"
     And the response status code is "<statusCode>"
     Examples:
       | todoId | projectId | errorMessage                                          | statusCode |
@@ -127,8 +127,8 @@ Feature: Manage tasks/tasksof relationships
 
 
 
-#  As a user, I want to get all the todo instances related to a project instance,
-#  so I can keep track of the tasks that need to be done to complete that project.
+  #  As a user, I want to get all the todo instances related to a project instance,
+  #  so I can keep track of the tasks that need to be done to complete that project.
 
   Scenario Outline: User gets the existing todos associated with an existing project. (Normal flow)
     Given the following todos exist:
@@ -175,7 +175,7 @@ Feature: Manage tasks/tasksof relationships
       | projectId | projectTitle    | projectCompleted | projectActive | projectDescription                    |
       | 2         | ECSE429 Project | false            | true          | Test API for a project management app |
     When the user gets the todos associated with the project with id "<projectId>"
-    Then an error message "<errorMessage>" is returned
+    And the system should tell me if there was an error: "<errorMessage>"
     And the response status code is "<statusCode>"
     Examples:
       | projectId | errorMessage                                         | statusCode |
