@@ -11,7 +11,13 @@ import static io.cucumber.junit.platform.engine.Constants.PLUGIN_PROPERTY_NAME;
 @Suite
 @IncludeEngines("cucumber")
 // Ensure paths match the project structure
-@SelectClasspathResource("features")
+@SelectClasspathResource("features/todos_management.feature")
+@SelectClasspathResource("features/todo_and_project_management.feature")
+@SelectClasspathResource("features/projects_management.feature")
+@SelectClasspathResource("features/category_and_todo_management.feature")
+@SelectClasspathResource("features/category_and_project_management.feature")
+@SelectClasspathResource("features/categories_management.feature")
+//@SelectClasspathResource("features")
 @ConfigurationParameter(key = GLUE_PROPERTY_NAME, value = "setup,steps,api, models") // Added 'api' just in case
 @ConfigurationParameter(key = PLUGIN_PROPERTY_NAME, value = "pretty, summary")
 public class TestRunner {
