@@ -30,10 +30,6 @@ public class CategoriesApiTest extends Api {
         String responseMessage = connection.getResponseMessage();
         String responseBody = readResponse(connection);
 
-        System.out.println("Response code: " + responseCode);
-        System.out.println("Response message: " + responseMessage);
-        System.out.println("Response body: " + responseBody);
-
         ObjectMapper objectMapper = new ObjectMapper();
         Category createdCategory = objectMapper.readValue(responseBody, Category.class);
 
@@ -66,7 +62,7 @@ public class CategoriesApiTest extends Api {
         assertEquals(newTitle, updatedCategory.getTitle());
         assertEquals(newDescription, updatedCategory.getDescription());
 
-        connection.disconnect();
+        connection.getInputStream().close();
     }
 
     private void deleteCategory(String id) throws Exception {
@@ -79,7 +75,7 @@ public class CategoriesApiTest extends Api {
         assertEquals("OK", responseMessage);
         assertEquals("", responseBody);
 
-        connection.disconnect();
+        connection.getInputStream().close();
     }
 
 
@@ -124,13 +120,77 @@ public class CategoriesApiTest extends Api {
 
     @Test
     public void testPutCategoriesIdJson() throws Exception {
+        System.out.println("\n----------------------Updating categories performance tests");
 
+        // Store <number of objects, <time taken to update all objects, CPU usage, memory usage>>
+        Map<Integer, List<String>> performanceMetrics = new HashMap<>();
+
+        for (int numObjects : NUM_OBJECTS_FOR_PERFORMANCE_TESTING) {
+            // First, create the required number of categories
+            for (int i = 0; i < numObjects; i++) {
+                String randomTitle = generateRandomString(1, 50, false);
+                String randomDescription = generateRandomString(0, 200, true);
+                createCategory(randomTitle, randomDescription);
+            }
+
+            // Now, update the created categories and measure performance
+            List<String> metrics = measurePerformanceMetrics(() -> {
+                for (int i = 0; i < numObjects; i++) {
+                    System.out.println("\n############# Updating category " + (i + 1) + " of " + numObjects);
+                    String newRandomTitle = generateRandomString(1, 50, false);
+                    String newRandomDescription = generateRandomString(0, 200, true);
+                    try {
+                        changeCategory(String.valueOf(latestCreatedCategoryId - numObjects + 1 + i), newRandomTitle, newRandomDescription);
+                    } catch (Exception e) {
+                        throw new RuntimeException("Failed to update category", e);
+                    }
+                }
+            });
+
+            performanceMetrics.put(numObjects, metrics);
+        }
+
+        String filePath = Paths.get(System.getProperty("user.dir"), "results", "updateCategories.csv").toString();
+        savePerformanceMetricsToCSV(filePath, performanceMetrics);
+
+        System.out.println("\nSaved updating categories performance tests----------------------\n");
     }
 
     // Test DELETE /categories/:id
 
     @Test
     public void testDeleteCategoriesIdJson() throws Exception {
+        System.out.println("\n----------------------Deleting categories performance tests");
 
+        // Store <number of objects, <time taken to delete all objects, CPU usage, memory usage>>
+        Map<Integer, List<String>> performanceMetrics = new HashMap<>();
+
+        for (int numObjects : NUM_OBJECTS_FOR_PERFORMANCE_TESTING) {
+            // First, create the required number of categories
+            for (int i = 0; i < numObjects; i++) {
+                String randomTitle = generateRandomString(1, 50, false);
+                String randomDescription = generateRandomString(0, 200, true);
+                createCategory(randomTitle, randomDescription);
+            }
+
+            // Now, delete the created categories and measure performance
+            List<String> metrics = measurePerformanceMetrics(() -> {
+                for (int i = 0; i < numObjects; i++) {
+                    System.out.println("\n############# Deleting category " + (i + 1) + " of " + numObjects);
+                    try {
+                        deleteCategory(String.valueOf(latestCreatedCategoryId - numObjects + 1 + i));
+                    } catch (Exception e) {
+                        throw new RuntimeException("Failed to delete category", e);
+                    }
+                }
+            });
+
+            performanceMetrics.put(numObjects, metrics);
+        }
+
+        String filePath = Paths.get(System.getProperty("user.dir"), "results", "deleteCategories.csv").toString();
+        savePerformanceMetricsToCSV(filePath, performanceMetrics);
+
+        System.out.println("\nSaved deleting categories performance tests----------------------\n");
     }
 }

@@ -14,7 +14,6 @@ import java.lang.management.ManagementFactory;
 
 import com.sun.management.OperatingSystemMXBean;
 
-
 import org.junit.After;
 import org.junit.Before;
 
@@ -130,34 +129,23 @@ public abstract class Api {
 
     /* PERFORMANCE */
 
-    private double getCPUUsage() {
-        OperatingSystemMXBean operatingSystemMXBean = (OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean();
-        double cupUsage = operatingSystemMXBean.getProcessCpuLoad();
-
-        return cupUsage * 100; // Convert to percentage
-    }
-
-    private double getMemoryUsageInMB() {
-        long memoryUsageBytes = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
-
-        return memoryUsageBytes / (1024.0 * 1024.0);    // Convert to MB
-    }
-
     // To measure performance metrics
     public List<String> measurePerformanceMetrics(Runnable operation) {
-        double initialCPU = getCPUUsage();
-        double initialMemory = getMemoryUsageInMB();
+        OperatingSystemMXBean osBean = (OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean();
+
+        double initialCPU = osBean.getProcessCpuLoad();
+        long initialFreeMemory = osBean.getFreeMemorySize();
         long startTime = System.currentTimeMillis();
 
         operation.run();
 
         long endTime = System.currentTimeMillis();
-        double finalMemory = getMemoryUsageInMB();
-        double finalCPU = getCPUUsage();
+        double finalCPU = osBean.getProcessCpuLoad();
+        long finalFreeMemory = osBean.getFreeMemorySize();
 
         long timeTaken = endTime - startTime; // in milliseconds
-        double cpuUsed = finalCPU - initialCPU; // in percentage
-        double memoryUsed = finalMemory - initialMemory; // in MB
+        double cpuUsed = (finalCPU - initialCPU) * 100; // in percentage
+        double memoryUsed = (finalFreeMemory - initialFreeMemory) / (1024.0 * 1024.0); // in MB
 
         return List.of(
                 String.valueOf(timeTaken),

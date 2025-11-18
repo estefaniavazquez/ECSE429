@@ -12,14 +12,9 @@ public class CommonConstants {
 
     public static final String JSON_FORMAT = "application/json";
 
-    public static final String GET_METHOD = "GET";
     public static final String POST_METHOD = "POST";
     public static final String PUT_METHOD = "PUT";
     public static final String DELETE_METHOD = "DELETE";
 
     public static final int[] NUM_OBJECTS_FOR_PERFORMANCE_TESTING = { 1, 5, 10, 25, 50, 75, 100, 250, 500, 750, 1000, 2500, 5000, 7500, 10000 };
-
-    public static final Category officeCategory = new Category("1", "Office", "");
-    public static final Category homeCategory = new Category("2", "Home", "");
-    public static final Category[] defaultCategories = { officeCategory, homeCategory };
 }
