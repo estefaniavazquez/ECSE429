@@ -1,30 +1,33 @@
 package general;
 
-import java.io.*;
-
+import java.io.BufferedReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.lang.management.ManagementFactory;
 import java.net.HttpURLConnection;
 import java.net.URL;
-
 import java.nio.charset.StandardCharsets;
-
 import java.util.List;
 import java.util.Map;
-
-import java.lang.management.ManagementFactory;
-
-import com.sun.management.OperatingSystemMXBean;
 
 import org.junit.After;
 import org.junit.Before;
 
 import com.google.gson.Gson;
+import com.sun.management.OperatingSystemMXBean;
 
-import static general.CommonConstants.*;
+import static general.CommonConstants.BASE_URL;
+import static general.CommonConstants.JSON_FORMAT;
+import static general.CommonConstants.PATH_TO_SERVER_JAR;
 
 public abstract class Api {
     private static Process serverProcess;
     private static final Gson GSON = new Gson();
     protected int latestCreatedCategoryId;
+    protected int latestCreatedTodoId;
+
 
     public Api() {}
 
