@@ -16,7 +16,6 @@ import org.junit.After;
 import org.junit.Before;
 
 import com.google.gson.Gson;
-import com.sun.management.OperatingSystemMXBean;
 
 import static general.CommonConstants.BASE_URL;
 import static general.CommonConstants.JSON_FORMAT;
@@ -27,6 +26,7 @@ public abstract class Api {
     private static final Gson GSON = new Gson();
     protected int latestCreatedCategoryId;
     protected int latestCreatedTodoId;
+    protected int latestCreatedProjectId;
 
 
     public Api() {}
@@ -48,6 +48,11 @@ public abstract class Api {
         }
 
         return randomString.toString().trim();
+    }
+
+    // Generate a boolean value randomly
+    public boolean generateRandomBoolean() {
+        return Math.random() < 0.5;
     }
 
     // Converts a Map (payload) into a JSON string.
@@ -134,27 +139,40 @@ public abstract class Api {
 
     // To measure performance metrics
     public List<String> measurePerformanceMetrics(Runnable operation) {
-        OperatingSystemMXBean osBean = (OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean();
+        ResourceMonitor resourceMonitor = new ResourceMonitor();
+        Thread monitorThread = new Thread(resourceMonitor);
+        monitorThread.start();
 
-        double initialCPU = osBean.getProcessCpuLoad();
-        long initialFreeMemory = osBean.getFreeMemorySize();
+        // Wait briefly for the monitor to initialize and capture baseline
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+
+        // Capture fresh baseline right before the operation
+        resourceMonitor.captureNewBaseline();
+
         long startTime = System.currentTimeMillis();
 
         operation.run();
 
         long endTime = System.currentTimeMillis();
-        double finalCPU = osBean.getProcessCpuLoad();
-        long finalFreeMemory = osBean.getFreeMemorySize();
+        resourceMonitor.stop();
+        try {
+            monitorThread.join();
+        } catch (InterruptedException e) {
+            throw new RuntimeException("Resource monitor thread interrupted", e);
+        }
 
         long timeTaken = endTime - startTime; // in milliseconds
-        double cpuUsed = (finalCPU - initialCPU) * 100; // in percentage
-        double memoryUsed = (finalFreeMemory - initialFreeMemory) / (1024.0 * 1024.0); // in MB
 
-        return List.of(
+        List<String> metrics = List.of(
                 String.valueOf(timeTaken),
-                String.format("%.2f", cpuUsed),
-                String.format("%.2f", memoryUsed)
+                resourceMonitor.getAverageCpu(),
+                resourceMonitor.getAverageMemory()
         );
+        return metrics;
     }
 
     // To save performance metrics to CSV file

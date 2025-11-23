@@ -6,11 +6,13 @@ import org.junit.runners.MethodSorters;
 import org.junit.runners.Suite;
 
 import api.CategoriesApiTest;
+import api.ProjectsApiTest;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-        CategoriesApiTest.class,
+ //       CategoriesApiTest.class,
+        ProjectsApiTest.class
 })
 
 public class AllApiTests {
