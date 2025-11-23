@@ -46,6 +46,9 @@ public class ResourceMonitor implements Runnable {
 
     public void captureNewBaseline() {
         try {
+            // Force garbage collection to minimize memory noise
+            forceGarbageCollection();
+
             // Take multiple samples and average for more stable baseline
             double cpuSum = 0;
             double memSum = 0;
@@ -117,4 +120,12 @@ public class ResourceMonitor implements Runnable {
         }
     }
 
+    public void forceGarbageCollection() {
+        try {
+            System.gc();              // Request GC
+            Thread.sleep(100);        // Wait 100ms for GC to complete
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+    }
 }
