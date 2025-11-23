@@ -93,7 +93,7 @@ public class ProjectsApiTest extends Api {
         Map<Integer, List<String>> projectsMetrics = new HashMap<>();
     
         for (int numProjects : NUM_OBJECTS_FOR_PERFORMANCE_TESTING) {
-            System.out.println("\\n############# Testing with " + numProjects + " projects");
+            System.out.println("\n############# Testing with " + numProjects + " projects");
             
             List<String> metrics = measurePerformanceMetrics(() -> {
                 for (int i = 0; i < numProjects; i++) {

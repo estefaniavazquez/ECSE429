@@ -11,7 +11,7 @@ import api.ProjectsApiTest;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
- //       CategoriesApiTest.class,
+        CategoriesApiTest.class,
         ProjectsApiTest.class
 })
 

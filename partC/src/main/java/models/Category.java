@@ -26,8 +26,8 @@ public class Category {
     // only add fields if not empty
     public Map<String, Object> toPayloadMap() {
         Map<String, Object> m = new HashMap<>();
-        if (title != null && !title.isEmpty()) m.put("title", title);
-        if (description != null && !description.isEmpty()) m.put("description", description);
+        m.put("title", title);
+        m.put("description", description);
         return m;
     }
 
@@ -37,4 +37,17 @@ public class Category {
     public String getTitle() { return title; }
     // get description
     public String getDescription() { return description; }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Category category = (Category) o;
+
+        if (id != null ? !id.equals(category.id) : category.id != null) return false;
+        if (title != null ? !title.equals(category.title) : category.title != null) return false;
+        return description != null ? description.equals(category.description) : category.description == null;
+    }
 }

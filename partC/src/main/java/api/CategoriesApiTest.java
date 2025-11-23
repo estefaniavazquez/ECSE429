@@ -2,6 +2,7 @@ package api;
 
 import java.net.HttpURLConnection;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,14 +19,24 @@ import static general.CommonConstants.*;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class CategoriesApiTest extends Api {
+    private List<String> testCategoriesStrings = new ArrayList<>();
+
     /* Helpers */
 
-    private void createCategory(String title, String description) throws Exception {
-        Category category = new Category(title, description);
-        Map<String, Object> payloadMap = category.toPayloadMap();
-        String jsonBody = toJson(payloadMap);
+    private void populateTestCategories() {
+        for (int i = 0; i<MAX_NUM_OBJECTS_FOR_PERFORMANCE_TESTING; i++) {
+            String title = generateRandomString(1, 50, false);
+            String description = generateRandomString(0, 200, true);
+            Category category = new Category(title, description);
 
-        HttpURLConnection connection = request(CATEGORIES_ENDPOINT, POST_METHOD, jsonBody);
+            Map<String, Object> payloadMap = category.toPayloadMap();
+            String jsonBody = toJson(payloadMap);
+            testCategoriesStrings.add(jsonBody);
+        }
+    }
+
+    private void createCategory(String categoryJsonBody) throws Exception {
+        HttpURLConnection connection = request(CATEGORIES_ENDPOINT, POST_METHOD, categoryJsonBody);
         int responseCode = connection.getResponseCode();
         String responseMessage = connection.getResponseMessage();
         String responseBody = readResponse(connection);
@@ -33,22 +44,19 @@ public class CategoriesApiTest extends Api {
         ObjectMapper objectMapper = new ObjectMapper();
         Category createdCategory = objectMapper.readValue(responseBody, Category.class);
 
+        String createdCategoryJsonBody = toJson(createdCategory.toPayloadMap());
+
         assertEquals(201, responseCode);
         assertEquals("Created", responseMessage);
-        assertEquals(title, createdCategory.getTitle());
-        assertEquals(description, createdCategory.getDescription());
+        assertEquals(createdCategoryJsonBody, categoryJsonBody);
 
         connection.getInputStream().close();
 
         latestCreatedCategoryId = Integer.parseInt(createdCategory.getId());
     }
 
-    private void changeCategory(String id, String newTitle, String newDescription) throws Exception {
-        Category category = new Category(newTitle, newDescription);
-        Map<String, Object> payloadMap = category.toPayloadMap();
-        String jsonBody = toJson(payloadMap);
-
-        HttpURLConnection connection = requestWithId(CATEGORIES_ENDPOINT, PUT_METHOD, id, jsonBody);
+    private void changeCategory(String id, String categoryJsonBody) throws Exception {
+        HttpURLConnection connection = requestWithId(CATEGORIES_ENDPOINT, PUT_METHOD, id, categoryJsonBody);
         int responseCode = connection.getResponseCode();
         String responseMessage = connection.getResponseMessage();
         String responseBody = readResponse(connection);
@@ -56,11 +64,12 @@ public class CategoriesApiTest extends Api {
         ObjectMapper objectMapper = new ObjectMapper();
         Category updatedCategory = objectMapper.readValue(responseBody, Category.class);
 
+        String updatedCategoryJsonBody = toJson(updatedCategory.toPayloadMap());
+
         assertEquals(200, responseCode);
         assertEquals("OK", responseMessage);
         assertEquals(id, updatedCategory.getId());
-        assertEquals(newTitle, updatedCategory.getTitle());
-        assertEquals(newDescription, updatedCategory.getDescription());
+        assertEquals(updatedCategoryJsonBody, categoryJsonBody);
 
         connection.getInputStream().close();
     }
@@ -87,17 +96,17 @@ public class CategoriesApiTest extends Api {
     public void testPostCategoriesJson() throws Exception {
         System.out.println("\n----------------------Creating categories performance tests");
 
+        populateTestCategories();
+
         // Store <number of objects, <time taken to create all objects, CPU usage, memory usage>>
         Map<Integer, List<String>> performanceMetrics = new HashMap<>();
 
         for (int numObjects : NUM_OBJECTS_FOR_PERFORMANCE_TESTING) {
+            System.out.println("\n############# Testing with " + numObjects + " categories");
             List<String> metrics = measurePerformanceMetrics(() -> {
                 for (int i = 0; i < numObjects; i++) {
-                    System.out.println("\n############# Creating category " + (i + 1) + " of " + numObjects);
-                    String randomTitle = generateRandomString(1, 50, false);
-                    String randomDescription = generateRandomString(0, 200, true);
                     try {
-                        createCategory(randomTitle, randomDescription);
+                        createCategory(testCategoriesStrings.get(i));
                     } catch (Exception e) {
                         throw new RuntimeException("Failed to create a random category", e);
                     }
@@ -105,6 +114,13 @@ public class CategoriesApiTest extends Api {
             });
 
             performanceMetrics.put(numObjects, metrics);
+
+            // Sleep for a short duration to allow server to stabilize
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
         }
 
         String filePath = Paths.get(System.getProperty("user.dir"), "results", "createCategories.csv").toString();
@@ -122,25 +138,28 @@ public class CategoriesApiTest extends Api {
     public void testPutCategoriesIdJson() throws Exception {
         System.out.println("\n----------------------Updating categories performance tests");
 
+        populateTestCategories();
+
         // Store <number of objects, <time taken to update all objects, CPU usage, memory usage>>
         Map<Integer, List<String>> performanceMetrics = new HashMap<>();
 
         for (int numObjects : NUM_OBJECTS_FOR_PERFORMANCE_TESTING) {
+            System.out.println("\n############# Testing with " + numObjects + " categories to update");
+
             // First, create the required number of categories
             for (int i = 0; i < numObjects; i++) {
-                String randomTitle = generateRandomString(1, 50, false);
-                String randomDescription = generateRandomString(0, 200, true);
-                createCategory(randomTitle, randomDescription);
+                createCategory(testCategoriesStrings.get(i));
             }
+
+            // Get fresh random data for updates
+            populateTestCategories();
 
             // Now, update the created categories and measure performance
             List<String> metrics = measurePerformanceMetrics(() -> {
                 for (int i = 0; i < numObjects; i++) {
-                    System.out.println("\n############# Updating category " + (i + 1) + " of " + numObjects);
-                    String newRandomTitle = generateRandomString(1, 50, false);
-                    String newRandomDescription = generateRandomString(0, 200, true);
+                    String currentCategoryId = String.valueOf(latestCreatedCategoryId - numObjects + 1 + i);
                     try {
-                        changeCategory(String.valueOf(latestCreatedCategoryId - numObjects + 1 + i), newRandomTitle, newRandomDescription);
+                        changeCategory(currentCategoryId, testCategoriesStrings.get(i));
                     } catch (Exception e) {
                         throw new RuntimeException("Failed to update category", e);
                     }
@@ -148,6 +167,13 @@ public class CategoriesApiTest extends Api {
             });
 
             performanceMetrics.put(numObjects, metrics);
+
+            // Sleep for a short duration to allow server to stabilize
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
         }
 
         String filePath = Paths.get(System.getProperty("user.dir"), "results", "updateCategories.csv").toString();
@@ -162,23 +188,25 @@ public class CategoriesApiTest extends Api {
     public void testDeleteCategoriesIdJson() throws Exception {
         System.out.println("\n----------------------Deleting categories performance tests");
 
+        populateTestCategories();
+
         // Store <number of objects, <time taken to delete all objects, CPU usage, memory usage>>
         Map<Integer, List<String>> performanceMetrics = new HashMap<>();
 
         for (int numObjects : NUM_OBJECTS_FOR_PERFORMANCE_TESTING) {
+            System.out.println("\n############# Testing with " + numObjects + " categories to delete");
+
             // First, create the required number of categories
             for (int i = 0; i < numObjects; i++) {
-                String randomTitle = generateRandomString(1, 50, false);
-                String randomDescription = generateRandomString(0, 200, true);
-                createCategory(randomTitle, randomDescription);
+                createCategory(testCategoriesStrings.get(i));
             }
 
             // Now, delete the created categories and measure performance
             List<String> metrics = measurePerformanceMetrics(() -> {
                 for (int i = 0; i < numObjects; i++) {
-                    System.out.println("\n############# Deleting category " + (i + 1) + " of " + numObjects);
+                    String currentCategoryId = String.valueOf(latestCreatedCategoryId - numObjects + 1 + i);
                     try {
-                        deleteCategory(String.valueOf(latestCreatedCategoryId - numObjects + 1 + i));
+                        deleteCategory(currentCategoryId);
                     } catch (Exception e) {
                         throw new RuntimeException("Failed to delete category", e);
                     }
@@ -186,6 +214,13 @@ public class CategoriesApiTest extends Api {
             });
 
             performanceMetrics.put(numObjects, metrics);
+
+            // Sleep for a short duration to allow server to stabilize
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
         }
 
         String filePath = Paths.get(System.getProperty("user.dir"), "results", "deleteCategories.csv").toString();
