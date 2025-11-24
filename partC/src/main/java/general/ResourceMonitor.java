@@ -33,7 +33,14 @@ public class ResourceMonitor implements Runnable {
     }
 
     public String getAverageMemory() {
-        return calculateAverage(memoryUsages, initialMemoryUsage);
+        if (memoryUsages.isEmpty()) {
+            return "0.00";
+        }
+        double sum = 0.0;
+        for (Double usage : memoryUsages) {
+            sum += usage;
+        }
+        return String.format("%.2f", sum / memoryUsages.size());
     }
 
     public double getInitialCpuUsage() {
@@ -56,14 +63,15 @@ public class ResourceMonitor implements Runnable {
             
             for (int i = 0; i < samples; i++) {
                 cpuSum += getCurrentCpuUsage();
-                memSum += getCurrentMemoryUsage();
+//                memSum += getCurrentMemoryUsage();
+                memSum += getCurrentFreeMemory();
                 if (i < samples - 1) Thread.sleep(10); // Small delay between samples
             }
             
             initialCpuUsage = cpuSum / samples;
             initialMemoryUsage = memSum / samples;
             
-            System.out.println("Baseline - CPU: " + String.format("%.2f", initialCpuUsage) + "%, Memory: " + String.format("%.2f", initialMemoryUsage) + " MB");
+            System.out.println("Baseline - CPU: " + String.format("%.2f", initialCpuUsage) + "%, Free Memory: " + String.format("%.2f", initialMemoryUsage) + " MB");
         } catch (Exception e) {
             System.err.println("Failed to capture baseline: " + e.getMessage());
             initialCpuUsage = 0.0;
@@ -89,6 +97,12 @@ public class ResourceMonitor implements Runnable {
         return usedMemory / (1024.0 * 1024.0);
     }
 
+    private double getCurrentFreeMemory() {
+        Runtime runtime = Runtime.getRuntime();
+        long freeMemory = runtime.maxMemory() - (runtime.totalMemory() - runtime.freeMemory());
+        return freeMemory / (1024.0 * 1024.0); // MB
+    }
+
     private String calculateAverage(List<Double> usages, double initialUsage) {
         if (usages.isEmpty()) {
             return "0.00";
@@ -107,11 +121,13 @@ public class ResourceMonitor implements Runnable {
         while (running.get()) {
             try {
                 double currentCpu = getCurrentCpuUsage();
-                double currentMemory = getCurrentMemoryUsage();
+//                double currentMemory = getCurrentMemoryUsage();
+                double currentFreeMemory = getCurrentFreeMemory();
                 
                 cpuUsages.add(currentCpu);
-                memoryUsages.add(currentMemory);
-                
+//                memoryUsages.add(currentMemory);
+                memoryUsages.add(currentFreeMemory);
+
                 Thread.sleep(50); // Sample every 50 milliseconds for better granularity
             } catch (Exception e) {
                 // Ignore the sample if failure
