@@ -5,5 +5,6 @@ public class Main {
         PlotGraph plotGraph = new PlotGraph();
         plotGraph.plotCsvMetrics("Categories");
         plotGraph.plotCsvMetrics("Projects");
+        plotGraph.plotCsvMetrics("Todos");
     }
 }

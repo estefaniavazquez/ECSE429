@@ -24,7 +24,7 @@ import models.Todo;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class TodosApiTest extends Api {
 
-    private int latestCreatedTodoId;
+    // use latestCreatedTodoId from Api (protected field), no shadowing here
 
     /* --------------------------------------------------------------------
        HELPERS
