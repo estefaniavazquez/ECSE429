@@ -6,7 +6,6 @@ import org.jfree.chart.ChartPanel;
 import org.jfree.chart.ChartUtils;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.NumberAxis;
-import org.jfree.chart.axis.NumberTickUnit;
 import org.jfree.chart.renderer.xy.*;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
@@ -21,6 +20,8 @@ import java.nio.file.Paths;
 import java.util.List;
 
 public class PlotGraph {
+    String lowestMemoryValue;
+    String highestMemoryValue;
 
     public void plotCsvMetrics(String endpoint) {
         // Paths to CSV files
@@ -37,6 +38,8 @@ public class PlotGraph {
         String timeTakenGraphPath = Paths.get(System.getProperty("user.dir"), "partC", "graphs", "time_taken_" + endpoint + ".png").toString();
         String cpuUsageGraphPath = Paths.get(System.getProperty("user.dir"), "partC", "graphs", "cpu_usage_" + endpoint + ".png").toString();
         String freeMemoryGraphPath = Paths.get(System.getProperty("user.dir"), "partC", "graphs", "free_memory_" + endpoint + ".png").toString();
+
+        getLowestAndHighestMemoryValues(createData, updateData, deleteData);
 
         // Plot time taken graph
         plotGraph(createData, updateData, deleteData, 1, "Time Taken (ms)", "Number of " + endpoint, "Time Taken vs Number of " + endpoint, timeTakenGraphPath, false);
@@ -56,8 +59,32 @@ public class PlotGraph {
         }
     }
 
-    private void plotGraph(List<String[]> createData, List<String[]> updateData, List<String[]> deleteData, int columnIndex,
-                            String yAxisLabel, String xAxisLabel, String chartTitle, String outputFileName, boolean scale) {
+    private void getLowestAndHighestMemoryValues(List<String[]> createData, List<String[]> updateData, List<String[]> deleteData) {
+        double lowest = Double.MAX_VALUE;
+        double highest = Double.MIN_VALUE;
+
+        for (List<String[]> dataList : List.of(createData, updateData, deleteData)) {
+            for (int i = 1; i < dataList.size(); i++) {
+                String[] row = dataList.get(i);
+                try {
+                    double memoryValue = Double.parseDouble(row[3]);
+                    if (memoryValue < lowest) {
+                        lowest = memoryValue;
+                    }
+                    if (memoryValue > highest) {
+                        highest = memoryValue;
+                    }
+                } catch (NumberFormatException e) {
+                    System.err.println("Skipping row while calculating memory values: " + String.join(",", row));
+                }
+            }
+        }
+
+        lowestMemoryValue = String.valueOf(lowest);
+        highestMemoryValue = String.valueOf(highest);
+    }
+
+    private void plotGraph(List<String[]> createData, List<String[]> updateData, List<String[]> deleteData, int columnIndex, String yAxisLabel, String xAxisLabel, String chartTitle, String outputFileName, boolean scale) {
         XYSeriesCollection dataset = new XYSeriesCollection();
         XYSeries seriesCreate = new XYSeries("Created");
         XYSeries seriesUpdate = new XYSeries("Updated");
@@ -116,7 +143,13 @@ public class PlotGraph {
         XYPlot plot = chart.getXYPlot();
         if (scale) {
             NumberAxis yAxis = (NumberAxis) plot.getRangeAxis();
-            yAxis.setRange(7500, 8500);  // Only display values between 7500 and 8500 to highlight differences
+            if (lowestMemoryValue != null && highestMemoryValue != null) {
+                double lowerBound = Double.parseDouble(lowestMemoryValue) - 10;
+                double upperBound = Double.parseDouble(highestMemoryValue) + 10;
+                yAxis.setRange(lowerBound, upperBound);
+            } else {
+                System.err.println("Lowest or highest memory value is null, not setting range.");
+            }
         }
 
         XYLineAndShapeRenderer renderer = (XYLineAndShapeRenderer) plot.getRenderer();
