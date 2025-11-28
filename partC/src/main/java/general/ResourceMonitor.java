@@ -1,11 +1,11 @@
 package general;
 
 import java.lang.management.ManagementFactory;
-import java.lang.management.OperatingSystemMXBean;
 import java.lang.management.MemoryMXBean;
+import java.lang.management.OperatingSystemMXBean;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.ArrayList;
 
 public class ResourceMonitor implements Runnable {
     private final AtomicBoolean running = new AtomicBoolean(true);
@@ -81,14 +81,22 @@ public class ResourceMonitor implements Runnable {
 
 
     private double getCurrentCpuUsage() {
-        // Process CPU load as percentage
-        double cpuLoad = sunOsBean.getProcessCpuLoad();
-        if (cpuLoad < 0) {
-            // Sometimes returns -1 if not available, use system CPU instead
-            cpuLoad = osBean.getSystemLoadAverage() / osBean.getAvailableProcessors();
-            if (cpuLoad < 0) cpuLoad = 0; // If still not available
+        com.sun.management.OperatingSystemMXBean os =
+                (com.sun.management.OperatingSystemMXBean)
+                        ManagementFactory.getOperatingSystemMXBean();
+
+        os.getProcessCpuLoad(); // warm-up
+
+        try {
+            Thread.sleep(200);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
         }
-        return cpuLoad * 100.0;
+
+        double load = os.getProcessCpuLoad();
+        if (load < 0) load = 0;
+
+        return load * 100.0;
     }
 
     private double getCurrentMemoryUsage() {
