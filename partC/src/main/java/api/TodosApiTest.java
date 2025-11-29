@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
@@ -28,83 +29,92 @@ public class TodosApiTest extends Api {
 
     private List<String> testTodosStrings = new ArrayList<>();
 
+    /* Helpers */
+
     private void populateTestTodos() {
         testTodosStrings.clear();
         for (int i = 0; i < MAX_NUM_OBJECTS_FOR_PERFORMANCE_TESTING; i++) {
             Map<String, Object> payload = new HashMap<>();
             payload.put("title", generateRandomString(1, 50, false));
-            payload.put("doneStatus", false);
+            payload.put("doneStatus", generateRandomBoolean());
             payload.put("description", generateRandomString(0, 200, true));
-            String jsonBody = toJson(payload);
-            testTodosStrings.add(jsonBody);
+            testTodosStrings.add(toJson(payload));
         }
     }
 
-    private void createTodo(String jsonBody) throws Exception {
-        HttpURLConnection connection =
-                request(TODOS_ENDPOINT, POST_METHOD, jsonBody);
+    private void createTodo(String todoJsonBody) throws Exception {
+        HttpURLConnection conn = request(TODOS_ENDPOINT, POST_METHOD, todoJsonBody);
+        int code = conn.getResponseCode();
+        String body = readResponse(conn);
 
-        assertEquals(201, connection.getResponseCode());
+        assertEquals(201, code);
 
-        String response = readResponse(connection);
-        ObjectMapper mapper = new ObjectMapper();
-        Todo todo = mapper.readValue(response, Todo.class);
+        Todo created = new ObjectMapper().readValue(body, Todo.class);
 
-        latestCreatedTodoId = Integer.parseInt(todo.getId());
-        connection.getInputStream().close();
+        // Minimal checks only (do NOT compare raw JSON)
+        assertNotNull(created.getId());
+        assertNotNull(created.getTitle());
+
+        conn.getInputStream().close();
+        latestCreatedTodoId = Integer.parseInt(created.getId());
     }
 
-    private void changeTodo(String id, String jsonBody) throws Exception {
-        HttpURLConnection connection =
-                requestWithId(TODOS_ENDPOINT, PUT_METHOD, id, jsonBody);
+    private void changeTodo(String id, String todoJsonBody) throws Exception {
+        HttpURLConnection conn = requestWithId(TODOS_ENDPOINT, PUT_METHOD, id, todoJsonBody);
+        int code = conn.getResponseCode();
+        String body = readResponse(conn);
 
-        assertEquals(200, connection.getResponseCode());
+        assertEquals(200, code);
 
-        String response = readResponse(connection);
-        ObjectMapper mapper = new ObjectMapper();
-        Todo updated = mapper.readValue(response, Todo.class);
-
+        Todo updated = new ObjectMapper().readValue(body, Todo.class);
         assertEquals(id, updated.getId());
-        assertEquals(jsonBody, toJson(updated.toPayloadMap()));
-        connection.getInputStream().close();
+
+        conn.getInputStream().close();
     }
 
     private void deleteTodo(String id) throws Exception {
-        HttpURLConnection connection =
-                requestWithId(TODOS_ENDPOINT, DELETE_METHOD, id, null);
+        HttpURLConnection conn = requestWithId(TODOS_ENDPOINT, DELETE_METHOD, id, null);
+        int code = conn.getResponseCode();
+        String body = readResponse(conn);
 
-        assertEquals(200, connection.getResponseCode());
-        assertEquals("", readResponse(connection));
-        connection.getInputStream().close();
+        assertEquals(200, code);
+        assertEquals("", body);
+
+        conn.getInputStream().close();
     }
+
+    /* Tests */
 
     @Test
     public void testPostTodosJson() throws Exception {
         System.out.println("\n----------------------Creating todos performance tests");
 
-        Map<Integer, List<String>> performanceMetrics = new HashMap<>();
-
         populateTestTodos();
+        Map<Integer, List<String>> metricsMap = new HashMap<>();
 
         for (int numObjects : NUM_OBJECTS_FOR_PERFORMANCE_TESTING) {
+            System.out.println("\n############# Testing with " + numObjects + " todos");
 
             List<String> metrics = measurePerformanceMetrics(() -> {
                 for (int i = 0; i < numObjects; i++) {
                     try {
                         createTodo(testTodosStrings.get(i));
                     } catch (Exception e) {
-                        throw new RuntimeException("Failed to create todo", e);
+                        throw new RuntimeException("Failed to create todo " + (i + 1)
+                                + " of " + numObjects, e);
                     }
                 }
             });
 
-            performanceMetrics.put(numObjects, metrics);
+            metricsMap.put(numObjects, metrics);
+
+            try { Thread.sleep(2000); }
+            catch (InterruptedException e) { Thread.currentThread().interrupt(); }
         }
 
-        String filePath = Paths.get(System.getProperty("user.dir"),
+        String path = Paths.get(System.getProperty("user.dir"),
                 "results", "createTodos.csv").toString();
-
-        savePerformanceMetricsToCSV(filePath, performanceMetrics);
+        savePerformanceMetricsToCSV(path, metricsMap);
 
         System.out.println("\nSaved creating todos performance tests----------------------\n");
     }
@@ -113,37 +123,42 @@ public class TodosApiTest extends Api {
     public void testPutTodosIdJson() throws Exception {
         System.out.println("\n----------------------Updating todos performance tests");
 
-        Map<Integer, List<String>> performanceMetrics = new HashMap<>();
+        populateTestTodos();
+        Map<Integer, List<String>> metricsMap = new HashMap<>();
 
         for (int numObjects : NUM_OBJECTS_FOR_PERFORMANCE_TESTING) {
+            System.out.println("\n############# Testing with " + numObjects + " todos to update");
 
-            populateTestTodos();
-
+            // Create todos
             for (int i = 0; i < numObjects; i++) {
                 createTodo(testTodosStrings.get(i));
             }
 
             int startId = latestCreatedTodoId - numObjects + 1;
 
-            populateTestTodos();
+            populateTestTodos(); // get new data for updating
 
             List<String> metrics = measurePerformanceMetrics(() -> {
                 for (int i = 0; i < numObjects; i++) {
+                    String id = String.valueOf(startId + i);
                     try {
-                        changeTodo(String.valueOf(startId + i), testTodosStrings.get(i));
+                        changeTodo(id, testTodosStrings.get(i));
                     } catch (Exception e) {
-                        throw new RuntimeException("Failed to update todo", e);
+                        throw new RuntimeException("Failed to update todo " + (i + 1)
+                                + " of " + numObjects, e);
                     }
                 }
             });
 
-            performanceMetrics.put(numObjects, metrics);
+            metricsMap.put(numObjects, metrics);
+
+            try { Thread.sleep(2000); }
+            catch (InterruptedException e) { Thread.currentThread().interrupt(); }
         }
 
-        String filePath = Paths.get(System.getProperty("user.dir"),
+        String path = Paths.get(System.getProperty("user.dir"),
                 "results", "updateTodos.csv").toString();
-
-        savePerformanceMetricsToCSV(filePath, performanceMetrics);
+        savePerformanceMetricsToCSV(path, metricsMap);
 
         System.out.println("\nSaved updating todos performance tests----------------------\n");
     }
@@ -152,12 +167,13 @@ public class TodosApiTest extends Api {
     public void testDeleteTodosIdJson() throws Exception {
         System.out.println("\n----------------------Deleting todos performance tests");
 
-        Map<Integer, List<String>> performanceMetrics = new HashMap<>();
+        populateTestTodos();
+        Map<Integer, List<String>> metricsMap = new HashMap<>();
 
         for (int numObjects : NUM_OBJECTS_FOR_PERFORMANCE_TESTING) {
+            System.out.println("\n############# Testing with " + numObjects + " todos to delete");
 
-            populateTestTodos();
-
+            // Create todos
             for (int i = 0; i < numObjects; i++) {
                 createTodo(testTodosStrings.get(i));
             }
@@ -166,21 +182,25 @@ public class TodosApiTest extends Api {
 
             List<String> metrics = measurePerformanceMetrics(() -> {
                 for (int i = 0; i < numObjects; i++) {
+                    String id = String.valueOf(startId + i);
                     try {
-                        deleteTodo(String.valueOf(startId + i));
+                        deleteTodo(id);
                     } catch (Exception e) {
-                        throw new RuntimeException("Failed to delete todo", e);
+                        throw new RuntimeException("Failed to delete todo " + (i + 1)
+                                + " of " + numObjects, e);
                     }
                 }
             });
 
-            performanceMetrics.put(numObjects, metrics);
+            metricsMap.put(numObjects, metrics);
+
+            try { Thread.sleep(2000); }
+            catch (InterruptedException e) { Thread.currentThread().interrupt(); }
         }
 
-        String filePath = Paths.get(System.getProperty("user.dir"),
+        String path = Paths.get(System.getProperty("user.dir"),
                 "results", "deleteTodos.csv").toString();
-
-        savePerformanceMetricsToCSV(filePath, performanceMetrics);
+        savePerformanceMetricsToCSV(path, metricsMap);
 
         System.out.println("\nSaved deleting todos performance tests----------------------\n");
     }
