@@ -2,6 +2,7 @@ package api;
 
 import java.net.HttpURLConnection;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +16,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import general.Api;
 import static general.CommonConstants.DELETE_METHOD;
+import static general.CommonConstants.MAX_NUM_OBJECTS_FOR_PERFORMANCE_TESTING;
 import static general.CommonConstants.NUM_OBJECTS_FOR_PERFORMANCE_TESTING;
 import static general.CommonConstants.POST_METHOD;
 import static general.CommonConstants.PUT_METHOD;
@@ -24,21 +26,23 @@ import models.Todo;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class TodosApiTest extends Api {
 
-    // use latestCreatedTodoId from Api (protected field), no shadowing here
+    private List<String> testTodosStrings = new ArrayList<>();
 
-    /* --------------------------------------------------------------------
-       HELPERS
-       -------------------------------------------------------------------- */
+    private void populateTestTodos() {
+        testTodosStrings.clear();
+        for (int i = 0; i < MAX_NUM_OBJECTS_FOR_PERFORMANCE_TESTING; i++) {
+            Map<String, Object> payload = new HashMap<>();
+            payload.put("title", generateRandomString(1, 50, false));
+            payload.put("doneStatus", false);
+            payload.put("description", generateRandomString(0, 200, true));
+            String jsonBody = toJson(payload);
+            testTodosStrings.add(jsonBody);
+        }
+    }
 
-    private Todo createTodo() throws Exception {
-
-        Map<String, Object> payload = new HashMap<>();
-        payload.put("title", "todo-" + System.nanoTime());
-        payload.put("doneStatus", false);
-        payload.put("description", "desc-" + System.currentTimeMillis());
-
+    private void createTodo(String jsonBody) throws Exception {
         HttpURLConnection connection =
-                request(TODOS_ENDPOINT, POST_METHOD, toJson(payload));
+                request(TODOS_ENDPOINT, POST_METHOD, jsonBody);
 
         assertEquals(201, connection.getResponseCode());
 
@@ -47,37 +51,12 @@ public class TodosApiTest extends Api {
         Todo todo = mapper.readValue(response, Todo.class);
 
         latestCreatedTodoId = Integer.parseInt(todo.getId());
-        return todo;
+        connection.getInputStream().close();
     }
 
-    private void createTodo(String title, String description) throws Exception {
-
-        Map<String, Object> payload = new HashMap<>();
-        payload.put("title", title);
-        payload.put("doneStatus", false);
-        payload.put("description", description);
-
+    private void changeTodo(String id, String jsonBody) throws Exception {
         HttpURLConnection connection =
-                request(TODOS_ENDPOINT, POST_METHOD, toJson(payload));
-
-        assertEquals(201, connection.getResponseCode());
-
-        String response = readResponse(connection);
-        ObjectMapper mapper = new ObjectMapper();
-        Todo todo = mapper.readValue(response, Todo.class);
-
-        latestCreatedTodoId = Integer.parseInt(todo.getId());
-    }
-
-    private void changeTodo(String id, String newTitle, String newDescription) throws Exception {
-
-        Map<String, Object> payload = new HashMap<>();
-        payload.put("title", newTitle);
-        payload.put("doneStatus", false);
-        payload.put("description", newDescription);
-
-        HttpURLConnection connection =
-                requestWithId(TODOS_ENDPOINT, PUT_METHOD, id, toJson(payload));
+                requestWithId(TODOS_ENDPOINT, PUT_METHOD, id, jsonBody);
 
         assertEquals(200, connection.getResponseCode());
 
@@ -86,8 +65,8 @@ public class TodosApiTest extends Api {
         Todo updated = mapper.readValue(response, Todo.class);
 
         assertEquals(id, updated.getId());
-        assertEquals(newTitle, updated.getTitle());
-        assertEquals(newDescription, updated.getDescription());
+        assertEquals(jsonBody, toJson(updated.toPayloadMap()));
+        connection.getInputStream().close();
     }
 
     private void deleteTodo(String id) throws Exception {
@@ -96,11 +75,8 @@ public class TodosApiTest extends Api {
 
         assertEquals(200, connection.getResponseCode());
         assertEquals("", readResponse(connection));
+        connection.getInputStream().close();
     }
-
-    /* --------------------------------------------------------------------
-       TESTS
-       -------------------------------------------------------------------- */
 
     @Test
     public void testPostTodosJson() throws Exception {
@@ -108,17 +84,14 @@ public class TodosApiTest extends Api {
 
         Map<Integer, List<String>> performanceMetrics = new HashMap<>();
 
+        populateTestTodos();
+
         for (int numObjects : NUM_OBJECTS_FOR_PERFORMANCE_TESTING) {
 
             List<String> metrics = measurePerformanceMetrics(() -> {
                 for (int i = 0; i < numObjects; i++) {
-                    System.out.println("\n############# Creating todo "
-                            + (i + 1) + " of " + numObjects);
                     try {
-                        createTodo(
-                                "todo-" + System.nanoTime(),
-                                "desc-" + System.nanoTime()
-                        );
+                        createTodo(testTodosStrings.get(i));
                     } catch (Exception e) {
                         throw new RuntimeException("Failed to create todo", e);
                     }
@@ -144,25 +117,20 @@ public class TodosApiTest extends Api {
 
         for (int numObjects : NUM_OBJECTS_FOR_PERFORMANCE_TESTING) {
 
-            // Create Todos to update
+            populateTestTodos();
+
             for (int i = 0; i < numObjects; i++) {
-                String t = "todo-" + System.nanoTime();
-                String d = "desc-" + System.nanoTime();
-                createTodo(t, d);
+                createTodo(testTodosStrings.get(i));
             }
 
             int startId = latestCreatedTodoId - numObjects + 1;
 
+            populateTestTodos();
+
             List<String> metrics = measurePerformanceMetrics(() -> {
                 for (int i = 0; i < numObjects; i++) {
-                    System.out.println("\n############# Updating todo "
-                            + (i + 1) + " of " + numObjects);
                     try {
-                        changeTodo(
-                                String.valueOf(startId + i),
-                                "updated-" + System.nanoTime(),
-                                "updatedDesc-" + System.nanoTime()
-                        );
+                        changeTodo(String.valueOf(startId + i), testTodosStrings.get(i));
                     } catch (Exception e) {
                         throw new RuntimeException("Failed to update todo", e);
                     }
@@ -188,19 +156,16 @@ public class TodosApiTest extends Api {
 
         for (int numObjects : NUM_OBJECTS_FOR_PERFORMANCE_TESTING) {
 
-            // Create Todos to delete
+            populateTestTodos();
+
             for (int i = 0; i < numObjects; i++) {
-                String t = "todo-" + System.nanoTime();
-                String d = "desc-" + System.nanoTime();
-                createTodo(t, d);
+                createTodo(testTodosStrings.get(i));
             }
 
             int startId = latestCreatedTodoId - numObjects + 1;
 
             List<String> metrics = measurePerformanceMetrics(() -> {
                 for (int i = 0; i < numObjects; i++) {
-                    System.out.println("\n############# Deleting todo "
-                            + (i + 1) + " of " + numObjects);
                     try {
                         deleteTodo(String.valueOf(startId + i));
                     } catch (Exception e) {
