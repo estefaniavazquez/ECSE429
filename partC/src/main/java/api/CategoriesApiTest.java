@@ -7,15 +7,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.*;
+import static org.junit.Assert.assertEquals;
+import org.junit.FixMethodOrder;
+import org.junit.Test;
 import org.junit.runners.MethodSorters;
-import static org.junit.Assert.*;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import general.Api;
+import static general.CommonConstants.CATEGORIES_ENDPOINT;
+import static general.CommonConstants.DELETE_METHOD;
+import static general.CommonConstants.MAX_NUM_OBJECTS_FOR_PERFORMANCE_TESTING;
+import static general.CommonConstants.NUM_OBJECTS_FOR_PERFORMANCE_TESTING;
+import static general.CommonConstants.POST_METHOD;
+import static general.CommonConstants.PUT_METHOD;
 import models.Category;
-import static general.CommonConstants.*;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class CategoriesApiTest extends Api {
