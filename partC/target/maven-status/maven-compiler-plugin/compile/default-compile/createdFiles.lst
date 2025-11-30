@@ -1,6 +1,7 @@
 general/ResourceMonitor.class
 general/AllApiTests.class
 api/ProjectsApiTest.class
+graph/Main.class
 api/TodosApiTest.class
 models/Project.class
 models/Todo.class
@@ -8,3 +9,4 @@ api/CategoriesApiTest.class
 general/CommonConstants.class
 models/Category.class
 general/Api.class
+graph/PlotGraph.class

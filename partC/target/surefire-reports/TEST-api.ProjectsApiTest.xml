@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="api.ProjectsApiTest" time="344.556" tests="3" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="api.ProjectsApiTest" time="391.588" tests="3" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="25"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
-    <property name="java.class.path" value="/Users/williamzhang/Documents/GitHub/ECSE429/partC/target/test-classes:/Users/williamzhang/Documents/GitHub/ECSE429/partC/target/classes:/Users/williamzhang/.m2/repository/junit/junit/4.13.2/junit-4.13.2.jar:/Users/williamzhang/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar:/Users/williamzhang/.m2/repository/com/google/code/gson/gson/2.10.1/gson-2.10.1.jar:/Users/williamzhang/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.17.2/jackson-databind-2.17.2.jar:/Users/williamzhang/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.17.2/jackson-annotations-2.17.2.jar:/Users/williamzhang/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.17.2/jackson-core-2.17.2.jar:/Users/williamzhang/.m2/repository/org/apache/httpcomponents/httpclient/4.5.14/httpclient-4.5.14.jar:/Users/williamzhang/.m2/repository/org/apache/httpcomponents/httpcore/4.4.16/httpcore-4.4.16.jar:/Users/williamzhang/.m2/repository/commons-logging/commons-logging/1.2/commons-logging-1.2.jar:/Users/williamzhang/.m2/repository/commons-codec/commons-codec/1.11/commons-codec-1.11.jar:/Users/williamzhang/.m2/repository/com/opencsv/opencsv/4.1/opencsv-4.1.jar:/Users/williamzhang/.m2/repository/org/apache/commons/commons-lang3/3.6/commons-lang3-3.6.jar:/Users/williamzhang/.m2/repository/org/apache/commons/commons-text/1.1/commons-text-1.1.jar:/Users/williamzhang/.m2/repository/commons-beanutils/commons-beanutils/1.9.3/commons-beanutils-1.9.3.jar:/Users/williamzhang/.m2/repository/commons-collections/commons-collections/3.2.2/commons-collections-3.2.2.jar:"/>
+    <property name="java.class.path" value="/Users/williamzhang/Documents/GitHub/ECSE429/partC/target/test-classes:/Users/williamzhang/Documents/GitHub/ECSE429/partC/target/classes:/Users/williamzhang/.m2/repository/junit/junit/4.13.2/junit-4.13.2.jar:/Users/williamzhang/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar:/Users/williamzhang/.m2/repository/com/google/code/gson/gson/2.10.1/gson-2.10.1.jar:/Users/williamzhang/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.17.2/jackson-databind-2.17.2.jar:/Users/williamzhang/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.17.2/jackson-annotations-2.17.2.jar:/Users/williamzhang/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.17.2/jackson-core-2.17.2.jar:/Users/williamzhang/.m2/repository/org/apache/httpcomponents/httpclient/4.5.14/httpclient-4.5.14.jar:/Users/williamzhang/.m2/repository/org/apache/httpcomponents/httpcore/4.4.16/httpcore-4.4.16.jar:/Users/williamzhang/.m2/repository/commons-logging/commons-logging/1.2/commons-logging-1.2.jar:/Users/williamzhang/.m2/repository/commons-codec/commons-codec/1.11/commons-codec-1.11.jar:/Users/williamzhang/.m2/repository/com/opencsv/opencsv/4.1/opencsv-4.1.jar:/Users/williamzhang/.m2/repository/org/apache/commons/commons-lang3/3.6/commons-lang3-3.6.jar:/Users/williamzhang/.m2/repository/org/apache/commons/commons-text/1.1/commons-text-1.1.jar:/Users/williamzhang/.m2/repository/commons-beanutils/commons-beanutils/1.9.3/commons-beanutils-1.9.3.jar:/Users/williamzhang/.m2/repository/commons-collections/commons-collections/3.2.2/commons-collections-3.2.2.jar:/Users/williamzhang/.m2/repository/org/jfree/jfreechart/1.5.3/jfreechart-1.5.3.jar:"/>
     <property name="java.vm.vendor" value="Homebrew"/>
     <property name="sun.arch.data.model" value="64"/>
     <property name="java.vendor.url" value="https://github.com/Homebrew/homebrew-core/issues"/>
@@ -13,10 +13,10 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="CA"/>
     <property name="sun.boot.library.path" value="/opt/homebrew/Cellar/openjdk/25/libexec/openjdk.jdk/Contents/Home/lib"/>
-    <property name="sun.java.command" value="/Users/williamzhang/Documents/GitHub/ECSE429/partC/target/surefire/surefirebooter-20251122195228365_3.jar /Users/williamzhang/Documents/GitHub/ECSE429/partC/target/surefire 2025-11-22T19-52-28_321-jvmRun1 surefire-20251122195228365_1tmp surefire_0-20251122195228365_2tmp"/>
+    <property name="sun.java.command" value="/Users/williamzhang/Documents/GitHub/ECSE429/partC/target/surefire/surefirebooter-20251130010112393_3.jar /Users/williamzhang/Documents/GitHub/ECSE429/partC/target/surefire 2025-11-30T01-01-12_337-jvmRun1 surefire-20251130010112393_1tmp surefire_0-20251130010112393_2tmp"/>
     <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="jdk.debug" value="release"/>
-    <property name="surefire.test.class.path" value="/Users/williamzhang/Documents/GitHub/ECSE429/partC/target/test-classes:/Users/williamzhang/Documents/GitHub/ECSE429/partC/target/classes:/Users/williamzhang/.m2/repository/junit/junit/4.13.2/junit-4.13.2.jar:/Users/williamzhang/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar:/Users/williamzhang/.m2/repository/com/google/code/gson/gson/2.10.1/gson-2.10.1.jar:/Users/williamzhang/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.17.2/jackson-databind-2.17.2.jar:/Users/williamzhang/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.17.2/jackson-annotations-2.17.2.jar:/Users/williamzhang/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.17.2/jackson-core-2.17.2.jar:/Users/williamzhang/.m2/repository/org/apache/httpcomponents/httpclient/4.5.14/httpclient-4.5.14.jar:/Users/williamzhang/.m2/repository/org/apache/httpcomponents/httpcore/4.4.16/httpcore-4.4.16.jar:/Users/williamzhang/.m2/repository/commons-logging/commons-logging/1.2/commons-logging-1.2.jar:/Users/williamzhang/.m2/repository/commons-codec/commons-codec/1.11/commons-codec-1.11.jar:/Users/williamzhang/.m2/repository/com/opencsv/opencsv/4.1/opencsv-4.1.jar:/Users/williamzhang/.m2/repository/org/apache/commons/commons-lang3/3.6/commons-lang3-3.6.jar:/Users/williamzhang/.m2/repository/org/apache/commons/commons-text/1.1/commons-text-1.1.jar:/Users/williamzhang/.m2/repository/commons-beanutils/commons-beanutils/1.9.3/commons-beanutils-1.9.3.jar:/Users/williamzhang/.m2/repository/commons-collections/commons-collections/3.2.2/commons-collections-3.2.2.jar:"/>
+    <property name="surefire.test.class.path" value="/Users/williamzhang/Documents/GitHub/ECSE429/partC/target/test-classes:/Users/williamzhang/Documents/GitHub/ECSE429/partC/target/classes:/Users/williamzhang/.m2/repository/junit/junit/4.13.2/junit-4.13.2.jar:/Users/williamzhang/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar:/Users/williamzhang/.m2/repository/com/google/code/gson/gson/2.10.1/gson-2.10.1.jar:/Users/williamzhang/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.17.2/jackson-databind-2.17.2.jar:/Users/williamzhang/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.17.2/jackson-annotations-2.17.2.jar:/Users/williamzhang/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.17.2/jackson-core-2.17.2.jar:/Users/williamzhang/.m2/repository/org/apache/httpcomponents/httpclient/4.5.14/httpclient-4.5.14.jar:/Users/williamzhang/.m2/repository/org/apache/httpcomponents/httpcore/4.4.16/httpcore-4.4.16.jar:/Users/williamzhang/.m2/repository/commons-logging/commons-logging/1.2/commons-logging-1.2.jar:/Users/williamzhang/.m2/repository/commons-codec/commons-codec/1.11/commons-codec-1.11.jar:/Users/williamzhang/.m2/repository/com/opencsv/opencsv/4.1/opencsv-4.1.jar:/Users/williamzhang/.m2/repository/org/apache/commons/commons-lang3/3.6/commons-lang3-3.6.jar:/Users/williamzhang/.m2/repository/org/apache/commons/commons-text/1.1/commons-text-1.1.jar:/Users/williamzhang/.m2/repository/commons-beanutils/commons-beanutils/1.9.3/commons-beanutils-1.9.3.jar:/Users/williamzhang/.m2/repository/commons-collections/commons-collections/3.2.2/commons-collections-3.2.2.jar:/Users/williamzhang/.m2/repository/org/jfree/jfreechart/1.5.3/jfreechart-1.5.3.jar:"/>
     <property name="sun.cpu.endian" value="little"/>
     <property name="user.home" value="/Users/williamzhang"/>
     <property name="user.language" value="en"/>
@@ -30,7 +30,7 @@
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="apple.awt.application.name" value="ForkedBooter"/>
-    <property name="surefire.real.class.path" value="/Users/williamzhang/Documents/GitHub/ECSE429/partC/target/surefire/surefirebooter-20251122195228365_3.jar"/>
+    <property name="surefire.real.class.path" value="/Users/williamzhang/Documents/GitHub/ECSE429/partC/target/surefire/surefirebooter-20251130010112393_3.jar"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="java.runtime.version" value="25"/>
@@ -40,6 +40,7 @@
     <property name="os.version" value="26.1"/>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
     <property name="file.encoding" value="UTF-8"/>
+    <property name="autoStartServer" value="false"/>
     <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
     <property name="java.vendor.version" value="Homebrew"/>
     <property name="localRepository" value="/Users/williamzhang/.m2/repository"/>
@@ -60,60 +61,60 @@
     <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="java.class.version" value="69.0"/>
   </properties>
-  <testcase name="testDeleteProjectsId" classname="api.ProjectsApiTest" time="154.332">
+  <testcase name="testDeleteProjectsId" classname="api.ProjectsApiTest" time="171.772">
     <system-out><![CDATA[=======================Server is up and running.
 
 ----------------------Deleting projects performance tests
 
 ############# Testing with 1 projects to delete
-Baseline - CPU: 0.04%, Memory: 48.07 MB
+Baseline - CPU: 0.03%, Free Memory: 2031.62 MB
 
 ############# Testing with 5 projects to delete
-Baseline - CPU: 4.09%, Memory: 49.07 MB
+Baseline - CPU: 0.02%, Free Memory: 2031.57 MB
 
 ############# Testing with 10 projects to delete
-Baseline - CPU: 0.06%, Memory: 50.07 MB
+Baseline - CPU: 0.03%, Free Memory: 2031.68 MB
 
 ############# Testing with 50 projects to delete
-Baseline - CPU: 0.04%, Memory: 55.07 MB
+Baseline - CPU: 0.03%, Free Memory: 2031.73 MB
 
 ############# Testing with 100 projects to delete
-Baseline - CPU: 0.04%, Memory: 65.07 MB
+Baseline - CPU: 0.42%, Free Memory: 2031.67 MB
 
 ############# Testing with 500 projects to delete
-Baseline - CPU: 0.04%, Memory: 104.07 MB
+Baseline - CPU: 0.02%, Free Memory: 2031.72 MB
 
 ############# Testing with 1000 projects to delete
-Baseline - CPU: 12.24%, Memory: 95.82 MB
+Baseline - CPU: 0.03%, Free Memory: 2031.77 MB
 
 ############# Testing with 5000 projects to delete
-Baseline - CPU: 0.01%, Memory: 55.74 MB
+Baseline - CPU: 0.02%, Free Memory: 2031.53 MB
 
 ############# Testing with 10000 projects to delete
-Baseline - CPU: 0.02%, Memory: 96.73 MB
+Baseline - CPU: 0.02%, Free Memory: 2031.39 MB
 
 ############# Testing with 50000 projects to delete
-Baseline - CPU: 0.03%, Memory: 75.71 MB
+Baseline - CPU: 0.02%, Free Memory: 2031.72 MB
 
-- Performance metrics for 1 objects: Time Taken = 4 ms, CPU Usage = 1.29 %, Memory Usage = -0.33 MB
+- Performance metrics for 1 objects: Time Taken = 8 ms, CPU Usage = 0.22 %, Memory Usage = 2031.75 MB
 
-- Performance metrics for 5 objects: Time Taken = 4 ms, CPU Usage = 4.53 %, Memory Usage = -0.33 MB
+- Performance metrics for 5 objects: Time Taken = 15 ms, CPU Usage = 1.75 %, Memory Usage = 2031.71 MB
 
-- Performance metrics for 10 objects: Time Taken = 15 ms, CPU Usage = 1.48 %, Memory Usage = 0.00 MB
+- Performance metrics for 10 objects: Time Taken = 18 ms, CPU Usage = 3.20 %, Memory Usage = 2031.80 MB
 
-- Performance metrics for 50 objects: Time Taken = 34 ms, CPU Usage = 0.44 %, Memory Usage = -0.25 MB
+- Performance metrics for 50 objects: Time Taken = 44 ms, CPU Usage = 0.48 %, Memory Usage = 2031.53 MB
 
-- Performance metrics for 100 objects: Time Taken = 38 ms, CPU Usage = 1.13 %, Memory Usage = -0.25 MB
+- Performance metrics for 100 objects: Time Taken = 49 ms, CPU Usage = -0.04 %, Memory Usage = 2031.16 MB
 
-- Performance metrics for 500 objects: Time Taken = 80 ms, CPU Usage = 1.29 %, Memory Usage = -16.85 MB
+- Performance metrics for 500 objects: Time Taken = 84 ms, CPU Usage = 0.31 %, Memory Usage = 2028.36 MB
 
-- Performance metrics for 1000 objects: Time Taken = 134 ms, CPU Usage = -4.12 %, Memory Usage = -9.99 MB
+- Performance metrics for 1000 objects: Time Taken = 171 ms, CPU Usage = 0.50 %, Memory Usage = 2030.56 MB
 
-- Performance metrics for 5000 objects: Time Taken = 1282 ms, CPU Usage = 0.94 %, Memory Usage = 16.56 MB
+- Performance metrics for 5000 objects: Time Taken = 1337 ms, CPU Usage = 0.66 %, Memory Usage = 2025.47 MB
 
-- Performance metrics for 10000 objects: Time Taken = 4139 ms, CPU Usage = 0.56 %, Memory Usage = -22.56 MB
+- Performance metrics for 10000 objects: Time Taken = 4194 ms, CPU Usage = 0.61 %, Memory Usage = 2018.79 MB
 
-- Performance metrics for 50000 objects: Time Taken = 119987 ms, CPU Usage = 0.13 %, Memory Usage = -1.18 MB
+- Performance metrics for 50000 objects: Time Taken = 124090 ms, CPU Usage = 0.13 %, Memory Usage = 2015.93 MB
 
 Saved deleting projects performance tests----------------------
 
@@ -121,50 +122,60 @@ Server stopped.=======================
 
 ]]></system-out>
   </testcase>
-  <testcase name="testPostProjectsJson" classname="api.ProjectsApiTest" time="29.213">
+  <testcase name="testPostProjectsJson" classname="api.ProjectsApiTest" time="42.106">
     <system-out><![CDATA[=======================Server is up and running.
 
 ----------------------Creating projects performance tests
-\n############# Testing with 1 projects
-Baseline - CPU: 0.03%, Memory: 65.76 MB
-\n############# Testing with 5 projects
-Baseline - CPU: 0.06%, Memory: 65.76 MB
-\n############# Testing with 10 projects
-Baseline - CPU: 0.09%, Memory: 66.76 MB
-\n############# Testing with 50 projects
-Baseline - CPU: 0.05%, Memory: 67.76 MB
-\n############# Testing with 100 projects
-Baseline - CPU: 0.05%, Memory: 72.76 MB
-\n############# Testing with 500 projects
-Baseline - CPU: 0.06%, Memory: 79.76 MB
-\n############# Testing with 1000 projects
-Baseline - CPU: 0.06%, Memory: 113.76 MB
-\n############# Testing with 5000 projects
-Baseline - CPU: 0.06%, Memory: 83.77 MB
-\n############# Testing with 10000 projects
-Baseline - CPU: 0.08%, Memory: 116.46 MB
-\n############# Testing with 50000 projects
-Baseline - CPU: 0.07%, Memory: 60.14 MB
 
-- Performance metrics for 1 objects: Time Taken = 6 ms, CPU Usage = 0.46 %, Memory Usage = -0.25 MB
+############# Testing with 1 projects
+Baseline - CPU: 0.02%, Free Memory: 2031.66 MB
 
-- Performance metrics for 5 objects: Time Taken = 15 ms, CPU Usage = 0.35 %, Memory Usage = 0.00 MB
+############# Testing with 5 projects
+Baseline - CPU: 0.06%, Free Memory: 2031.60 MB
 
-- Performance metrics for 10 objects: Time Taken = 24 ms, CPU Usage = 0.34 %, Memory Usage = 0.00 MB
+############# Testing with 10 projects
+Baseline - CPU: 0.03%, Free Memory: 2031.71 MB
 
-- Performance metrics for 50 objects: Time Taken = 63 ms, CPU Usage = 0.59 %, Memory Usage = 0.60 MB
+############# Testing with 50 projects
+Baseline - CPU: 0.13%, Free Memory: 2031.71 MB
 
-- Performance metrics for 100 objects: Time Taken = 62 ms, CPU Usage = 0.73 %, Memory Usage = 0.80 MB
+############# Testing with 100 projects
+Baseline - CPU: 0.03%, Free Memory: 2031.76 MB
 
-- Performance metrics for 500 objects: Time Taken = 141 ms, CPU Usage = 0.82 %, Memory Usage = 4.67 MB
+############# Testing with 500 projects
+Baseline - CPU: 0.03%, Free Memory: 2031.76 MB
 
-- Performance metrics for 1000 objects: Time Taken = 148 ms, CPU Usage = 1.47 %, Memory Usage = -22.16 MB
+############# Testing with 1000 projects
+Baseline - CPU: 0.02%, Free Memory: 2031.76 MB
 
-- Performance metrics for 5000 objects: Time Taken = 565 ms, CPU Usage = 2.64 %, Memory Usage = -0.11 MB
+############# Testing with 5000 projects
+Baseline - CPU: 0.04%, Free Memory: 2031.69 MB
 
-- Performance metrics for 10000 objects: Time Taken = 1008 ms, CPU Usage = 3.17 %, Memory Usage = -18.15 MB
+############# Testing with 10000 projects
+Baseline - CPU: 0.03%, Free Memory: 2031.58 MB
 
-- Performance metrics for 50000 objects: Time Taken = 4217 ms, CPU Usage = 3.99 %, Memory Usage = 25.56 MB
+############# Testing with 50000 projects
+Baseline - CPU: 0.05%, Free Memory: 2031.60 MB
+
+- Performance metrics for 1 objects: Time Taken = 22 ms, CPU Usage = 0.17 %, Memory Usage = 2031.79 MB
+
+- Performance metrics for 5 objects: Time Taken = 16 ms, CPU Usage = 0.36 %, Memory Usage = 2031.74 MB
+
+- Performance metrics for 10 objects: Time Taken = 23 ms, CPU Usage = 0.44 %, Memory Usage = 2031.78 MB
+
+- Performance metrics for 50 objects: Time Taken = 60 ms, CPU Usage = 0.40 %, Memory Usage = 2031.28 MB
+
+- Performance metrics for 100 objects: Time Taken = 77 ms, CPU Usage = 0.72 %, Memory Usage = 2030.73 MB
+
+- Performance metrics for 500 objects: Time Taken = 162 ms, CPU Usage = 0.72 %, Memory Usage = 2031.46 MB
+
+- Performance metrics for 1000 objects: Time Taken = 134 ms, CPU Usage = 0.91 %, Memory Usage = 2031.47 MB
+
+- Performance metrics for 5000 objects: Time Taken = 593 ms, CPU Usage = 1.77 %, Memory Usage = 2024.85 MB
+
+- Performance metrics for 10000 objects: Time Taken = 1001 ms, CPU Usage = 2.51 %, Memory Usage = 2022.35 MB
+
+- Performance metrics for 50000 objects: Time Taken = 4309 ms, CPU Usage = 3.81 %, Memory Usage = 2018.52 MB
 
 Saved creating projects performance tests----------------------
 
@@ -172,60 +183,60 @@ Server stopped.=======================
 
 ]]></system-out>
   </testcase>
-  <testcase name="testPutProjectsIdJson" classname="api.ProjectsApiTest" time="161.01">
+  <testcase name="testPutProjectsIdJson" classname="api.ProjectsApiTest" time="177.707">
     <system-out><![CDATA[=======================Server is up and running.
 
 ----------------------Updating projects performance tests
 
 ############# Testing with 1 projects to update
-Baseline - CPU: 0.04%, Memory: 73.75 MB
+Baseline - CPU: 0.03%, Free Memory: 2020.50 MB
 
 ############# Testing with 5 projects to update
-Baseline - CPU: 0.03%, Memory: 84.62 MB
+Baseline - CPU: 0.03%, Free Memory: 2008.84 MB
 
 ############# Testing with 10 projects to update
-Baseline - CPU: 0.03%, Memory: 95.12 MB
+Baseline - CPU: 0.04%, Free Memory: 1997.74 MB
 
 ############# Testing with 50 projects to update
-Baseline - CPU: 0.04%, Memory: 118.12 MB
+Baseline - CPU: 0.10%, Free Memory: 1985.77 MB
 
 ############# Testing with 100 projects to update
-Baseline - CPU: 0.04%, Memory: 152.12 MB
+Baseline - CPU: 0.03%, Free Memory: 1974.80 MB
 
 ############# Testing with 500 projects to update
-Baseline - CPU: 0.04%, Memory: 141.22 MB
+Baseline - CPU: 0.04%, Free Memory: 1963.88 MB
 
 ############# Testing with 1000 projects to update
-Baseline - CPU: 0.03%, Memory: 109.64 MB
+Baseline - CPU: 0.03%, Free Memory: 1952.09 MB
 
 ############# Testing with 5000 projects to update
-Baseline - CPU: 0.04%, Memory: 112.25 MB
+Baseline - CPU: 0.09%, Free Memory: 1940.84 MB
 
 ############# Testing with 10000 projects to update
-Baseline - CPU: 0.01%, Memory: 180.44 MB
+Baseline - CPU: 0.02%, Free Memory: 1930.13 MB
 
 ############# Testing with 50000 projects to update
-Baseline - CPU: 0.05%, Memory: 160.98 MB
+Baseline - CPU: 0.03%, Free Memory: 1917.82 MB
 
-- Performance metrics for 1 objects: Time Taken = 4 ms, CPU Usage = 0.39 %, Memory Usage = -0.33 MB
+- Performance metrics for 1 objects: Time Taken = 12 ms, CPU Usage = 0.26 %, Memory Usage = 2020.63 MB
 
-- Performance metrics for 5 objects: Time Taken = 11 ms, CPU Usage = 0.60 %, Memory Usage = -0.25 MB
+- Performance metrics for 5 objects: Time Taken = 19 ms, CPU Usage = 0.31 %, Memory Usage = 2008.99 MB
 
-- Performance metrics for 10 objects: Time Taken = 15 ms, CPU Usage = 0.60 %, Memory Usage = -0.50 MB
+- Performance metrics for 10 objects: Time Taken = 26 ms, CPU Usage = 0.41 %, Memory Usage = 1997.82 MB
 
-- Performance metrics for 50 objects: Time Taken = 41 ms, CPU Usage = 0.49 %, Memory Usage = -0.25 MB
+- Performance metrics for 50 objects: Time Taken = 52 ms, CPU Usage = 0.41 %, Memory Usage = 1985.44 MB
 
-- Performance metrics for 100 objects: Time Taken = 51 ms, CPU Usage = 0.66 %, Memory Usage = 0.25 MB
+- Performance metrics for 100 objects: Time Taken = 62 ms, CPU Usage = 0.60 %, Memory Usage = 1973.88 MB
 
-- Performance metrics for 500 objects: Time Taken = 104 ms, CPU Usage = 1.22 %, Memory Usage = 3.00 MB
+- Performance metrics for 500 objects: Time Taken = 116 ms, CPU Usage = 0.75 %, Memory Usage = 1958.36 MB
 
-- Performance metrics for 1000 objects: Time Taken = 177 ms, CPU Usage = 2.11 %, Memory Usage = 16.43 MB
+- Performance metrics for 1000 objects: Time Taken = 198 ms, CPU Usage = 1.37 %, Memory Usage = 1941.51 MB
 
-- Performance metrics for 5000 objects: Time Taken = 1316 ms, CPU Usage = 2.42 %, Memory Usage = 31.83 MB
+- Performance metrics for 5000 objects: Time Taken = 1385 ms, CPU Usage = 1.40 %, Memory Usage = 1905.25 MB
 
-- Performance metrics for 10000 objects: Time Taken = 4770 ms, CPU Usage = 1.34 %, Memory Usage = -24.35 MB
+- Performance metrics for 10000 objects: Time Taken = 4748 ms, CPU Usage = 1.13 %, Memory Usage = 1873.11 MB
 
-- Performance metrics for 50000 objects: Time Taken = 124474 ms, CPU Usage = 0.39 %, Memory Usage = 8.40 MB
+- Performance metrics for 50000 objects: Time Taken = 127937 ms, CPU Usage = 0.34 %, Memory Usage = 1849.43 MB
 
 Saved updating projects performance tests----------------------
 
